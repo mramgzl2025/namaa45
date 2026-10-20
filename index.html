@@ -387,7 +387,7 @@ footer b{color:var(--hero-ink)}
       <div class="sec-head"><div class="sec-title" style="--c:var(--gold)"><span class="num"><svg width="26" height="26"><use href="#i-chart"/></svg></span><div><h2>لوحة متابعة شؤون المعلمات</h2><p>أ. ريم الحيسوني — متابعة توثيق المعلمات وإحصائية النمو المهني</p></div></div>
         <div class="actions" id="adm-actions" hidden><select class="fsel" id="a-term-f" aria-label="الفصل الدراسي"></select><button class="btn btn-gold" id="export"><svg><use href="#i-down"/></svg>تصدير Excel</button></div></div>
       <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول وكيلة شؤون المعلمات</h3><p class="hint">لوحة المتابعة محمية برمز الإدارة.</p></div>
-        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمز الإدارة</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
+        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمز الإدارة</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
       <div id="adm-body" hidden>
       <div class="kpis" id="kpis"></div>
 
@@ -415,7 +415,7 @@ footer b{color:var(--hero-ink)}
           <div class="confirm" id="names-confirm" hidden><span id="names-confirm-t"></span><button class="btn btn-danger" id="names-yes">تأكيد</button><button class="btn btn-ghost" id="names-no">تراجع</button></div>
         </details>
         <details style="margin-top:10px"><summary>تغيير رمز الإدارة</summary>
-          <form class="pin" id="chg-form" style="margin-top:8px"><label for="chg-pin" class="hint">الرمز الجديد (٦ أرقام أو أكثر)</label><input id="chg-pin" type="password" inputmode="numeric" autocomplete="new-password" required><button class="btn btn-primary">حفظ الرمز</button><span class="msg" id="chg-msg" role="status"></span></form>
+          <form class="pin" id="chg-form" style="margin-top:8px"><label for="chg-pin" class="hint">الرمز الجديد (٤ أرقام)</label><input id="chg-pin" type="password" inputmode="numeric" autocomplete="new-password" maxlength="4" pattern="[0-9]{4}" required><button class="btn btn-primary">حفظ الرمز</button><span class="msg" id="chg-msg" role="status"></span></form>
         </details>
       </div>
       </div>
@@ -429,7 +429,7 @@ footer b{color:var(--hero-ink)}
 <div class="overlay" id="dlg-pin" hidden>
   <form class="dialog" id="f-pin" style="width:min(420px,100%)">
     <div class="dlg-head"><div class="ht"><span class="hi" id="p-av" style="display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-size:22px;font-weight:700"></span><div style="min-width:0"><div class="hint">ملف سري</div><h2 id="p-name"></h2></div></div><button type="button" class="close" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
-    <div class="field"><label for="p-pin">اكتبي رمزك السري</label><input id="p-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="10" required style="font-size:22px;letter-spacing:.4em;text-align:center"></div>
+    <div class="field"><label for="p-pin">اكتبي رمزك السري</label><input id="p-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required style="font-size:22px;letter-spacing:.4em;text-align:center"></div>
     <p class="hint">لا يفتح الملف إلا برمز صاحبته. نسيتِ الرمز؟ اطلبيه من وكيلة شؤون المعلمات.</p>
     <p class="msg" id="p-msg" role="status"></p>
     <div class="actions"><button class="btn btn-primary" id="p-go">فتح ملفي</button><button type="button" class="btn btn-ghost" data-close>إلغاء</button></div>
@@ -630,7 +630,7 @@ const rpc=async(fn,args)=>{const {data,error}=await sb.rpc(fn,args||{});if(error
 const fileUrl=p=>sb?sb.storage.from("files").getPublicUrl(p).data.publicUrl:"";
 async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
 const norm=r=>({...r,createdAt:Date.parse(r.created_at)});
-const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي بعد ١٥ دقيقة.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٦ أرقام أو أكثر."};
+const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي بعد ١٥ دقيقة.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٤ أرقام."};
 $("#demo-bar").hidden=true;
 
 /* pdf.js */
