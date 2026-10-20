@@ -330,6 +330,26 @@ body.has-sbar footer{padding-bottom:64px}
 .hm .rem:hover{border-color:var(--accent)}
 .hm tbody tr:hover td{background:var(--bg)}
 .toast2{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--ink);color:var(--surface);padding:10px 18px;border-radius:12px;font-weight:700;max-width:calc(100vw - 32px);text-align:center}
+.lanterns{background:radial-gradient(120% 90% at 50% 0%,#232C63 0%,#151B3D 70%);border-color:#232C63;color:#F4F1E8}
+.lanterns .hint{color:#B9BEDD}.lanterns h3{color:#F4F1E8}
+.ln-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:14px 10px}
+.ln{display:grid;justify-items:center;gap:4px;background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:4px;border-radius:14px;min-width:0}
+.ln:hover{background:rgba(255,255,255,.05)}
+.ln:focus-visible{outline:3px solid var(--gold)}
+.ln svg{width:70px;height:104px;overflow:visible}
+.ln b{font-size:13px;line-height:1.4;text-align:center;max-width:100%;overflow-wrap:anywhere}
+.ln small{font-size:12px;color:#B9BEDD}
+.ln.full small{color:#F3C76E;font-weight:800}
+.ln .halo{animation:lnGlow 3.6s ease-in-out infinite}
+@keyframes lnGlow{50%{opacity:.55}}
+@media (prefers-reduced-motion:reduce){.ln .halo{animation:none}}
+.ln-star{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:16px;padding:16px 18px;border-radius:18px;background:linear-gradient(120deg,rgba(243,199,110,.18),rgba(243,199,110,.05));border:1px solid rgba(243,199,110,.45)}
+.ln-star .big{font-size:40px;line-height:1}
+.ln-star .tx{flex:1;min-width:200px;display:grid;gap:2px}
+.ln-star .tx small{color:#F3C76E;font-weight:700;font-size:13px}
+.ln-star .tx b{font-family:var(--f-display);font-size:22px;color:#fff}
+.ln-star .tx span{font-size:13.5px;color:#B9BEDD}
+.ln-star .btn{background:#F3C76E;color:#2A1E05;border:0}
 .upcard{display:flex;align-items:center;gap:14px;width:100%;margin:14px 0;padding:18px 20px;border:2px dashed var(--c,var(--accent));border-radius:18px;background:color-mix(in srgb,var(--c,var(--accent)) 7%,var(--surface));color:var(--ink);cursor:pointer;text-align:start;font:inherit}
 .upcard:hover{background:color-mix(in srgb,var(--c,var(--accent)) 13%,var(--surface))}
 .upcard svg{width:46px;height:46px;color:var(--c,var(--accent));flex:none}
@@ -505,6 +525,11 @@ body.has-sbar footer{padding-bottom:64px}
       <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول الإدارة</h3><p class="hint">لمديرة المدرسة ووكيلة شؤون المعلمات، كلٌّ برمزها الخاص.</p></div>
         <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
       <div id="adm-body" hidden>
+      <div class="panel lanterns" id="ln-panel">
+        <div class="ln-star" id="ln-star"></div>
+        <div class="p-head"><div><h3>💡 منارات نماء</h3><p class="hint">لكل معلمة فانوس يزداد نوره مع كل مجال توثّقه، حتى يضيء ذهبيًا عند اكتمال الملف.</p></div></div>
+        <div class="ln-grid" id="ln-grid"></div>
+      </div>
       <div class="panel" id="hm-panel">
         <div class="p-head"><div><h3>🗺️ خريطة الإنجاز</h3><p class="hint">من بداية العام · كل مربع مجال: الأخضر موثّق، والرمادي لم يُوثّق بعد. المربع المنقّط أُضيف في الشهر المختار.</p></div>
           <label class="hm-month"><span>شهر المتابعة</span><select class="fsel" id="hm-month" aria-label="شهر المتابعة"></select></label></div>
@@ -553,7 +578,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٧ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٨ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -818,6 +843,45 @@ function reminderMsg(t,its){
   const who=adminRole==="principal"?"أ. فاطمة البدراني":adminRole==="vice"?"أ. ريم الحيسوني":"إدارة المدرسة";
   return `صباح الخير أستاذة ${first} 🌷\nشكرًا لجهودكِ الجميلة في ملتقى نماء المهني، وصلتِ إلى ${ar(pct)}٪ من ملفكِ 👏\n`+(lines.length?`وهذه مجالات ما زالت في انتظار بصمتكِ:\n${lines.join("\n")}\n`:"")+`\nالرابط: ${SITE_URL}\nدمتِ مبدعة ✨\n${who}`;
 }
+function lanternSVG(p,i){const a=p/100;const gid="lg"+i;const glass=p===100?"#F3C76E":"#FFD98A";
+  return `<svg viewBox="0 0 70 104" aria-hidden="true"><defs><radialGradient id="${gid}" cx="50%" cy="55%" r="55%"><stop offset="0" stop-color="#FFF4C9" stop-opacity="${(.25+a*.75).toFixed(2)}"/><stop offset=".6" stop-color="${glass}" stop-opacity="${(.12+a*.7).toFixed(2)}"/><stop offset="1" stop-color="#E3A43A" stop-opacity="${(.05+a*.35).toFixed(2)}"/></radialGradient></defs>
+  ${a>0?`<circle class="halo" cx="35" cy="58" r="${(20+a*22).toFixed(1)}" fill="#F3C76E" opacity="${(a*.35).toFixed(2)}"/>`:""}
+  <path d="M35 2v8" stroke="#B9BEDD" stroke-width="2"/><circle cx="35" cy="4" r="3" fill="none" stroke="#B9BEDD" stroke-width="2"/>
+  <path d="M24 14h22l4 10H20z" fill="#C98A22"/>
+  <path d="M20 24h30l6 14v34l-6 14H20l-6-14V38z" fill="url(#${gid})" stroke="#C98A22" stroke-width="2.5"/>
+  <path d="M35 24v62M14 38h42M14 72h42" stroke="#C98A22" stroke-width="1.6" opacity=".8"/>
+  <path d="M20 86h30l-4 8H24z" fill="#C98A22"/><path d="M30 94h10l-2 6h-6z" fill="#C98A22"/>
+  ${p===100?`<path d="M35 47l2.6 5.4 5.9.8-4.3 4.1 1 5.8L35 60.3l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z" fill="#fff"/>`:""}</svg>`;}
+function monthStars(ms,me){const R=teachers.map(t=>({t,n:tItems(t.id).filter(x=>(x.createdAt||0)>=ms&&(x.createdAt||0)<me).length})).filter(r=>r.n>0).sort((a,b)=>b.n-a.n);if(!R.length)return [];return R.filter(r=>r.n===R[0].n);}
+let starNow=[],starMonth="";
+function renderLanterns(){
+  const sel=$("#hm-month");if(!sel.value)return;const [yy,mm]=sel.value.split("-").map(Number);const ms=new Date(yy,mm,1).getTime(),me=new Date(yy,mm+1,1).getTime();
+  starNow=monthStars(ms,me);starMonth=MONTHS[mm]+" "+ar(yy).replace(/٬/g,"");
+  $("#ln-star").innerHTML=starNow.length?`<span class="big">⭐</span><div class="tx"><small>نجمة نماء لشهر ${esc(starMonth)}</small><b>${starNow.map(r=>esc(r.t.name)).join(" · ")}</b><span>الأكثر توثيقًا هذا الشهر: ${ar(starNow[0].n)} شاهد</span></div>${starNow.map((r,k)=>`<button type="button" class="btn" data-cert="${k}">🏆 شهادة ${starNow.length>1?esc(r.t.name.split(" ")[0]):"الشكر"}</button>`).join("")}`:`<span class="big">⭐</span><div class="tx"><small>نجمة نماء لشهر ${esc(starMonth)}</small><b>لم تُحدَّد بعد</b><span>أول معلمة توثّق شواهدها هذا الشهر تضيء النجمة.</span></div>`;
+  const rows=teachers.map(t=>({t,c:covOf(tItems(t.id))})).sort((a,b)=>b.c.pct-a.c.pct);
+  $("#ln-grid").innerHTML=rows.map((r,i)=>`<button type="button" class="ln ${r.c.pct===100?"full":""}" data-t="${esc(r.t.id)}" title="${esc(r.t.name)}: ${ar(r.c.pct)}٪">${lanternSVG(r.c.pct,i)}<b>${esc(r.t.name)}</b><small>${r.c.pct===100?"✦ مكتمل ✦":ar(r.c.pct)+"٪"}</small></button>`).join("");
+}
+async function makeCert(name){
+  try{await document.fonts.load('700 60px "El Messiri"');await document.fonts.load('500 30px "Tajawal"');}catch(e){}
+  const W=1600,H=1130,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");x.direction="rtl";x.textAlign="center";
+  const g=x.createLinearGradient(0,0,W,H);g.addColorStop(0,"#FFFDF6");g.addColorStop(1,"#FBF1DC");x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.strokeStyle="#C98A22";x.lineWidth=14;x.strokeRect(40,40,W-80,H-80);x.lineWidth=3;x.strokeRect(70,70,W-140,H-140);
+  x.fillStyle="#151B3D";x.fillRect(70,70,W-140,150);
+  x.fillStyle="#F3C76E";x.font='700 30px "Tajawal",Tahoma,sans-serif';x.fillText("الثانوية الخامسة والأربعون · ملتقى نماء المهني",W/2,135);
+  x.fillStyle="#F4F1E8";x.font='500 24px "Tajawal",Tahoma,sans-serif';x.fillText("⭐ نجمة نماء لشهر "+starMonth+" ⭐",W/2,185);
+  // lantern emblem
+  x.save();x.translate(W/2,330);const rg=x.createRadialGradient(0,0,4,0,0,90);rg.addColorStop(0,"rgba(243,199,110,.9)");rg.addColorStop(1,"rgba(243,199,110,0)");x.fillStyle=rg;x.beginPath();x.arc(0,0,90,0,7);x.fill();
+  x.fillStyle="#C98A22";x.beginPath();x.moveTo(-22,-56);x.lineTo(22,-56);x.lineTo(30,-40);x.lineTo(-30,-40);x.fill();x.fillStyle="#FFE6A6";x.strokeStyle="#C98A22";x.lineWidth=4;x.beginPath();x.moveTo(-30,-40);x.lineTo(30,-40);x.lineTo(40,-16);x.lineTo(40,30);x.lineTo(30,52);x.lineTo(-30,52);x.lineTo(-40,30);x.lineTo(-40,-16);x.closePath();x.fill();x.stroke();x.fillStyle="#C98A22";x.fillRect(-26,52,52,10);x.restore();
+  x.fillStyle="#7A5310";x.font='700 74px "El Messiri","Tajawal",Tahoma,sans-serif';x.fillText("شهادة شكر وتقدير",W/2,500);
+  x.fillStyle="#3A3550";x.font='500 34px "Tajawal",Tahoma,sans-serif';x.fillText("تتقدّم إدارة المدرسة بخالص الشكر والتقدير للأستاذة",W/2,585);
+  x.fillStyle="#151B3D";x.font='700 72px "El Messiri","Tajawal",Tahoma,sans-serif';x.fillText(name,W/2,690);
+  x.strokeStyle="#E3A43A";x.lineWidth=3;x.beginPath();x.moveTo(W/2-260,720);x.lineTo(W/2+260,720);x.stroke();
+  x.fillStyle="#3A3550";x.font='500 32px "Tajawal",Tahoma,sans-serif';x.fillText("لتميّزها في توثيق شواهد النمو المهني، وتتويجها «نجمة نماء» لشهر "+starMonth,W/2,785);
+  x.fillText("سائلين الله لها دوام التوفيق والعطاء",W/2,835);
+  x.font='700 28px "Tajawal",Tahoma,sans-serif';x.fillStyle="#7A5310";x.fillText("مديرة المدرسة",W*0.72,945);x.fillText("وكيلة شؤون المعلمات",W*0.28,945);
+  x.fillStyle="#151B3D";x.font='700 34px "El Messiri","Tajawal",Tahoma,sans-serif';x.fillText("أ. فاطمة البدراني",W*0.72,995);x.fillText("أ. ريم الحيسوني",W*0.28,995);
+  const blob=await new Promise(r=>c.toBlob(r,"image/png"));const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="شهادة-نجمة-نماء-"+name.replace(/\s+/g,"-")+".png";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},800);
+}
 function renderHeatmap(){
   const sel=$("#hm-month");if(!sel.options.length){const now=new Date();const opts=[];for(let k=0;k<12;k++){const d=new Date(now.getFullYear(),now.getMonth()-k,1);opts.push(`<option value="${d.getFullYear()}-${d.getMonth()}">${MONTHS[d.getMonth()]} ${d.getFullYear()}</option>`);}sel.innerHTML=opts.join("");}
   const [yy,mm]=sel.value.split("-").map(Number);const ms=new Date(yy,mm,1).getTime(),me=new Date(yy,mm+1,1).getTime();
@@ -906,7 +970,7 @@ function statsFor(tid){
 }
 function renderAdmin(){
   $("#adm-gate").hidden=!!adminPin;$("#adm-who").textContent=adminRole==="principal"?"أهلًا أ. فاطمة البدراني — مديرة المدرسة":adminRole==="vice"?"أهلًا أ. ريم الحيسوني — وكيلة شؤون المعلمات":"مديرة المدرسة أ. فاطمة البدراني · وكيلة شؤون المعلمات أ. ريم الحيسوني";$("#adm-body").hidden=!adminPin;$("#adm-actions").hidden=true;$("#adm-follow").hidden=!adminPin;
-  if($("#v-admin").hidden||!adminPin) return; renderHeatmap(); $("#a-term-f").hidden=perMode!=="term";$("#per-range").textContent=perRange();
+  if($("#v-admin").hidden||!adminPin) return; renderHeatmap(); renderLanterns(); $("#a-term-f").hidden=perMode!=="term";$("#per-range").textContent=perRange();
   document.querySelectorAll("#pers [data-per]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.per===perMode));
   const S=teachers.map(t=>({t,...statsFor(t.id)}));
   const L=items.filter(inPer);
@@ -1003,7 +1067,8 @@ $("#add-btn").onclick=()=>{
 };
 $("#dv-up").onclick=()=>$("#add-btn").click();
 $("#logout").onclick=logout;
-$("#hm-month").onchange=renderHeatmap;
+$("#hm-month").onchange=()=>{renderHeatmap();renderLanterns();};
+document.addEventListener("click",async e=>{const b=e.target.closest("[data-cert]");if(!b)return;const r=starNow[+b.dataset.cert];if(!r)return;b.disabled=true;try{await makeCert(r.t.name);toast2("تم تنزيل الشهادة ✓");}catch(err){toast2("تعذّر إنشاء الشهادة");}finally{b.disabled=false;}});
 document.addEventListener("click",async e=>{
   const c=e.target.closest("[data-hm]");if(c){const [tid,did]=c.dataset.hm.split("|");curT=tid;openDomain(did);return;}
   const m=e.target.closest("[data-rem]");if(m){const t=teachers.find(x=>x.id===m.dataset.rem);if(!t)return;const ok=await copyText(reminderMsg(t,tItems(t.id)));toast2(ok?"نُسخت رسالة التذكير ✓ الصقيها في الواتساب":"تعذّر النسخ، جرّبي مرة أخرى");return;}
