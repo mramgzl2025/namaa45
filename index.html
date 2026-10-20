@@ -326,7 +326,7 @@ footer b{color:var(--hero-ink)}
       <span class="kicker">ملفات الإنجاز والنمو المهني للمعلمات</span>
       <h1>ملتقى <em>نماء</em> المهني</h1>
       <p class="lead">اختاري اسمك، ثم وثّقي شواهدك في التعليم والتعلم والنمو المهني.</p>
-      <div class="owner"><svg class="av"><use href="#i-user"/></svg><div><small>المتابعة والإشراف</small><b>وكيلة شؤون المعلمات: أ. ريم الحيسوني</b></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px"><div class="owner"><svg class="av"><use href="#i-user"/></svg><div><small>مديرة المدرسة</small><b>أ. فاطمة البدراني</b></div></div><div class="owner"><svg class="av"><use href="#i-user"/></svg><div><small>وكيلة شؤون المعلمات</small><b>أ. ريم الحيسوني</b></div></div></div>
       <div class="hero-cta">
         <a class="btn btn-gold" href="#teachers"><svg><use href="#i-user"/></svg>ادخلي باسمك</a>
         <button class="btn btn-glass" id="open-adm"><svg><use href="#i-chart"/></svg>لوحة المتابعة</button>
@@ -384,10 +384,10 @@ footer b{color:var(--hero-ink)}
   <div id="v-admin" hidden>
     <section>
       <button class="back" data-list><svg><use href="#i-back"/></svg>العودة إلى قائمة المعلمات</button>
-      <div class="sec-head"><div class="sec-title" style="--c:var(--gold)"><span class="num"><svg width="26" height="26"><use href="#i-chart"/></svg></span><div><h2>لوحة متابعة شؤون المعلمات</h2><p>أ. ريم الحيسوني — متابعة توثيق المعلمات وإحصائية النمو المهني</p></div></div>
+      <div class="sec-head"><div class="sec-title" style="--c:var(--gold)"><span class="num"><svg width="26" height="26"><use href="#i-chart"/></svg></span><div><h2>لوحة متابعة شؤون المعلمات</h2><p id="adm-who">مديرة المدرسة أ. فاطمة البدراني · وكيلة شؤون المعلمات أ. ريم الحيسوني</p></div></div>
         <div class="actions" id="adm-actions" hidden><select class="fsel" id="a-term-f" aria-label="الفصل الدراسي"></select><button class="btn btn-gold" id="export"><svg><use href="#i-down"/></svg>تصدير Excel</button></div></div>
-      <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول وكيلة شؤون المعلمات</h3><p class="hint">لوحة المتابعة محمية برمز الإدارة.</p></div>
-        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمز الإدارة</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
+      <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول الإدارة</h3><p class="hint">لمديرة المدرسة ووكيلة شؤون المعلمات، كلٌّ برمزها الخاص.</p></div>
+        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
       <div id="adm-body" hidden>
       <div class="kpis" id="kpis"></div>
 
@@ -414,7 +414,7 @@ footer b{color:var(--hero-ink)}
           <div class="actions"><button class="btn btn-primary" id="save-names">حفظ الأسماء</button><span class="msg" id="names-msg" role="status"></span></div>
           <div class="confirm" id="names-confirm" hidden><span id="names-confirm-t"></span><button class="btn btn-danger" id="names-yes">تأكيد</button><button class="btn btn-ghost" id="names-no">تراجع</button></div>
         </details>
-        <details style="margin-top:10px"><summary>تغيير رمز الإدارة</summary>
+        <details style="margin-top:10px"><summary>تغيير رمزي</summary>
           <form class="pin" id="chg-form" style="margin-top:8px"><label for="chg-pin" class="hint">الرمز الجديد (٤ أرقام)</label><input id="chg-pin" type="password" inputmode="numeric" autocomplete="new-password" maxlength="4" pattern="[0-9]{4}" required><button class="btn btn-primary">حفظ الرمز</button><span class="msg" id="chg-msg" role="status"></span></form>
         </details>
       </div>
@@ -630,7 +630,7 @@ const rpc=async(fn,args)=>{const {data,error}=await sb.rpc(fn,args||{});if(error
 const fileUrl=p=>sb?sb.storage.from("files").getPublicUrl(p).data.publicUrl:"";
 async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
 const norm=r=>({...r,createdAt:Date.parse(r.created_at)});
-const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي بعد ١٥ دقيقة.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٤ أرقام."};
+const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي بعد ١٥ دقيقة.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٤ أرقام.",taken:"هذا الرمز مستخدم. اختاري رمزًا آخر."};
 $("#demo-bar").hidden=true;
 
 /* pdf.js */
@@ -650,7 +650,7 @@ $("#a-term").innerHTML=termOpts(false);$("#dv-term").innerHTML=termOpts(true);$(
 
 /* ================= state ================= */
 let teachers=[],items=[],curT=null,curD=null;
-let adminPin=null, adminTeachers=[];      // admin session (memory only)
+let adminPin=null, adminTeachers=[], adminRole=null;      // admin session (memory only)
 const tPins={};                            // teacher pins unlocked in this tab (memory only)
 const tItems=tid=>items.filter(x=>x.teacher_id===tid);
 const nonEval=D.filter(d=>!d.step);
@@ -660,7 +660,7 @@ async function load(){
   renderAll();
 }
 async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
-async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminTeachers=r.teachers;items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));}
+async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminRole=r.role;adminTeachers=r.teachers;items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));}
 function showErr(t){const b=$("#demo-bar");b.hidden=false;b.style.background="var(--danger)";b.style.color="#fff";b.textContent=t;}
 
 /* ================= render ================= */
@@ -716,7 +716,7 @@ function statsFor(tid,tv){
   return {L,license:c("license")>0,promo:promo?promo.kind||"✓":"",cDo:c("courses","منفّذة"),cGet:c("courses","مستفيدة"),plc:c("plc"),vIn:c("visits","في التخصص"),vOut:c("visits","غير التخصص"),portfolio:c("portfolioT")>0,programs:c("programs"),demo:c("demo"),other:c("other")};
 }
 function renderAdmin(){
-  $("#adm-gate").hidden=!!adminPin;$("#adm-body").hidden=!adminPin;$("#adm-actions").hidden=!adminPin;
+  $("#adm-gate").hidden=!!adminPin;$("#adm-who").textContent=adminRole==="principal"?"أهلًا أ. فاطمة البدراني — مديرة المدرسة":adminRole==="vice"?"أهلًا أ. ريم الحيسوني — وكيلة شؤون المعلمات":"مديرة المدرسة أ. فاطمة البدراني · وكيلة شؤون المعلمات أ. ريم الحيسوني";$("#adm-body").hidden=!adminPin;$("#adm-actions").hidden=!adminPin;
   if($("#v-admin").hidden||!adminPin) return; const tv=$("#a-term-f").value;
   const S=teachers.map(t=>({t,...statsFor(t.id,tv)}));
   const L=items.filter(x=>!tv||x.term===tv);
@@ -787,7 +787,7 @@ $("#names-yes").onclick=()=>{$("#names-confirm").hidden=true;applyNames();};
 async function applyNames(){const list=pendingNames;if(!list)return;const m=$("#names-msg");m.className="msg";m.textContent="جارٍ الحفظ…";
   try{const r=await rpc("admin_set_teachers",{p:adminPin,names:list});if(!r.ok)throw r;await refreshAdmin();renderAll();m.textContent=`حُفظت القائمة (${ar(list.length)} معلمة).`;}catch(e){m.className="msg err";m.textContent="تعذّر حفظ القائمة.";}pendingNames=null;}
 $("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#chg-msg"),np=$("#chg-pin").value.trim();m.className="msg";m.textContent="جارٍ الحفظ…";
-  try{const r=await rpc("admin_change_pin",{p:adminPin,np});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر.";return;}adminPin=np;$("#chg-pin").value="";m.textContent="تم تغيير رمز الإدارة. احفظيه في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الاتصال.";}});
+  try{const r=await rpc("admin_change_pin",{p:adminPin,np});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر.";return;}adminPin=np;$("#chg-pin").value="";m.textContent="تم تغيير رمزك. احفظيه في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الاتصال.";}});
 
 /* ================= add ================= */
 let viewTok=0;
