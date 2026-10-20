@@ -285,6 +285,51 @@ footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12p
 body.has-sbar footer{padding-bottom:64px}
 .pinbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0;padding:12px 16px;border-radius:14px;background:var(--gold-soft);border:1px solid var(--gold)}
 .pinbar span{flex:1;min-width:200px;font-weight:700;font-size:14.5px}
+.journey{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin-top:16px}
+@media (max-width:640px){.journey{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.jring{position:relative;width:132px;height:132px;flex:none}
+.jring svg{width:100%;height:100%;transform:rotate(-90deg) scaleY(-1)}
+.jring b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-display);font-size:30px;line-height:1}
+.jring small{position:absolute;bottom:30px;inset-inline:0;text-align:center;font-size:12px;color:var(--muted)}
+.jbody{display:grid;gap:12px;min-width:0;width:100%}
+.jbody h3{font-size:20px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 6px;border-radius:999px;font-size:13px;font-weight:700;border:1.5px dashed var(--line);color:var(--muted);background:var(--bg)}
+.badge i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;background:var(--line);color:var(--muted)}
+.badge.on{border-style:solid;border-color:var(--c);color:var(--ink);background:color-mix(in srgb,var(--c) 12%,var(--surface))}
+.badge.on i{background:var(--c);color:#fff}
+.badge.gold.on{border-color:#D9A441;background:linear-gradient(120deg,#FBF1DC,#F7DFA4);color:#5A3E05}
+.badge.gold.on i{background:#D9A441}
+.todo{display:flex;flex-wrap:wrap;gap:8px}
+.todo button{display:inline-flex;align-items:center;gap:8px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--line));background:color-mix(in srgb,var(--c) 7%,var(--surface));color:var(--ink);border-radius:12px;padding:6px 8px 6px 12px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+.todo button:hover{background:color-mix(in srgb,var(--c) 15%,var(--surface))}
+.todo button span{background:var(--c);color:#fff;border-radius:8px;padding:1px 8px;font-size:12px}
+.todo-g{display:grid;gap:10px}
+.tg{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:start}
+.tg>b{font-size:13.5px;color:var(--c);padding-top:6px}.tg>b small{background:color-mix(in srgb,var(--c) 15%,var(--surface));border-radius:99px;padding:0 7px;margin-inline-start:4px}
+@media (max-width:640px){.tg{grid-template-columns:1fr;gap:4px;text-align:right}.jbody{text-align:right}}
+.todo-h{font-size:14px;color:var(--muted);font-weight:700;display:flex;gap:6px;align-items:center}
+.hm-month{display:flex;gap:8px;align-items:center;font-size:13.5px;font-weight:700;color:var(--muted)}
+.hm-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:4px 0 10px;font-size:12.5px;color:var(--muted)}
+.hm-legend span{display:inline-flex;gap:6px;align-items:center}
+.hm-legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.hm{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+.hm th,.hm td{padding:4px 3px;text-align:center;font-size:12.5px;white-space:nowrap}
+.hm thead th{font-weight:700;color:#fff;border-radius:8px 8px 0 0}
+.hm td.nm{text-align:right;font-weight:700;padding-inline-end:10px;position:sticky;right:0;background:var(--surface);z-index:1}
+.hm td.nm a{color:inherit}
+.hm .grp{padding:4px 6px;border-inline-start:6px solid transparent}
+.hm .cells{display:flex;gap:3px}
+.hm .cell{width:15px;height:15px;border-radius:4px;border:0;padding:0;cursor:pointer;background:var(--line)}
+.hm .cell.on{background:var(--c)}
+.hm .cell.nw{outline:2px dotted var(--ink);outline-offset:1px}
+.hm .cell:focus-visible{outline:3px solid var(--gold)}
+.hm .pct{font-weight:800;min-width:46px}
+.hm .nwc{color:var(--ok);font-weight:800}
+.hm .rem{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:3px 10px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+.hm .rem:hover{border-color:var(--accent)}
+.hm tbody tr:hover td{background:var(--bg)}
+.toast2{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--ink);color:var(--surface);padding:10px 18px;border-radius:12px;font-weight:700;max-width:calc(100vw - 32px);text-align:center}
 .upcard{display:flex;align-items:center;gap:14px;width:100%;margin:14px 0;padding:18px 20px;border:2px dashed var(--c,var(--accent));border-radius:18px;background:color-mix(in srgb,var(--c,var(--accent)) 7%,var(--surface));color:var(--ink);cursor:pointer;text-align:start;font:inherit}
 .upcard:hover{background:color-mix(in srgb,var(--c,var(--accent)) 13%,var(--surface))}
 .upcard svg{width:46px;height:46px;color:var(--c,var(--accent));flex:none}
@@ -419,6 +464,7 @@ body.has-sbar footer{padding-bottom:64px}
   <div id="v-teacher" hidden>
     <div class="who" id="who"></div>
     <div class="pinbar" id="t-lock" hidden><span>🔒 أنتِ تتصفحين هذا الملف كإدارة (للاطلاع فقط). لرفع الشواهد ادخلي برمز المعلمة.</span><button type="button" class="btn btn-primary" data-unlock>إدخال رمز المعلمة</button></div>
+    <div class="journey" id="t-journey"></div>
     <div id="t-home"></div>
   </div>
 
@@ -459,6 +505,12 @@ body.has-sbar footer{padding-bottom:64px}
       <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول الإدارة</h3><p class="hint">لمديرة المدرسة ووكيلة شؤون المعلمات، كلٌّ برمزها الخاص.</p></div>
         <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
       <div id="adm-body" hidden>
+      <div class="panel" id="hm-panel">
+        <div class="p-head"><div><h3>🗺️ خريطة الإنجاز</h3><p class="hint">من بداية العام · كل مربع مجال: الأخضر موثّق، والرمادي لم يُوثّق بعد. المربع المنقّط أُضيف في الشهر المختار.</p></div>
+          <label class="hm-month"><span>شهر المتابعة</span><select class="fsel" id="hm-month" aria-label="شهر المتابعة"></select></label></div>
+        <div class="hm-legend" id="hm-legend"></div>
+        <div class="tscroll"><table class="hm" id="hm"></table></div>
+      </div>
       <div class="kpis" id="kpis"></div>
       <div class="panel" id="usage-panel">
         <div class="p-head"><h3>المساحة المستخدمة</h3><p class="hint">الخطة المجانية: ١ جيجابايت لكل ملفات المعلمات.</p></div>
@@ -501,7 +553,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٤ · ٢٠ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٥ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -742,6 +794,33 @@ let adminPin=null, adminTeachers=[], adminRole=null;      // admin session (memo
 const tPins={};                            // teacher pins unlocked in this tab (memory only)
 const tItems=tid=>items.filter(x=>x.teacher_id===tid);
 const nonEval=D.filter(d=>!d.step);
+const BADGE={growth:"نجمة النمو المهني",plan:"متقنة التخطيط",strat:"مبدعة الاستراتيجيات",skills:"بانية المهارات والقيم",students:"راعية الطالبات",eval:"خبيرة التقويم"};
+const SITE_URL="https://mramgzl2025.github.io/namaa45";
+const MONTHS=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+function covOf(its){const done=new Set(its.map(x=>x.domain));return {done,n:D.filter(d=>done.has(d.id)).length,pct:Math.round(D.filter(d=>done.has(d.id)).length/D.length*100)};}
+function toast2(t){document.querySelectorAll(".toast2").forEach(e=>e.remove());const e=document.createElement("div");e.className="toast2";e.setAttribute("role","status");e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2600);}
+async function copyText(t){try{await navigator.clipboard.writeText(t);return true;}catch(e){try{const ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();const ok=document.execCommand("copy");ta.remove();return ok;}catch(_){return false;}}}
+function renderJourney(t,its){
+  const {done,pct}=covOf(its);const C=2*Math.PI*54;const can=!!tPins[t.id];
+  const badges=SECTIONS.map(s=>{const ds=D.filter(d=>d.sec===s.id);const on=ds.every(d=>done.has(d.id));return `<span class="badge ${on?"on":""}" style="--c:${s.c}" title="${on?"مكتمل":"أكملي قسم "+esc(s.name)+" لتحصلي عليها"}"><i>${on?"★":s.n}</i>${esc(BADGE[s.id])}</span>`;}).join("")+`<span class="badge gold ${pct===100?"on":""}"><i>🏅</i>الشارة الذهبية</span>`;
+  const left=D.filter(d=>!done.has(d.id));
+  const todo=left.length?`<div class="todo-h">✨ في انتظار بصمتكِ · ${ar(left.length)} مجال</div><div class="todo-g">${SECTIONS.map(s=>{const l=left.filter(d=>d.sec===s.id);return l.length?`<div class="tg" style="--c:${s.c}"><b>${esc(s.name)} <small>${ar(l.length)}</small></b><div class="todo">${l.map(d=>`<button type="button" data-todo="${d.id}" style="--c:${s.c}">${esc(d.name)}${can?"<span>⬆</span>":""}</button>`).join("")}</div></div>`:"";}).join("")}</div>`:`<div class="todo-h" style="color:var(--ok)">🎉 اكتمل ملفكِ، بوركت جهودكِ!</div>`;
+  $("#t-journey").innerHTML=`<div class="jring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="60" cy="60" r="54" fill="none" stroke="${pct===100?"#D9A441":"var(--ok)"}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}"/></svg><b>${ar(pct)}٪</b><small>من الملف</small></div>
+  <div class="jbody"><h3>مسيرتي في نماء</h3><div class="badges">${badges}</div>${todo}</div>`;
+}
+function reminderMsg(t,its){
+  const {done,pct}=covOf(its);const first=t.name.split(" ")[0];
+  const lines=SECTIONS.map(s=>{const l=D.filter(d=>d.sec===s.id&&!done.has(d.id));return l.length?`• ${s.name}: ${l.map(d=>d.name).join("، ")}`:"";}).filter(Boolean);
+  const who=adminRole==="principal"?"أ. فاطمة البدراني":adminRole==="vice"?"أ. ريم الحيسوني":"إدارة المدرسة";
+  return `صباح الخير أستاذة ${first} 🌷\nشكرًا لجهودكِ الجميلة في ملتقى نماء المهني، وصلتِ إلى ${ar(pct)}٪ من ملفكِ 👏\n`+(lines.length?`وهذه مجالات ما زالت في انتظار بصمتكِ:\n${lines.join("\n")}\n`:"")+`\nالرابط: ${SITE_URL}\nدمتِ مبدعة ✨\n${who}`;
+}
+function renderHeatmap(){
+  const sel=$("#hm-month");if(!sel.options.length){const now=new Date();const opts=[];for(let k=0;k<12;k++){const d=new Date(now.getFullYear(),now.getMonth()-k,1);opts.push(`<option value="${d.getFullYear()}-${d.getMonth()}">${MONTHS[d.getMonth()]} ${d.getFullYear()}</option>`);}sel.innerHTML=opts.join("");}
+  const [yy,mm]=sel.value.split("-").map(Number);const ms=new Date(yy,mm,1).getTime(),me=new Date(yy,mm+1,1).getTime();
+  $("#hm-legend").innerHTML=SECTIONS.map(s=>`<span><i style="background:${s.c}"></i>${esc(s.name)}</span>`).join("")+`<span><i style="background:var(--line)"></i>لم يُوثّق</span>`;
+  const rows=teachers.map(t=>{const its=tItems(t.id);const c=covOf(its);const nw=new Set(its.filter(x=>(x.createdAt||0)>=ms&&(x.createdAt||0)<me).map(x=>x.domain));return {t,its,c,nw};}).sort((a,b)=>b.c.pct-a.c.pct||b.nw.size-a.nw.size);
+  $("#hm").innerHTML=`<thead><tr><th style="color:var(--ink)">المعلمة</th><th style="color:var(--ink)">الإنجاز</th><th style="color:var(--ink)">${MONTHS[mm]}</th>${SECTIONS.map(s=>`<th style="background:${s.c}">${esc(s.name)}</th>`).join("")}<th></th></tr></thead><tbody>${rows.map(r=>`<tr><td class="nm"><a href="#" data-t="${esc(r.t.id)}">${esc(r.t.name)}</a></td><td class="pct" style="color:${r.c.pct===100?"#B88A1E":r.c.pct>=50?"var(--ok)":r.c.pct?"var(--ink)":"var(--danger)"}">${ar(r.c.pct)}٪${r.c.pct===100?" 🏅":""}</td><td class="nwc">${r.nw.size?"+"+ar(r.nw.size):'<span class="no">—</span>'}</td>${SECTIONS.map(s=>`<td class="grp"><div class="cells">${D.filter(d=>d.sec===s.id).map(d=>`<button type="button" class="cell ${r.c.done.has(d.id)?"on":""} ${r.nw.has(d.id)?"nw":""}" style="--c:${s.c}" data-hm="${esc(r.t.id)}|${d.id}" title="${esc(r.t.name)} · ${esc(d.name)}: ${r.c.done.has(d.id)?"موثّق":"لم يُوثّق بعد"}" aria-label="${esc(d.name)}"></button>`).join("")}</div></td>`).join("")}<td>${r.c.pct<100?`<button type="button" class="rem" data-rem="${esc(r.t.id)}">📋 تذكير</button>`:""}</td></tr>`).join("")}</tbody>`;
+}
 async function load(){
   if(!sb){showErr("إعدادات الاتصال ناقصة في ملف الموقع.");return;}
   try{teachers=await rpc("list_teachers");}catch(e){console.error(e);showErr("تعذّر الاتصال بقاعدة البيانات. أعيدي تحميل الصفحة.");}
@@ -787,6 +866,7 @@ function renderTeacher(){
     <div class="sec-prog" style="--c:${c}"><span>${ar(its.length)} شاهد · ${ar(cov)} من ${ar(nonEval.length)} مجال</span><span class="bar"><span style="width:${Math.round(cov/nonEval.length*100)}%"></span></span></div>
     <button class="btn btn-ghost" data-list><svg><use href="#i-back"/></svg>تغيير المعلمة</button>`;
   const byD=id=>its.filter(x=>x.domain===id);
+  renderJourney(t,its);
   $("#t-home").innerHTML=SECTIONS.map(s=>{
     const ds=D.filter(d=>d.sec===s.id);const done=ds.filter(d=>byD(d.id).length).length;const pct=Math.round(done/ds.length*100);
     const head=`<div class="sec-head"><div class="sec-title" style="--c:${s.c}"><span class="num">${s.n}</span><div><h2>${esc(s.name)}</h2><p>${esc(s.desc)}</p></div></div><div class="sec-prog" style="--c:${s.c}"><span>${done?ar(done)+" من "+ar(ds.length)+" موثّق":"لم يبدأ التوثيق"}</span><span class="bar"><span style="width:${pct}%"></span></span></div></div>`;
@@ -822,7 +902,7 @@ function statsFor(tid){
 }
 function renderAdmin(){
   $("#adm-gate").hidden=!!adminPin;$("#adm-who").textContent=adminRole==="principal"?"أهلًا أ. فاطمة البدراني — مديرة المدرسة":adminRole==="vice"?"أهلًا أ. ريم الحيسوني — وكيلة شؤون المعلمات":"مديرة المدرسة أ. فاطمة البدراني · وكيلة شؤون المعلمات أ. ريم الحيسوني";$("#adm-body").hidden=!adminPin;$("#adm-actions").hidden=true;$("#adm-follow").hidden=!adminPin;
-  if($("#v-admin").hidden||!adminPin) return; $("#a-term-f").hidden=perMode!=="term";$("#per-range").textContent=perRange();
+  if($("#v-admin").hidden||!adminPin) return; renderHeatmap(); $("#a-term-f").hidden=perMode!=="term";$("#per-range").textContent=perRange();
   document.querySelectorAll("#pers [data-per]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.per===perMode));
   const S=teachers.map(t=>({t,...statsFor(t.id)}));
   const L=items.filter(inPer);
@@ -919,6 +999,12 @@ $("#add-btn").onclick=()=>{
 };
 $("#dv-up").onclick=()=>$("#add-btn").click();
 $("#logout").onclick=logout;
+$("#hm-month").onchange=renderHeatmap;
+document.addEventListener("click",async e=>{
+  const c=e.target.closest("[data-hm]");if(c){const [tid,did]=c.dataset.hm.split("|");curT=tid;openDomain(did);return;}
+  const m=e.target.closest("[data-rem]");if(m){const t=teachers.find(x=>x.id===m.dataset.rem);if(!t)return;const ok=await copyText(reminderMsg(t,tItems(t.id)));toast2(ok?"نُسخت رسالة التذكير ✓ الصقيها في الواتساب":"تعذّر النسخ، جرّبي مرة أخرى");return;}
+  const td=e.target.closest("[data-todo]");if(td){openDomain(td.dataset.todo);if(tPins[curT])setTimeout(()=>$("#add-btn").click(),350);}
+});
 document.addEventListener("click",e=>{if(e.target.closest("[data-unlock]")&&curT)askPin(curT);});
 /* attachments: image / pdf / word / link / barcode */
 let att=[],pickKind=null;
