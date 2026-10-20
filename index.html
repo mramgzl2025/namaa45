@@ -285,7 +285,22 @@ footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12p
 body.has-sbar footer{padding-bottom:64px}
 .pinbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0;padding:12px 16px;border-radius:14px;background:var(--gold-soft);border:1px solid var(--gold)}
 .pinbar span{flex:1;min-width:200px;font-weight:700;font-size:14.5px}
-.journey{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin-top:16px}
+.journey{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;border-radius:24px;padding:24px;margin-top:16px;color:#F4F1E8;border:1px solid rgba(243,199,110,.35);
+  background:radial-gradient(90% 120% at 100% 0%,rgba(192,69,122,.55) 0%,transparent 55%),radial-gradient(80% 120% at 0% 100%,rgba(14,159,159,.45) 0%,transparent 55%),linear-gradient(135deg,#2B1D6B 0%,#1B2459 55%,#151B3D 100%);box-shadow:0 18px 40px rgba(27,34,89,.35)}
+.jlan{display:grid;justify-items:center;gap:4px;min-width:150px;text-align:center}
+.jlan svg{width:104px;height:154px;overflow:visible}
+.jlan b{font-family:var(--f-display);font-size:30px;line-height:1;color:#F3C76E}
+.jlan small{font-size:12.5px;color:#D6D2F0;max-width:170px}
+.jlan .halo{animation:lnGlow 3.6s ease-in-out infinite}
+.journey h3{color:#fff}
+.journey .badge{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.25);color:#C9C4E8}
+.journey .badge i{background:rgba(255,255,255,.15);color:#E8E4FA}
+.journey .badge.on{background:color-mix(in srgb,var(--c) 35%,transparent);border-color:var(--c);color:#fff}
+.journey .badge.gold.on{background:linear-gradient(120deg,#F7DFA4,#D9A441);color:#3A2705}
+.journey .todo-h{color:#F3C76E}
+.journey .tg>b{color:#fff}.journey .tg>b small{background:rgba(255,255,255,.18);color:#fff}
+.journey .todo button{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#F4F1E8}
+.journey .todo button:hover{background:rgba(255,255,255,.16)}
 @media (max-width:640px){.journey{grid-template-columns:1fr;justify-items:center;text-align:center}}
 .jring{position:relative;width:132px;height:132px;flex:none}
 .jring svg{width:100%;height:100%;transform:rotate(-90deg) scaleY(-1)}
@@ -578,7 +593,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٩ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٠ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -834,7 +849,7 @@ function renderJourney(t,its){
   const badges=SECTIONS.map(s=>{const ds=D.filter(d=>d.sec===s.id);const on=ds.every(d=>done.has(d.id));return `<span class="badge ${on?"on":""}" style="--c:${s.c}" title="${on?"مكتمل":"أكملي قسم "+esc(s.name)+" لتحصلي عليها"}"><i>${on?"★":s.n}</i>${esc(BADGE[s.id])}</span>`;}).join("")+`<span class="badge gold ${pct===100?"on":""}"><i>🏅</i>الشارة الذهبية</span>`;
   const left=D.filter(d=>!done.has(d.id));
   const todo=left.length?`<div class="todo-h">✨ في انتظار بصمتكِ · ${ar(left.length)} مجال</div><div class="todo-g">${SECTIONS.map(s=>{const l=left.filter(d=>d.sec===s.id);return l.length?`<div class="tg" style="--c:${s.c}"><b>${esc(s.name)} <small>${ar(l.length)}</small></b><div class="todo">${l.map(d=>`<button type="button" data-todo="${d.id}" style="--c:${s.c}">${esc(d.name)}${can?"<span>⬆</span>":""}</button>`).join("")}</div></div>`:"";}).join("")}</div>`:`<div class="todo-h" style="color:var(--ok)">🎉 اكتمل ملفكِ، بوركت جهودكِ!</div>`;
-  $("#t-journey").innerHTML=`<div class="jring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="60" cy="60" r="54" fill="none" stroke="${pct===100?"#D9A441":"var(--ok)"}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*pct/100} ${C}"/></svg><b>${ar(pct)}٪</b><small>من الملف</small></div>
+  $("#t-journey").innerHTML=`<div class="jlan">${lanternSVG(pct,"me")}<b>${ar(pct)}٪</b><small>${pct===100?"✦ فانوسكِ مضيء بالكامل ✦":"يزداد نور فانوسكِ مع كل شاهد"}</small></div>
   <div class="jbody"><h3>مسيرتي في نماء</h3><div class="badges">${badges}</div>${todo}</div>`;
 }
 function reminderMsg(t,its){
