@@ -135,7 +135,7 @@ section{padding-block:36px 4px}
 
 /* stepper */
 .stepper{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;overflow-x:auto}
-.steps{display:grid;grid-template-columns:repeat(8,minmax(118px,1fr));gap:0;min-width:940px;position:relative}
+.steps{display:grid;grid-template-columns:repeat(9,minmax(112px,1fr));gap:0;min-width:1010px;position:relative}
 .st{position:relative;display:grid;justify-items:center;gap:8px;text-align:center;padding:0 6px;cursor:pointer;background:none;border:0}
 .st::before{content:"";position:absolute;top:34px;right:50%;width:100%;height:4px;background:var(--line);z-index:0}
 .st:first-child::before{display:none}
@@ -553,7 +553,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٦ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٧ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -714,6 +714,8 @@ const D=[
  {id:"curriculum",sec:"plan",name:"متابعة تنفيذ المنهج",c:"#2E9D6A",desc:"نسبة الإنجاز مقارنة بالتوزيع.",scene:[["chart",130,92,1.5],["checklist",230,92,1.05]],hints:["نموذج متابعة تنفيذ المنهج","ما يثبت التعويض عند التأخر"]},
  {id:"records",sec:"plan",name:"سجلات المتابعة",c:"#5B5BD6",desc:"سجل المتابعة والدرجات والملاحظات.",scene:[["notebook",130,92,1.5],["magnifier",220,92,1.2],["okbadge",160,58,1]],hints:["صفحات من سجل المتابعة","سجل الدرجات والمشاركة"]},
  {id:"notebooks",sec:"plan",name:"كتب ودفاتر الطالبات",c:"#E07A3F",desc:"متابعة الكتب والدفاتر والتصحيح.",scene:[["book",120,98,1.5],["notebook",222,92,1.15],["okbadge",250,56,1]],hints:["صور من دفاتر مصحّحة","نماذج التعزيز والملاحظات"]},
+ {id:"khatm",sec:"plan",name:"ختم المنهج",c:"#2E9D6A",desc:"إنهاء المقرر في وقته وتوثيق ختمه.",scene:[["book",120,100,1.5],["okbadge",160,60,1.3],["calendar",236,92,1],["spark",270,40]],hints:["نموذج ختم المنهج المعتمد","توزيع المنهج مع ما يثبت الإنجاز","صور من حصة الختم"]},
+ {id:"review",sec:"plan",name:"المراجعة",c:"#8B5CF6",desc:"خطة المراجعة وأوراقها قبل الاختبارات.",scene:[["sheets",120,94,1.4],["magnifier",210,90,1.1],["pencil",262,104,.9]],hints:["خطة المراجعة وجدولها","أوراق ومراجعات الطالبات","أسئلة المراجعة أو الملخصات"]},
  {id:"platform",sec:"plan",name:"منصة مدرستي والأنشطة الإلكترونية",c:"#1F87B8",desc:"أنشطة إلكترونية حضوريًا أو عن بعد.",scene:[["laptop",130,96,1.6],["phone",236,92,1.1],["spark",270,40]],hints:["لقطات من الأنشطة في منصة مدرستي","نماذج اختبارات إلكترونية","تقارير التفاعل"]},
  // strat
  {id:"strategies",sec:"strat",name:"الاستراتيجيات التدريسية",c:"#E07A3F",desc:"تنويع الاستراتيجيات داخل الحصة.",scene:[["bulb",120,80,1.6],["gear",200,104,1.3,"#3D4DB8"],["gear",238,70,.9],["spark",70,40]],hints:["خطة تبيّن الاستراتيجية المستخدمة","صور التطبيق مع الطالبات","أدوات الاستراتيجية"]},
@@ -745,7 +747,8 @@ const D=[
  {id:"p2",sec:"eval",name:"اختبار فترة ٢",c:"#1F87B8",step:true,icon:"doc",scene:[["doc",130,90,1.5],["grade",220,92,1.2]],hints:["نموذج الاختبار وكشف الدرجات"]},
  {id:"a2",sec:"eval",name:"تحليل النتائج ٢",c:"#5B5BD6",step:true,icon:"chart",scene:[["chart",150,92,1.6],["magnifier",236,100,.9]],hints:["جدول التحليل والمقارنة مع الفترة الأولى"]},
  {id:"r2",sec:"eval",name:"معالجة الضعف ٢",c:"#E07A3F",step:true,icon:"bandage",scene:[["bandage",130,92,1.4],["stairs",230,120,1],["arrowUp",250,60,.8,G]],hints:["خطة المعالجة الثانية ونتائجها"]},
- {id:"final",sec:"eval",name:"الاختبار النهائي",c:"#C0457A",step:true,icon:"trophy",scene:[["trophy",130,92,1.6],["cert",226,92,1]],hints:["الاختبار النهائي وتحليل نتائجه"]}
+ {id:"final",sec:"eval",name:"الاختبار النهائي",c:"#C0457A",step:true,icon:"trophy",scene:[["trophy",130,92,1.6],["cert",226,92,1]],hints:["نموذج الاختبار النهائي وكشف الدرجات"]},
+ {id:"af",sec:"eval",name:"تحليل النتائج النهائي",c:"#5B5BD6",step:true,icon:"chart",scene:[["chart",150,92,1.6],["trophy",240,100,.8]],hints:["جدول تحليل نتائج الاختبار النهائي","مقارنة النتائج مع الفترات السابقة","التوصيات للفصل القادم"]}
 ];
 const DM=Object.fromEntries(D.map(d=>[d.id,d]));
 const SM=Object.fromEntries(SECTIONS.map(s=>[s.id,s]));
