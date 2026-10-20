@@ -276,6 +276,15 @@ footer b{color:var(--hero-ink)}
 .fkpis b{display:block;font-size:22px;color:var(--c)}.fkpis span{font-size:13px;color:var(--muted)}
 .st-on{color:var(--ok);font-weight:800}.st-off{color:var(--danger);font-weight:800}
 footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12px;font-weight:700}
+.sbar{position:fixed;inset-inline:0;bottom:0;z-index:40;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--hero);color:var(--hero-ink);box-shadow:0 -6px 20px rgba(0,0,0,.2)}
+.sbar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.sdot{width:10px;height:10px;border-radius:50%;background:#4CC08A;flex:none;box-shadow:0 0 0 4px rgba(76,192,138,.25)}
+.swho{flex:1;min-width:0;font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sout{background:#E25B5B;color:#fff;border:0;padding:8px 18px}
+.sout svg{transform:scaleX(-1)}
+body.has-sbar footer{padding-bottom:64px}
+.pinbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0;padding:12px 16px;border-radius:14px;background:var(--gold-soft);border:1px solid var(--gold)}
+.pinbar span{flex:1;min-width:200px;font-weight:700;font-size:14.5px}
 .upcard{display:flex;align-items:center;gap:14px;width:100%;margin:14px 0;padding:18px 20px;border:2px dashed var(--c,var(--accent));border-radius:18px;background:color-mix(in srgb,var(--c,var(--accent)) 7%,var(--surface));color:var(--ink);cursor:pointer;text-align:start;font:inherit}
 .upcard:hover{background:color-mix(in srgb,var(--c,var(--accent)) 13%,var(--surface))}
 .upcard svg{width:46px;height:46px;color:var(--c,var(--accent));flex:none}
@@ -409,6 +418,7 @@ footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12p
   <!-- teacher home -->
   <div id="v-teacher" hidden>
     <div class="who" id="who"></div>
+    <div class="pinbar" id="t-lock" hidden><span>🔒 أنتِ تتصفحين هذا الملف كإدارة (للاطلاع فقط). لرفع الشواهد ادخلي برمز المعلمة.</span><button type="button" class="btn btn-primary" data-unlock>إدخال رمز المعلمة</button></div>
     <div id="t-home"></div>
   </div>
 
@@ -424,7 +434,7 @@ footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12p
       </div>
       <div class="grid" id="dv-grid"></div>
       <button type="button" class="upcard" id="dv-up"><svg><use href="#i-upload"/></svg><span><b>ارفعي ملف الشاهد هنا</b><small>PDF أو صورة — اضغطي لاختيار الملف من جهازك</small></span></button>
-      <p class="locknote" id="dv-lock" hidden>🔒 الرفع متاح للمعلمة صاحبة الملف بعد فتحه برمزها السري.</p>
+      <div class="pinbar" id="dv-lock" hidden><span>🔒 أنتِ تتصفحين كإدارة. لرفع شاهد في هذا الملف ادخلي برمز المعلمة.</span><button type="button" class="btn btn-primary" data-unlock>إدخال رمز المعلمة</button></div>
       <div class="empty" id="dv-empty" hidden><h3>لم يُوثَّق شاهد في هذا المجال بعد</h3><p>اضغطي «ارفعي ملف الشاهد» وارفعي الملف أو الصورة.</p></div>
     </section>
   </div>
@@ -490,7 +500,8 @@ footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12p
   </div>
 </main>
 
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٣ · ٢٠ أكتوبر ٢٠٢٦</span></div></footer>
+<div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٤ · ٢٠ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -769,7 +780,7 @@ function renderNav(){
   $("#secnav").innerHTML=SECTIONS.map(s=>`<a href="#sec-${s.id}" data-sec="${s.id}"><i style="background:${s.c}">${s.n}</i>${esc(s.name)}</a>`).join("");
 }
 function renderTeacher(){
-  if(!curT) return; const t=teachers.find(x=>x.id===curT); if(!t){showView("list");return;}
+  if(!curT) return; const t=teachers.find(x=>x.id===curT); if(!t){showView("list");return;} $("#t-lock").hidden=!!tPins[curT];
   const its=tItems(t.id); const c=avColor(t.name); const cov=nonEval.filter(d=>its.some(x=>x.domain===d.id)).length;
   $("#who").style.setProperty("--c",c);
   $("#who").innerHTML=`<span class="av">${esc(initial(t.name))}</span><div class="grow"><p>ملف إنجاز المعلمة</p><h2>${esc(t.name)}</h2></div>
@@ -838,7 +849,9 @@ function renderAdmin(){
   $("#tb-pins").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>الرمز السري</th><th></th></tr></thead><tbody>${adminTeachers.map((t,i)=>`<tr><td>${ar(i+1)}</td><td class="nm">${esc(t.name)}</td><td><b style="font-family:var(--f-display);font-size:17px;letter-spacing:.15em">${esc(t.pin||"—")}</b></td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:13px" data-reset="${esc(t.id)}">رمز جديد</button></td></tr>`).join("")}</tbody>`;
   if(document.activeElement!==$("#t-names")) $("#t-names").value=teachers.map(t=>t.name).join("\n");
 }
-function renderAll(){renderStats();renderList();renderTeacher();renderDomain();renderAdmin();}
+function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const on=parts.length>0;$("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);if(on)$("#swho").textContent="داخلة الآن: "+parts.join(" · ");}
+function logout(){adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
+function renderAll(){renderSession();renderStats();renderList();renderTeacher();renderDomain();renderAdmin();}
 renderNav();
 
 /* ================= navigation ================= */
@@ -867,7 +880,7 @@ let pinFor=null;
 function askPin(id){const t=teachers.find(x=>x.id===id);if(!t)return;pinFor=id;$("#p-name").textContent=t.name;const av=$("#p-av");av.textContent=initial(t.name);av.style.background=avColor(t.name);$("#p-pin").value="";$("#p-msg").textContent="";$("#dlg-pin").hidden=false;setTimeout(()=>$("#p-pin").focus(),50);}
 $("#f-pin").addEventListener("submit",async e=>{e.preventDefault();const id=pinFor,pin=$("#p-pin").value.trim(),m=$("#p-msg"),b=$("#p-go");if(!id||!pin)return;b.disabled=true;m.className="msg";m.textContent="جارٍ التحقق…";
   try{const r=await rpc("teacher_open",{tid:id,p:pin});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر الفتح.";return;}
-    tPins[id]=pin;items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;renderList();openTeacher(id);
+    tPins[id]=pin;items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;if(curT===id&&(!$("#v-domain").hidden||!$("#v-teacher").hidden))renderAll();else{renderList();openTeacher(id);}
   }catch(err){m.className="msg err";m.textContent="تعذّر الاتصال. حاولي مرة أخرى.";}finally{b.disabled=false;}});
 
 /* admin login + management */
@@ -905,6 +918,8 @@ $("#add-btn").onclick=()=>{
   att=[];renderAtt();$("#a-link").hidden=true;$("#a-url").value="";$("#a-msg").textContent="";$("#a-msg").className="msg";$("#dlg-add").hidden=false;$("#a-name").focus();
 };
 $("#dv-up").onclick=()=>$("#add-btn").click();
+$("#logout").onclick=logout;
+document.addEventListener("click",e=>{if(e.target.closest("[data-unlock]")&&curT)askPin(curT);});
 /* attachments: image / pdf / word / link / barcode */
 let att=[],pickKind=null;
 const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
