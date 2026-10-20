@@ -265,6 +265,8 @@ footer b{color:var(--hero-ink)}
 @media (prefers-reduced-motion:reduce){.card,.dc,.scene svg,.st .bub{transition:none}}
 
 /* ---- school edition ---- */
+.own-btn{font:inherit;color:inherit;text-align:right;cursor:pointer;transition:background .2s,border-color .2s}
+.own-btn:hover{background:rgba(255,255,255,.12);border-color:var(--gold)}
 .demo-bar{background:var(--gold);color:#1B1607;text-align:center;font-weight:700;font-size:14px;padding:8px 16px}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .tc{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;cursor:pointer;text-align:right;transition:transform .2s,box-shadow .2s,border-color .2s;min-width:0}
@@ -326,7 +328,7 @@ footer b{color:var(--hero-ink)}
       <span class="kicker">ملفات الإنجاز والنمو المهني للمعلمات</span>
       <h1>ملتقى <em>نماء</em> المهني</h1>
       <p class="lead">اختاري اسمك، ثم وثّقي شواهدك في التعليم والتعلم والنمو المهني.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px"><div class="owner"><svg class="av"><use href="#i-user"/></svg><div><small>مديرة المدرسة</small><b>أ. فاطمة البدراني</b></div></div><div class="owner"><svg class="av"><use href="#i-user"/></svg><div><small>وكيلة شؤون المعلمات</small><b>أ. ريم الحيسوني</b></div></div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px"><button type="button" class="owner own-btn" data-adm><svg class="av"><use href="#i-user"/></svg><div><small>مديرة المدرسة · دخول برمزك</small><b>أ. فاطمة البدراني</b></div></button><button type="button" class="owner own-btn" data-adm><svg class="av"><use href="#i-user"/></svg><div><small>وكيلة شؤون المعلمات · دخول برمزك</small><b>أ. ريم الحيسوني</b></div></button></div>
       <div class="hero-cta">
         <a class="btn btn-gold" href="#teachers"><svg><use href="#i-user"/></svg>ادخلي باسمك</a>
         <button class="btn btn-glass" id="open-adm"><svg><use href="#i-chart"/></svg>لوحة المتابعة</button>
@@ -758,6 +760,7 @@ document.addEventListener("click",e=>{
 });
 document.querySelector('.hero-cta a').addEventListener("click",e=>{if($("#v-list").hidden){e.preventDefault();openList();}});
 $("#open-adm").onclick=openAdmin;
+document.querySelectorAll("[data-adm]").forEach(b=>b.onclick=()=>{openAdmin();setTimeout(()=>{const i=$("#adm-pin");if(i&&!$("#adm-gate").hidden)i.focus();},400);});
 $("#back-teacher").onclick=()=>{curD=null;showView("teacher");renderTeacher();toMain();};
 $("#t-q").oninput=renderList;$("#dv-term").onchange=renderDomain;$("#dv-kind").onchange=renderDomain;$("#a-term-f").onchange=renderAdmin;
 
