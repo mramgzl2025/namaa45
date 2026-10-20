@@ -13,8 +13,7 @@
    ====================================================== */
 window.NAMAA_CONFIG = {
   SUPABASE_URL: "https://fjvtdpiblvunztvlocvy.supabase.co",        // الصقي هنا Project URL من Supabase
-  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqdnRkcGlibHZ1bnp0dmxvY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MTAxNjQsImV4cCI6MjEwODA4NjE2NH0.xbi6NgVfe54NH7-PClPWLCxP-6yvmlSgFUoVBNS_Nes",   // الصقي هنا anon public key من Supabase
-  ADMIN_PIN: "1448"        // رمز لوحة الإدارة (للأستاذة ريم فقط) — غيّريه
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqdnRkcGlibHZ1bnp0dmxvY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MTAxNjQsImV4cCI6MjEwODA4NjE2NH0.xbi6NgVfe54NH7-PClPWLCxP-6yvmlSgFUoVBNS_Nes"   // مفتاح عام — الحماية في قاعدة البيانات
 };
 </script>
 <style>
@@ -386,7 +385,10 @@ footer b{color:var(--hero-ink)}
     <section>
       <button class="back" data-list><svg><use href="#i-back"/></svg>العودة إلى قائمة المعلمات</button>
       <div class="sec-head"><div class="sec-title" style="--c:var(--gold)"><span class="num"><svg width="26" height="26"><use href="#i-chart"/></svg></span><div><h2>لوحة متابعة شؤون المعلمات</h2><p>أ. ريم الحيسوني — متابعة توثيق المعلمات وإحصائية النمو المهني</p></div></div>
-        <div class="actions"><select class="fsel" id="a-term-f" aria-label="الفصل الدراسي"></select><button class="btn btn-gold" id="export"><svg><use href="#i-down"/></svg>تصدير Excel</button></div></div>
+        <div class="actions" id="adm-actions" hidden><select class="fsel" id="a-term-f" aria-label="الفصل الدراسي"></select><button class="btn btn-gold" id="export"><svg><use href="#i-down"/></svg>تصدير Excel</button></div></div>
+      <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول وكيلة شؤون المعلمات</h3><p class="hint">لوحة المتابعة محمية برمز الإدارة.</p></div>
+        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمز الإدارة</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
+      <div id="adm-body" hidden>
       <div class="kpis" id="kpis"></div>
 
       <div class="panel"><div class="p-head"><h3>إحصائية عن كل ما يتعلق بالنمو المهني</h3><p class="hint">نفس أعمدة نموذج الإدارة، تُعبّأ تلقائيًا من شواهد كل معلمة.</p></div>
@@ -404,20 +406,35 @@ footer b{color:var(--hero-ink)}
       </div>
 
       <div class="panel tlist" style="margin-top:16px">
-        <div class="p-head"><h3>إدارة أسماء المعلمات</h3><p class="hint">خاصة بوكيلة شؤون المعلمات.</p></div>
-        <div id="pin-box" class="pin"><label for="pin-in" class="hint">رمز الإدارة</label><input id="pin-in" type="password" inputmode="numeric" autocomplete="off"><button class="btn btn-primary" id="pin-go">فتح</button><span class="msg" id="pin-msg"></span></div>
-        <div id="mng" hidden>
-          <label class="hint" for="t-names">اكتبي اسم كل معلمة في سطر مستقل، ثم احفظي. الأسماء الجديدة تُضاف، والمحذوفة تُزال مع شواهدها.</label>
+        <div class="p-head"><h3>أسماء المعلمات ورموزهن السرية</h3><p class="hint">أعطي كل معلمة رمزها على الخاص. «رمز جديد» يلغي القديم فورًا.</p></div>
+        <div class="tscroll"><table class="adm-table" id="tb-pins" style="min-width:520px"></table></div>
+        <details style="margin-top:14px"><summary>تعديل قائمة الأسماء</summary>
+          <label class="hint" for="t-names">اسم كل معلمة في سطر مستقل. الأسماء الجديدة تُضاف برمز جديد، والمحذوفة تُزال مع شواهدها.</label>
           <textarea id="t-names" rows="10"></textarea>
           <div class="actions"><button class="btn btn-primary" id="save-names">حفظ الأسماء</button><span class="msg" id="names-msg" role="status"></span></div>
           <div class="confirm" id="names-confirm" hidden><span id="names-confirm-t"></span><button class="btn btn-danger" id="names-yes">تأكيد</button><button class="btn btn-ghost" id="names-no">تراجع</button></div>
-        </div>
+        </details>
+        <details style="margin-top:10px"><summary>تغيير رمز الإدارة</summary>
+          <form class="pin" id="chg-form" style="margin-top:8px"><label for="chg-pin" class="hint">الرمز الجديد (٦ أرقام أو أكثر)</label><input id="chg-pin" type="password" inputmode="numeric" autocomplete="new-password" required><button class="btn btn-primary">حفظ الرمز</button><span class="msg" id="chg-msg" role="status"></span></form>
+        </details>
+      </div>
       </div>
     </section>
   </div>
 </main>
 
 <footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span></div></footer>
+
+<!-- Teacher PIN -->
+<div class="overlay" id="dlg-pin" hidden>
+  <form class="dialog" id="f-pin" style="width:min(420px,100%)">
+    <div class="dlg-head"><div class="ht"><span class="hi" id="p-av" style="display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-size:22px;font-weight:700"></span><div style="min-width:0"><div class="hint">ملف سري</div><h2 id="p-name"></h2></div></div><button type="button" class="close" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
+    <div class="field"><label for="p-pin">اكتبي رمزك السري</label><input id="p-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="10" required style="font-size:22px;letter-spacing:.4em;text-align:center"></div>
+    <p class="hint">لا يفتح الملف إلا برمز صاحبته. نسيتِ الرمز؟ اطلبيه من وكيلة شؤون المعلمات.</p>
+    <p class="msg" id="p-msg" role="status"></p>
+    <div class="actions"><button class="btn btn-primary" id="p-go">فتح ملفي</button><button type="button" class="btn btn-ghost" data-close>إلغاء</button></div>
+  </form>
+</div>
 
 <!-- Add item -->
 <div class="overlay" id="dlg-add" hidden>
@@ -607,42 +624,14 @@ const initial=name=>{const p=String(name).trim().split(/\s+/);return (p[0]||"؟"
 const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
 
-/* ================= data store ================= */
-const live=!!(CFG.SUPABASE_URL&&CFG.SUPABASE_ANON_KEY&&window.supabase);
-let store;
-if(live){
-  const sb=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY);
-  const pub=p=>sb.storage.from("files").getPublicUrl(p).data.publicUrl;
-  store={
-    async teachers(){const {data,error}=await sb.from("teachers").select("*").order("sort").order("created_at");if(error)throw error;return data;},
-    async addTeacher(name,sort){const {error}=await sb.from("teachers").insert({name,sort});if(error)throw error;},
-    async removeTeacher(id){const {error}=await sb.from("teachers").delete().eq("id",id);if(error)throw error;},
-    async items(){let all=[],from=0;for(;;){const {data,error}=await sb.from("items").select("*").order("created_at",{ascending:false}).range(from,from+999);if(error)throw error;all=all.concat(data);if(data.length<1000)break;from+=1000;}return all.map(r=>({...r,createdAt:Date.parse(r.created_at)}));},
-    async addItem(doc){const row={teacher_id:doc.teacher,domain:doc.domain,sec:doc.sec,title:doc.title,kind:doc.kind||null,term:doc.term,date:doc.date||null,cls:doc.cls,descr:doc.desc,checks:doc.checks||[],files:doc.files};const {data,error}=await sb.from("items").insert(row).select().single();if(error)throw error;return data.id;},
-    async removeItem(it){const paths=[];(it.files||[]).forEach(f=>{paths.push(f.path);if(f.thumb)paths.push(f.thumb);});if(paths.length)await sb.storage.from("files").remove(paths);const {error}=await sb.from("items").delete().eq("id",it.id);if(error)throw error;},
-    async upload(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}.${ext}`;const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;},
-    url:pub
-  };
-}else{
-  const mem={}; // demo blobs (lost on reload)
-  let T=LS.get("namaa-demo-t",null), I=LS.get("namaa-demo-i",[]);
-  if(!T){T=["نورة العتيبي (مثال)","هند الحربي (مثال)","سارة الجهني (مثال)","أمل الرحيلي (مثال)"].map((n,i)=>({id:uid(),name:n,sort:i}));LS.set("namaa-demo-t",T);
-    const now=Date.now(); I=[{id:uid(),teacher_id:T[0].id,domain:"plc",sec:"growth",title:"لقاء: التعلم النشط في الحصص الأولى (مثال)",term:"الفصل الأول ١٤٤٨",files:[],createdAt:now-864e5},
-      {id:uid(),teacher_id:T[0].id,domain:"visits",sec:"growth",kind:"في التخصص",title:"زيارة تبادلية (مثال)",term:"الفصل الأول ١٤٤٨",files:[],createdAt:now-2*864e5},
-      {id:uid(),teacher_id:T[1].id,domain:"courses",sec:"growth",kind:"مستفيدة",title:"دورة التقويم البنائي (مثال)",term:"الفصل الأول ١٤٤٨",files:[],createdAt:now-3*864e5},
-      {id:uid(),teacher_id:T[1].id,domain:"diag",sec:"eval",title:"الاختبار التشخيصي (مثال)",term:"الفصل الأول ١٤٤٨",files:[],createdAt:now-4*864e5}];LS.set("namaa-demo-i",I);}
-  store={
-    async teachers(){return [...T].sort((a,b)=>(a.sort||0)-(b.sort||0));},
-    async addTeacher(name,sort){T.push({id:uid(),name,sort});LS.set("namaa-demo-t",T);},
-    async removeTeacher(id){T=T.filter(t=>t.id!==id);I=I.filter(i=>i.teacher_id!==id);LS.set("namaa-demo-t",T);LS.set("namaa-demo-i",I);},
-    async items(){return [...I];},
-    async addItem(doc){const id=uid();I.unshift({id,teacher_id:doc.teacher,domain:doc.domain,sec:doc.sec,title:doc.title,kind:doc.kind,term:doc.term,date:doc.date,cls:doc.cls,descr:doc.desc,checks:doc.checks||[],files:doc.files,createdAt:Date.now()});LS.set("namaa-demo-i",I);return id;},
-    async removeItem(it){I=I.filter(i=>i.id!==it.id);LS.set("namaa-demo-i",I);},
-    async upload(blob,ext){const p="demo/"+uid()+"."+ext;mem[p]=URL.createObjectURL(blob);return p;},
-    url:p=>mem[p]||""
-  };
-}
-$("#demo-bar").hidden=live;
+/* ================= data store (secure RPC) ================= */
+const sb=(CFG.SUPABASE_URL&&CFG.SUPABASE_ANON_KEY&&window.supabase)?window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY):null;
+const rpc=async(fn,args)=>{const {data,error}=await sb.rpc(fn,args||{});if(error)throw error;return data;};
+const fileUrl=p=>sb?sb.storage.from("files").getPublicUrl(p).data.publicUrl:"";
+async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
+const norm=r=>({...r,createdAt:Date.parse(r.created_at)});
+const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي بعد ١٥ دقيقة.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٦ أرقام أو أكثر."};
+$("#demo-bar").hidden=true;
 
 /* pdf.js */
 try{if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";}catch(e){}
@@ -660,28 +649,33 @@ const termOpts=all=>(all?`<option value="">كل الفصول</option>`:"")+TERMS
 $("#a-term").innerHTML=termOpts(false);$("#dv-term").innerHTML=termOpts(true);$("#a-term-f").innerHTML=termOpts(true);$("#a-term-f").value=TERMS[0];
 
 /* ================= state ================= */
-let teachers=[],items=[],curT=null,curD=null,adminOpen=false;
-const mine=()=>LS.get("namaa-mine",[]);
-const canDelete=it=>adminOpen||mine().includes(it.id);
+let teachers=[],items=[],curT=null,curD=null;
+let adminPin=null, adminTeachers=[];      // admin session (memory only)
+const tPins={};                            // teacher pins unlocked in this tab (memory only)
 const tItems=tid=>items.filter(x=>x.teacher_id===tid);
 const nonEval=D.filter(d=>!d.step);
 async function load(){
-  try{[teachers,items]=await Promise.all([store.teachers(),store.items()]);}catch(e){console.error(e);showErr("تعذّر الاتصال بقاعدة البيانات. تحققي من إعدادات Supabase.");}
+  if(!sb){showErr("إعدادات الاتصال ناقصة في ملف الموقع.");return;}
+  try{teachers=await rpc("list_teachers");}catch(e){console.error(e);showErr("تعذّر الاتصال بقاعدة البيانات. أعيدي تحميل الصفحة.");}
   renderAll();
 }
+async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
+async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminTeachers=r.teachers;items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));}
 function showErr(t){const b=$("#demo-bar");b.hidden=false;b.style.background="var(--danger)";b.style.color="#fff";b.textContent=t;}
 
 /* ================= render ================= */
 function renderStats(){
-  $("#s-t").textContent=ar(teachers.length);$("#s-items").textContent=ar(items.length);
-  $("#s-files").textContent=ar(items.reduce((n,x)=>n+(x.files?.length||0),0));
-  $("#s-active").textContent=ar(teachers.filter(t=>tItems(t.id).length).length);
+  $("#s-t").textContent=ar(teachers.length);
+  const known=adminPin?items:null;
+  $("#s-items").textContent=known?ar(known.length):"🔒";
+  $("#s-files").textContent=known?ar(known.reduce((n,x)=>n+(x.files?.length||0),0)):"🔒";
+  $("#s-active").textContent=known?ar(teachers.filter(t=>tItems(t.id).length).length):"🔒";
 }
 function renderList(){
   const q=$("#t-q").value.trim();
   const L=teachers.filter(t=>!q||t.name.includes(q));
-  $("#tgrid").innerHTML=L.map(t=>{const its=tItems(t.id);const cov=nonEval.filter(d=>its.some(x=>x.domain===d.id)).length;const c=avColor(t.name);
-    return `<button class="tc" data-t="${esc(t.id)}" style="--c:${c}"><span class="av">${esc(initial(t.name))}</span><span class="tt"><b>${esc(t.name)}</b><small>${its.length?ar(its.length)+" شاهد · "+ar(cov)+" من "+ar(nonEval.length)+" مجال":"لم تبدأ التوثيق"}</small><span class="pbar"><span style="width:${Math.round(cov/nonEval.length*100)}%"></span></span></span></button>`;}).join("");
+  $("#tgrid").innerHTML=L.map(t=>{const c=avColor(t.name);const open=!!tPins[t.id]||!!adminPin;
+    return `<button class="tc" data-t="${esc(t.id)}" style="--c:${c}"><span class="av">${esc(initial(t.name))}</span><span class="tt"><b>${esc(t.name)}</b><small>${open?"مفتوح الآن":"🔒 ملف سري"}</small></span></button>`;}).join("");
   $("#t-empty").hidden=!!teachers.length;
 }
 function renderNav(){
@@ -703,12 +697,12 @@ function renderTeacher(){
   }).join("");
 }
 function itemCard(x){
-  const d=DM[x.domain]||D[0];const f=x.files?.[0];const th=f?(f.thumb||(f.type&&f.type.startsWith("image/")?f.path:null)):null;const n=x.files?.length||0;const src=th?store.url(th):"";
+  const d=DM[x.domain]||D[0];const f=x.files?.[0];const th=f?(f.thumb||(f.type&&f.type.startsWith("image/")?f.path:null)):null;const n=x.files?.length||0;const src=th?fileUrl(th):"";
   return `<button class="card" data-item="${esc(x.id)}" style="--c:${d.c}"><div class="thumb">${d.svg}${src?`<img src="${esc(src)}" alt="" loading="lazy" onerror="this.remove()">`:""}${x.kind?`<span class="chipc">${esc(x.kind)}</span>`:""}${n?`<span class="fn"><svg><use href="#i-file"/></svg>${ar(n)}</span>`:""}</div>
     <div class="body"><h3>${esc(x.title)}</h3><div class="meta">${x.term?`<span><svg><use href="#i-cal"/></svg>${esc(x.term)}</span>`:""}${x.date?`<span>${fmtDate(x.date)}</span>`:""}${x.cls?`<span><svg><use href="#i-class"/></svg>${esc(x.cls)}</span>`:""}</div></div></button>`;
 }
 function renderDomain(){
-  if(!curD||!curT) return; const d=DM[curD],s=SM[d.sec];
+  if(!curD||!curT) return; $("#add-btn").hidden=!tPins[curT]; const d=DM[curD],s=SM[d.sec];
   $("#dv-head").style.setProperty("--c",d.c);
   $("#dv-head").innerHTML=`<div class="scene">${d.svg}</div><div class="txt"><span class="sec-l">${esc(s.n)} · ${esc(s.name)}</span><h2>${esc(d.name)}</h2>${d.desc?`<p>${esc(d.desc)}</p>`:""}<div class="hints"><b><svg><use href="#i-bulb"/></svg>كيف أوثّق هذا المجال؟</b><ul>${d.hints.map(h=>`<li>${esc(h)}</li>`).join("")}</ul></div></div>`;
   const ks=$("#dv-kind");ks.hidden=!d.kinds;if(ks.dataset.d!==d.id){ks.innerHTML=d.kinds?`<option value="">كل الأنواع</option>`+d.kinds.map(k=>`<option>${esc(k)}</option>`).join(""):"";ks.dataset.d=d.id;}
@@ -722,7 +716,8 @@ function statsFor(tid,tv){
   return {L,license:c("license")>0,promo:promo?promo.kind||"✓":"",cDo:c("courses","منفّذة"),cGet:c("courses","مستفيدة"),plc:c("plc"),vIn:c("visits","في التخصص"),vOut:c("visits","غير التخصص"),portfolio:c("portfolioT")>0,programs:c("programs"),demo:c("demo"),other:c("other")};
 }
 function renderAdmin(){
-  if($("#v-admin").hidden) return; const tv=$("#a-term-f").value;
+  $("#adm-gate").hidden=!!adminPin;$("#adm-body").hidden=!adminPin;$("#adm-actions").hidden=!adminPin;
+  if($("#v-admin").hidden||!adminPin) return; const tv=$("#a-term-f").value;
   const S=teachers.map(t=>({t,...statsFor(t.id,tv)}));
   const L=items.filter(x=>!tv||x.term===tv);
   const active=S.filter(r=>r.L.length).length;
@@ -740,7 +735,8 @@ function renderAdmin(){
   const tn=Object.fromEntries(teachers.map(t=>[t.id,t.name]));
   const fl=[...L].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,40);
   $("#feed").innerHTML=fl.length?fl.map(x=>{const d=DM[x.domain]||D[0];return `<li class="fi" data-item="${esc(x.id)}" style="--c:${d.c}"><span class="fd"></span><div class="ft"><b>${esc(tn[x.teacher_id]||"")}</b> — ${esc(x.title)}<small>${esc(d.name)}${x.kind?" · "+esc(x.kind):""} · ${shortT(x.createdAt)}</small></div></li>`;}).join(""):'<li class="hint" style="padding:12px">لا توجد شواهد في هذه الفترة.</li>';
-  if(adminOpen&&document.activeElement!==$("#t-names")) $("#t-names").value=teachers.map(t=>t.name).join("\n");
+  $("#tb-pins").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>الرمز السري</th><th></th></tr></thead><tbody>${adminTeachers.map((t,i)=>`<tr><td>${ar(i+1)}</td><td class="nm">${esc(t.name)}</td><td><b style="font-family:var(--f-display);font-size:17px;letter-spacing:.15em">${esc(t.pin||"—")}</b></td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:13px" data-reset="${esc(t.id)}">رمز جديد</button></td></tr>`).join("")}</tbody>`;
+  if(document.activeElement!==$("#t-names")) $("#t-names").value=teachers.map(t=>t.name).join("\n");
 }
 function renderAll(){renderStats();renderList();renderTeacher();renderDomain();renderAdmin();}
 renderNav();
@@ -748,7 +744,7 @@ renderNav();
 /* ================= navigation ================= */
 function showView(v){["list","teacher","domain","admin"].forEach(k=>$("#v-"+k).hidden=k!==v);$("#secnav-wrap").hidden=v!=="teacher";}
 const toMain=()=>window.scrollTo({top:$("main").offsetTop-70,behavior:"smooth"});
-function openTeacher(id){curT=id;curD=null;showView("teacher");renderTeacher();try{history.replaceState(null,"","#t-"+id);}catch(e){}toMain();}
+function openTeacher(id){if(!tPins[id]&&!adminPin){askPin(id);return;}curT=id;curD=null;showView("teacher");renderTeacher();try{history.replaceState(null,"","#t-"+id);}catch(e){}toMain();}
 function openDomain(id){curD=id;$("#dv-term").value="";showView("domain");renderDomain();toMain();}
 function openList(){curT=null;curD=null;showView("list");renderList();try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}toMain();}
 function openAdmin(){curT=null;curD=null;showView("admin");renderAdmin();try{history.replaceState(null,"","#admin");}catch(e){}toMain();}
@@ -765,25 +761,33 @@ $("#open-adm").onclick=openAdmin;
 $("#back-teacher").onclick=()=>{curD=null;showView("teacher");renderTeacher();toMain();};
 $("#t-q").oninput=renderList;$("#dv-term").onchange=renderDomain;$("#dv-kind").onchange=renderDomain;$("#a-term-f").onchange=renderAdmin;
 
-/* admin PIN + names */
-$("#pin-go").onclick=()=>{if($("#pin-in").value===String(CFG.ADMIN_PIN||"")){adminOpen=true;$("#pin-box").hidden=true;$("#mng").hidden=false;$("#t-names").value=teachers.map(t=>t.name).join("\n");}else{$("#pin-msg").className="msg err";$("#pin-msg").textContent="الرمز غير صحيح.";}};
-$("#pin-in").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("#pin-go").click();}});
+/* teacher PIN */
+let pinFor=null;
+function askPin(id){const t=teachers.find(x=>x.id===id);if(!t)return;pinFor=id;$("#p-name").textContent=t.name;const av=$("#p-av");av.textContent=initial(t.name);av.style.background=avColor(t.name);$("#p-pin").value="";$("#p-msg").textContent="";$("#dlg-pin").hidden=false;setTimeout(()=>$("#p-pin").focus(),50);}
+$("#f-pin").addEventListener("submit",async e=>{e.preventDefault();const id=pinFor,pin=$("#p-pin").value.trim(),m=$("#p-msg"),b=$("#p-go");if(!id||!pin)return;b.disabled=true;m.className="msg";m.textContent="جارٍ التحقق…";
+  try{const r=await rpc("teacher_open",{tid:id,p:pin});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر الفتح.";return;}
+    tPins[id]=pin;items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;renderList();openTeacher(id);
+  }catch(err){m.className="msg err";m.textContent="تعذّر الاتصال. حاولي مرة أخرى.";}finally{b.disabled=false;}});
+
+/* admin login + management */
+$("#adm-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#adm-msg");m.className="msg";m.textContent="جارٍ التحقق…";adminPin=$("#adm-pin").value.trim();
+  try{await refreshAdmin();$("#adm-pin").value="";m.textContent="";renderAll();}catch(r){adminPin=null;m.className="msg err";m.textContent=(r&&PINERR[r.error])||"تعذّر الاتصال.";}});
+$("#tb-pins").addEventListener("click",async e=>{const b=e.target.closest("[data-reset]");if(!b)return;
+  if(b.dataset.armed!=="1"){b.dataset.armed="1";b.textContent="تأكيد؟";setTimeout(()=>{b.dataset.armed="";b.textContent="رمز جديد";},3000);return;}
+  b.disabled=true;try{const r=await rpc("admin_reset_pin",{p:adminPin,tid:b.dataset.reset});if(r.ok){delete tPins[b.dataset.reset];await refreshAdmin();renderAll();}}catch(err){b.textContent="تعذّر";}});
 let pendingNames=null;
 $("#save-names").onclick=()=>{
   const list=[...new Set($("#t-names").value.split("\n").map(s=>s.trim()).filter(Boolean))];
-  const add=list.filter(n=>!teachers.some(t=>t.name===n)), rem=teachers.filter(t=>!list.includes(t.name));
-  pendingNames={list,add,rem};
-  if(rem.length){const withItems=rem.filter(t=>tItems(t.id).length);$("#names-confirm-t").textContent=`سيُضاف ${ar(add.length)} اسم، ويُحذف ${ar(rem.length)}${withItems.length?` (منها ${ar(withItems.length)} لديها شواهد ستُحذف أيضًا)`:""}.`;$("#names-confirm").hidden=false;}else applyNames();
+  const add=list.filter(n=>!teachers.some(t=>t.name===n)),rem=teachers.filter(t=>!list.includes(t.name));
+  pendingNames=list;
+  if(rem.length){const w=rem.filter(t=>tItems(t.id).length);$("#names-confirm-t").textContent=`سيُضاف ${ar(add.length)} اسم، ويُحذف ${ar(rem.length)}: ${rem.map(t=>t.name).join("، ")}${w.length?` (مع شواهدهن)`:""}.`;$("#names-confirm").hidden=false;}else applyNames();
 };
 $("#names-no").onclick=()=>{$("#names-confirm").hidden=true;pendingNames=null;};
 $("#names-yes").onclick=()=>{$("#names-confirm").hidden=true;applyNames();};
-async function applyNames(){
-  const p=pendingNames;if(!p)return;const m=$("#names-msg");m.className="msg";m.textContent="جارٍ الحفظ…";
-  try{for(const t of p.rem){for(const it of tItems(t.id))await store.removeItem(it);await store.removeTeacher(t.id);}
-    for(const n of p.add)await store.addTeacher(n,p.list.indexOf(n));
-    m.textContent=`حُفظت القائمة (${ar(p.list.length)} معلمة).`;await load();
-  }catch(e){m.className="msg err";m.textContent="تعذّر حفظ القائمة. تحققي من الاتصال.";}pendingNames=null;
-}
+async function applyNames(){const list=pendingNames;if(!list)return;const m=$("#names-msg");m.className="msg";m.textContent="جارٍ الحفظ…";
+  try{const r=await rpc("admin_set_teachers",{p:adminPin,names:list});if(!r.ok)throw r;await refreshAdmin();renderAll();m.textContent=`حُفظت القائمة (${ar(list.length)} معلمة).`;}catch(e){m.className="msg err";m.textContent="تعذّر حفظ القائمة.";}pendingNames=null;}
+$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#chg-msg"),np=$("#chg-pin").value.trim();m.className="msg";m.textContent="جارٍ الحفظ…";
+  try{const r=await rpc("admin_change_pin",{p:adminPin,np});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر.";return;}adminPin=np;$("#chg-pin").value="";m.textContent="تم تغيير رمز الإدارة. احفظيه في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الاتصال.";}});
 
 /* ================= add ================= */
 let viewTok=0;
@@ -807,15 +811,17 @@ $("#f-add").addEventListener("submit",async e=>{
     const out=[];
     for(let i=0;i<files.length;i++){const f=files[i];msg.textContent=`جارٍ رفع الملف ${ar(i+1)} من ${ar(files.length)}…`;
       const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name);const ext=isPdf?"pdf":(f.name.split(".").pop()||"jpg").toLowerCase();const type=isPdf?"application/pdf":(f.type||"image/jpeg");
-      const path=await store.upload(f,ext,type);let thumb=null;
-      if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await store.upload(blob,"jpg","image/jpeg");}catch(err){}}
+      const path=await uploadFile(f,ext,type);let thumb=null;
+      if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       out.push({path,name:f.name.replace(/\.[^.]+$/,""),type,thumb});}
     msg.textContent="جارٍ الحفظ…";
     const doc={teacher:curT,domain:d.id,sec:d.sec,title:$("#a-name").value.trim(),term:$("#a-term").value,date:$("#a-date").value||"",cls:$("#a-cls").value.trim(),desc:$("#a-desc").value.trim(),files:out};
     if(d.kinds)doc.kind=$("#a-kind").value;
     if(d.checks)doc.checks=[...document.querySelectorAll("#a-checks input:checked")].map(x=>x.value);
-    const id=await store.addItem(doc);LS.set("namaa-mine",[...mine(),id]);
-    $("#f-add").reset();closeAll();await load();
+    const it={domain:doc.domain,sec:doc.sec,title:doc.title,kind:doc.kind||null,term:doc.term,date:doc.date||"",cls:doc.cls,descr:doc.desc,checks:doc.checks||[],files:doc.files};
+    const r=adminPin&&!tPins[curT]?null:await rpc("teacher_add",{tid:curT,p:tPins[curT],it});
+    if(!r||!r.ok)throw r||{error:"pin"};
+    $("#f-add").reset();closeAll();if(adminPin)await refreshAdmin();else await refreshTeacher(curT);renderAll();
   }catch(err){console.error(err);msg.className="msg err";msg.textContent="تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}
 });
 
@@ -827,7 +833,7 @@ function openView(id){
   $("#v-meta").innerHTML=`${x.term?`<span><svg><use href="#i-cal"/></svg>${esc(x.term)}</span>`:""}${x.date?`<span>${fmtDate(x.date)}</span>`:""}${x.cls?`<span><svg><use href="#i-class"/></svg>${esc(x.cls)}</span>`:""}`;
   $("#v-tags").innerHTML=(x.checks||[]).map(c=>`<span>✓ ${esc(c)}</span>`).join("");
   $("#v-desc").textContent=x.descr||"";$("#v-desc").hidden=!x.descr;
-  $("#v-del").hidden=!canDelete(x);$("#v-confirm").hidden=true;$("#v-msg").textContent="";
+  $("#v-del").hidden=!(adminPin||tPins[x.teacher_id]);$("#v-confirm").hidden=true;$("#v-msg").textContent="";
   const fs=x.files||[];$("#v-tabs").innerHTML=fs.length>1?fs.map((f,i)=>`<button class="ftab" data-i="${i}" aria-pressed="${i===0}">${esc(f.name||("ملف "+ar(i+1)))}</button>`).join(""):"";
   $("#dlg-view").hidden=false;loadFile(0);
 }
@@ -835,7 +841,7 @@ $("#v-tabs").addEventListener("click",e=>{const b=e.target.closest("[data-i]");i
 async function loadFile(i){
   const f=curItem?.files?.[i];const box=$("#v-pages");const tok=++viewTok;const dl=$("#v-dl");
   if(!f){dl.hidden=true;box.innerHTML='<p class="msg">لا توجد ملفات مرفقة بهذا الشاهد.</p>';return;}
-  const url=store.url(f.path);dl.hidden=!url;dl.href=url;
+  const url=fileUrl(f.path);dl.hidden=!url;dl.href=url;
   if(!url){box.innerHTML='<p class="msg">في وضع التجربة لا تبقى الملفات بعد إعادة تحميل الصفحة.</p>';return;}
   if(f.type&&f.type.startsWith("image/")){box.innerHTML=`<img src="${esc(url)}" alt="${esc(f.name)}">`;return;}
   box.innerHTML='<p class="msg">جارٍ فتح الملف…</p>';
@@ -847,7 +853,7 @@ async function loadFile(i){
 }
 $("#v-del").onclick=()=>{$("#v-confirm").hidden=false;};
 $("#v-no").onclick=()=>{$("#v-confirm").hidden=true;};
-$("#v-yes").onclick=async()=>{const x=curItem;if(!x)return;$("#v-yes").disabled=true;try{await store.removeItem(x);closeAll();await load();}catch(e){$("#v-msg").className="msg err";$("#v-msg").textContent="تعذّر الحذف.";}finally{$("#v-yes").disabled=false;}};
+$("#v-yes").onclick=async()=>{const x=curItem;if(!x)return;$("#v-yes").disabled=true;try{const r=tPins[x.teacher_id]?await rpc("teacher_delete",{tid:x.teacher_id,p:tPins[x.teacher_id],iid:x.id}):await rpc("admin_delete_item",{p:adminPin,iid:x.id});if(!r.ok)throw r;items=items.filter(i=>i.id!==x.id);closeAll();renderAll();}catch(e){$("#v-msg").className="msg err";$("#v-msg").textContent="تعذّر الحذف.";}finally{$("#v-yes").disabled=false;}};
 
 /* ================= export (Excel) ================= */
 $("#export").onclick=()=>{
