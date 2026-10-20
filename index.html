@@ -553,7 +553,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٥ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ٦ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -735,6 +735,7 @@ const D=[
  {id:"enrich",sec:"students",name:"الأنشطة الإثرائية",c:"#E07A3F",desc:"صفية لإثراء التعلم، ولاصفية كالمسابقات والمعارض.",kindL:"النوع",kinds:["صفي","لاصفي (مسابقات ومعارض)"],scene:[["book",110,104,1.4],["spark",96,50],["spark",130,38,.7],["trophy",226,92,1.4],["spark",270,46]],hints:["نشاط إثرائي صفي","شهادات مشاركة الطالبات في المسابقات","صور المعرض"]},
  {id:"support",sec:"students",name:"دعم المتعثرات والضعيفات",c:"#2E9D6A",desc:"برامج علاجية ومتابعة التحسّن.",scene:[["stairs",150,128,1.5],["person",150,70,.9,"#E07A3F"],["person",206,56,.95],["heart",252,40,.6,"#E25B7E"],["arrowUp",84,90,.9,G]],hints:["الخطة العلاجية وكشف الطالبات","الاختبار القبلي والبعدي","نتائج التحسّن"]},
  {id:"projects",sec:"students",name:"مشاريع الطالبات",c:"#5B5BD6",desc:"نماذج من مشاريع الطالبات.",scene:[["easel",120,96,1.3],["rocket",212,92,1.1],["medal",266,80,.9]],hints:["صور المشاريع","معايير التقييم"]},
+ {id:"honor",sec:"students",name:"تكريم المتفوقات",c:"#D9A441",desc:"تكريم الطالبات المتفوقات والمتميزات.",scene:[["trophy",120,92,1.5],["person",206,104,1,"#C0457A"],["medal",262,74,1],["spark",70,46],["spark",250,34,.8]],hints:["شهادات الشكر والتكريم","صور حفل أو لوحة التكريم","قائمة الطالبات المتفوقات"]},
  {id:"portfolioS",sec:"students",name:"ملف إنجاز الطالبات",c:"#B88A1E",desc:"ملفات إنجاز الطالبات.",scene:[["folder",130,96,1.4],["person",222,104,1,"#C0457A"],["spark",256,44]],hints:["نماذج من ملفات إنجاز الطالبات"]},
  // eval (stepper)
  {id:"diag",sec:"eval",name:"اختبار تشخيصي",c:"#2E9D6A",step:true,icon:"magnifier",scene:[["magnifier",130,86,1.5],["doc",220,92,1.2]],hints:["الاختبار التشخيصي ونتائجه"]},
@@ -794,7 +795,7 @@ let adminPin=null, adminTeachers=[], adminRole=null;      // admin session (memo
 const tPins={};                            // teacher pins unlocked in this tab (memory only)
 const tItems=tid=>items.filter(x=>x.teacher_id===tid);
 const nonEval=D.filter(d=>!d.step);
-const BADGE={growth:"نجمة النمو المهني",plan:"متقنة التخطيط",strat:"مبدعة الاستراتيجيات",skills:"بانية المهارات والقيم",students:"راعية الطالبات",eval:"خبيرة التقويم"};
+const BADGE={growth:"نجمة النمو المهني",plan:"متقنة التخطيط",strat:"مبدعة الاستراتيجيات",skills:"بانية المهارات والقيم",students:"مُلهمة الطالبات",eval:"خبيرة التقويم"};
 const SITE_URL="https://mramgzl2025.github.io/namaa45";
 const MONTHS=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 function covOf(its){const done=new Set(its.map(x=>x.domain));return {done,n:D.filter(d=>done.has(d.id)).length,pct:Math.round(D.filter(d=>done.has(d.id)).length/D.length*100)};}
