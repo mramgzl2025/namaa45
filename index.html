@@ -265,6 +265,16 @@ footer b{color:var(--hero-ink)}
 @media (prefers-reduced-motion:reduce){.card,.dc,.scene svg,.st .bub{transition:none}}
 
 /* ---- school edition ---- */
+.usage{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ubar{flex:1;min-width:200px;height:14px;border-radius:99px;background:var(--line);overflow:hidden}
+.ubar span{display:block;height:100%;width:0;border-radius:99px;background:var(--ok);transition:width .6s}
+.ubar span.warn{background:var(--gold)}.ubar span.crit{background:var(--danger)}
+.unums{display:flex;gap:6px;align-items:baseline;font-variant-numeric:tabular-nums}
+.unums b{font-family:var(--f-display);font-size:24px}
+.unums span{color:var(--muted);font-size:14px}
+.utop{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.utop span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13.5px}
+.utop span b{font-variant-numeric:tabular-nums;margin-inline-start:6px;color:var(--accent)}
 .own-btn{font:inherit;color:inherit;text-align:right;cursor:pointer;transition:background .2s,border-color .2s}
 .own-btn:hover{background:rgba(255,255,255,.12);border-color:var(--gold)}
 .demo-bar{background:var(--gold);color:#1B1607;text-align:center;font-weight:700;font-size:14px;padding:8px 16px}
@@ -392,6 +402,13 @@ footer b{color:var(--hero-ink)}
         <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
       <div id="adm-body" hidden>
       <div class="kpis" id="kpis"></div>
+      <div class="panel" id="usage-panel">
+        <div class="p-head"><h3>المساحة المستخدمة</h3><p class="hint">الخطة المجانية: ١ جيجابايت لكل ملفات المعلمات.</p></div>
+        <div class="usage"><div class="ubar"><span id="u-fill"></span></div><div class="unums"><b id="u-used">—</b><span id="u-of"></span></div></div>
+        <p class="msg" id="u-note"></p>
+        <div class="utop" id="u-top"></div>
+        <div class="actions" id="u-clean-wrap" hidden><button class="btn btn-ghost" id="u-clean">تنظيف الملفات المحذوفة</button><span class="msg" id="u-clean-msg" role="status"></span></div>
+      </div>
 
       <div class="panel"><div class="p-head"><h3>إحصائية عن كل ما يتعلق بالنمو المهني</h3><p class="hint">نفس أعمدة نموذج الإدارة، تُعبّأ تلقائيًا من شواهد كل معلمة.</p></div>
         <div class="tscroll"><table class="adm-table" id="tb-form"></table></div></div>
@@ -662,7 +679,17 @@ async function load(){
   renderAll();
 }
 async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
-async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminRole=r.role;adminTeachers=r.teachers;items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));}
+let usage=null;
+const fmtMB=b=>{const mb=b/1048576;return mb>=1024?ar((mb/1024).toFixed(2))+" جيجابايت":ar(mb<10?mb.toFixed(1):Math.round(mb))+" ميجابايت";};
+async function refreshUsage(){try{const u=await rpc("admin_usage",{p:adminPin});if(u.ok)usage=u;}catch(e){}renderUsage();}
+function renderUsage(){if(!usage)return;const pct=Math.min(100,usage.total/usage.limit*100);const f=$("#u-fill");f.style.width=Math.max(pct,.5)+"%";f.className=pct>=90?"crit":pct>=70?"warn":"";
+  $("#u-used").textContent=fmtMB(usage.total);$("#u-of").textContent="من ١ جيجابايت · "+ar(Math.round(pct))+"٪ · "+ar(usage.count)+" ملف";
+  const left=usage.limit-usage.total;$("#u-note").className="msg"+(pct>=90?" err":"");$("#u-note").textContent=pct>=90?"المساحة توشك على الامتلاء. اطلبي من المعلمات ضغط الملفات، أو فكّري في الخطة المدفوعة.":"المتبقي: "+fmtMB(left)+" تقريبًا. نصيحة: ضغط ملفات PDF قبل الرفع يوفّر كثيرًا.";
+  const tn=Object.fromEntries(teachers.map(t=>[t.id,t.name]));const top=[...usage.per].sort((a,b)=>b.bytes-a.bytes).slice(0,8);
+  $("#u-top").innerHTML=top.length?'<span style="border:0;background:none;padding-inline:0;color:var(--muted)">الأكثر استهلاكًا:</span>'+top.map(x=>`<span>${esc(tn[x.id]||"—")}<b>${fmtMB(x.bytes)}</b></span>`).join(""):"";
+  $("#u-clean-wrap").hidden=!(usage.orphans&&usage.orphans.length);$("#u-clean").textContent="تنظيف ملفات محذوفة لا تزال تشغل مساحة ("+fmtMB(usage.orphan)+")";}
+async function removeFiles(paths){paths=paths.filter(Boolean);if(!paths.length||!sb)return;try{await sb.storage.from("files").remove(paths);}catch(e){}}
+async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminRole=r.role;adminTeachers=r.teachers;refreshUsage();items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));}
 function showErr(t){const b=$("#demo-bar");b.hidden=false;b.style.background="var(--danger)";b.style.color="#fff";b.textContent=t;}
 
 /* ================= render ================= */
@@ -773,6 +800,7 @@ $("#f-pin").addEventListener("submit",async e=>{e.preventDefault();const id=pinF
   }catch(err){m.className="msg err";m.textContent="تعذّر الاتصال. حاولي مرة أخرى.";}finally{b.disabled=false;}});
 
 /* admin login + management */
+$("#u-clean").onclick=async()=>{const b=$("#u-clean"),m=$("#u-clean-msg");b.disabled=true;m.className="msg";m.textContent="جارٍ التنظيف…";await removeFiles(usage.orphans||[]);await refreshUsage();m.textContent="تم التنظيف.";b.disabled=false;};
 $("#adm-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#adm-msg");m.className="msg";m.textContent="جارٍ التحقق…";adminPin=$("#adm-pin").value.trim();
   try{await refreshAdmin();$("#adm-pin").value="";m.textContent="";renderAll();}catch(r){adminPin=null;m.className="msg err";m.textContent=(r&&PINERR[r.error])||"تعذّر الاتصال.";}});
 $("#tb-pins").addEventListener("click",async e=>{const b=e.target.closest("[data-reset]");if(!b)return;
@@ -856,7 +884,7 @@ async function loadFile(i){
 }
 $("#v-del").onclick=()=>{$("#v-confirm").hidden=false;};
 $("#v-no").onclick=()=>{$("#v-confirm").hidden=true;};
-$("#v-yes").onclick=async()=>{const x=curItem;if(!x)return;$("#v-yes").disabled=true;try{const r=tPins[x.teacher_id]?await rpc("teacher_delete",{tid:x.teacher_id,p:tPins[x.teacher_id],iid:x.id}):await rpc("admin_delete_item",{p:adminPin,iid:x.id});if(!r.ok)throw r;items=items.filter(i=>i.id!==x.id);closeAll();renderAll();}catch(e){$("#v-msg").className="msg err";$("#v-msg").textContent="تعذّر الحذف.";}finally{$("#v-yes").disabled=false;}};
+$("#v-yes").onclick=async()=>{const x=curItem;if(!x)return;$("#v-yes").disabled=true;try{const r=tPins[x.teacher_id]?await rpc("teacher_delete",{tid:x.teacher_id,p:tPins[x.teacher_id],iid:x.id}):await rpc("admin_delete_item",{p:adminPin,iid:x.id});if(!r.ok)throw r;items=items.filter(i=>i.id!==x.id);await removeFiles((x.files||[]).flatMap(f=>[f.path,f.thumb]));closeAll();renderAll();if(adminPin)refreshUsage();}catch(e){$("#v-msg").className="msg err";$("#v-msg").textContent="تعذّر الحذف.";}finally{$("#v-yes").disabled=false;}};
 
 /* ================= export (Excel) ================= */
 $("#export").onclick=()=>{
