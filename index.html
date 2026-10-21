@@ -430,6 +430,124 @@ body.has-sbar footer{padding-bottom:64px}
 .pin{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .pin input{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:9px 12px;width:150px}
 .tlist textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;line-height:1.9;margin:8px 0}
+
+/* ===== v11: vice hub — النمو المهني + حضور الحصص ===== */
+.vhub{position:relative;overflow:hidden;border-radius:26px;padding:22px;margin-bottom:16px;background:linear-gradient(135deg,#151B3D 0%,#2B2F7A 55%,#5B2C7E 100%);color:#F4F1E8;box-shadow:var(--shadow)}
+.vhub::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 20%,rgba(217,164,65,.35),transparent 45%),radial-gradient(circle at 90% 90%,rgba(192,69,122,.35),transparent 45%);pointer-events:none}
+.vhub>*{position:relative}
+.vhub-h{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.vhub-h h3{font-family:var(--f-display);font-size:clamp(20px,3vw,26px);margin:0;color:#fff}
+.vhub-h p{margin:0;color:#C9CCEA;font-size:14px}
+.vhub-h .crown{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.12);font-size:24px}
+.vtiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.vtile{display:flex;gap:14px;align-items:center;text-align:right;border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:16px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 10px 26px rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s;font:inherit}
+.vtile:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.32)}
+.vtile svg.ill{width:88px;height:88px;flex:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
+.vtile b{display:block;font-family:var(--f-display);font-size:23px;line-height:1.3}
+.vtile small{display:block;color:rgba(255,255,255,.88);font-size:13.5px;margin-top:2px}
+.vtile .vcount{display:inline-block;margin-top:8px;background:rgba(255,255,255,.2);border-radius:99px;padding:3px 10px;font-size:12.5px;font-weight:700}
+.vonly{display:inline-flex;align-items:center;gap:6px;background:rgba(217,164,65,.22);color:#FCE7B8;border:1px solid rgba(217,164,65,.45);border-radius:99px;padding:4px 12px;font-size:12.5px;font-weight:700;margin-inline-start:auto}
+
+.bk{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bk .bki{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:#E7F5EE;font-size:26px;flex:none}
+.bk .bkt{flex:1;min-width:220px}
+.bk .bkt b{font-size:17px}
+.bk-warn{background:#FFF4E5;border:1px solid #F3C98B;color:#8A4B00;border-radius:12px;padding:8px 12px;font-size:13.5px;font-weight:700}
+
+/* growth view */
+.ghero{border-radius:26px;padding:24px;margin-bottom:18px;color:#fff;background:linear-gradient(135deg,#1F5F8B,#2E9D6A 60%,#B88A1E);position:relative;overflow:hidden}
+.ghero h2{color:#fff;font-family:var(--f-display);font-size:clamp(26px,4vw,36px);margin:0}
+.ghero p{margin:4px 0 0;color:rgba(255,255,255,.9)}
+.ghero svg.deco{position:absolute;left:-10px;bottom:-14px;width:180px;height:180px;opacity:.25}
+.gdoms{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.gdom{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;cursor:pointer;text-align:right;padding:0;font:inherit;color:var(--ink);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.gdom:hover,.gdom[aria-pressed="true"]{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--c)}
+.gdom[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:-3px}
+.gdom .gs{height:118px;display:grid;place-items:center;background:linear-gradient(160deg,color-mix(in srgb,var(--c) 18%,#fff),color-mix(in srgb,var(--c) 40%,#fff))}
+.gdom .gs svg{width:96px;height:96px}
+.gdom .gb{padding:12px 14px 14px;display:grid;gap:3px}
+.gdom .gb .gn{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:9px;background:var(--c);color:#fff;font-weight:800;font-size:13px}
+.gdom .gb b{font-size:16.5px;line-height:1.4}
+.gdom .gb small{color:var(--muted);font-size:13px}
+.gpanel{margin-top:18px;border-top:5px solid var(--c)}
+.gfiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.gfile{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.gfile .gth{height:120px;background:color-mix(in srgb,var(--c) 10%,#fff);display:grid;place-items:center;font-size:40px;overflow:hidden}
+.gfile .gth img{width:100%;height:100%;object-fit:cover}
+.gfile .gfb{padding:10px 12px;display:grid;gap:6px}
+.gfile .gfb b{font-size:15px}
+.gfile .gfl{display:flex;flex-wrap:wrap;gap:6px}
+.gfile .gfl a{font-size:12.5px;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:3px 10px;color:var(--accent);font-weight:700}
+.gfile .gdel{border:0;background:none;color:var(--danger);font-size:12.5px;cursor:pointer;justify-self:start;padding:0;font-weight:700}
+
+/* visits */
+.vt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.vt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px;cursor:pointer;text-align:right;font:inherit;color:var(--ink);transition:transform .15s,border-color .15s}
+.vt:hover{transform:translateY(-2px);border-color:#C0457A}
+.vt .av{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}
+.vt b{display:block;font-size:15px;line-height:1.35}
+.vt small{color:var(--muted);font-size:12.5px}
+.vhead{border-radius:24px;padding:20px;margin-bottom:16px;color:#fff;background:linear-gradient(135deg,#7B2D5E,#C0457A 55%,#E07A3F);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.vhead h2{color:#fff;font-family:var(--f-display);margin:0;font-size:clamp(22px,3.4vw,30px)}
+.vhead p{margin:2px 0 0;color:rgba(255,255,255,.9);font-size:14px}
+.vhead svg{width:64px;height:64px;flex:none}
+.vprev{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.vprev button{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:var(--ink)}
+.vprev button[aria-pressed="true"]{background:#C0457A;color:#fff;border-color:#C0457A}
+.vinfo{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.vinfo label{display:grid;gap:4px;font-size:13px;color:var(--muted);font-weight:700}
+.vinfo input{font:inherit;font-size:15px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--surface);color:var(--ink);min-width:0}
+.vsum{position:sticky;top:8px;z-index:5;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;box-shadow:var(--shadow)}
+.vsum .vbar{flex:1;min-width:140px;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.vsum .vbar i{display:block;height:100%;background:linear-gradient(90deg,#C0457A,#E07A3F);width:0;transition:width .3s}
+.vdom{margin-bottom:18px}
+.vdom-h{display:flex;align-items:center;gap:10px;background:var(--c);color:#fff;border-radius:16px 16px 0 0;padding:10px 16px;font-family:var(--f-display);font-size:19px}
+.vdom-h span{margin-inline-start:auto;font-family:var(--f-body);font-size:13px;background:rgba(255,255,255,.22);border-radius:99px;padding:2px 10px}
+.vdom-b{border:1px solid var(--line);border-top:0;border-radius:0 0 16px 16px;background:var(--surface);padding:6px}
+.vitem{border-bottom:1px dashed var(--line);padding:12px 10px;display:grid;gap:8px}
+.vitem:last-child{border-bottom:0}
+.vitem-h{display:flex;gap:10px;align-items:flex-start}
+.vitem-h .vn{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font-weight:800;flex:none}
+.vitem-h b{font-size:15.5px;line-height:1.55}
+.vchk{display:grid;gap:4px;padding-inline-start:42px}
+.vchk label{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:14.5px;line-height:1.6;padding:3px 6px;border-radius:8px}
+.vchk label:hover{background:color-mix(in srgb,var(--c) 7%,transparent)}
+.vchk input{width:19px;height:19px;accent-color:var(--c);margin-top:3px;flex:none}
+.vrate{display:flex;gap:6px;flex-wrap:wrap;padding-inline-start:42px}
+.vrate button{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
+.vrate button[aria-pressed="true"]{background:var(--rc);border-color:var(--rc);color:#fff}
+.vnote{margin-inline-start:42px;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:7px 10px;resize:vertical;min-height:38px;background:var(--bg);color:var(--ink)}
+.vrecs textarea{width:100%;box-sizing:border-box;font:inherit;font-size:15px;border:1px solid var(--line);border-radius:12px;padding:10px;min-height:110px;resize:vertical;background:var(--surface);color:var(--ink)}
+.sigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.sig{border:1px solid var(--line);border-radius:16px;padding:12px;background:var(--surface);display:grid;gap:8px}
+.sig b{font-size:15px}
+.sig canvas{width:100%;height:150px;border:1.5px dashed #C9CDE3;border-radius:12px;background:#fff;touch-action:none;cursor:crosshair}
+.sig img{width:100%;height:150px;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#fff}
+.sig .sact{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sig .sok{color:var(--ok);font-weight:700;font-size:13px}
+.tvis{margin-top:20px}
+.tvis-list{display:grid;gap:10px}
+.tvis-it{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:14px;padding:10px 14px;background:var(--surface)}
+.tvis-it .grow{flex:1;min-width:180px}
+.pill-ok{background:#E7F5EE;color:var(--ok);border-radius:99px;padding:3px 10px;font-size:12.5px;font-weight:700}
+.pill-wait{background:#FFF1E0;color:#B5651D;border-radius:99px;padding:3px 10px;font-size:12.5px;font-weight:700}
+.vprint-head{display:none}
+@media print{
+  body.printing *{visibility:hidden}
+  body.printing #v-visit,body.printing #v-visit *,body.printing #dlg-tvis,body.printing #dlg-tvis *{visibility:visible}
+  body.printing #v-visit,body.printing #dlg-tvis .dialog{position:absolute;inset:0 0 auto 0;width:100%;max-height:none;box-shadow:none}
+  body.printing .noprint{display:none!important}
+  body.printing .vsum{position:static;box-shadow:none}
+  body.printing .vprint-head{display:block;text-align:center;font-family:var(--f-display);font-size:22px;margin-bottom:8px}
+  body.printing .vitem{break-inside:avoid}
+  body.printing .vdom-h{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+.v-stamp{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,#EEF1FD,#FBF1DC);border:1px solid #D8DEF7;border-radius:14px;padding:10px 14px}
+.v-stamp .si{width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center;font-size:20px;flex:none;box-shadow:0 2px 6px rgba(27,34,69,.08)}
+.v-stamp small{display:block;color:var(--muted);font-size:12.5px;font-weight:700}
+.v-stamp b{font-size:15px;color:var(--ink);line-height:1.6}
+.card .addt{display:inline-block;justify-self:start;margin-top:4px;font-size:12px;font-weight:700;color:#3D4DB8;background:#EEF1FD;border-radius:99px;padding:2px 9px}
 </style>
 </head>
 <body>
@@ -501,6 +619,7 @@ body.has-sbar footer{padding-bottom:64px}
     <div class="pinbar" id="t-lock" hidden><span>🔒 أنتِ تتصفحين هذا الملف كإدارة (للاطلاع فقط). لرفع الشواهد ادخلي برمز المعلمة.</span><button type="button" class="btn btn-primary" data-unlock>إدخال رمز المعلمة</button></div>
     <div class="journey" id="t-journey"></div>
     <div id="t-home"></div>
+    <div id="t-visits" hidden></div>
   </div>
 
   <!-- domain -->
@@ -540,6 +659,18 @@ body.has-sbar footer{padding-bottom:64px}
       <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول الإدارة</h3><p class="hint">لمديرة المدرسة ووكيلة شؤون المعلمات، كلٌّ برمزها الخاص.</p></div>
         <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
       <div id="adm-body" hidden>
+      <div class="vhub" id="vhub" hidden>
+        <div class="vhub-h"><span class="crown">✨</span><div><h3>مساحة وكيلة شؤون المعلمات</h3><p>أ. ريم الحيسوني — ملفاتكِ الخاصة وبطاقات زيارة الحصص</p></div><span class="vonly">🔒 خاص بالوكيلة</span></div>
+        <div class="vtiles">
+          <button type="button" class="vtile" id="vh-growth" style="--c1:#1F5F8B;--c2:#2E9D6A">
+            <svg class="ill" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="rgba(255,255,255,.16)"/><path d="M50 80V44" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M50 56c-16 0-24-10-24-24 16 0 24 10 24 24z" fill="#B9F0D3"/><path d="M50 46c14 0 22-9 22-22-14 0-22 9-22 22z" fill="#fff"/><path d="M30 80h40" stroke="#F5D27A" stroke-width="5" stroke-linecap="round"/><circle cx="74" cy="22" r="7" fill="#F5D27A"/></svg>
+            <span><b>النمو المهني</b><small>الجداول · المناوبة · منصة مدرستي · خطط النمو</small><span class="vcount" id="vh-g-n"></span></span></button>
+          <button type="button" class="vtile" id="vh-visits" style="--c1:#7B2D5E;--c2:#E07A3F">
+            <svg class="ill" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="rgba(255,255,255,.16)"/><rect x="28" y="20" width="44" height="60" rx="7" fill="#fff"/><rect x="40" y="15" width="20" height="10" rx="4" fill="#F5D27A"/><path d="m36 38 4 4 7-8M36 52l4 4 7-8M36 66l4 4 7-8" stroke="#2E9D6A" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M53 39h12M53 53h12M53 67h9" stroke="#C0457A" stroke-width="3.5" stroke-linecap="round"/></svg>
+            <span><b>حضور الحصص</b><small>بطاقة الملاحظة الصفية التفاعلية لكل معلمة</small><span class="vcount" id="vh-v-n"></span></span></button>
+        </div>
+      </div>
+      <div class="panel" id="bk-panel"><div class="bk"><span class="bki">🛡️</span><div class="bkt"><b>النسخة الاحتياطية الأسبوعية</b><p class="hint" id="bk-when"></p></div><span class="bk-warn" id="bk-warn" hidden>⏰ حان وقت النسخة الأسبوعية</span><button class="btn btn-gold" id="bk-go"><svg><use href="#i-down"/></svg>تحميل نسخة احتياطية</button></div><p class="msg" id="bk-msg" role="status" style="margin-top:8px"></p><p class="hint">تُنزَّل كل البيانات في ملف Excel (أسماء المعلمات ورموزهن، والشواهد بروابطها، والنمو المهني وحضور الحصص) مع ملف نسخة كاملة. يُنصح بالتحميل نهاية كل أسبوع.</p></div>
       <div class="panel lanterns" id="ln-panel">
         <div class="ln-star" id="ln-star"></div>
         <div class="p-head"><div><h3>💡 منارات نماء</h3><p class="hint">لكل معلمة فانوس يزداد نوره مع كل مجال توثّقه، حتى يضيء ذهبيًا عند اكتمال الملف.</p></div></div>
@@ -575,7 +706,7 @@ body.has-sbar footer{padding-bottom:64px}
       </div>
 
       <div class="panel tlist" style="margin-top:16px">
-        <div class="p-head"><h3>أسماء المعلمات ورموزهن السرية</h3><p class="hint">أعطي كل معلمة رمزها على الخاص. «رمز جديد» يلغي القديم فورًا.</p></div>
+        <div class="p-head"><h3>أسماء المعلمات ورموزهن السرية</h3><p class="hint">أعطي كل معلمة رمزها على الخاص. الرموز ثابتة 🔒 ولا يمكن تغييرها.</p></div>
         <div class="tscroll"><table class="adm-table" id="tb-pins" style="min-width:520px"></table></div>
         <details style="margin-top:14px"><summary>تعديل قائمة الأسماء</summary>
           <label class="hint" for="t-names">اسم كل معلمة في سطر مستقل. الأسماء الجديدة تُضاف برمز جديد، والمحذوفة تُزال مع شواهدها.</label>
@@ -583,17 +714,58 @@ body.has-sbar footer{padding-bottom:64px}
           <div class="actions"><button class="btn btn-primary" id="save-names">حفظ الأسماء</button><span class="msg" id="names-msg" role="status"></span></div>
           <div class="confirm" id="names-confirm" hidden><span id="names-confirm-t"></span><button class="btn btn-danger" id="names-yes">تأكيد</button><button class="btn btn-ghost" id="names-no">تراجع</button></div>
         </details>
-        <details style="margin-top:10px"><summary>تغيير رمزي</summary>
-          <form class="pin" id="chg-form" style="margin-top:8px"><label for="chg-pin" class="hint">الرمز الجديد (٤ أرقام)</label><input id="chg-pin" type="password" inputmode="numeric" autocomplete="new-password" maxlength="4" pattern="[0-9]{4}" required><button class="btn btn-primary">حفظ الرمز</button><span class="msg" id="chg-msg" role="status"></span></form>
-        </details>
       </div>
       </div>
+    </section>
+  </div>
+
+  <!-- vice: professional growth -->
+  <div id="v-growth" hidden>
+    <section>
+      <button class="back" data-adm-back><svg><use href="#i-back"/></svg>العودة إلى لوحة المتابعة</button>
+      <div class="ghero"><h2>🌱 النمو المهني</h2><p>مساحة أ. ريم الحيسوني — وكيلة شؤون المعلمات. اختاري المجال ثم أضيفي ملفاتكِ.</p>
+        <svg class="deco" viewBox="0 0 100 100"><path d="M50 95V40" stroke="#fff" stroke-width="6"/><path d="M50 60C25 60 12 45 12 22c25 0 38 15 38 38zM50 45c22 0 34-13 34-33-22 0-34 13-34 33z" fill="#fff"/></svg></div>
+      <div class="gdoms" id="g-doms"></div>
+      <div class="panel gpanel" id="g-panel" hidden>
+        <div class="p-head"><div><h3 id="g-title"></h3><p class="hint" id="g-desc"></p></div><button class="btn btn-primary" id="g-add"><svg><use href="#i-plus"/></svg>إضافة ملف</button></div>
+        <div class="gfiles" id="g-files"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- vice: class visits list -->
+  <div id="v-visits" hidden>
+    <section>
+      <button class="back" data-adm-back><svg><use href="#i-back"/></svg>العودة إلى لوحة المتابعة</button>
+      <div class="vhead"><svg viewBox="0 0 100 100"><rect x="26" y="16" width="48" height="68" rx="8" fill="#fff"/><rect x="38" y="10" width="24" height="12" rx="5" fill="#F5D27A"/><path d="m35 38 4 4 7-8M35 54l4 4 7-8M35 70l4 4 7-8" stroke="#2E9D6A" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M52 39h14M52 55h14M52 71h10" stroke="#C0457A" stroke-width="4" stroke-linecap="round"/></svg><div><h2>حضور الحصص</h2><p>اختاري اسم المعلمة لفتح بطاقة الملاحظة الصفية</p></div></div>
+      <input class="tsearch" id="vt-q" type="search" placeholder="ابحثي عن اسم المعلمة" aria-label="بحث عن معلمة" style="margin-bottom:14px">
+      <div class="vt-grid" id="vt-grid"></div>
+    </section>
+  </div>
+
+  <!-- vice: one class-visit card -->
+  <div id="v-visit" hidden>
+    <section>
+      <button class="back noprint" id="vv-back"><svg><use href="#i-back"/></svg>العودة إلى قائمة المعلمات</button>
+      <div class="vprint-head" id="vp-name"></div>
+      <div class="vhead noprint"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="rgba(255,255,255,.18)"/><rect x="28" y="18" width="44" height="64" rx="7" fill="#fff"/><path d="m36 40 4 4 7-8M36 56l4 4 7-8" stroke="#2E9D6A" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M52 41h12M52 57h12M36 72h28" stroke="#C0457A" stroke-width="4" stroke-linecap="round"/></svg><div><h2>بطاقة الملاحظة الصفية</h2><p><b id="vv-name"></b> · <span id="vv-sub"></span></p></div></div>
+      <div class="vprev noprint" id="vv-prev"></div>
+      <div class="panel"><div class="vinfo" id="vv-info"></div></div>
+      <div class="vsum noprint"><b>التقدّم</b><span class="vbar"><i id="vs-bar"></i></span><span class="hint" id="vs-txt"></span></div>
+      <div id="vv-doms"></div>
+      <div class="panel vrecs"><div class="p-head"><h3>💡 التوصيات</h3></div><textarea id="vv-recs" placeholder="اكتبي توصياتكِ للمعلمة…"></textarea></div>
+      <div class="panel"><div class="p-head"><h3>✍️ التوقيعات</h3><p class="hint">وقّعي بإصبعكِ أو بالفأرة. تستطيع المعلمة التوقيع هنا، أو لاحقًا من ملفها برمزها.</p></div>
+        <div class="sigs">
+          <div class="sig" id="sig-teacher"><b>توقيع المعلمة</b><div class="sbody"></div><div class="sact noprint"><button type="button" class="btn btn-ghost" data-sclear="teacher">مسح</button><span class="sok"></span></div></div>
+          <div class="sig" id="sig-vice"><b>توقيع وكيلة شؤون المعلمات — أ. ريم الحيسوني</b><div class="sbody"></div><div class="sact noprint"><button type="button" class="btn btn-ghost" data-sclear="vice">مسح</button><span class="sok"></span></div></div>
+        </div></div>
+      <div class="actions noprint" style="margin-bottom:30px"><button class="btn btn-primary" id="vv-save"><svg><use href="#i-check"/></svg>حفظ البطاقة</button><button class="btn btn-ghost" id="vv-print"><svg><use href="#i-down"/></svg>طباعة / حفظ PDF</button><button class="btn btn-danger" id="vv-del" hidden>حذف البطاقة</button><span class="msg" id="vv-msg" role="status"></span></div>
     </section>
   </div>
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٠ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٢ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -641,12 +813,48 @@ body.has-sbar footer{padding-bottom:64px}
   <div class="dialog wide" role="dialog" aria-modal="true" aria-labelledby="v-title">
     <div class="dlg-head"><div class="ht"><span class="hi" id="v-ic"></span><div style="min-width:0"><div class="hint" id="v-dom"></div><h2 id="v-title"></h2></div></div><button type="button" class="close" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
     <div class="v-meta" id="v-meta"></div>
+    <div class="v-stamp" id="v-stamp" hidden></div>
     <div class="v-tags" id="v-tags"></div>
     <p style="margin:0" id="v-desc"></p>
     <div class="ftabs" id="v-tabs"></div>
     <div class="actions"><a class="btn btn-ghost" id="v-dl" target="_blank" rel="noopener" hidden><svg><use href="#i-down"/></svg>فتح / تحميل الملف</a><button class="btn btn-danger" id="v-del" hidden>حذف الشاهد</button><span class="msg" id="v-msg" role="status"></span></div>
     <div class="confirm" id="v-confirm" hidden><span>سيُحذف الشاهد وملفاته نهائيًا.</span><button class="btn btn-danger" id="v-yes">تأكيد الحذف</button><button class="btn btn-ghost" id="v-no">تراجع</button></div>
     <div class="pages" id="v-pages"></div>
+  </div>
+</div>
+
+<!-- vice: add growth file -->
+<div class="overlay" id="dlg-gadd" hidden>
+  <form class="dialog" id="f-gadd">
+    <div class="dlg-head"><div class="ht"><span class="hi">🌱</span><div style="min-width:0"><div class="hint" id="ga-dom"></div><h2>إضافة ملف</h2></div></div><button type="button" class="close" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
+    <div class="field"><label for="ga-title">العنوان</label><input id="ga-title" required maxlength="140" placeholder="مثال: جدول المناوبة — الأسبوع الثالث"></div>
+    <div class="field"><label for="ga-desc">وصف مختصر (اختياري)</label><textarea id="ga-desc" maxlength="700"></textarea></div>
+    <div class="field"><span class="lbl">المرفقات — اختاري نوع ما تريدين رفعه</span>
+      <div class="atypes" id="ga-types">
+        <button type="button" data-gat="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
+        <button type="button" data-gat="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
+        <button type="button" data-gat="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
+        <button type="button" data-gat="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
+        <button type="button" data-gat="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
+      </div>
+      <input id="ga-pick" type="file" hidden multiple>
+      <div class="alink" id="ga-link" hidden><input id="ga-url" type="text" inputmode="url" dir="ltr" placeholder="https://"><button type="button" class="btn btn-primary" id="ga-url-add">إضافة الرابط</button></div>
+      <ul class="alist" id="ga-list"></ul>
+      <p class="hint">يمكن إضافة أكثر من مرفق، حتى 20 ميجابايت للملف.</p></div>
+    <div class="actions"><button class="btn btn-primary" id="ga-save"><svg><use href="#i-upload"/></svg>حفظ</button><span class="msg" id="ga-msg" role="status"></span></div>
+  </form>
+</div>
+
+<!-- teacher: view + sign a class visit -->
+<div class="overlay" id="dlg-tvis" hidden>
+  <div class="dialog wide" role="dialog" aria-modal="true" aria-label="بطاقة الملاحظة الصفية">
+    <div class="dlg-head"><div class="ht"><span class="hi">📋</span><div><h2>بطاقة الملاحظة الصفية</h2></div></div><button type="button" class="close noprint" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
+    <div id="tv-body"></div>
+    <div class="sigs">
+      <div class="sig" id="sig-tv"><b>توقيعكِ</b><div class="sbody"></div><div class="sact noprint"><button type="button" class="btn btn-ghost" data-sclear="tv">مسح</button><span class="sok"></span></div></div>
+      <div class="sig"><b>توقيع وكيلة شؤون المعلمات</b><div id="tv-vsig"></div></div>
+    </div>
+    <div class="actions noprint"><button class="btn btn-primary" id="tv-sign"><svg><use href="#i-check"/></svg>حفظ توقيعي</button><button class="btn btn-ghost" id="tv-print">طباعة</button><span class="msg" id="tv-msg" role="status"></span></div>
   </div>
 </div>
 
@@ -806,6 +1014,10 @@ const AVC=["#3D4DB8","#C0457A","#2E9D6A","#E07A3F","#1F87B8","#8B5CF6","#B88A1E"
 const avColor=name=>{let h=0;for(const ch of name)h=(h*31+ch.charCodeAt(0))>>>0;return AVC[h%AVC.length];};
 const initial=name=>{const p=String(name).trim().split(/\s+/);return (p[0]||"؟").charAt(0);};
 const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
+const TZ="Asia/Riyadh";
+const tmT=t=>{try{return new Intl.DateTimeFormat("ar-SA",{hour:"numeric",minute:"2-digit",hour12:true,timeZone:TZ}).format(new Date(t));}catch(e){return"";}};
+const shortDT=t=>{if(!t)return"";try{return new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{day:"numeric",month:"short",timeZone:TZ}).format(new Date(t))+" · "+tmT(t);}catch(e){return"";}};
+const fullT=t=>{if(!t)return"";try{const d=new Date(t);const h=new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:TZ}).format(d);const g=new Intl.DateTimeFormat("ar-SA-u-ca-gregory",{day:"numeric",month:"long",year:"numeric",timeZone:TZ}).format(d);return h+" · "+g+" · الساعة "+tmT(t);}catch(e){return"";}};
 const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
 
 /* ================= data store (secure RPC) ================= */
@@ -927,7 +1139,7 @@ async function load(){
 async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
 let usage=null;
 const fmtMB=b=>{const mb=b/1048576;return mb>=1024?ar((mb/1024).toFixed(2))+" جيجابايت":ar(mb<10?mb.toFixed(1):Math.round(mb))+" ميجابايت";};
-async function refreshUsage(){try{const u=await rpc("admin_usage",{p:adminPin});if(u.ok)usage=u;}catch(e){}renderUsage();}
+async function refreshUsage(){try{const u=await rpc("admin_usage",{p:adminPin});if(u.ok){let keep=new Set();try{const pp=await rpc("protected_paths",{p:adminPin});if(pp&&pp.ok)keep=new Set(pp.paths||[]);}catch(_){}u.orphans=(u.orphans||[]).filter(x=>x&&!String(x).startsWith("vice/")&&!keep.has(x));if(!u.orphans.length)u.orphan=0;usage=u;}}catch(e){}renderUsage();}
 function renderUsage(){if(!usage)return;const pct=Math.min(100,usage.total/usage.limit*100);const f=$("#u-fill");f.style.width=Math.max(pct,.5)+"%";f.className=pct>=90?"crit":pct>=70?"warn":"";
   $("#u-used").textContent=fmtMB(usage.total);$("#u-of").textContent="من ١ جيجابايت · "+ar(Math.round(pct))+"٪ · "+ar(usage.count)+" ملف";
   const left=usage.limit-usage.total;$("#u-note").className="msg"+(pct>=90?" err":"");$("#u-note").textContent=pct>=90?"المساحة توشك على الامتلاء. اطلبي من المعلمات ضغط الملفات، أو فكّري في الخطة المدفوعة.":"المتبقي: "+fmtMB(left)+" تقريبًا. نصيحة: ضغط ملفات PDF قبل الرفع يوفّر كثيرًا.";
@@ -935,7 +1147,7 @@ function renderUsage(){if(!usage)return;const pct=Math.min(100,usage.total/usage
   $("#u-top").innerHTML=top.length?'<span style="border:0;background:none;padding-inline:0;color:var(--muted)">الأكثر استهلاكًا:</span>'+top.map(x=>`<span>${esc(tn[x.id]||"—")}<b>${fmtMB(x.bytes)}</b></span>`).join(""):"";
   $("#u-clean-wrap").hidden=!(usage.orphans&&usage.orphans.length);$("#u-clean").textContent="تنظيف ملفات محذوفة لا تزال تشغل مساحة ("+fmtMB(usage.orphan)+")";}
 async function removeFiles(paths){paths=paths.filter(Boolean);if(!paths.length||!sb)return;try{await sb.storage.from("files").remove(paths);}catch(e){}}
-async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminRole=r.role;adminTeachers=r.teachers;refreshUsage();items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));}
+async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminRole=r.role;adminTeachers=r.teachers;refreshUsage();items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));if(r.role==="vice")await loadVice();}
 function showErr(t){const b=$("#demo-bar");b.hidden=false;b.style.background="var(--danger)";b.style.color="#fff";b.textContent=t;}
 
 /* ================= render ================= */
@@ -965,6 +1177,7 @@ function renderTeacher(){
     <button class="btn btn-ghost" data-list><svg><use href="#i-back"/></svg>تغيير المعلمة</button>`;
   const byD=id=>its.filter(x=>x.domain===id);
   renderJourney(t,its);
+  if(tPins[t.id]&&!tVisits[t.id]){tVisits[t.id]=[];loadTVisits(t.id);}renderTVisits();
   $("#t-home").innerHTML=SECTIONS.map(s=>{
     const ds=D.filter(d=>d.sec===s.id);const done=ds.filter(d=>byD(d.id).length).length;const pct=Math.round(done/ds.length*100);
     const head=`<div class="sec-head"><div class="sec-title" style="--c:${s.c}"><span class="num">${s.n}</span><div><h2>${esc(s.name)}</h2><p>${esc(s.desc)}</p></div></div><div class="sec-prog" style="--c:${s.c}"><span>${done?ar(done)+" من "+ar(ds.length)+" موثّق":"لم يبدأ التوثيق"}</span><span class="bar"><span style="width:${pct}%"></span></span></div></div>`;
@@ -975,7 +1188,7 @@ function renderTeacher(){
 function itemCard(x){
   const d=DM[x.domain]||D[0];const f=x.files?.[0];const th=f?(f.thumb||(f.type&&f.type.startsWith("image/")?f.path:null)):null;const n=x.files?.length||0;const src=th?fileUrl(th):"";
   return `<button class="card" data-item="${esc(x.id)}" style="--c:${d.c}"><div class="thumb">${d.svg}${src?`<img src="${esc(src)}" alt="" loading="lazy" onerror="this.remove()">`:""}${x.kind?`<span class="chipc">${esc(x.kind)}</span>`:""}${n?`<span class="fn"><svg><use href="#i-file"/></svg>${ar(n)}</span>`:""}</div>
-    <div class="body"><h3>${esc(x.title)}</h3><div class="meta">${x.term?`<span><svg><use href="#i-cal"/></svg>${esc(x.term)}</span>`:""}${x.date?`<span>${fmtDate(x.date)}</span>`:""}${x.cls?`<span><svg><use href="#i-class"/></svg>${esc(x.cls)}</span>`:""}</div></div></button>`;
+    <div class="body"><h3>${esc(x.title)}</h3><div class="meta">${x.term?`<span><svg><use href="#i-cal"/></svg>${esc(x.term)}</span>`:""}${x.date?`<span>${fmtDate(x.date)}</span>`:""}${x.cls?`<span><svg><use href="#i-class"/></svg>${esc(x.cls)}</span>`:""}</div>${x.createdAt?`<span class="addt" title="${esc(fullT(x.createdAt))}">🕒 أُضيف ${esc(shortDT(x.createdAt))}</span>`:""}</div></button>`;
 }
 function renderDomain(){
   if(!curD||!curT) return; const can=!!tPins[curT]; $("#add-btn").hidden=!can; $("#dv-up").hidden=!can; $("#dv-lock").hidden=can; const d=DM[curD],s=SM[d.sec]; $("#dv-up").style.setProperty("--c",d.c);
@@ -991,6 +1204,7 @@ const DAY=864e5;
 function perStart(){return perMode==="week"?Date.now()-7*DAY:perMode==="month"?Date.now()-30*DAY:0;}
 function inPer(x){if(perMode==="term"){const tv=$("#a-term-f").value;return !tv||x.term===tv;}return (x.createdAt||0)>=perStart();}
 function perLabel(){const tv=$("#a-term-f").value;return perMode==="week"?"آخر أسبوع":perMode==="month"?"آخر شهر":(tv||"كل الفصول");}
+const gDT=t=>{try{return new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{day:"numeric",month:"long",year:"numeric",timeZone:TZ}).format(new Date(t))+" — "+tmT(t);}catch(e){return"";}};
 const gDate=t=>{try{return new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{day:"numeric",month:"long",year:"numeric"}).format(new Date(t));}catch(e){return"";}};
 function perRange(){if(perMode==="term")return "";return "من "+gDate(perStart())+" إلى "+gDate(Date.now());}
 function statsFor(tid){
@@ -1008,7 +1222,7 @@ function renderAdmin(){
   const fk=[["#3D4DB8",ar(L.length),"شاهد في "+perLabel()],["#2E9D6A",ar(S.filter(r=>r.L.length).length),"معلمة أضافت"],["#C0457A",ar(S.filter(r=>!r.L.length).length),"لم تُضف شيئًا"],["#E07A3F",ar(L.reduce((n,x)=>n+(x.files?.length||0),0)),"مرفق"]];
   $("#fkpis").innerHTML=fk.map(([c,n,l])=>`<div style="--c:${c}"><b>${n}</b><span>${l}</span></div>`).join("");
   const FS=[...S].sort((a,b)=>b.L.length-a.L.length);
-  $("#tb-follow").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>عدد الشواهد</th><th>المرفقات</th><th>المجالات الموثّقة</th><th>آخر إضافة</th><th>الحالة</th></tr></thead><tbody>${FS.map((r,i)=>{const last=r.L.reduce((m,x)=>Math.max(m,x.createdAt||0),0);const doms=new Set(r.L.map(x=>x.domain)).size;return `<tr><td>${ar(i+1)}</td><td class="nm"><a href="#" data-t="${esc(r.t.id)}">${esc(r.t.name)}</a></td><td><b>${ar(r.L.length)}</b></td><td>${ar(nf(r))}</td><td>${ar(doms)}</td><td>${last?shortT(last):'<span class="no">—</span>'}</td><td>${r.L.length?'<span class="st-on">✓ نشطة</span>':'<span class="st-off">لم تُضف</span>'}</td></tr>`;}).join("")}</tbody>`;
+  $("#tb-follow").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>عدد الشواهد</th><th>المرفقات</th><th>المجالات الموثّقة</th><th>آخر إضافة</th><th>الحالة</th></tr></thead><tbody>${FS.map((r,i)=>{const last=r.L.reduce((m,x)=>Math.max(m,x.createdAt||0),0);const doms=new Set(r.L.map(x=>x.domain)).size;return `<tr><td>${ar(i+1)}</td><td class="nm"><a href="#" data-t="${esc(r.t.id)}">${esc(r.t.name)}</a></td><td><b>${ar(r.L.length)}</b></td><td>${ar(nf(r))}</td><td>${ar(doms)}</td><td>${last?shortDT(last):'<span class="no">—</span>'}</td><td>${r.L.length?'<span class="st-on">✓ نشطة</span>':'<span class="st-off">لم تُضف</span>'}</td></tr>`;}).join("")}</tbody>`;
   const active=S.filter(r=>r.L.length).length;
   const kp=[["user","#3D4DB8",ar(teachers.length),"معلمة"],["check","#2E9D6A",ar(L.length),"شاهد في الفترة"],["layers","#E07A3F",ar(active)+" / "+ar(teachers.length),"بدأن التوثيق"],["file","#C0457A",ar(L.reduce((n,x)=>n+(x.files?.length||0),0)),"مرفق"]];
   $("#kpis").innerHTML=kp.map(([i,c,n,l])=>`<div class="kpi" style="--c:${c}"><span class="ki"><svg class="ico"><use href="#i-${i}"/></svg></span><div><strong>${n}</strong><span>${l}</span></div></div>`).join("");
@@ -1023,17 +1237,18 @@ function renderAdmin(){
   $("#missing").innerHTML=miss.length?miss.map(r=>`<span>${esc(r.t.name)}</span>`).join(""):(teachers.length?'<p class="hint">جميع المعلمات بدأن التوثيق في هذه الفترة 🌟</p>':'<p class="hint">لا توجد أسماء بعد.</p>');
   const tn=Object.fromEntries(teachers.map(t=>[t.id,t.name]));
   const fl=[...L].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,40);
-  $("#feed").innerHTML=fl.length?fl.map(x=>{const d=DM[x.domain]||D[0];return `<li class="fi" data-item="${esc(x.id)}" style="--c:${d.c}"><span class="fd"></span><div class="ft"><b>${esc(tn[x.teacher_id]||"")}</b> — ${esc(x.title)}<small>${esc(d.name)}${x.kind?" · "+esc(x.kind):""} · ${shortT(x.createdAt)}</small></div></li>`;}).join(""):'<li class="hint" style="padding:12px">لا توجد شواهد في هذه الفترة.</li>';
-  $("#tb-pins").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>الرمز السري</th><th></th></tr></thead><tbody>${adminTeachers.map((t,i)=>`<tr><td>${ar(i+1)}</td><td class="nm">${esc(t.name)}</td><td><b style="font-family:var(--f-display);font-size:17px;letter-spacing:.15em">${esc(t.pin||"—")}</b></td><td><button class="btn btn-ghost" style="padding:4px 10px;font-size:13px" data-reset="${esc(t.id)}">رمز جديد</button></td></tr>`).join("")}</tbody>`;
+  $("#feed").innerHTML=fl.length?fl.map(x=>{const d=DM[x.domain]||D[0];return `<li class="fi" data-item="${esc(x.id)}" style="--c:${d.c}"><span class="fd"></span><div class="ft"><b>${esc(tn[x.teacher_id]||"")}</b> — ${esc(x.title)}<small>${esc(d.name)}${x.kind?" · "+esc(x.kind):""} · ${shortDT(x.createdAt)}</small></div></li>`;}).join(""):'<li class="hint" style="padding:12px">لا توجد شواهد في هذه الفترة.</li>';
+  $("#tb-pins").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>الرمز السري</th></tr></thead><tbody>${adminTeachers.map((t,i)=>`<tr><td>${ar(i+1)}</td><td class="nm">${esc(t.name)}</td><td><b style="font-family:var(--f-display);font-size:17px;letter-spacing:.15em">${esc(t.pin||"—")}</b></td></tr>`).join("")}</tbody>`;
   if(document.activeElement!==$("#t-names")) $("#t-names").value=teachers.map(t=>t.name).join("\n");
+  renderViceHub();renderBackup();
 }
 function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const on=parts.length>0;$("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);if(on)$("#swho").textContent="داخلة الآن: "+parts.join(" · ");}
-function logout(){adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
+function logout(){viceFiles=[];visits=[];curG=null;adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
 function renderAll(){renderSession();renderStats();renderList();renderTeacher();renderDomain();renderAdmin();}
 renderNav();
 
 /* ================= navigation ================= */
-function showView(v){["list","teacher","domain","admin"].forEach(k=>$("#v-"+k).hidden=k!==v);$("#secnav-wrap").hidden=v!=="teacher";}
+function showView(v){["list","teacher","domain","admin","growth","visits","visit"].forEach(k=>$("#v-"+k).hidden=k!==v);$("#secnav-wrap").hidden=v!=="teacher";}
 const toMain=()=>window.scrollTo({top:$("main").offsetTop-70,behavior:"smooth"});
 function openTeacher(id){if(!tPins[id]&&!adminPin){askPin(id);return;}curT=id;curD=null;showView("teacher");renderTeacher();try{history.replaceState(null,"","#t-"+id);}catch(e){}toMain();}
 function openDomain(id){curD=id;$("#dv-term").value="";showView("domain");renderDomain();toMain();}
@@ -1079,7 +1294,7 @@ $("#names-no").onclick=()=>{$("#names-confirm").hidden=true;pendingNames=null;};
 $("#names-yes").onclick=()=>{$("#names-confirm").hidden=true;applyNames();};
 async function applyNames(){const list=pendingNames;if(!list)return;const m=$("#names-msg");m.className="msg";m.textContent="جارٍ الحفظ…";
   try{const r=await rpc("admin_set_teachers",{p:adminPin,names:list});if(!r.ok)throw r;await refreshAdmin();renderAll();m.textContent=`حُفظت القائمة (${ar(list.length)} معلمة).`;}catch(e){m.className="msg err";m.textContent="تعذّر حفظ القائمة.";}pendingNames=null;}
-$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#chg-msg"),np=$("#chg-pin").value.trim();m.className="msg";m.textContent="جارٍ الحفظ…";
+if($("#chg-form"))$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#chg-msg"),np=$("#chg-pin").value.trim();m.className="msg";m.textContent="جارٍ الحفظ…";
   try{const r=await rpc("admin_change_pin",{p:adminPin,np});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر.";return;}adminPin=np;$("#chg-pin").value="";m.textContent="تم تغيير رمزك. احفظيه في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الاتصال.";}});
 
 /* ================= add ================= */
@@ -1160,6 +1375,7 @@ function openView(id){
   const x=items.find(i=>i.id===id);if(!x)return;curItem=x;const d=DM[x.domain]||D[0];const tn=teachers.find(t=>t.id===x.teacher_id)?.name||"";
   $("#v-ic").innerHTML=d.svg;$("#v-dom").textContent=(tn?tn+" · ":"")+d.name+(x.kind?" · "+x.kind:"");$("#v-title").textContent=x.title;
   $("#v-meta").innerHTML=`${x.term?`<span><svg><use href="#i-cal"/></svg>${esc(x.term)}</span>`:""}${x.date?`<span>${fmtDate(x.date)}</span>`:""}${x.cls?`<span><svg><use href="#i-class"/></svg>${esc(x.cls)}</span>`:""}`;
+  $("#v-stamp").innerHTML=x.createdAt?`<span class="si">🕒</span><span><small>تاريخ ووقت إضافة الشاهد</small><b>${esc(fullT(x.createdAt))}</b></span>`:"";$("#v-stamp").hidden=!x.createdAt;
   $("#v-tags").innerHTML=(x.checks||[]).map(c=>`<span>✓ ${esc(c)}</span>`).join("");
   $("#v-desc").textContent=x.descr||"";$("#v-desc").hidden=!x.descr;
   $("#v-del").hidden=!(adminPin||tPins[x.teacher_id]);$("#v-confirm").hidden=true;$("#v-msg").textContent="";
@@ -1244,11 +1460,11 @@ $("#export").onclick=async()=>{
   S.forEach((r,i)=>{const row=body(ws,er+2+i,[r.t.name,...ev.map(d=>r.L.some(x=>x.domain===d.id)?"✓":"—")],i);row.getCell(1).alignment={horizontal:"right",vertical:"middle"};row.getCell(1).font={name:F,size:11,bold:true};for(let c=2;c<=evN;c++){const x=row.getCell(c);if(x.value==="✓"){x.font={name:F,size:12,bold:true,color:{argb:"FF1E7A4F"}};x.fill={type:"pattern",pattern:"solid",fgColor:{argb:GREEN}};}}});
   // 4) details
   ws=sheet("تفاصيل الشواهد",[5,24,20,24,34,12,16,18,22,40],"FFC0457A");banner(ws,10,"تفاصيل الشواهد المضافة",sub);
-  head(ws,4,["م","اسم المعلمة","القسم","المجال","عنوان الشاهد","النوع","الفصل الدراسي","تاريخ الإضافة","المرفقات","الروابط"],NAVY);
+  head(ws,4,["م","اسم المعلمة","القسم","المجال","عنوان الشاهد","النوع","الفصل الدراسي","تاريخ ووقت الإضافة","المرفقات","الروابط"],NAVY);
   const LL=[...L].sort((a,b)=>(tn[a.teacher_id]||"").localeCompare(tn[b.teacher_id]||"","ar")||(b.createdAt||0)-(a.createdAt||0));
   LL.forEach((x,i)=>{const d=DM[x.domain]||D[0];const fs=x.files||[];const cnt={};fs.forEach(f=>{const k=AR_KIND[kindOf(f)]||"ملف";cnt[k]=(cnt[k]||0)+1;});
     const links=fs.filter(f=>f.url).map(f=>f.url);const fileL=fs.filter(f=>f.path).map(f=>fileUrl(f.path)).filter(Boolean);
-    const row=body(ws,5+i,[i+1,tn[x.teacher_id]||"",(SM[d.sec]||{}).name||"",d.name,x.title,x.kind||"—",x.term||"",x.createdAt?gDate(x.createdAt):"",Object.entries(cnt).map(([k,n])=>n>1?`${k} (${n})`:k).join("، ")||"—",""],i,{left:[4,9]});
+    const row=body(ws,5+i,[i+1,tn[x.teacher_id]||"",(SM[d.sec]||{}).name||"",d.name,x.title,x.kind||"—",x.term||"",x.createdAt?gDT(x.createdAt):"",Object.entries(cnt).map(([k,n])=>n>1?`${k} (${n})`:k).join("، ")||"—",""],i,{left:[4,9]});
     const all=[...links,...fileL];const lc=row.getCell(10);if(all.length===1){lc.value={text:links.length?"فتح الرابط":"فتح الملف",hyperlink:all[0]};lc.font={name:F,size:11,color:{argb:"FF1F6FD1"},underline:true};}else if(all.length){lc.value=all.join("\n");lc.font={name:F,size:9,color:{argb:"FF1F6FD1"}};row.height=Math.min(120,16*all.length);}else lc.value="—";
     const dc=row.getCell(3);dc.font={name:F,size:11,bold:true,color:{argb:hx((SM[d.sec]||{}).c||"#3D4DB8")}};});
   if(!LL.length){ws.mergeCells(5,1,5,10);const c=ws.getCell(5,1);c.value="لا توجد شواهد في هذه الفترة";c.alignment={horizontal:"center"};c.font={name:F,size:12,color:{argb:"FF8A86A0"}};}
@@ -1259,6 +1475,211 @@ $("#export").onclick=async()=>{
   m.textContent="تم تحميل الملف ✓";
   }catch(e){console.error(e);m.className="msg err";m.textContent="تعذّر إنشاء الملف.";}finally{btn.disabled=false;}
 };
+
+
+/* ================= v11: وكيلة شؤون المعلمات — النمو المهني + حضور الحصص ================= */
+const isVice=()=>!!adminPin&&adminRole==="vice";
+const GD=[
+ {id:"tables",n:1,name:"الجداول",desc:"الجدول المدرسي وجداول الحصص والانتظار",c:"#3D4DB8",
+  svg:`<svg viewBox="0 0 100 100"><rect x="14" y="20" width="72" height="64" rx="10" fill="#fff" stroke="#3D4DB8" stroke-width="3"/><rect x="14" y="20" width="72" height="16" rx="8" fill="#3D4DB8"/><circle cx="30" cy="20" r="4" fill="#D9A441"/><circle cx="70" cy="20" r="4" fill="#D9A441"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<rect x="${22+c*20}" y="${42+r*10}" width="16" height="7" rx="2" fill="${(r+c)%3===0?"#C0457A":(r+c)%3===1?"#8FA0F0":"#E3E7FA"}"/>`).join("")).join("")}</svg>`},
+ {id:"duty",n:2,name:"المناوبة",desc:"جداول المناوبة والإشراف اليومي ومتابعتها",c:"#2E9D6A",
+  svg:`<svg viewBox="0 0 100 100"><path d="M50 12 80 24v22c0 20-13 33-30 40-17-7-30-20-30-40V24z" fill="#2E9D6A"/><path d="M50 20 72 29v17c0 15-9 25-22 31-13-6-22-16-22-31V29z" fill="#E7F5EE"/><circle cx="50" cy="48" r="15" fill="#fff" stroke="#2E9D6A" stroke-width="3"/><path d="M50 40v9l6 4" stroke="#2E9D6A" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="76" cy="76" r="10" fill="#D9A441"/><path d="m71 76 4 4 7-8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`},
+ {id:"madrasati",n:3,name:"إحصائيات منصة مدرستي",desc:"تقارير وإحصائيات المعلمات على المنصة",c:"#1F87B8",
+  svg:`<svg viewBox="0 0 100 100"><rect x="10" y="16" width="80" height="54" rx="8" fill="#14334A"/><rect x="15" y="21" width="70" height="44" rx="4" fill="#E6F4FB"/><rect x="24" y="44" width="9" height="16" rx="2" fill="#1F87B8"/><rect x="38" y="36" width="9" height="24" rx="2" fill="#2E9D6A"/><rect x="52" y="28" width="9" height="32" rx="2" fill="#D9A441"/><rect x="66" y="40" width="9" height="20" rx="2" fill="#C0457A"/><path d="M24 34l14-6 14 2 16-8" stroke="#14334A" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="40" y="70" width="20" height="8" fill="#14334A"/><rect x="30" y="78" width="40" height="5" rx="2.5" fill="#14334A"/></svg>`},
+ {id:"tplan",n:4,name:"خطة النمو المهني للمعلمات",desc:"الخطة السنوية لتطوير المعلمات وبرامجها",c:"#E07A3F",
+  svg:`<svg viewBox="0 0 100 100"><path d="M14 84h72" stroke="#B35A27" stroke-width="3" stroke-linecap="round"/><rect x="18" y="64" width="16" height="20" rx="3" fill="#F6C9A8"/><rect x="40" y="50" width="16" height="34" rx="3" fill="#EFA06B"/><rect x="62" y="34" width="16" height="50" rx="3" fill="#E07A3F"/><path d="M70 34c0-10 0-14 0-18" stroke="#2E9D6A" stroke-width="3"/><path d="M70 22c-8-1-12-6-12-12 7 0 12 4 12 12zM70 18c7-1 11-5 11-11-6 0-11 4-11 11z" fill="#2E9D6A"/><circle cx="26" cy="56" r="5" fill="#3D4DB8"/><circle cx="48" cy="42" r="5" fill="#3D4DB8"/></svg>`},
+ {id:"vgrowth",n:5,name:"النمو المهني الخاص بالوكيلة",desc:"دوراتي وشهاداتي وإنجازاتي المهنية",c:"#8B5CF6",
+  svg:`<svg viewBox="0 0 100 100"><circle cx="50" cy="42" r="26" fill="#EDE6FE"/><path d="M50 22l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z" fill="#D9A441"/><path d="M36 64 30 88l12-6 8 10 4-22M64 64l6 24-12-6-8 10" fill="#8B5CF6"/><circle cx="50" cy="42" r="26" fill="none" stroke="#8B5CF6" stroke-width="3"/></svg>`}
+];
+const GDM=Object.fromEntries(GD.map(d=>[d.id,d]));
+const VDOMS=[
+ {name:"مجال بيئة التعلم",c:"#2E9D6A",items:[
+  ["تنفذ المدرسة برامج وأنشطة؛ لتعزيز القيم الإسلامية والهوية الوطنية لدى المتعلمين.",["توظيف أمثلة أو أنشطة مرتبطة بالقيم الإسلامية","ربط المحتوى بالهوية الوطنية وتضمين أنشطة تعزز الانتماء للوطن"]],
+  ["تنفذ المدرسة إجراءات تضمن مناخًا آمنًا للتعلم والنمو نفسيًا واجتماعيًا.",["التعامل باحترام مع جميع المتعلمين","شعور المتعلمين بالأمان داخل الصف والتعبير عن آرائهم دون خوف من الخطأ","خلو البيئة من التنمر أو التهديد"]],
+  ["يتوافر في بيئة التعلم مصادر وأنشطة متنوعة للتعلم تلبي احتياجات المتعلمين، ومنهم ذوو الإعاقة والموهوبون.",["تنوع الأنشطة وفق مستويات المتعلمين","مراعاة الفروق الفردية (الإعاقة والموهوبات)"]],
+  ["يُدار الوقت في بيئة التعلم بفاعلية؛ لدعم التعلم وتلبية احتياجات المتعلمين، ومنهم ذوو الإعاقة والموهوبون.",["الالتزام بتوقيت كل مرحلة من الدرس (مقدمة – عرض – تطبيق – غلق)","منح المتعلمين الذين يحتاجون وقتًا إضافيًا فرصة إضافية دون الإخلال بجدول الحصة","الانتقال السلس بين الأنشطة"]],
+  ["يُتاح للمتعلمين فرص متكافئة في الأنشطة والمناقشة الصفية، واستخدام مصادر التعلم.",["إشراك جميع المتعلمين","تنوع أساليب المشاركة","عدالة توزيع الفرص وتشجيع الطلاب المنعزلين عن المشاركة"]]]},
+ {name:"مجال التدريس والتعلم",c:"#3D4DB8",items:[
+  ["توفر المدرسة مصادر تعلم متنوعة تدعم تنفيذ المناهج؛ لتحقيق نواتج التعلم المستهدفة.",["استخدام مصادر تعلم متنوعة داخل الحصة (عرض، فيديو، أوراق عمل، منصة رقمية)","توظيف المصادر بشكل مباشر لخدمة هدف الدرس وليس للعرض فقط","يظهر أثر استخدام المصادر على فهم المتعلمين ومشاركتهم أثناء الحصة"]],
+  ["ينفذ المعلم أنشطة واستراتيجيات تدريس تستوفي نواتج التعلم المستهدفة في المنهج، وتتسق معها بوضوح.",["تنوع الأنشطة والاستراتيجيات المرتبطة بأهداف الدرس","وضوح ارتباط الأنشطة بنواتج التعلم","تحقق نواتج التعلم من خلال تنفيذ الأنشطة"]],
+  ["تتنوع استراتيجيات التدريس وفقًا لقدرات المتعلمين، وتراعي الفروق الفردية بينهم.",["تنوع الاستراتيجيات وفق مستويات المتعلمين","مراعاة الفروق الفردية أثناء التنفيذ","مشاركة جميع المتعلمين حسب قدراتهم"]],
+  ["يستخدم المعلم مصادر تعلم رقمية تلبي احتياجات المتعلمين بمختلف فئاتهم.",["استخدام مصادر رقمية متنوعة (منصة، فيديو، تطبيق) تخدم أهداف الدرس","تكييف استخدام المصادر الرقمية لتناسب مستويات واحتياجات جميع المتعلمين"]],
+  ["تنفذ المدرسة أنشطة تعليم وتعلم تركز على تطبيقات عملية ترتبط بحياة المتعلمين.",["تنفيذ أنشطة عملية تطبق فيها الطالبات ما تعلمنه في مواقف من حياتهن اليومية","ربط المهارات والدرس بتجارب واقعية (مثل أمثلة من البيت أو المجتمع) لزيادة الفهم"]]]},
+ {name:"مجال تنمية المهارات",c:"#E07A3F",items:[
+  ["تشجع بيئة التعلم داخل الصف على تنمية مهارات القراءة والكتابة لدى المتعلمين.",["تضمين أنشطة قراءة وكتابة مرتبطة بالدرس","تشجيع المتعلمين على التعبير والكتابة والمشاركة","تصحيح الأخطاء والسلامة اللغوية"]],
+  ["تشجع بيئة التعلم داخل الصف على تنمية المهارات العددية (الحساب) لدى المتعلمين.",["دمج أرقام، إحصائيات، أو تواريخ ضمن سياق الدرس لتعزيز الفهم","تشجيع المتعلمين على استخدام مهارات التقدير (مثل: تقدير زمن المهمة، تقدير المسافات)","استخدام المتعلمين للمصطلحات العددية (أكثر، أقل، ضعف، نسبة مئوية، الترتيب التسلسلي)"]],
+  ["تشجع الممارسات التدريسية على تنمية مهارات التفكير والبحث والابتكار لدى المتعلمين.",["طرح أسئلة تفكير عليا (تحليل – تفسير – استنتاج) لماذا؟ كيف؟","توجيه المتعلمين لاستخراج المعلومات من (الكتاب، مصادر خارجية، أو تجربة ذهنية)","التشجيع على تقديم حلول غير معتادة أو اقتراح «نهاية مختلفة» أو «تصميم فكرة»"]],
+  ["تشجع بيئة التعلم تنمية المهارات العاطفية والاجتماعية لدى المتعلمين.",["تعزيز التعاون والعمل الجماعي بين الطالبات وبمهام محددة","تنمية مهارات التواصل واحترام آراء الآخرين","دعم الثقة بالنفس والتعبير عن المشاعر بشكل إيجابي"]],
+  ["يستخدم المعلم أساليب تحفيز تعزز الدافعية لدى المتعلمين.",["تستخدم المعلمة التعزيز الإيجابي (لفظي أو معنوي) لتحفيز جميع الطالبات","توظف أساليب تشجيعية متنوعة (نقاط – مسابقات – مكافآت – أوسمة)","النجاح في جعل المتعلمين يبادرون بالمشاركة والحماس للأنشطة طوال وقت الحصة"]],
+  ["يشارك المتعلمون في أنشطة التعلم بفاعلية، ويستمتعون بها.",["مبادرة المتعلمين للمشاركة وطرح الأسئلة بوضوح وحماس طوال الحصة","انخراط المتعلمين في تنفيذ الأنشطة الصفية بتركيز عالٍ، مع الالتزام التام بالعمل الجماعي","ظهور علامات البهجة والارتياح أثناء التعلم، مع الرغبة المستمرة في إكمال التحديات"]]]},
+ {name:"مجال التقويم",c:"#C0457A",items:[
+  ["يستخدم المعلمون أساليب وأدوات تقويم متنوعة تشخيصية وبنائية وختامية؛ للكشف عن الفروق الفردية في مستويات أداء المتعلمين المختلفة.",["استخدام التقويم في كافة مراحل الحصة (قبلي، بنائي أثناء الشرح، وختامي)","توظيف أدوات متنوعة (مثل: الأسئلة الشفهية، الاختبارات القصيرة أو تطبيقات التقويم التقني)","تصميم أسئلة ومهام تتناسب مع مستويات الطالبات المختلفة (الضعيفة، المتوسطة، والمتميزة)"]],
+  ["يطبق المعلم أساليب وأدوات تقويم متنوعة؛ لقياس مستوى تحقق نواتج التعلم المستهدفة في المنهج لدى المتعلمين.",["تستخدم طرقًا مختلفة للقياس (مثل: الاختبارات القصيرة، الأنشطة الشفهية، أو المهام الأدائية)","تتأكد أن كل سؤال أو نشاط يقيس فعليًا هدفًا محددًا من أهداف الدرس (نواتج التعلم)","تستطيع من خلال التقويم تحديد مستوى كل طالبة (من أتقنت المهارة ومن تحتاج إلى دعم إضافي)"]],
+  ["يقدم المعلم تغذية راجعة متنوعة للمتعلمين حسب الموقف التعليمي تركز على تحسين أدائهم.",["تقديم التعليق أو التصحيح للمتعلم أثناء أو فور انتهاء المهمة مباشرة لضمان الاستفادة","عدم الاكتفاء بقول (صح أو خطأ)، بل يوضح للمتعلم «لماذا» أخطأت وكيف تصحح مسارها للوصول للحل الصحيح","استخدام طرقًا مختلفة للتغذية الراجعة (مثل: التصحيح الذاتي، تبادل التصحيح بين الزميلات، أو التوجيه الفردي)"]]]},
+ {name:"مجال سلوك المتعلمين",c:"#B88A1E",items:[
+  ["يظهر المتعلمون الاعتزاز بالقيم والهوية الوطنية.",["التزام المتعلمين بالتحدث بلغة عربية سليمة طوال زمن الحصة","اعتزاز المتعلمين بتاريخ ومنجزات الوطن ورموزه في مشاركاتهم وأثناء الأنشطة","التمسك بالقيم والأخلاق الإسلامية في التعامل والسمت العام"]],
+  ["يظهر المتعلمون الاتجاهات الإيجابية نحو ذواتهم والآخرين.",["إظهار الثقة بالنفس أثناء المشاركة وطرح الآراء","يحترم المتعلمون آراء زملائهم ويتعاملون بإيجابية ويشجعون بعضهم أثناء الأنشطة"]],
+  ["يظهر المتعلمون التزامًا بالممارسات الصحية السليمة.",["المحافظة على نظافة المكان والأدوات، والحرص على بيئة صفية صحية (تهوية وإضاءة)","الالتزام بوضعية الجلوس الصحيحة، والاهتمام بالنظافة الشخصية والترتيب العام"]],
+  ["يلتزم المتعلمون بقواعد السلوك والانضباط.",["الالتزام بالتعليمات والنظام داخل الحصة دون تكرار التنبيه، والمحافظة على الهدوء","الحرص على آداب الاستئذان قبل المشاركة، والالتزام بمواعيد بدء ونهاية الحصة"]],
+  ["يظهر المتعلمون الاستقلالية، والقدرة على التعلم الذاتي.",["الاعتماد على النفس في إنجاز المهام، والبحث عن المعلومة قبل طلب المساعدة","القدرة على التقييم الذاتي وتصحيح الأخطاء بناءً على التغذية الراجعة"]],
+  ["يظهر المتعلمون الاعتزاز بثقافتهم واحترام التنوع الثقافي في المجتمع.",["التعبير عن الاعتزاز بالثقافة والهوية الوطنية، وإظهار التقدير لثقافات ولهجات الآخرين","تجنب أي تعليقات سلبية تجاه الاختلافات الثقافية، والتعامل بروح الانفتاح والاحترام"]]]}
+];
+let VN=0;VDOMS.forEach(d=>d.items.forEach(it=>{VN++;it.n=VN;}));
+const RATES=[["متحقق بدرجة منخفضة","#D14D4D"],["متحقق بدرجة متوسطة","#E0A030"],["متحقق بدرجة مرتفعة","#2E9D6A"],["متحقق بدرجة مرتفعة جدًا","#1F6FB8"]];
+let viceFiles=[],visits=[],curG=null,curVT=null,curV=null,vData=null;
+const tVisits={};
+async function loadVice(){if(!isVice())return;try{const [a,b]=await Promise.all([rpc("vice_files_list",{p:adminPin}),rpc("visit_list",{p:adminPin})]);if(a&&a.ok)viceFiles=a.items||[];if(b&&b.ok)visits=b.items||[];}catch(e){console.error(e);}}
+
+/* ---- hub on the admin dashboard ---- */
+function renderViceHub(){
+  const h=$("#vhub");if(!h)return;h.hidden=!isVice();if(!isVice())return;
+  $("#vh-g-n").textContent=ar(viceFiles.length)+" ملف في ٥ مجالات";
+  $("#vh-v-n").textContent=ar(visits.length)+" بطاقة ملاحظة";
+}
+function renderBackup(){const w=$("#bk-when");if(!w)return;const t=LS.get("namaa_bk",0);const days=t?Math.floor((Date.now()-t)/864e5):null;
+  w.textContent=t?"آخر نسخة احتياطية: "+shortT(t)+(days?" (قبل "+ar(days)+" يوم)":" (اليوم)"):"لم تُحمَّل نسخة احتياطية بعد على هذا الجهاز.";
+  $("#bk-warn").hidden=!(days===null||days>=7);}
+
+/* ---- النمو المهني ---- */
+function openGrowth(){if(!isVice())return;curT=null;curD=null;showView("growth");renderGrowth();toMain();}
+function renderGrowth(){
+  $("#g-doms").innerHTML=GD.map(d=>{const n=viceFiles.filter(f=>f.domain===d.id).length;return `<button type="button" class="gdom" data-gd="${d.id}" style="--c:${d.c}" aria-pressed="${curG===d.id}"><div class="gs">${d.svg}</div><div class="gb"><span class="gn">${ar(d.n)}</span><b>${esc(d.name)}</b><small>${esc(d.desc)}</small><small style="color:${d.c};font-weight:700">${n?ar(n)+" ملف":"لا توجد ملفات بعد"}</small></div></button>`;}).join("");
+  const p=$("#g-panel");if(!curG){p.hidden=true;return;}const d=GDM[curG];p.hidden=false;p.style.setProperty("--c",d.c);
+  $("#g-title").textContent=d.name;$("#g-desc").textContent=d.desc;
+  const fs=viceFiles.filter(f=>f.domain===curG);
+  $("#g-files").innerHTML=fs.length?fs.map(f=>{const fl=f.files||[];const img=fl.find(x=>x.kind==="image"||x.kind==="barcode");const th=img?`<img src="${esc(fileUrl(img.path))}" alt="" loading="lazy">`:fl.find(x=>x.thumb)?`<img src="${esc(fileUrl(fl.find(x=>x.thumb).thumb))}" alt="" loading="lazy">`:(AT[kindOf(fl[0]||{type:"link"})]||AT.link).ic;
+    const links=fl.map((x,i)=>{const u=x.kind==="link"?x.url:fileUrl(x.path);const safe=/^https?:\/\//i.test(u)?u:"#";return `<a href="${esc(safe)}" target="_blank" rel="noopener">${(AT[x.kind]||AT.link).ic} ${esc(x.kind==="link"?"فتح الرابط":(x.name||AT[x.kind].l))}</a>`+(x.kind==="barcode"&&x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener">🔗 رابط الباركود</a>`:"");}).join("");
+    return `<div class="gfile"><div class="gth">${th}</div><div class="gfb"><b>${esc(f.title||"بدون عنوان")}</b>${f.descr?`<small class="hint">${esc(f.descr)}</small>`:""}<small class="hint">🕒 ${esc(shortDT(Date.parse(f.created_at)))}</small><div class="gfl">${links}</div><button type="button" class="gdel" data-gdel="${esc(f.id)}">حذف</button></div></div>`;}).join(""):`<div class="empty" style="grid-column:1/-1"><h3>لا توجد ملفات في «${esc(d.name)}» بعد</h3><p>اضغطي «إضافة ملف» وارفعي صورة أو وورد أو PDF أو رابطًا أو باركود.</p></div>`;
+}
+$("#g-doms").addEventListener("click",e=>{const b=e.target.closest("[data-gd]");if(!b)return;curG=b.dataset.gd;renderGrowth();setTimeout(()=>$("#g-panel").scrollIntoView({behavior:"smooth",block:"start"}),60);});
+$("#g-files").addEventListener("click",async e=>{const b=e.target.closest("[data-gdel]");if(!b)return;
+  if(b.dataset.armed!=="1"){b.dataset.armed="1";b.textContent="تأكيد الحذف؟";setTimeout(()=>{b.dataset.armed="";b.textContent="حذف";},3000);return;}
+  b.disabled=true;try{const r=await rpc("vice_file_delete",{p:adminPin,fid:b.dataset.gdel});if(r.ok){await removeFiles((r.files||[]).flatMap(f=>[f.path,f.thumb]));await loadVice();renderGrowth();toast2("تم الحذف");}}catch(err){b.textContent="تعذّر";}});
+/* add dialog */
+let gAtt=[],gKind=null;
+function renderGAtt(){$("#ga-list").innerHTML=gAtt.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?a.url:a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-grm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
+$("#g-add").onclick=()=>{if(!curG)return;$("#f-gadd").reset();gAtt=[];renderGAtt();$("#ga-msg").textContent="";$("#ga-dom").textContent=GDM[curG].name;$("#ga-link").hidden=true;$("#dlg-gadd").hidden=false;setTimeout(()=>$("#ga-title").focus(),50);};
+$("#ga-list").addEventListener("click",e=>{const b=e.target.closest("[data-grm]");if(b){gAtt.splice(+b.dataset.grm,1);renderGAtt();}});
+$("#ga-types").addEventListener("click",e=>{const b=e.target.closest("[data-gat]");if(!b)return;const k=b.dataset.gat;
+  if(k==="link"){const L=$("#ga-link");L.hidden=!L.hidden;if(!L.hidden)$("#ga-url").focus();return;}
+  gKind=k;const inp=$("#ga-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
+function gAddUrl(){let u=$("#ga-url").value.trim();if(!u)return true;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#ga-msg").className="msg err";$("#ga-msg").textContent="الرابط غير صحيح.";return false;}gAtt.push({kind:"link",url:u});$("#ga-url").value="";$("#ga-link").hidden=true;renderGAtt();return true;}
+$("#ga-url-add").onclick=gAddUrl;$("#ga-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gAddUrl();}});
+$("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
+  const ok=k==="pdf"?isPdf:k==="word"?isWord:isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
+async function uploadVice(blob,ext,type){const path=`vice/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)return uploadFile(blob,ext,type);return path;}
+$("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()||!curG)return;if(!gAddUrl())return;const msg=$("#ga-msg"),btn=$("#ga-save");
+  if(!gAtt.length){msg.className="msg err";msg.textContent="أضيفي ملفًا أو رابطًا واحدًا على الأقل.";return;}
+  const bad=gAtt.find(a=>a.file&&a.file.size>20*1024*1024);if(bad){msg.className="msg err";msg.textContent=`الملف «${bad.file.name}» أكبر من 20 ميجابايت.`;return;}
+  btn.disabled=true;msg.className="msg";
+  try{const out=[];const ups=gAtt.filter(a=>a.file);let ui=0;
+    for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
+      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word";const ext=(f.name.split(".").pop()||(isPdf?"pdf":"jpg")).toLowerCase();
+      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):(f.type||"image/jpeg");
+      let path;try{path=await uploadVice(f,ext,type);}catch(er){throw {upl:f.name};}let thumb=null;
+      if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,600);const bl=await new Promise(r=>cv.toBlob(r,"image/jpeg",.8));if(bl)thumb=await uploadVice(bl,"jpg","image/jpeg");}catch(_){}}
+      const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
+    msg.textContent="جارٍ الحفظ…";
+    const r=await rpc("vice_file_add",{p:adminPin,it:{domain:curG,title:$("#ga-title").value.trim(),descr:$("#ga-desc").value.trim(),files:out}});if(!r||!r.ok)throw r;
+    $("#dlg-gadd").hidden=true;await loadVice();renderGrowth();toast2("تمت الإضافة ✓");
+  }catch(err){console.error(err);msg.className="msg err";msg.textContent=err&&err.upl?`تعذّر رفع الملف «${err.upl}».`:"تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}});
+
+/* ---- حضور الحصص ---- */
+function openVisits(){if(!isVice())return;curT=null;curD=null;showView("visits");renderVisits();toMain();}
+function renderVisits(){const q=($("#vt-q").value||"").trim();const L=teachers.filter(t=>!q||t.name.includes(q));
+  $("#vt-grid").innerHTML=L.length?L.map(t=>{const n=visits.filter(v=>v.teacher_id===t.id).length;return `<button type="button" class="vt" data-vt="${esc(t.id)}"><span class="av" style="background:${avColor(t.name)}">${esc(initial(t.name))}</span><span><b>${esc(t.name)}</b><small>${n?ar(n)+" زيارة سابقة":"لم تُزر بعد"}</small></span></button>`;}).join(""):'<p class="hint">لا توجد أسماء مطابقة.</p>';}
+$("#vt-q").oninput=renderVisits;
+$("#vt-grid").addEventListener("click",e=>{const b=e.target.closest("[data-vt]");if(b)openVisit(b.dataset.vt,null);});
+const blankV=()=>({subject:"",cls:"",lesson:"",idno:"",day:"",date:new Date().toISOString().slice(0,10),present:"",absent:"",items:{},recs:""});
+function openVisit(tid,vid){curVT=tid;const v=vid?visits.find(x=>x.id===vid):null;curV=v?v.id:null;vData=v?JSON.parse(JSON.stringify(v.data||{})):blankV();vData.items=vData.items||{};
+  sigState.vice=v?v.vice_sig||null:null;sigState.teacher=v?v.teacher_sig||null:null;showView("visit");renderVisit();toMain();}
+const DAYS=["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+function renderVisit(){const t=teachers.find(x=>x.id===curVT);if(!t){openVisits();return;}
+  $("#vv-name").textContent=t.name;$("#vv-sub").textContent=curV?"بطاقة محفوظة — يمكنك تعديلها":"بطاقة ملاحظة جديدة";
+  $("#vp-name").textContent="بطاقة الملاحظة الصفية — "+t.name;
+  const mine=visits.filter(v=>v.teacher_id===curVT);
+  $("#vv-prev").innerHTML=`<button type="button" data-vnew aria-pressed="${!curV}">＋ بطاقة جديدة</button>`+mine.map(v=>`<button type="button" data-vopen="${esc(v.id)}" aria-pressed="${curV===v.id}">${esc(v.data&&v.data.date?fmtDate(v.data.date):shortT(Date.parse(v.created_at)))}${v.teacher_sig?" ✓":""}</button>`).join("");
+  const F=[["idno","رقم الهوية","text"],["subject","المادة","text"],["cls","الصف","text"],["lesson","عنوان الدرس","text"],["day","اليوم","day"],["date","التاريخ","date"],["present","الحضور","number"],["absent","الغياب","number"]];
+  $("#vv-info").innerHTML=`<label>الاسم<input value="${esc(t.name)}" disabled></label>`+F.map(([k,l,ty])=>ty==="day"?`<label>${l}<select class="fsel" data-vf="${k}"><option value=""></option>${DAYS.map(d=>`<option ${vData[k]===d?"selected":""}>${d}</option>`).join("")}</select></label>`:`<label>${l}<input type="${ty}" ${ty==="number"?'min="0" inputmode="numeric"':""} data-vf="${k}" value="${esc(vData[k]||"")}"></label>`).join("");
+  $("#vv-doms").innerHTML=VDOMS.map(d=>`<section class="vdom" style="--c:${d.c}"><div class="vdom-h">${esc(d.name)}<span>${ar(d.items[0].n)}–${ar(d.items[d.items.length-1].n)}</span></div><div class="vdom-b">${d.items.map(it=>{const s=vData.items[it.n]||{};const cs=s.c||[];return `<div class="vitem" data-vi="${it.n}"><div class="vitem-h"><span class="vn">${ar(it.n)}</span><b>${esc(it[0])}</b></div>
+    <div class="vchk">${it[1].map((x,j)=>`<label><input type="checkbox" data-vc="${it.n}|${j}" ${cs.includes(j)?"checked":""}><span>${esc(x)}</span></label>`).join("")}</div>
+    <div class="vrate">${RATES.map(([l,c],r)=>`<button type="button" data-vr="${it.n}|${r}" style="--rc:${c}" aria-pressed="${s.r===r}">${l}</button>`).join("")}</div>
+    <textarea class="vnote" rows="1" data-vnote="${it.n}" placeholder="تعليق أو ملاحظة (اختياري)">${esc(s.note||"")}</textarea></div>`;}).join("")}</div></section>`).join("");
+  $("#vv-recs").value=vData.recs||"";
+  renderSig("vice");renderSig("teacher");updVSum();$("#vv-del").hidden=!curV;$("#vv-msg").textContent="";
+}
+function updVSum(){const rs=Object.values(vData.items).filter(s=>typeof s.r==="number");const n=rs.length;$("#vs-bar").style.width=Math.round(n/VN*100)+"%";
+  const avg=n?rs.reduce((a,s)=>a+s.r+1,0)/n:0;$("#vs-txt").textContent=`قُيّم ${ar(n)} من ${ar(VN)} محورًا`+(n?` · المتوسط ${ar(avg.toFixed(1))} من ٤ (${ar(Math.round(avg/4*100))}٪)`:"");}
+const vItem=n=>vData.items[n]||(vData.items[n]={c:[]});
+$("#vv-info").addEventListener("input",e=>{const i=e.target.closest("[data-vf]");if(i)vData[i.dataset.vf]=i.value;});
+$("#vv-info").addEventListener("change",e=>{const i=e.target.closest("[data-vf]");if(!i)return;vData[i.dataset.vf]=i.value;if(i.dataset.vf==="date"&&i.value&&!vData.day){vData.day=DAYS[new Date(i.value+"T12:00:00").getDay()];renderVisit();}});
+$("#vv-doms").addEventListener("change",e=>{const c=e.target.closest("[data-vc]");if(!c)return;const [n,j]=c.dataset.vc.split("|").map(Number);const s=vItem(n);s.c=(s.c||[]).filter(x=>x!==j);if(c.checked)s.c.push(j);});
+$("#vv-doms").addEventListener("click",e=>{const b=e.target.closest("[data-vr]");if(!b)return;const [n,r]=b.dataset.vr.split("|").map(Number);const s=vItem(n);s.r=s.r===r?undefined:r;b.parentElement.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b&&s.r===r));updVSum();});
+$("#vv-doms").addEventListener("input",e=>{const t=e.target.closest("[data-vnote]");if(!t)return;vItem(+t.dataset.vnote).note=t.value;t.style.height="auto";t.style.height=t.scrollHeight+"px";});
+$("#vv-recs").oninput=e=>{vData.recs=e.target.value;};
+$("#vv-prev").addEventListener("click",e=>{if(e.target.closest("[data-vnew]")){openVisit(curVT,null);return;}const b=e.target.closest("[data-vopen]");if(b)openVisit(curVT,b.dataset.vopen);});
+$("#vv-back").onclick=()=>{showView("visits");renderVisits();toMain();};
+/* signatures */
+const sigState={vice:null,teacher:null};
+function renderSig(k){const box=$("#sig-"+k);const v=sigState[k];
+  box.querySelector(".sbody").innerHTML=v?`<img src="${esc(v)}" alt="التوقيع">`:`<canvas width="600" height="225" aria-label="مساحة التوقيع"></canvas>`;
+  box.querySelector(".sok").textContent=v?"✓ تم التوقيع":"";box.querySelector("[data-sclear]").textContent=v?"إعادة التوقيع":"مسح";
+  if(!v)bindPad(box.querySelector("canvas"),k);}
+function bindPad(cv,k){const x=cv.getContext("2d");x.lineWidth=3.2;x.lineCap="round";x.lineJoin="round";x.strokeStyle="#1B2245";let on=false,drawn=false,last=null;
+  const pt=e=>{const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height];};
+  cv.onpointerdown=e=>{on=true;last=pt(e);cv.setPointerCapture(e.pointerId);};
+  cv.onpointermove=e=>{if(!on)return;const p=pt(e);x.beginPath();x.moveTo(...last);x.lineTo(...p);x.stroke();last=p;drawn=true;};
+  cv.onpointerup=cv.onpointercancel=()=>{if(on&&drawn)cv.dataset.drawn="1";on=false;};}
+function padData(k){const cv=$("#sig-"+k+" canvas");return cv&&cv.dataset.drawn?cv.toDataURL("image/png"):null;}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-sclear]");if(!b)return;const k=b.dataset.sclear;sigState[k]=null;renderSig(k);});
+async function saveVisit(){const m=$("#vv-msg"),b=$("#vv-save");m.className="msg";m.textContent="جارٍ الحفظ…";b.disabled=true;
+  sigState.vice=sigState.vice||padData("vice");sigState.teacher=sigState.teacher||padData("teacher");
+  try{const r=await rpc("visit_save",{p:adminPin,v:{id:curV||"",teacher_id:curVT,data:vData,vice_sig:sigState.vice,teacher_sig:sigState.teacher}});if(!r||!r.ok)throw r;
+    curV=r.id;await loadVice();renderVisit();$("#vv-msg").textContent="حُفظت البطاقة ✓";toast2("حُفظت بطاقة الملاحظة ✓");
+  }catch(err){console.error(err);m.className="msg err";m.textContent="تعذّر الحفظ. تحققي من الاتصال.";}finally{b.disabled=false;}}
+$("#vv-save").onclick=saveVisit;
+$("#vv-print").onclick=()=>{document.body.classList.add("printing");setTimeout(()=>{window.print();},50);};
+addEventListener("afterprint",()=>document.body.classList.remove("printing"));
+$("#vv-del").onclick=async()=>{const b=$("#vv-del");if(!curV)return;if(b.dataset.armed!=="1"){b.dataset.armed="1";b.textContent="تأكيد الحذف؟";setTimeout(()=>{b.dataset.armed="";b.textContent="حذف البطاقة";},3000);return;}
+  b.disabled=true;try{await rpc("visit_delete",{p:adminPin,vid:curV});await loadVice();openVisit(curVT,null);toast2("حُذفت البطاقة");}catch(e){}finally{b.disabled=false;b.dataset.armed="";b.textContent="حذف البطاقة";}};
+
+/* ---- المعلمة: بطاقاتها والتوقيع ---- */
+async function loadTVisits(tid){if(!tPins[tid])return;try{const r=await rpc("teacher_visits",{tid,p:tPins[tid]});if(r&&r.ok){tVisits[tid]=r.items||[];renderTVisits();}}catch(e){}}
+function renderTVisits(){const box=$("#t-visits");if(!box)return;const L=curT&&tPins[curT]?tVisits[curT]:null;if(!L||!L.length){box.hidden=true;return;}box.hidden=false;
+  box.innerHTML=`<div class="panel tvis"><div class="p-head"><h3>📋 بطاقات الملاحظة الصفية</h3><p class="hint">زيارات وكيلة شؤون المعلمات لحصصكِ — اطّلعي عليها ووقّعي.</p></div><div class="tvis-list">${L.map(v=>`<div class="tvis-it"><div class="grow"><b>${esc(v.data&&v.data.lesson||"زيارة صفية")}</b><br><small class="hint">${esc(v.data&&v.data.date?fmtDate(v.data.date):shortT(Date.parse(v.created_at)))}</small></div>${v.teacher_sig?'<span class="pill-ok">✓ موقّعة</span>':'<span class="pill-wait">بانتظار توقيعكِ</span>'}<button type="button" class="btn btn-ghost" data-tvo="${esc(v.id)}">عرض${v.teacher_sig?"":" والتوقيع"}</button></div>`).join("")}</div></div>`;}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-tvo]");if(b)openTVisit(b.dataset.tvo);});
+let tvCur=null;
+function visitHTML(v,tname){const d=v.data||{};const it=d.items||{};
+  const info=[["الاسم",tname],["المادة",d.subject],["الصف",d.cls],["عنوان الدرس",d.lesson],["اليوم",d.day],["التاريخ",d.date?fmtDate(d.date):""],["الحضور",d.present],["الغياب",d.absent]];
+  return `<div class="vinfo">${info.map(([l,x])=>`<label>${l}<input value="${esc(x||"")}" disabled></label>`).join("")}</div>`+VDOMS.map(dm=>`<section class="vdom" style="--c:${dm.c};margin-top:14px"><div class="vdom-h">${esc(dm.name)}</div><div class="vdom-b">${dm.items.map(q=>{const s=it[q.n]||{};return `<div class="vitem"><div class="vitem-h"><span class="vn">${ar(q.n)}</span><b>${esc(q[0])}</b></div><div class="vchk">${q[1].map((x,j)=>`<label><input type="checkbox" disabled ${(s.c||[]).includes(j)?"checked":""}><span>${esc(x)}</span></label>`).join("")}</div>${typeof s.r==="number"?`<div class="vrate"><button type="button" aria-pressed="true" style="--rc:${RATES[s.r][1]}" disabled>${RATES[s.r][0]}</button></div>`:""}${s.note?`<p class="hint" style="padding-inline-start:42px">💬 ${esc(s.note)}</p>`:""}</div>`;}).join("")}</div></section>`).join("")+
+  `<div class="panel vrecs" style="margin-top:14px"><h3>التوصيات</h3><p style="white-space:pre-wrap;margin:6px 0 0">${esc(d.recs||"—")}</p></div>`;}
+function openTVisit(id){const L=tVisits[curT]||[];const v=L.find(x=>x.id===id);if(!v)return;tvCur=v;const t=teachers.find(x=>x.id===curT);
+  $("#tv-body").innerHTML=visitHTML(v,t?t.name:"");
+  $("#tv-vsig").innerHTML=v.vice_sig?`<img src="${esc(v.vice_sig)}" alt="">`:'<p class="hint">لم توقّع الوكيلة بعد.</p>';
+  sigState.tv=v.teacher_sig||null;renderSig("tv");$("#tv-msg").textContent="";$("#tv-sign").hidden=!!v.teacher_sig;$("#dlg-tvis").hidden=false;}
+$("#tv-sign").onclick=async()=>{const m=$("#tv-msg"),b=$("#tv-sign");const sig=padData("tv");if(!sig){m.className="msg err";m.textContent="وقّعي في المربع أولًا.";return;}
+  b.disabled=true;m.className="msg";m.textContent="جارٍ الحفظ…";try{const r=await rpc("teacher_sign_visit",{tid:curT,p:tPins[curT],vid:tvCur.id,sig});if(!r||!r.ok)throw r;await loadTVisits(curT);$("#dlg-tvis").hidden=true;toast2("تم التوقيع ✓ شكرًا لكِ");}catch(e){m.className="msg err";m.textContent="تعذّر حفظ التوقيع.";}finally{b.disabled=false;}};
+$("#tv-print").onclick=()=>{document.body.classList.add("printing");setTimeout(()=>window.print(),50);};
+
+/* ---- النسخة الاحتياطية ---- */
+async function doBackup(){const m=$("#bk-msg"),b=$("#bk-go");b.disabled=true;m.className="msg";m.textContent="جارٍ تجهيز النسخة…";
+  try{const r=await rpc("admin_open",{p:adminPin});if(!r.ok)throw r;let vf=[],vs=[];if(r.role==="vice"){try{const a=await rpc("vice_files_list",{p:adminPin});if(a.ok)vf=a.items;const c=await rpc("visit_list",{p:adminPin});if(c.ok)vs=c.items;}catch(e){}}
+    const stamp=new Date().toISOString().slice(0,10);const full={site:"ملتقى نماء المهني",date:new Date().toISOString(),teachers:r.teachers,items:r.items,vice_files:vf,class_visits:vs};
+    await loadXL();const wb=new ExcelJS.Workbook();const F="Tajawal";const tn=Object.fromEntries(r.teachers.map(t=>[t.id,t.name]));
+    const add=(name,cols,rows)=>{const ws=wb.addWorksheet(name,{views:[{rightToLeft:true,state:"frozen",ySplit:1}]});ws.columns=cols.map(([h,w])=>({header:h,width:w}));rows.forEach(x=>ws.addRow(x));ws.getRow(1).eachCell(c=>{c.font={name:F,bold:true,color:{argb:"FFFFFFFF"}};c.fill={type:"pattern",pattern:"solid",fgColor:{argb:"FF3D4DB8"}};c.alignment={horizontal:"center"};});ws.eachRow((rw,i)=>{if(i>1)rw.eachCell(c=>{c.font={name:F};c.alignment={wrapText:true,vertical:"top"};});});};
+    const links=fs=>(fs||[]).map(f=>f.kind==="link"?f.url:fileUrl(f.path)).join("\n");
+    add("المعلمات",[["م",6],["الاسم",34],["الرمز السري",14]],r.teachers.map((t,i)=>[i+1,t.name,t.pin||""]));
+    add("الشواهد",[["المعلمة",28],["المجال",24],["العنوان",34],["النوع",14],["الفصل",14],["التاريخ",14],["الصف",10],["الوصف",40],["روابط الملفات",60],["تاريخ ووقت الإضافة",44]],r.items.map(x=>[tn[x.teacher_id]||"",(DM[x.domain]||{}).name||x.domain,x.title,x.kind||"",x.term||"",x.date||"",x.cls||"",x.descr||"",links(x.files),fullT(x.created_at)]));
+    if(r.role==="vice"){add("النمو المهني",[["المجال",30],["العنوان",34],["الوصف",40],["روابط الملفات",60],["تاريخ ووقت الإضافة",44]],vf.map(x=>[(GDM[x.domain]||{}).name||x.domain,x.title,x.descr,links(x.files),fullT(x.created_at)]));
+      add("حضور الحصص",[["المعلمة",28],["التاريخ",14],["المادة",14],["الصف",10],["الدرس",28],["المتوسط من ٤",12],["التوصيات",50],["توقيع المعلمة",14]],vs.map(v=>{const d=v.data||{};const rs=Object.values(d.items||{}).filter(s=>typeof s.r==="number");return [tn[v.teacher_id]||"",d.date||"",d.subject||"",d.cls||"",d.lesson||"",rs.length?+(rs.reduce((a,s)=>a+s.r+1,0)/rs.length).toFixed(2):"",d.recs||"",v.teacher_sig?"✓":"—"];}));}
+    const dl=(blob,name)=>{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},800);};
+    dl(new Blob([await wb.xlsx.writeBuffer()],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}),`نسخة-احتياطية-نماء-${stamp}.xlsx`);
+    setTimeout(()=>dl(new Blob([JSON.stringify(full)],{type:"application/json"}),`نسخة-كاملة-نماء-${stamp}.json`),600);
+    LS.set("namaa_bk",Date.now());renderBackup();m.textContent="تم تحميل النسخة ✓ احفظي الملفين في مكان آمن (مثل Google Drive).";
+  }catch(e){console.error(e);m.className="msg err";m.textContent="تعذّر تجهيز النسخة.";}finally{b.disabled=false;}}
+$("#bk-go").onclick=doBackup;
+$("#vh-growth").onclick=openGrowth;$("#vh-visits").onclick=openVisits;
+document.addEventListener("click",e=>{if(e.target.closest("[data-adm-back]")){openAdmin();}});
 
 /* ================= start ================= */
 load().then(()=>{const h=(location.hash||"").slice(1);if(h==="admin")openAdmin();else if(h.startsWith("t-")&&teachers.some(t=>t.id===h.slice(2)))openTeacher(h.slice(2));});
