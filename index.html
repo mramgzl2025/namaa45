@@ -481,7 +481,25 @@ body.has-sbar footer{padding-bottom:64px}
 .gfile .gdel{border:0;background:none;color:var(--danger);font-size:12.5px;cursor:pointer;justify-self:start;padding:0;font-weight:700}
 
 /* visits */
-.vt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.vpick{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:linear-gradient(135deg,#FFF5F9,#FFF3E8);border:2px solid #F2C6D8;border-radius:24px;padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+.vpick-ic{width:74px;height:74px;border-radius:22px;background:linear-gradient(135deg,#C0457A,#E07A3F);display:grid;place-items:center;font-size:38px;flex:none;box-shadow:0 8px 20px rgba(192,69,122,.3)}
+.vpick-body{flex:1;min-width:240px;display:grid;gap:8px}
+.vpick-body label{font-family:var(--f-display);font-size:20px;font-weight:700;color:#7B2D5E}
+.vsel{position:relative;display:flex;align-items:center;background:#fff;border:2.5px solid #C0457A;border-radius:16px;box-shadow:0 4px 14px rgba(192,69,122,.15);transition:box-shadow .2s}
+.vsel:focus-within{box-shadow:0 0 0 4px rgba(192,69,122,.2)}
+.vsel-av{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;margin-inline-start:8px;flex:none;background:#C9CDE3;transition:background .2s}
+.vsel select{appearance:none;-webkit-appearance:none;flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:17px;font-weight:700;color:var(--ink);padding:14px 12px 14px 40px;cursor:pointer;outline:none}
+.vsel select option{font-weight:500;font-size:16px}
+.vsel-arr{position:absolute;inset-inline-end:14px;pointer-events:none;color:#C0457A;font-size:20px}
+.vpick-go{background:linear-gradient(135deg,#C0457A,#E07A3F);color:#fff;padding:14px 22px;font-size:16px;border-radius:14px;box-shadow:0 6px 16px rgba(192,69,122,.3)}
+
+.vpick-go:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.vrecent h3{font-size:18px;margin:0 0 10px}
+.vr-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.vr{display:flex;gap:10px;align-items:center;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 12px;cursor:pointer;text-align:right;font:inherit;color:var(--ink);transition:transform .15s,border-color .15s}
+.vr:hover{transform:translateY(-2px);border-color:#C0457A}
+.vr .av{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}
+.vr b{display:block;font-size:14.5px}.vr small{color:var(--muted);font-size:12.5px}
 .vt{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px;cursor:pointer;text-align:right;font:inherit;color:var(--ink);transition:transform .15s,border-color .15s}
 .vt:hover{transform:translateY(-2px);border-color:#C0457A}
 .vt .av{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}
@@ -555,6 +573,20 @@ body.has-sbar footer{padding-bottom:64px}
 .v-stamp small{display:block;color:var(--muted);font-size:12.5px;font-weight:700}
 .v-stamp b{font-size:15px;color:var(--ink);line-height:1.6}
 .card .addt{display:inline-block;justify-self:start;margin-top:4px;font-size:12px;font-weight:700;color:#3D4DB8;background:#EEF1FD;border-radius:99px;padding:2px 9px}
+.vend{border:2.5px solid #E3C77E;background:linear-gradient(180deg,#FFFDF6,#fff);box-shadow:0 10px 28px rgba(184,138,30,.14);padding:0;overflow:hidden;margin-top:22px}
+.vend>:not(.vend-h){margin:16px}
+.vend textarea,.vend>.vrec-txt{width:calc(100% - 32px)!important;box-sizing:border-box}
+.vend-h{display:flex;gap:12px;align-items:center;padding:14px 18px;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));border-radius:14px}
+.vend .vend-h{border-radius:0}
+.vend-h>span{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:24px;flex:none}
+.vend-h h3{color:#fff;font-family:var(--f-display);font-size:22px;margin:0}
+.vend-h p{margin:2px 0 0;color:rgba(255,255,255,.92);font-size:13.5px}
+.vend textarea#vv-recs{border:2px solid #E3C77E;background:#fff;font-size:16px;line-height:1.9;min-height:140px;background-image:repeating-linear-gradient(transparent 0 29px,#F1E4BE 29px 30px);background-attachment:local;padding:8px 12px}
+.vrec-txt{white-space:pre-wrap;font-size:16px;line-height:1.9;background:#fff;border:2px solid #E3C77E;border-radius:12px;padding:10px 14px}
+.vend .sig,.dialog .sig{border:2.5px solid #C7CEF3;background:#fff;box-shadow:0 4px 12px rgba(61,77,184,.08)}
+.vend .sig b,.dialog .sig b{font-family:var(--f-display);font-size:17px;color:#2B3593;border-bottom:2px solid #E2E6FA;padding-bottom:6px}
+.sig canvas{border:2.5px dashed #8E9BE0;background:linear-gradient(transparent 0 112px,#C7CEF3 112px 114px,transparent 114px) #FBFCFF}
+.dialog .vend-h{margin-top:6px}
 </style>
 </head>
 <body>
@@ -745,8 +777,16 @@ body.has-sbar footer{padding-bottom:64px}
     <section>
       <button class="back" data-adm-back><svg><use href="#i-back"/></svg>العودة إلى لوحة المتابعة</button>
       <div class="vhead"><svg viewBox="0 0 100 100"><rect x="26" y="16" width="48" height="68" rx="8" fill="#fff"/><rect x="38" y="10" width="24" height="12" rx="5" fill="#F5D27A"/><path d="m35 38 4 4 7-8M35 54l4 4 7-8M35 70l4 4 7-8" stroke="#2E9D6A" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M52 39h14M52 55h14M52 71h10" stroke="#C0457A" stroke-width="4" stroke-linecap="round"/></svg><div><h2>حضور الحصص</h2><p>اختاري اسم المعلمة لفتح بطاقة الملاحظة الصفية</p></div></div>
-      <input class="tsearch" id="vt-q" type="search" placeholder="ابحثي عن اسم المعلمة" aria-label="بحث عن معلمة" style="margin-bottom:14px">
-      <div class="vt-grid" id="vt-grid"></div>
+      <div class="vpick">
+        <div class="vpick-ic">👩‍🏫</div>
+        <div class="vpick-body">
+          <label for="vt-sel">اختاري اسم المعلمة</label>
+          <div class="vsel"><span class="vsel-av" id="vt-av">؟</span><select id="vt-sel" aria-label="اسم المعلمة"></select><span class="vsel-arr" aria-hidden="true">▾</span></div>
+          <p class="hint" id="vt-info">اختاري المعلمة من القائمة، فتفتح بطاقة الملاحظة الصفية مباشرة.</p>
+        </div>
+        <button type="button" class="btn vpick-go" id="vt-go" disabled><svg><use href="#i-arrow"/></svg>فتح بطاقة الملاحظة</button>
+      </div>
+      <div class="vrecent" id="vt-recent"></div>
     </section>
   </div>
 
@@ -760,8 +800,8 @@ body.has-sbar footer{padding-bottom:64px}
       <div class="panel"><div class="vinfo" id="vv-info"></div></div>
       <div class="vsum noprint"><b>التقدّم</b><span class="vbar"><i id="vs-bar"></i></span><span class="hint" id="vs-txt"></span></div>
       <div id="vv-doms"></div>
-      <div class="panel vrecs"><div class="p-head"><h3>💡 التوصيات</h3></div><textarea id="vv-recs" placeholder="اكتبي توصياتكِ للمعلمة…"></textarea></div>
-      <div class="panel"><div class="p-head"><h3>✍️ التوقيعات</h3><p class="hint">وقّعي بإصبعكِ أو بالفأرة. تستطيع المعلمة التوقيع هنا، أو لاحقًا من ملفها برمزها.</p></div>
+      <div class="panel vrecs vend"><div class="vend-h" style="--g1:#B88A1E;--g2:#E3A43A"><span>💡</span><div><h3>التوصيات</h3><p>توصيات وكيلة شؤون المعلمات للمعلمة</p></div></div><textarea id="vv-recs" placeholder="اكتبي توصياتكِ للمعلمة…"></textarea></div>
+      <div class="panel vend"><div class="vend-h" style="--g1:#3D4DB8;--g2:#7B5CD6"><span>✍️</span><div><h3>التوقيعات</h3><p>وقّعي بإصبعكِ أو بالفأرة. تستطيع المعلمة التوقيع هنا، أو لاحقًا من ملفها برمزها.</p></div></div>
         <div class="sigs">
           <div class="sig" id="sig-teacher"><b>توقيع المعلمة</b><div class="sbody"></div><div class="sact noprint"><button type="button" class="btn btn-ghost" data-sclear="teacher">مسح</button><span class="sok"></span></div></div>
           <div class="sig" id="sig-vice"><b>توقيع وكيلة شؤون المعلمات — أ. ريم الحيسوني</b><div class="sbody"></div><div class="sact noprint"><button type="button" class="btn btn-ghost" data-sclear="vice">مسح</button><span class="sok"></span></div></div>
@@ -772,7 +812,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٣ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٤ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -857,6 +897,7 @@ body.has-sbar footer{padding-bottom:64px}
   <div class="dialog wide" role="dialog" aria-modal="true" aria-label="بطاقة الملاحظة الصفية">
     <div class="dlg-head"><div class="ht"><span class="hi">📋</span><div><h2>بطاقة الملاحظة الصفية</h2></div></div><button type="button" class="close noprint" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
     <div id="tv-body"></div>
+    <div class="vend-h" style="--g1:#3D4DB8;--g2:#7B5CD6"><span>✍️</span><div><h3>التوقيعات</h3></div></div>
     <div class="sigs">
       <div class="sig" id="sig-tv"><b>توقيعكِ</b><div class="sbody"></div><div class="sact noprint"><button type="button" class="btn btn-ghost" data-sclear="tv">مسح</button><span class="sok"></span></div></div>
       <div class="sig"><b>توقيع وكيلة شؤون المعلمات</b><div id="tv-vsig"></div></div>
@@ -1593,10 +1634,17 @@ $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()
 
 /* ---- حضور الحصص ---- */
 function openVisits(){if(!isVice())return;curT=null;curD=null;showView("visits");renderVisits();toMain();}
-function renderVisits(){const q=($("#vt-q").value||"").trim();const L=teachers.filter(t=>!q||t.name.includes(q));
-  $("#vt-grid").innerHTML=L.length?L.map(t=>{const n=visits.filter(v=>v.teacher_id===t.id).length;return `<button type="button" class="vt" data-vt="${esc(t.id)}"><span class="av" style="background:${avColor(t.name)}">${esc(initial(t.name))}</span><span><b>${esc(t.name)}</b><small>${n?ar(n)+" زيارة سابقة":"لم تُزر بعد"}</small></span></button>`;}).join(""):'<p class="hint">لا توجد أسماء مطابقة.</p>';}
-$("#vt-q").oninput=renderVisits;
-$("#vt-grid").addEventListener("click",e=>{const b=e.target.closest("[data-vt]");if(b)openVisit(b.dataset.vt,null);});
+function renderVisits(){const sel=$("#vt-sel");const cur=sel.value;
+  sel.innerHTML=`<option value="">— اختاري المعلمة —</option>`+teachers.map((t,i)=>{const n=visits.filter(v=>v.teacher_id===t.id).length;return `<option value="${esc(t.id)}">${ar(i+1)}. ${esc(t.name)}${n?`  (${ar(n)} زيارة)`:""}</option>`;}).join("");
+  if(cur&&teachers.some(t=>t.id===cur))sel.value=cur;updPick();
+  const R=[...visits].sort((a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at)).slice(0,6);
+  $("#vt-recent").innerHTML=R.length?`<h3>🕒 آخر الزيارات</h3><div class="vr-list">${R.map(v=>{const t=teachers.find(x=>x.id===v.teacher_id);if(!t)return"";return `<button type="button" class="vr" data-vro="${esc(v.id)}" data-vrt="${esc(t.id)}"><span class="av" style="background:${avColor(t.name)}">${esc(initial(t.name))}</span><span><b>${esc(t.name)}</b><small>${esc(v.data&&v.data.date?fmtDate(v.data.date):shortT(Date.parse(v.created_at)))}${v.teacher_sig?" · ✓ موقّعة":" · بانتظار توقيع المعلمة"}</small></span></button>`;}).join("")}</div>`:"";}
+function updPick(){const id=$("#vt-sel").value;const t=teachers.find(x=>x.id===id);const av=$("#vt-av");
+  av.textContent=t?initial(t.name):"؟";av.style.background=t?avColor(t.name):"#C9CDE3";$("#vt-go").disabled=!t;
+  const n=t?visits.filter(v=>v.teacher_id===t.id).length:0;$("#vt-info").textContent=t?(n?`لها ${ar(n)} بطاقة سابقة — تستطيعين فتحها أو إنشاء بطاقة جديدة.`:"لم تُزر بعد — ستُفتح بطاقة جديدة."):"اختاري المعلمة من القائمة، فتفتح بطاقة الملاحظة الصفية مباشرة.";}
+$("#vt-sel").onchange=()=>{updPick();if($("#vt-sel").value)setTimeout(()=>openVisit($("#vt-sel").value,null),250);};
+$("#vt-go").onclick=()=>{const id=$("#vt-sel").value;if(id)openVisit(id,null);};
+$("#vt-recent").addEventListener("click",e=>{const b=e.target.closest("[data-vro]");if(b)openVisit(b.dataset.vrt,b.dataset.vro);});
 const blankV=()=>({subject:"",cls:"",lesson:"",idno:"",day:"",date:new Date().toISOString().slice(0,10),present:"",absent:"",items:{},recs:""});
 function openVisit(tid,vid){curVT=tid;const v=vid?visits.find(x=>x.id===vid):null;curV=v?v.id:null;vData=v?JSON.parse(JSON.stringify(v.data||{})):blankV();vData.items=vData.items||{};
   sigState.vice=v?v.vice_sig||null:null;sigState.teacher=v?v.teacher_sig||null:null;showView("visit");renderVisit();toMain();}
@@ -1659,7 +1707,7 @@ let tvCur=null;
 function visitHTML(v,tname){const d=v.data||{};const it=d.items||{};
   const info=[["الاسم",tname],["المادة",d.subject],["الصف",d.cls],["عنوان الدرس",d.lesson],["اليوم",d.day],["التاريخ",d.date?fmtDate(d.date):""],["الحضور",d.present],["الغياب",d.absent]];
   return `<div class="vinfo">${info.map(([l,x])=>`<label>${l}<input value="${esc(x||"")}" disabled></label>`).join("")}</div>`+VDOMS.map(dm=>`<section class="vdom" style="--c:${dm.c};margin-top:14px"><div class="vdom-h">${esc(dm.name)}</div><div class="vdom-b">${dm.items.map(q=>{const s=it[q.n]||{};return `<div class="vitem"><div class="vitem-h"><span class="vn">${ar(q.n)}</span><b>${esc(q[0])}</b></div><div class="vchk">${q[1].map((x,j)=>`<label><input type="checkbox" disabled ${(s.c||[]).includes(j)?"checked":""}><span>${esc(x)}</span></label>`).join("")}</div>${typeof s.r==="number"?`<div class="vrate"><button type="button" aria-pressed="true" style="--rc:${RATES[s.r][1]}" disabled>${RATES[s.r][0]}</button></div>`:""}${s.note?`<p class="hint">💬 ${esc(s.note)}</p>`:""}</div>`;}).join("")}</div></section>`).join("")+
-  `<div class="panel vrecs" style="margin-top:14px"><h3>التوصيات</h3><p style="white-space:pre-wrap;margin:6px 0 0">${esc(d.recs||"—")}</p></div>`;}
+  `<div class="panel vrecs vend" style="margin-top:14px"><div class="vend-h" style="--g1:#B88A1E;--g2:#E3A43A"><span>💡</span><div><h3>التوصيات</h3></div></div><p class="vrec-txt">${esc(d.recs||"—")}</p></div>`;}
 function openTVisit(id){const L=tVisits[curT]||[];const v=L.find(x=>x.id===id);if(!v)return;tvCur=v;const t=teachers.find(x=>x.id===curT);
   $("#tv-body").innerHTML=visitHTML(v,t?t.name:"");
   $("#tv-vsig").innerHTML=v.vice_sig?`<img src="${esc(v.vice_sig)}" alt="">`:'<p class="hint">لم توقّع الوكيلة بعد.</p>';
