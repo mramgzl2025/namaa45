@@ -504,19 +504,26 @@ body.has-sbar footer{padding-bottom:64px}
 .vdom-h{display:flex;align-items:center;gap:10px;background:var(--c);color:#fff;border-radius:16px 16px 0 0;padding:10px 16px;font-family:var(--f-display);font-size:19px}
 .vdom-h span{margin-inline-start:auto;font-family:var(--f-body);font-size:13px;background:rgba(255,255,255,.22);border-radius:99px;padding:2px 10px}
 .vdom-b{border:1px solid var(--line);border-top:0;border-radius:0 0 16px 16px;background:var(--surface);padding:6px}
-.vitem{border-bottom:1px dashed var(--line);padding:12px 10px;display:grid;gap:8px}
-.vitem:last-child{border-bottom:0}
-.vitem-h{display:flex;gap:10px;align-items:flex-start}
-.vitem-h .vn{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font-weight:800;flex:none}
+.vitem{border:2px solid color-mix(in srgb,var(--c) 45%,#fff);border-radius:16px;padding:12px;display:grid;gap:10px;margin:8px 4px;background:#fff}
+.vitem-h{display:flex;gap:10px;align-items:flex-start;background:color-mix(in srgb,var(--c) 12%,#fff);border-inline-start:5px solid var(--c);border-radius:10px;padding:9px 10px}
+.vitem-h .vn{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--c);color:#fff;font-weight:800;flex:none}
 .vitem-h b{font-size:15.5px;line-height:1.55}
-.vchk{display:grid;gap:4px;padding-inline-start:42px}
-.vchk label{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:14.5px;line-height:1.6;padding:3px 6px;border-radius:8px}
-.vchk label:hover{background:color-mix(in srgb,var(--c) 7%,transparent)}
-.vchk input{width:19px;height:19px;accent-color:var(--c);margin-top:3px;flex:none}
-.vrate{display:flex;gap:6px;flex-wrap:wrap;padding-inline-start:42px}
+.vchk{display:grid;gap:0;border:2px solid color-mix(in srgb,var(--c) 40%,#fff);border-radius:12px;overflow:hidden}
+.vchk label{display:flex;gap:12px;align-items:center;cursor:pointer;font-size:14.5px;line-height:1.6;padding:10px 12px;border-bottom:1.5px solid color-mix(in srgb,var(--c) 30%,#fff);background:#fff;transition:background .15s}
+.vchk label:last-child{border-bottom:0}
+.vchk label:nth-child(even){background:color-mix(in srgb,var(--c) 4%,#fff)}
+.vchk label:hover{background:color-mix(in srgb,var(--c) 10%,#fff)}
+.vchk label:has(input:checked){background:color-mix(in srgb,var(--c) 14%,#fff);font-weight:700}
+.vchk input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:0;flex:none;border:2.5px solid var(--c);border-radius:6px;background:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.vchk input::after{content:"";width:6px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
+.vchk input:checked{background:var(--c)}
+.vchk input:checked::after{opacity:1}
+.vchk input:disabled{cursor:default}
+.vchk input:focus-visible{outline:3px solid color-mix(in srgb,var(--c) 40%,transparent);outline-offset:2px}
+.vrate{display:flex;gap:6px;flex-wrap:wrap}
 .vrate button{border:1.5px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
 .vrate button[aria-pressed="true"]{background:var(--rc);border-color:var(--rc);color:#fff}
-.vnote{margin-inline-start:42px;font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:7px 10px;resize:vertical;min-height:38px;background:var(--bg);color:var(--ink)}
+.vnote{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:7px 10px;resize:vertical;min-height:38px;background:var(--bg);color:var(--ink)}
 .vrecs textarea{width:100%;box-sizing:border-box;font:inherit;font-size:15px;border:1px solid var(--line);border-radius:12px;padding:10px;min-height:110px;resize:vertical;background:var(--surface);color:var(--ink)}
 .sigs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
 .sig{border:1px solid var(--line);border-radius:16px;padding:12px;background:var(--surface);display:grid;gap:8px}
@@ -765,7 +772,7 @@ body.has-sbar footer{padding-bottom:64px}
 </main>
 
 <div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٢ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٣ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -1651,7 +1658,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-tvo]");if(
 let tvCur=null;
 function visitHTML(v,tname){const d=v.data||{};const it=d.items||{};
   const info=[["الاسم",tname],["المادة",d.subject],["الصف",d.cls],["عنوان الدرس",d.lesson],["اليوم",d.day],["التاريخ",d.date?fmtDate(d.date):""],["الحضور",d.present],["الغياب",d.absent]];
-  return `<div class="vinfo">${info.map(([l,x])=>`<label>${l}<input value="${esc(x||"")}" disabled></label>`).join("")}</div>`+VDOMS.map(dm=>`<section class="vdom" style="--c:${dm.c};margin-top:14px"><div class="vdom-h">${esc(dm.name)}</div><div class="vdom-b">${dm.items.map(q=>{const s=it[q.n]||{};return `<div class="vitem"><div class="vitem-h"><span class="vn">${ar(q.n)}</span><b>${esc(q[0])}</b></div><div class="vchk">${q[1].map((x,j)=>`<label><input type="checkbox" disabled ${(s.c||[]).includes(j)?"checked":""}><span>${esc(x)}</span></label>`).join("")}</div>${typeof s.r==="number"?`<div class="vrate"><button type="button" aria-pressed="true" style="--rc:${RATES[s.r][1]}" disabled>${RATES[s.r][0]}</button></div>`:""}${s.note?`<p class="hint" style="padding-inline-start:42px">💬 ${esc(s.note)}</p>`:""}</div>`;}).join("")}</div></section>`).join("")+
+  return `<div class="vinfo">${info.map(([l,x])=>`<label>${l}<input value="${esc(x||"")}" disabled></label>`).join("")}</div>`+VDOMS.map(dm=>`<section class="vdom" style="--c:${dm.c};margin-top:14px"><div class="vdom-h">${esc(dm.name)}</div><div class="vdom-b">${dm.items.map(q=>{const s=it[q.n]||{};return `<div class="vitem"><div class="vitem-h"><span class="vn">${ar(q.n)}</span><b>${esc(q[0])}</b></div><div class="vchk">${q[1].map((x,j)=>`<label><input type="checkbox" disabled ${(s.c||[]).includes(j)?"checked":""}><span>${esc(x)}</span></label>`).join("")}</div>${typeof s.r==="number"?`<div class="vrate"><button type="button" aria-pressed="true" style="--rc:${RATES[s.r][1]}" disabled>${RATES[s.r][0]}</button></div>`:""}${s.note?`<p class="hint">💬 ${esc(s.note)}</p>`:""}</div>`;}).join("")}</div></section>`).join("")+
   `<div class="panel vrecs" style="margin-top:14px"><h3>التوصيات</h3><p style="white-space:pre-wrap;margin:6px 0 0">${esc(d.recs||"—")}</p></div>`;}
 function openTVisit(id){const L=tVisits[curT]||[];const v=L.find(x=>x.id===id);if(!v)return;tvCur=v;const t=teachers.find(x=>x.id===curT);
   $("#tv-body").innerHTML=visitHTML(v,t?t.name:"");
