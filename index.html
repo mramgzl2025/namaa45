@@ -157,8 +157,9 @@ section{padding-block:36px 4px}
 .dv-head h2{font-size:clamp(24px,3.6vw,34px)}
 .dv-head .sec-l{color:var(--c);font-weight:800;font-size:14px}
 .dv-head p{margin:0;color:var(--muted)}
-.back{display:inline-flex;gap:6px;align-items:center;border:0;background:transparent;color:var(--accent);font-weight:700;cursor:pointer;padding:0;margin-bottom:14px}
-.back svg{width:18px;height:18px}
+.back{display:inline-flex;gap:8px;align-items:center;border:2px solid var(--accent);background:var(--accent-soft);color:var(--accent);font:inherit;font-weight:800;font-size:15.5px;cursor:pointer;padding:10px 18px 10px 20px;margin-bottom:16px;border-radius:999px;box-shadow:0 4px 12px rgba(61,77,184,.15);transition:transform .15s,background .15s,color .15s}
+.back:hover,.back:focus-visible{background:var(--accent);color:#fff;transform:translateY(-1px)}
+.back svg{width:20px;height:20px;flex:none}
 .hints{background:var(--gold-soft);border-radius:16px;padding:12px 16px}
 .hints b{display:flex;gap:6px;align-items:center;font-size:14.5px}
 .hints b svg{width:18px;height:18px;color:var(--gold)}
@@ -277,12 +278,24 @@ footer b{color:var(--hero-ink)}
 .st-on{color:var(--ok);font-weight:800}.st-off{color:var(--danger);font-weight:800}
 footer .ver{background:rgba(255,255,255,.12);border-radius:999px;padding:1px 12px;font-weight:700}
 .sbar{position:fixed;inset-inline:0;bottom:0;z-index:40;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--hero);color:var(--hero-ink);box-shadow:0 -6px 20px rgba(0,0,0,.2)}
-.sbar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.sbar-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.swho-w{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.snav{display:flex;gap:8px;margin-inline-start:auto;flex-wrap:nowrap}
+.nb{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font:inherit;font-weight:800;font-size:15px;padding:9px 16px;border-radius:14px;cursor:pointer;transition:background .15s,transform .15s}
+.nb:hover,.nb:focus-visible{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.nb .ni{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:16px;flex:none}
+.nb .ni svg{width:18px;height:18px}
+.nb-back{background:#3D4DB8;border-color:#6F7EE0}
+.nb-home{background:#2E9D6A;border-color:#5CC99A}
+.nb-adm{background:#B88A1E;border-color:#E3C26B}
+.nb-out{background:#D64545;border-color:#F08080}
+.nb[hidden]{display:none}
+@media (max-width:640px){.swho-w{flex-basis:100%;font-size:13px}.snav{width:100%;margin:0}.nb{flex:1;flex-direction:column;gap:3px;padding:7px 4px;font-size:12.5px;border-radius:12px}.nb .ni{width:26px;height:26px}}
 .sdot{width:10px;height:10px;border-radius:50%;background:#4CC08A;flex:none;box-shadow:0 0 0 4px rgba(76,192,138,.25)}
 .swho{flex:1;min-width:0;font-weight:700;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sout{background:#E25B5B;color:#fff;border:0;padding:8px 18px}
 .sout svg{transform:scaleX(-1)}
-body.has-sbar footer{padding-bottom:64px}
+body.has-sbar footer{padding-bottom:120px}
 .pinbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0;padding:12px 16px;border-radius:14px;background:var(--gold-soft);border:1px solid var(--gold)}
 .pinbar span{flex:1;min-width:200px;font-weight:700;font-size:14.5px}
 .journey{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;border-radius:24px;padding:24px;margin-top:16px;color:#F4F1E8;border:1px solid rgba(243,199,110,.35);
@@ -811,8 +824,16 @@ body.has-sbar footer{padding-bottom:64px}
   </div>
 </main>
 
-<div class="sbar" id="sbar" hidden><div class="sbar-in"><span class="sdot"></span><span class="swho" id="swho"></span><button type="button" class="btn sout" id="logout"><svg><use href="#i-back"/></svg>خروج</button></div></div>
-<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٤ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
+<div class="sbar" id="sbar" hidden><div class="sbar-in">
+  <div class="swho-w" id="swho-w"><span class="sdot"></span><span class="swho" id="swho"></span></div>
+  <nav class="snav" aria-label="التنقل">
+    <button type="button" class="nb nb-back" id="nb-back"><span class="ni"><svg><use href="#i-back"/></svg></span><b>رجوع</b></button>
+    <button type="button" class="nb nb-home" id="nb-home"><span class="ni">🏠</span><b>الرئيسية</b></button>
+    <button type="button" class="nb nb-adm" id="nb-adm" hidden><span class="ni">📊</span><b>لوحة المتابعة</b></button>
+    <button type="button" class="nb nb-out" id="logout" hidden><span class="ni">🚪</span><b>خروج</b></button>
+  </nav>
+</div></div>
+<footer><div class="wrap"><span><b>ملتقى نماء المهني</b> — الثانوية الخامسة والأربعون</span><span>فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b></span><span class="ver">الإصدار ١٥ · ٢١ أكتوبر ٢٠٢٦</span></div></footer>
 
 <!-- Teacher PIN -->
 <div class="overlay" id="dlg-pin" hidden>
@@ -1290,18 +1311,36 @@ function renderAdmin(){
   if(document.activeElement!==$("#t-names")) $("#t-names").value=teachers.map(t=>t.name).join("\n");
   renderViceHub();renderBackup();
 }
-function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const on=parts.length>0;$("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);if(on)$("#swho").textContent="داخلة الآن: "+parts.join(" · ");}
-function logout(){viceFiles=[];visits=[];curG=null;adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
+function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const logged=parts.length>0;
+  $("#swho-w").hidden=!logged;if(logged)$("#swho").textContent="داخلة الآن: "+parts.join(" · ");updNav();}
+function updNav(){const logged=!!adminPin||Object.keys(tPins).length>0;const away=curView!=="list";const on=logged||away;
+  $("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);
+  $("#nb-back").hidden=!away;$("#nb-home").hidden=!away;$("#nb-adm").hidden=!adminPin||curView==="admin";$("#logout").hidden=!logged;}
+function logout(){viceFiles=[];visits=[];curG=null;adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(history.state,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
 function renderAll(){renderSession();renderStats();renderList();renderTeacher();renderDomain();renderAdmin();}
 renderNav();
 
 /* ================= navigation ================= */
-function showView(v){["list","teacher","domain","admin","growth","visits","visit"].forEach(k=>$("#v-"+k).hidden=k!==v);$("#secnav-wrap").hidden=v!=="teacher";}
+let curView="list",navLock=false;
+function navState(){return {v:curView,t:curT||null,d:curD||null,vt:(curView==="visit"?curVT:null),vid:(curView==="visit"?curV:null)};}
+function showView(v){["list","teacher","domain","admin","growth","visits","visit"].forEach(k=>$("#v-"+k).hidden=k!==v);$("#secnav-wrap").hidden=v!=="teacher";curView=v;
+  if(!navLock){const st=navState();if(JSON.stringify(history.state)!==JSON.stringify(st)){try{history.pushState(st,"",location.href);}catch(e){}}}
+  try{updNav();}catch(e){}}
+function goBack(){if(curView==="list")return;if(history.state&&history.state.v&&history.length>1)history.back();else openList();}
+addEventListener("popstate",e=>{const s=e.state;if(!s||!s.v)return;navLock=true;try{closeAll();
+  const can=id=>id&&(tPins[id]||adminPin)&&teachers.some(t=>t.id===id);
+  if(s.v==="teacher"&&can(s.t))openTeacher(s.t);
+  else if(s.v==="domain"&&can(s.t)&&s.d){curT=s.t;openDomain(s.d);}
+  else if(s.v==="admin")openAdmin();
+  else if(s.v==="growth"&&isVice())openGrowth();
+  else if(s.v==="visits"&&isVice())openVisits();
+  else if(s.v==="visit"&&isVice()&&s.vt)openVisit(s.vt,s.vid);
+  else openList();}finally{navLock=false;}});
 const toMain=()=>window.scrollTo({top:$("main").offsetTop-70,behavior:"smooth"});
-function openTeacher(id){if(!tPins[id]&&!adminPin){askPin(id);return;}curT=id;curD=null;showView("teacher");renderTeacher();try{history.replaceState(null,"","#t-"+id);}catch(e){}toMain();}
+function openTeacher(id){if(!tPins[id]&&!adminPin){askPin(id);return;}curT=id;curD=null;showView("teacher");renderTeacher();try{history.replaceState(history.state,"","#t-"+id);}catch(e){}toMain();}
 function openDomain(id){curD=id;$("#dv-term").value="";showView("domain");renderDomain();toMain();}
-function openList(){curT=null;curD=null;showView("list");renderList();try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}toMain();}
-function openAdmin(){curT=null;curD=null;showView("admin");renderAdmin();try{history.replaceState(null,"","#admin");}catch(e){}toMain();}
+function openList(){curT=null;curD=null;showView("list");renderList();try{history.replaceState(history.state,"",location.pathname+location.search);}catch(e){}toMain();}
+function openAdmin(){curT=null;curD=null;showView("admin");renderAdmin();try{history.replaceState(history.state,"","#admin");}catch(e){}toMain();}
 document.addEventListener("click",e=>{
   if(e.target.closest(".overlay")&&!e.target.closest("[data-close]")) return;
   const t=e.target.closest("[data-t]"); if(t){e.preventDefault();openTeacher(t.dataset.t);return;}
@@ -1737,6 +1776,8 @@ $("#vh-growth").onclick=openGrowth;$("#vh-visits").onclick=openVisits;
 document.addEventListener("click",e=>{if(e.target.closest("[data-adm-back]")){openAdmin();}});
 
 /* ================= start ================= */
+try{history.replaceState({v:"list",t:null,d:null,vt:null,vid:null},"",location.href);}catch(e){}
+$("#nb-back").onclick=goBack;$("#nb-home").onclick=()=>openList();$("#nb-adm").onclick=()=>openAdmin();
 load().then(()=>{const h=(location.hash||"").slice(1);if(h==="admin")openAdmin();else if(h.startsWith("t-")&&teachers.some(t=>t.id===h.slice(2)))openTeacher(h.slice(2));});
 })();
 </script>
