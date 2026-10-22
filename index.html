@@ -1297,7 +1297,7 @@ function renderHeatmap(){
 }
 async function load(){
   if(!sb){showErr("إعدادات الاتصال ناقصة في ملف الموقع.");return;}
-  try{teachers=await rpc("list_teachers");}catch(e){console.error(e);showErr("تعذّر الاتصال بقاعدة البيانات. أعيدي تحميل الصفحة.");}
+  for(let k=0;k<3;k++){try{teachers=await rpc("list_teachers");break;}catch(e){console.error(e);if(k===2)showErr("تعذّر الاتصال بقاعدة البيانات. أعيدي تحميل الصفحة.");else await new Promise(r=>setTimeout(r,1500*(k+1)));}}
   renderAll();
 }
 async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];delete tRem[tid];sessSave();throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
@@ -1915,10 +1915,13 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-adm-back]")){op
 /* ================= start ================= */
 try{history.replaceState({v:"list",t:null,d:null,vt:null,vid:null},"",location.href);}catch(e){}
 $("#nb-back").onclick=goBack;$("#nb-home").onclick=()=>openList();$("#nb-adm").onclick=()=>openAdmin();
-async function restoreSess(){const s=sessRead();const ids=Object.keys(s.t).filter(id=>teachers.some(t=>t.id===id));
-  if(s.a){adminPin=s.a;aRem=s.ar;try{await refreshAdmin();}catch(e){adminPin=null;aRem=false;}}
-  await Promise.all(ids.map(async id=>{tPins[id]=s.t[id];tRem[id]=!!s.tr[id];try{await refreshTeacher(id);}catch(e){delete tPins[id];delete tRem[id];}}));
-  sessSave();if(adminPin||Object.keys(tPins).length)renderAll();}
+async function restoreSess(){if(!teachers.length)return;/* list did not load: keep the saved login untouched */const s=sessRead();const ids=Object.keys(s.t).filter(id=>teachers.some(t=>t.id===id));let netFail=false;
+  /* retry on slow/failed connection; forget the saved login only when the PIN is really rejected */
+  const tryN=async f=>{for(let k=0;k<4;k++){try{return await f();}catch(e){if(e&&e.ok===false)throw e;if(k===3){netFail=true;throw e;}await new Promise(r=>setTimeout(r,1000*(k+1)));}}};
+  if(s.a){adminPin=s.a;aRem=s.ar;try{await tryN(refreshAdmin);}catch(e){adminPin=null;aRem=false;}}
+  await Promise.all(ids.map(async id=>{tPins[id]=s.t[id];tRem[id]=!!s.tr[id];try{await tryN(()=>refreshTeacher(id));}catch(e){delete tPins[id];delete tRem[id];}}));
+  if(!netFail)sessSave();else toast2("تعذّر الاتصال الآن — دخولك محفوظ، أعيدي تحميل الصفحة بعد لحظات.");
+  if(adminPin||Object.keys(tPins).length)renderAll();}
 load().then(restoreSess).then(()=>{const h=(location.hash||"").slice(1);if(h==="admin")openAdmin();else if(h.startsWith("t-")&&teachers.some(t=>t.id===h.slice(2)))openTeacher(h.slice(2));});
 })();
 </script>
