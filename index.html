@@ -87,6 +87,8 @@ svg text{font-family:var(--f-display)}
 .who-chip .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .who-chip .role{padding:3px 11px;border-radius:999px;background:#3CC48A;color:#0B3B26;font-size:12.5px;font-weight:700;white-space:nowrap}
 .who-chip .role.adm{background:var(--gold);color:#3A2A08}
+.swho .who-chip{padding:5px 12px 5px 8px;font-size:14.5px;margin-inline-end:6px;vertical-align:middle}.swho .who-chip svg{width:20px;height:20px}
+.swho:has(.who-chip){white-space:normal;display:flex;flex-wrap:wrap;gap:6px}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:24px;max-width:580px}
 @media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .stat{border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:10px 12px;display:grid;gap:2px}
@@ -1407,7 +1409,7 @@ function renderAdmin(){
 function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const logged=parts.length>0;
   const ch=[];if(adminPin)ch.push([adminRole==="principal"?"أ. فاطمة البدراني":adminRole==="vice"?"أ. ريم الحيسوني":"الإدارة",adminRole==="principal"?"مديرة المدرسة":adminRole==="vice"?"وكيلة شؤون المعلمات":"الإدارة",1]);tn.forEach(n=>ch.push([n,"معلمة",0]));
   const wc=$("#who-chips");if(wc){wc.hidden=!ch.length;wc.innerHTML=ch.map(([n,r,a])=>`<span class="who-chip"><svg><use href="#i-user"/></svg><span class="nm">${esc(n)}</span><span class="role${a?" adm":""}">${r}</span></span>`).join("");}
-  $("#swho-w").hidden=!logged;if(logged)$("#swho").textContent="داخلة الآن: "+parts.join(" · ");updNav();}
+  $("#swho-w").hidden=!logged;if(logged)$("#swho").innerHTML=wc?wc.innerHTML:esc("داخلة الآن: "+parts.join(" · "));updNav();}
 function updNav(){const logged=!!adminPin||Object.keys(tPins).length>0;const away=curView!=="list";const on=logged||away;
   $("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);
   $("#nb-back").hidden=!away;$("#nb-home").hidden=!away;$("#nb-adm").hidden=!adminPin||curView==="admin";$("#logout").hidden=!logged;}
