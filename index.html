@@ -1458,7 +1458,7 @@ let pinFor=null;
 function askPin(id){const t=teachers.find(x=>x.id===id);if(!t)return;pinFor=id;$("#p-name").textContent=t.name;const av=$("#p-av");av.textContent=initial(t.name);av.style.background=avColor(t.name);$("#p-pin").value="";$("#p-msg").textContent="";$("#dlg-pin").hidden=false;setTimeout(()=>$("#p-pin").focus(),50);}
 $("#f-pin").addEventListener("submit",async e=>{e.preventDefault();const id=pinFor,pin=$("#p-pin").value.trim(),m=$("#p-msg"),b=$("#p-go");if(!id||!pin)return;b.disabled=true;m.className="msg";m.textContent="جارٍ التحقق…";
   try{const r=await rpc("teacher_open",{tid:id,p:pin});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر الفتح.";return;}
-    tPins[id]=pin;tRem[id]=!!($("#p-rem")&&$("#p-rem").checked);sessSave();items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;if(curT===id&&(!$("#v-domain").hidden||!$("#v-teacher").hidden))renderAll();else{renderList();openTeacher(id);}
+    tPins[id]=pin;tRem[id]=!!($("#p-rem")&&$("#p-rem").checked);sessSave();items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;if(curT===id&&(!$("#v-domain").hidden||!$("#v-teacher").hidden))renderAll();else{renderList();openTeacher(id);}renderSession();
   }catch(err){m.className="msg err";m.textContent="تعذّر الاتصال. حاولي مرة أخرى.";}finally{b.disabled=false;}});
 
 /* admin login + management */
