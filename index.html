@@ -1172,7 +1172,7 @@ const rpc=async(fn,args)=>{const {data,error}=await sb.rpc(fn,args||{});if(error
 const fileUrl=p=>sb?sb.storage.from("files").getPublicUrl(p).data.publicUrl:"";
 async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
 const norm=r=>({...r,createdAt:Date.parse(r.created_at)});
-const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي بعد ١٥ دقيقة.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٤ أرقام.",taken:"هذا الرمز مستخدم. اختاري رمزًا آخر."};
+const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي لاحقًا، ومن نسيت رمزها تطلبه من وكيلة شؤون المعلمات.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٤ أرقام.",taken:"هذا الرمز مستخدم. اختاري رمزًا آخر."};
 $("#demo-bar").hidden=true;
 
 /* pdf.js */
