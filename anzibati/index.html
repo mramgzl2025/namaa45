@@ -1,0 +1,806 @@
+<!-- test --><!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}</style>
+</head>
+<body>
+<title>انضباطي سر تميزي</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: a bold teal hero band with a live heartbeat line, then bright role cards; app views swap below it. */
+:root{
+  --bg:#F2F9F7; --surface:#FFFFFF; --surface2:#F7FBFA; --ink:#12302D; --muted:#58716D; --line:#D6E8E3;
+  --teal:#0E9C8D; --teal-deep:#0A6F66; --coral:#FF6A55; --sun:#FFB020; --sky:#2F7FEA; --berry:#E0457B; --gold:#C8962A;
+  --teal-soft:#DDF4F0; --coral-soft:#FFE7E3; --sun-soft:#FFF2D6; --sky-soft:#E2EEFF; --berry-soft:#FCE3EC;
+  --on-accent:#FFFFFF; --shadow:0 10px 30px -14px rgba(10,80,72,.35);
+  --display:"Reem Kufi","Tajawal","Segoe UI",Tahoma,sans-serif;
+  --body:"Tajawal","Segoe UI",Tahoma,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0C1A19; --surface:#132826; --surface2:#17302D; --ink:#E6F4F1; --muted:#9BB8B2; --line:#24423E;
+  --teal:#22C2AF; --teal-deep:#0B5A53; --coral:#FF7E6B; --sun:#FFC24D; --sky:#5C9BFF; --berry:#FF6A9A; --gold:#E2B653;
+  --teal-soft:#123B37; --coral-soft:#3A201C; --sun-soft:#3A2E12; --sky-soft:#152A47; --berry-soft:#3A1828;
+  --on-accent:#FFFFFF; --shadow:0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1A19; --surface:#132826; --surface2:#17302D; --ink:#E6F4F1; --muted:#9BB8B2; --line:#24423E;
+  --teal:#22C2AF; --teal-deep:#0B5A53; --coral:#FF7E6B; --sun:#FFC24D; --sky:#5C9BFF; --berry:#FF6A9A; --gold:#E2B653;
+  --teal-soft:#123B37; --coral-soft:#3A201C; --sun-soft:#3A2E12; --sky-soft:#152A47; --berry-soft:#3A1828;
+  --on-accent:#FFFFFF; --shadow:0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.3;margin:0}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:10px}
+.num{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.top{background:var(--teal-deep);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;cursor:pointer;padding:0;text-align:right}
+.brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--sun),var(--coral));display:grid;place-items:center;flex:none}
+.brand b{font-family:var(--display);font-size:1.1rem;display:block;line-height:1.2}
+.brand small{opacity:.8;font-size:.8rem}
+.top-actions{display:flex;gap:8px;align-items:center}
+.pill-btn{border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700;font-size:.85rem}
+.pill-btn:hover{background:rgba(255,255,255,.2)}
+
+/* hero */
+.hero{background:radial-gradient(circle at 12% 20%,rgba(255,176,32,.28),transparent 40%),radial-gradient(circle at 90% 80%,rgba(255,106,85,.3),transparent 45%),var(--teal-deep);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1.5px,transparent 1.5px);background-size:22px 22px}
+.hero .wrap{position:relative;padding-block:34px 46px;display:grid;gap:18px}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:700;width:max-content;max-width:100%}
+.hero h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:700}
+.hero h1 span{color:var(--sun)}
+.hero p.lead{font-size:1.1rem;max-width:58ch;opacity:.92}
+.ekg{width:100%;height:56px;display:block}
+.ekg path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:0;animation:beat 3.2s linear infinite}
+@keyframes beat{0%{stroke-dashoffset:1200}60%{stroke-dashoffset:0}100%{stroke-dashoffset:-1200}}
+@media (prefers-reduced-motion:reduce){.ekg path{animation:none}}
+.hero-stats{display:flex;flex-wrap:wrap;gap:10px}
+.hero-stats div{background:rgba(255,255,255,.13);border-radius:14px;padding:8px 14px;font-size:.9rem}
+.hero-stats b{font-family:var(--display);font-size:1.15rem;color:var(--sun);margin-left:4px}
+
+main{padding-block:28px 40px}
+.view{display:grid;gap:22px}
+
+/* icons */
+.ic{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;flex:none;color:#fff;box-shadow:0 8px 18px -8px currentColor}
+.ic svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ic.sm{width:42px;height:42px;border-radius:14px}.ic.sm svg{width:22px;height:22px}
+.g-teal{background:linear-gradient(135deg,#19C2AE,#0A7E72)} .g-coral{background:linear-gradient(135deg,#FF8B6B,#F04A4A)}
+.g-sun{background:linear-gradient(135deg,#FFCF4A,#FF9A1F)} .g-sky{background:linear-gradient(135deg,#5AA8FF,#2F63E0)}
+.g-berry{background:linear-gradient(135deg,#FF77A6,#C92D68)} .g-gold{background:linear-gradient(135deg,#F2CB6B,#B9831C)}
+
+/* role cards */
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:-58px;position:relative}
+.role{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;display:grid;gap:14px;box-shadow:var(--shadow);text-align:right;cursor:pointer;transition:transform .2s}
+.role:hover{transform:translateY(-3px)}
+.role h2{font-size:1.45rem}
+.role p{color:var(--muted)}
+.role .go{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--teal)}
+.role.admin .go{color:var(--berry)}
+.role-head{display:flex;gap:14px;align-items:center}
+
+.sec-title{display:flex;align-items:center;gap:10px}
+.sec-title h2{font-size:1.4rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.step{background:var(--surface);border-radius:20px;padding:18px;display:grid;gap:10px;border:1px solid var(--line)}
+.step .n{font-family:var(--display);font-size:.85rem;color:var(--muted)}
+.step h3{font-size:1.1rem}
+.step p{color:var(--muted);font-size:.95rem}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:18px}
+.rule p{font-size:.95rem}
+.rule b{display:block}
+.r1{background:var(--teal-soft)}.r2{background:var(--sun-soft)}.r3{background:var(--sky-soft)}.r4{background:var(--berry-soft)}
+
+/* panels & forms */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow);display:grid;gap:16px}
+.narrow{max-width:480px;margin-inline:auto;width:100%}
+.field{display:grid;gap:6px}
+.field label{font-weight:700;font-size:.95rem}
+.field .hint{font-size:.82rem;color:var(--muted)}
+.inp{width:100%;border:2px solid var(--line);background:var(--surface2);border-radius:14px;padding:11px 14px;font-size:1rem;transition:border-color .15s}
+.inp:focus{border-color:var(--teal);outline:none}
+.inp.big{font-size:1.5rem;letter-spacing:.12em;text-align:center;font-weight:800}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.btn{border:0;border-radius:14px;padding:12px 20px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:1rem;transition:filter .15s,transform .1s}
+.btn:active{transform:scale(.98)}
+.btn:hover{filter:brightness(1.06)}
+.btn.primary{background:linear-gradient(135deg,#17B5A3,#0A7E72);color:var(--on-accent)}
+.btn.warm{background:linear-gradient(135deg,#FF8B6B,#F04A4A);color:var(--on-accent)}
+.btn.berry{background:linear-gradient(135deg,#FF77A6,#C92D68);color:var(--on-accent)}
+.btn.ghost{background:var(--surface2);border:2px solid var(--line);color:var(--ink)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.err{color:var(--coral);font-weight:700;font-size:.9rem}
+.demo-note{background:var(--sun-soft);border-radius:14px;padding:10px 14px;font-size:.88rem}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--line);background:var(--surface2);border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:700;font-size:.92rem;display:inline-flex;gap:6px;align-items:center}
+.chip[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft);color:var(--ink)}
+.status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 12px;font-weight:800;font-size:.82rem;white-space:nowrap}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.s-new{background:var(--sky-soft);color:var(--sky)} .s-accepted{background:var(--teal-soft);color:var(--teal)}
+.s-rejected{background:var(--coral-soft);color:var(--coral)} .s-more{background:var(--sun-soft);color:#B7740A}
+:root[data-theme="dark"] .s-more{color:var(--sun)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .s-more{color:var(--sun)}}
+
+/* wizard */
+.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stepper div{border-radius:12px;padding:8px;text-align:center;font-weight:700;font-size:.85rem;background:var(--surface2);color:var(--muted);border:2px solid var(--line)}
+.stepper div.on{background:var(--teal-soft);border-color:var(--teal);color:var(--ink)}
+.stepper div.done{background:var(--teal);border-color:var(--teal);color:var(--on-accent)}
+.days-box{display:flex;align-items:center;gap:12px;background:var(--sky-soft);border-radius:16px;padding:12px 16px}
+.days-box b{font-family:var(--display);font-size:1.8rem;color:var(--sky)}
+.drop{border:2.5px dashed var(--teal);border-radius:20px;padding:24px;text-align:center;background:var(--teal-soft);cursor:pointer;display:grid;gap:8px;justify-items:center}
+.drop.over{background:var(--sun-soft);border-color:var(--sun)}
+.preview{display:flex;gap:12px;align-items:center;background:var(--surface2);border-radius:16px;padding:10px;border:1px solid var(--line)}
+.preview img{width:88px;height:88px;object-fit:cover;border-radius:12px}
+.preview .pdf{width:88px;height:88px;border-radius:12px;display:grid;place-items:center;background:var(--coral-soft);color:var(--coral);font-weight:800;font-family:var(--display)}
+.check{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);padding:12px;border-radius:14px}
+.check input{width:20px;height:20px;accent-color:var(--teal);margin-top:4px;flex:none}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+
+/* student dashboard */
+.hello{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.hello h2{font-size:1.5rem}
+.meter{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{border-radius:20px;padding:14px 16px;display:grid;gap:2px}
+.tile b{font-family:var(--display);font-size:1.9rem;line-height:1.2}
+.tile span{font-size:.9rem;font-weight:700}
+.t1{background:var(--sky-soft)}.t1 b{color:var(--sky)}
+.t2{background:var(--teal-soft)}.t2 b{color:var(--teal)}
+.t3{background:var(--sun-soft)}.t3 b{color:#C17A08}
+.t4{background:var(--coral-soft)}.t4 b{color:var(--coral)}
+:root[data-theme="dark"] .t3 b{color:var(--sun)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .t3 b{color:var(--sun)}}
+.quote{background:linear-gradient(135deg,var(--teal-soft),var(--sun-soft));border-radius:20px;padding:16px 18px;display:flex;gap:12px;align-items:center;font-weight:700}
+.list{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:grid;gap:6px}
+.item-top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.item-top b{font-size:1.02rem}
+.meta{color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;gap:4px 14px}
+.note-box{background:var(--sun-soft);border-radius:12px;padding:8px 12px;font-size:.9rem}
+.empty{text-align:center;color:var(--muted);padding:26px;display:grid;justify-items:center;gap:10px}
+
+/* success */
+.success{text-align:center;display:grid;justify-items:center;gap:12px}
+.refcode{font-family:var(--display);font-size:1.6rem;background:var(--sun-soft);border:2px dashed var(--sun);border-radius:16px;padding:8px 22px;direction:ltr;letter-spacing:.06em}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50;width:100%;height:100%}
+
+/* admin */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toolbar .inp{flex:1 1 220px;width:auto}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.adm-item{cursor:pointer;transition:border-color .15s}
+.adm-item:hover{border-color:var(--teal)}
+.late-tag{background:var(--coral-soft);color:var(--coral);border-radius:8px;padding:0 8px;font-size:.78rem;font-weight:800}
+.modal-bg{position:fixed;inset:0;background:rgba(5,25,23,.55);z-index:40;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);border-radius:24px;max-width:720px;width:100%;max-height:90vh;overflow:auto;padding:22px;display:grid;gap:14px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.kv div{background:var(--surface2);border-radius:12px;padding:8px 12px;min-width:0}
+.kv small{display:block;color:var(--muted);font-size:.78rem}
+.kv span{font-weight:700;overflow-wrap:anywhere}
+.filebox{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface2);min-height:120px;display:grid;place-items:center}
+.filebox img{width:100%;display:block}
+.filebox iframe{width:100%;height:520px;border:0}
+.decide{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:700;z-index:60;max-width:calc(100% - 32px);text-align:center}
+
+footer{border-top:1px solid var(--line);padding-block:20px 28px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;color:var(--muted);font-size:.88rem}
+.credit{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#F7DC8E,#D9A63A);color:#3E2A00;border-radius:999px;padding:6px 16px;font-weight:800}
+.credit svg{width:18px;height:18px;fill:#3E2A00}
+@media (max-width:560px){.hero .wrap{padding-block:24px 40px}.roles{margin-top:-46px}.stepper div{font-size:.75rem}}
+</style>
+
+<div id="app">
+  <header class="top">
+    <div class="wrap">
+      <button class="brand" id="homeBtn" type="button" aria-label="الصفحة الرئيسية">
+        <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/><path d="M7.5 12h2.2l1.3-2.5 2 5 1.3-2.5h2.2"/></svg></span>
+        <span><b>انضباطي سر تميزي</b><small id="schoolName">الثانوية الخامسة والأربعون</small></span>
+      </button>
+      <div class="top-actions" id="topActions"></div>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <span class="eyebrow">منصة الأعذار الطبية للطالبات</span>
+      <h1>انضباطي <span>سر تميزي</span></h1>
+      <p class="lead">غبتِ لظرف صحي؟ ارفعي تقريرك الطبي من جوالك في دقيقتين، وتابعي قبول عذرك من وكيلة شؤون الطالبات بدون أوراق ولا انتظار.</p>
+      <svg class="ekg" viewBox="0 0 1000 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 H300 l18 -4 12 4 H380 l14 -24 16 46 16 -36 10 14 H560 l12 -6 10 6 H700 l14 -22 16 40 14 -30 10 12 H1000"/></svg>
+    </div>
+  </section>
+
+  <main class="wrap" id="main"></main>
+
+  <footer>
+    <div class="wrap">
+      <span>منصة انضباطي · <span id="footSchool">الثانوية الخامسة والأربعون</span></span>
+      <span class="credit"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>تصميم أ. مديحه علي العبيدي</span>
+    </div>
+  </footer>
+</div>
+<canvas id="confetti" hidden></canvas>
+
+<script>
+/* ================== الإعدادات ================== */
+const CONFIG = {
+  SUPABASE_URL: "https://fjvtdpiblvunztvlocvy.supabase.co",
+  SUPABASE_ANON_KEY: "",   // يُقرأ تلقائياً من إعدادات ملتقى نماء (المشروع نفسه)
+  KEY_SOURCE: "../index.html",
+  SCHOOL: "الثانوية الخامسة والأربعون",
+  DEADLINE_DAYS: 3         // مهلة تقديم العذر بأيام الدراسة بعد العودة
+};
+/* ================================================ */
+
+document.documentElement.lang = "ar";
+document.documentElement.dir = "rtl";
+let DEMO = true;
+const $ = s => document.querySelector(s);
+const main = $("#main");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+const ICONS = {
+  student:'<svg viewBox="0 0 24 24"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg>',
+  admin:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+  id:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.6-1.5 4.4-1.5 5 0M14 10h4M14 13h3"/></svg>',
+  calendar:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
+  upload:'<svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
+  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  file:'<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>',
+  lock:'<svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>',
+  heart:'<svg viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/></svg>',
+  star:'<svg viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>',
+  arrow:'<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
+  back:'<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  out:'<svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg>',
+  search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
+  download:'<svg viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></svg>',
+  refresh:'<svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/></svg>'
+};
+const ic = (name, g, sm) => `<span class="ic ${sm?"sm":""} ${g}">${ICONS[name]}</span>`;
+
+const STATUS = {
+  new:{t:"قيد المراجعة",c:"s-new"}, accepted:{t:"عذر مقبول",c:"s-accepted"},
+  rejected:{t:"غير مقبول",c:"s-rejected"}, more:{t:"مطلوب استكمال",c:"s-more"}
+};
+const REASONS = [
+  {k:"مرض عارض",i:"🤒"},{k:"مراجعة مستشفى",i:"🏥"},{k:"تنويم",i:"🛏️"},{k:"عملية جراحية",i:"🩺"},
+  {k:"موعد أسنان",i:"🦷"},{k:"مرض مزمن",i:"💊"},{k:"أخرى",i:"📝"}
+];
+const GRADES = ["الأول الثانوي","الثاني الثانوي","الثالث الثانوي"];
+const QUOTES = [
+  "صحتك أولاً، وانضباطك يصنع تميزك 🌟",
+  "كل يوم حضور هو خطوة نحو حلمك",
+  "الطالبة المنضبطة تُخبر مدرستها، ولا تترك غيابها بلا عذر",
+  "عودي بسلامة، دروسك بانتظارك 💚"
+];
+["schoolName","footSchool"].forEach(id => $("#"+id).textContent = CONFIG.SCHOOL);
+
+/* ---------- تخزين الجهاز (تذكر الدخول 7 أيام) ---------- */
+const store = {
+  get(k){ try{ const v = JSON.parse(localStorage.getItem("anz_"+k)); if(!v) return null; if(v.exp && v.exp < Date.now()){ localStorage.removeItem("anz_"+k); return null;} return v.val; }catch(e){ return null; } },
+  set(k,val,days){ try{ localStorage.setItem("anz_"+k, JSON.stringify({val, exp: days ? Date.now()+days*864e5 : 0})); }catch(e){} },
+  del(k){ try{ localStorage.removeItem("anz_"+k); }catch(e){} }
+};
+
+/* ---------- التواريخ ---------- */
+const toDate = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const isSchoolDay = d => d.getDay() >= 0 && d.getDay() <= 4; // الأحد–الخميس
+function schoolDays(a, b){
+  if(!a || !b) return 0; let d = toDate(a), e = toDate(b), n = 0;
+  if(e < d) return 0;
+  while(d <= e){ if(isSchoolDay(d)) n++; d.setDate(d.getDate()+1); }
+  return n;
+}
+function lateBy(toStr){
+  const d = toDate(toStr); d.setDate(d.getDate()+1);
+  while(!isSchoolDay(d)) d.setDate(d.getDate()+1); // يوم العودة
+  const today = new Date(); today.setHours(0,0,0,0);
+  let n = 0; const c = new Date(d);
+  while(c < today){ c.setDate(c.getDate()+1); if(isSchoolDay(c)) n++; }
+  return n; // أيام دراسة مضت بعد يوم العودة
+}
+const fmt = s => { if(!s) return "—"; const d = new Date(s.length<=10 ? s+"T00:00:00" : s);
+  try{ return d.toLocaleDateString("ar-SA-u-ca-gregory-nu-arab",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return s.slice(0,10); } };
+const hijri = s => { try{ return new Date(s+"T00:00:00").toLocaleDateString("ar-SA-u-ca-islamic-umalqura",{day:"numeric",month:"long"}); }catch(e){ return ""; } };
+const fmtTime = s => { try{ return new Date(s).toLocaleString("ar-SA-u-ca-gregory",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"}); }catch(e){ return s; } };
+const validNid = v => /^[12]\d{9}$/.test(v);
+
+/* ---------- واجهة البيانات ---------- */
+async function rpc(fn, body){
+  const r = await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+    method:"POST", headers:{ apikey:CONFIG.SUPABASE_ANON_KEY, Authorization:"Bearer "+CONFIG.SUPABASE_ANON_KEY, "Content-Type":"application/json" },
+    body: JSON.stringify(body)
+  });
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+const demoDB = (() => {
+  const t = new Date(); const ago = n => { const d = new Date(t); d.setDate(d.getDate()-n); return iso(d); };
+  const mk = (o) => Object.assign({id:crypto.randomUUID?crypto.randomUUID():String(Math.random()), file_type:"image/svg+xml", file_name:"تقرير-تجريبي.svg", provider_type:"حكومي", late:false, admin_note:"", reviewed_by:"", reviewed_at:null}, o);
+  return { admins:[{name:"فاطمة فلاتة", role:"وكيلة شؤون الطالبات", pin:"123456"}], rows:[
+    mk({ref:"ANZ-DEMO-A1", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(16), to_date:ago(15), school_days:2, reason:"مرض عارض", provider:"مستشفى الملك فهد", leave_no:"PSL-0000000", status:"accepted", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(13)+"T09:10:00", created_at:ago(14)+"T07:40:00"}),
+    mk({ref:"ANZ-DEMO-B2", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(3), to_date:ago(3), school_days:1, reason:"موعد أسنان", provider:"مجمع عيادات خاص", provider_type:"خاص", leave_no:"", status:"new", created_at:ago(1)+"T20:15:00"}),
+    mk({ref:"ANZ-DEMO-C3", national_id:"1100000002", student_name:"جود (طالبة تجريبية)", grade:"الثاني الثانوي", section:"1", from_date:ago(9), to_date:ago(7), school_days:3, reason:"تنويم", provider:"مستشفى المدينة العام", leave_no:"PSL-1111111", status:"more", admin_note:"الصورة غير واضحة، فضلاً أعيدي رفع التقرير", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(5)+"T10:00:00", created_at:ago(6)+"T18:30:00"}),
+    mk({ref:"ANZ-DEMO-D4", national_id:"1100000003", student_name:"لمى (طالبة تجريبية)", grade:"الثالث الثانوي", section:"2", from_date:ago(12), to_date:ago(12), school_days:1, reason:"مراجعة مستشفى", provider:"مستوصف", provider_type:"خاص", leave_no:"", late:true, status:"new", created_at:ago(2)+"T13:05:00"})
+  ]};
+})();
+const DEMO_FILE = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420"><rect width="600" height="420" fill="#fff"/><rect x="0" y="0" width="600" height="70" fill="#0E9C8D"/><text x="300" y="45" font-size="26" text-anchor="middle" fill="#fff" font-family="Tahoma">تقرير طبي (نموذج تجريبي)</text><g font-family="Tahoma" font-size="18" fill="#333" text-anchor="end"><text x="560" y="130">اسم المريضة: طالبة تجريبية</text><text x="560" y="175">التشخيص: —</text><text x="560" y="220">مدة الإجازة: يوم واحد</text><text x="560" y="265">الجهة: مستشفى تجريبي</text></g><circle cx="110" cy="320" r="55" fill="none" stroke="#2F7FEA" stroke-width="4"/><text x="110" y="327" font-size="16" text-anchor="middle" fill="#2F7FEA" font-family="Tahoma">ختم</text></svg>');
+
+const api = {
+  async submit(p){
+    if(DEMO){ const ref = "ANZ-"+iso(new Date()).slice(2).replace(/-/g,"")+"-"+Math.random().toString(36).slice(2,6).toUpperCase();
+      demoDB.rows.unshift({...p, id:String(Date.now()), ref, status:"new", created_at:new Date().toISOString(), admin_note:"", reviewed_by:"", reviewed_at:null}); return ref; }
+    return rpc("anz_submit", {p});
+  },
+  async my(nid){ if(DEMO) return demoDB.rows.filter(r => r.national_id === nid); return rpc("anz_my", {p_nid:nid}); },
+  async adminLogin(pin){ if(DEMO){ await new Promise(r=>setTimeout(r,300)); return demoDB.admins.filter(a => a.pin === pin).map(({name,role})=>({name,role})); } return rpc("anz_admin_login", {p_pin:pin}); },
+  async adminList(pin){ if(DEMO) return demoDB.rows.map(({file_data, ...r}) => r); return rpc("anz_admin_list", {p_pin:pin}); },
+  async adminFile(pin,id){ if(DEMO){ const r = demoDB.rows.find(x => x.id === id); return [{file_name:r.file_name, file_type:r.file_type, file_data:r.file_data || DEMO_FILE}]; } return rpc("anz_admin_file", {p_pin:pin, p_id:id}); },
+  async review(pin,id,status,note,who){ if(DEMO){ const r = demoDB.rows.find(x => x.id === id); Object.assign(r,{status, admin_note:note, reviewed_by:who, reviewed_at:new Date().toISOString()}); return true; } return rpc("anz_admin_review", {p_pin:pin, p_id:id, p_status:status, p_note:note}); }
+};
+
+/* ---------- أدوات الواجهة ---------- */
+let toastT;
+function toast(msg){ let t = $(".toast"); if(!t){ t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
+  t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3200); }
+function setTop(html){ $("#topActions").innerHTML = html; }
+function showHero(on){ $("#hero").hidden = !on; }
+function go(fn){ window.scrollTo({top:0, behavior:"smooth"}); fn(); }
+const demoBanner = () => DEMO ? `<div class="demo-note">⚙️ هذه نسخة معاينة ببيانات تجريبية. بعد ربط المنصة بقاعدة البيانات ستُحفظ أعذار الطالبات فعلياً.</div>` : "";
+
+/* ================== الصفحة الرئيسية ================== */
+function home(){
+  showHero(true); setTop("");
+  main.innerHTML = `
+  <div class="view">
+    <div class="roles">
+      <button class="role" id="goStudent" type="button">
+        <div class="role-head">${ic("student","g-teal")}<div><h2>بوابة الطالبة</h2><p>ادخلي بسجلك المدني</p></div></div>
+        <p>ارفعي تقريرك الطبي، واعرفي حالة عذرك أولاً بأول، واحتفظي بسجل أعذارك كله في مكان واحد.</p>
+        <span class="go">دخول الطالبة <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+      </button>
+      <button class="role admin" id="goAdmin" type="button">
+        <div class="role-head">${ic("admin","g-berry")}<div><h2>بوابة الإدارة</h2><p>وكيلة شؤون الطالبات والمديرة</p></div></div>
+        <p>استلمي الأعذار مرتبة، افتحي التقرير، واعتمدي القرار بضغطة: مقبول، غير مقبول، أو مطلوب استكمال.</p>
+        <span class="go">دخول الإدارة <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+      </button>
+    </div>
+
+    <div class="sec-title">${ic("star","g-sun",1)}<h2>كيف أرفع عذري؟</h2></div>
+    <div class="steps">
+      <div class="step">${ic("id","g-sky")}<span class="n">الخطوة الأولى</span><h3>ادخلي بسجلك المدني</h3><p>رقم الهوية المكوّن من ١٠ أرقام، بدون كلمات مرور.</p></div>
+      <div class="step">${ic("calendar","g-sun")}<span class="n">الخطوة الثانية</span><h3>حددي أيام الغياب</h3><p>تحسب المنصة أيام الدراسة الفعلية تلقائياً.</p></div>
+      <div class="step">${ic("upload","g-coral")}<span class="n">الخطوة الثالثة</span><h3>صوّري التقرير وارفعيه</h3><p>صورة واضحة أو ملف PDF من جوالك مباشرة.</p></div>
+      <div class="step">${ic("check","g-teal")}<span class="n">الخطوة الرابعة</span><h3>تابعي القرار</h3><p>يظهر لك قرار الوكيلة وملاحظاتها في صفحتك.</p></div>
+    </div>
+
+    <div class="sec-title">${ic("heart","g-coral",1)}<h2>قبل أن ترفعي عذرك</h2></div>
+    <div class="rules">
+      <div class="rule r1">${ic("clock","g-teal",1)}<p><b>خلال ${CONFIG.DEADLINE_DAYS} أيام دراسية</b>من يوم عودتك للمدرسة.</p></div>
+      <div class="rule r2">${ic("file","g-sun",1)}<p><b>تقرير واضح ومختوم</b>يظهر فيه الاسم والتاريخ وختم الجهة الطبية.</p></div>
+      <div class="rule r3">${ic("id","g-sky",1)}<p><b>الإجازة المرضية من «صحة»</b>اكتبي رقمها إن وُجد ليسهل التحقق منها.</p></div>
+      <div class="rule r4">${ic("lock","g-berry",1)}<p><b>تقريرك سري</b>لا تراه إلا إدارة المدرسة المخولة.</p></div>
+    </div>
+  </div>`;
+  $("#goStudent").onclick = () => go(studentEntry);
+  $("#goAdmin").onclick = () => go(adminEntry);
+}
+
+/* ================== الطالبة ================== */
+let me = null; // {nid, name, grade, section}
+function studentEntry(){ const s = store.get("student"); if(s){ me = s; return studentHome(); } studentLogin(); }
+
+function studentLogin(){
+  showHero(false); setTop(`<button class="pill-btn" id="tb-home" type="button">الرئيسية</button>`); $("#tb-home").onclick = () => go(home);
+  main.innerHTML = `
+  <div class="view narrow">
+    <div class="panel">
+      <div class="role-head">${ic("id","g-teal")}<div><h2>دخول الطالبة</h2><p style="color:var(--muted)">اكتبي رقم سجلك المدني</p></div></div>
+      ${demoBanner()}
+      <form id="loginF" class="view" style="gap:14px" novalidate>
+        <div class="field"><label for="nid">السجل المدني</label>
+          <input class="inp big num" id="nid" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="١٠ أرقام" dir="ltr">
+          <span class="hint">${DEMO ? "للتجربة: 1100000001" : "يبدأ بالرقم 1 أو 2"}</span></div>
+        <div class="err" id="loginErr" hidden></div>
+        <button class="btn primary block" type="submit">دخول ${ICONS.arrow}</button>
+      </form>
+    </div>
+  </div>`;
+  const inp = $("#nid");
+  inp.addEventListener("input", () => { inp.value = inp.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/\D/g,"").slice(0,10); });
+  inp.focus();
+  $("#loginF").onsubmit = async e => {
+    e.preventDefault(); const v = inp.value, er = $("#loginErr");
+    if(!validNid(v)){ er.textContent = "رقم السجل المدني يتكون من ١٠ أرقام ويبدأ بـ 1 أو 2."; er.hidden = false; return; }
+    er.hidden = true;
+    let rows = [];
+    try{ rows = await api.my(v); }catch(err){ er.textContent = "تعذر الاتصال بالمنصة، تأكدي من الإنترنت وحاولي مرة أخرى."; er.hidden = false; return; }
+    const last = rows[0];
+    me = { nid:v, name:last?.student_name || "", grade:last?.grade || "", section:last?.section || "" };
+    store.set("student", me, 7);
+    studentHome(rows);
+  };
+}
+
+async function studentHome(pre){
+  showHero(false);
+  setTop(`<button class="pill-btn" id="tb-out" type="button">خروج</button>`);
+  $("#tb-out").onclick = () => { store.del("student"); me = null; go(home); };
+  main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تحميل صفحتك…</p></div></div>`;
+  let rows = pre;
+  if(!rows){ try{ rows = await api.my(me.nid); }catch(e){ rows = []; toast("تعذر تحميل أعذارك الآن"); } }
+  const c = k => rows.filter(r => r.status === k).length;
+  const days = rows.filter(r => r.status !== "rejected").reduce((s,r) => s + (r.school_days||0), 0);
+  const q = QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  main.innerHTML = `
+  <div class="view">
+    ${demoBanner()}
+    <div class="hello">
+      <div class="role-head">${ic("student","g-teal")}<div><h2>أهلاً ${esc(me.name ? me.name.split(" ")[0] : "بك")}</h2><p style="color:var(--muted)" class="num">السجل المدني: ${esc(me.nid.slice(0,2))}••••••${esc(me.nid.slice(-2))}</p></div></div>
+      <button class="btn warm" id="newEx" type="button">${ICONS.plus} رفع عذر طبي جديد</button>
+    </div>
+    <div class="meter">
+      <div class="tile t1"><b class="num">${c("new")}</b><span>قيد المراجعة</span></div>
+      <div class="tile t2"><b class="num">${c("accepted")}</b><span>أعذار مقبولة</span></div>
+      <div class="tile t3"><b class="num">${c("more")}</b><span>مطلوب استكمالها</span></div>
+      <div class="tile t4"><b class="num">${days}</b><span>أيام غياب بعذر</span></div>
+    </div>
+    <div class="quote">${ic("star","g-sun",1)}<span>${esc(q)}</span></div>
+    <div class="sec-title">${ic("file","g-sky",1)}<h2>سجل أعذاري</h2></div>
+    <div class="list">${rows.length ? rows.map(r => `
+      <div class="item">
+        <div class="item-top"><b>${esc(r.reason || "عذر طبي")}</b><span class="status ${STATUS[r.status]?.c}">${STATUS[r.status]?.t}</span></div>
+        <div class="meta"><span>${fmt(r.from_date)}${r.to_date !== r.from_date ? " ← " + fmt(r.to_date) : ""}</span><span class="num">${r.school_days || 0} يوم دراسي</span><span dir="ltr" class="num">${esc(r.ref)}</span></div>
+        ${r.admin_note ? `<div class="note-box"><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</div>` : ""}
+        ${r.status === "more" ? `<button class="btn ghost redo" type="button" data-ref="${esc(r.ref)}">${ICONS.upload} إعادة رفع التقرير</button>` : ""}
+      </div>`).join("") : `<div class="empty">${ic("heart","g-teal")}<p>لا توجد أعذار مسجلة. نتمنى لك دوام الصحة والحضور 💚</p></div>`}
+    </div>
+  </div>`;
+  $("#newEx").onclick = () => go(() => wizard());
+  document.querySelectorAll(".redo").forEach(b => b.onclick = () => { const r = rows.find(x => x.ref === b.dataset.ref); go(() => wizard({from:r.from_date, to:r.to_date, reason:r.reason, note:"إعادة رفع للعذر " + r.ref})); });
+}
+
+/* ---------- معالج رفع العذر ---------- */
+function wizard(prefill){
+  const d = Object.assign({ name:me.name, grade:me.grade, section:me.section, from:"", to:"", reason:"", provider:"", ptype:"حكومي", leave:"", note:"", file:null, pledge:false }, prefill || {});
+  let step = 1;
+  setTop(`<button class="pill-btn" id="tb-back" type="button">صفحتي</button>`); $("#tb-back").onclick = () => go(() => studentHome());
+
+  function render(){
+    const labels = ["بياناتي والغياب","التقرير الطبي","المراجعة والإرسال"];
+    const sd = schoolDays(d.from, d.to);
+    let body = "";
+    if(step === 1) body = `
+      <div class="row2">
+        <div class="field"><label for="w-name">الاسم الرباعي</label><input class="inp" id="w-name" value="${esc(d.name)}" placeholder="كما في السجل المدني"></div>
+        <div class="field"><label for="w-grade">الصف</label><select class="inp" id="w-grade"><option value="">اختاري</option>${GRADES.map(g => `<option ${g===d.grade?"selected":""}>${g}</option>`).join("")}</select></div>
+        <div class="field"><label for="w-sec">الفصل</label><select class="inp" id="w-sec"><option value="">اختاري</option>${[1,2,3,4,5,6,7,8,9,10].map(n => `<option ${String(n)===String(d.section)?"selected":""}>${n}</option>`).join("")}</select></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="w-from">أول يوم غياب</label><input class="inp" type="date" id="w-from" value="${d.from}" max="${iso(new Date())}"></div>
+        <div class="field"><label for="w-to">آخر يوم غياب</label><input class="inp" type="date" id="w-to" value="${d.to}" max="${iso(new Date())}"></div>
+      </div>
+      <div class="days-box">${ic("calendar","g-sky",1)}<div><b class="num" id="sdN">${sd}</b> <span>يوم دراسي</span><div class="hint" style="font-size:.82rem;color:var(--muted)" id="sdH">${d.from ? hijri(d.from) + (d.to && d.to!==d.from ? " – " + hijri(d.to) : "") + " هـ" : "الجمعة والسبت لا تُحسب"}</div></div></div>
+      <div class="field"><label>سبب الغياب</label><div class="chips" id="w-reason">${REASONS.map(r => `<button type="button" class="chip" aria-pressed="${r.k===d.reason}" data-k="${r.k}">${r.i} ${r.k}</button>`).join("")}</div></div>`;
+    if(step === 2) body = `
+      <div class="row2">
+        <div class="field"><label for="w-prov">الجهة الطبية</label><input class="inp" id="w-prov" value="${esc(d.provider)}" placeholder="مثال: مستشفى الولادة والأطفال"></div>
+        <div class="field"><label>نوع الجهة</label><div class="chips" id="w-ptype">${["حكومي","خاص"].map(t => `<button type="button" class="chip" aria-pressed="${t===d.ptype}" data-k="${t}">${t}</button>`).join("")}</div></div>
+      </div>
+      <div class="field"><label for="w-leave">رقم الإجازة المرضية من منصة «صحة» (إن وُجد)</label><input class="inp num" id="w-leave" dir="ltr" value="${esc(d.leave)}" placeholder="PSL…"><span class="hint">تجدينه في رسالة «صحة» النصية أو تطبيق صحتي.</span></div>
+      <div class="field"><label>صورة التقرير الطبي</label>
+        <input type="file" id="w-file" accept="image/*,application/pdf" hidden>
+        <div class="drop" id="drop" tabindex="0" role="button" aria-label="إرفاق التقرير الطبي">${ic("upload","g-coral")}<b>اضغطي لتصوير التقرير أو اختياره</b><span class="hint">صورة أو PDF · حتى ٣ ميجابايت</span></div>
+        <div id="fprev">${d.file ? prevHTML(d.file) : ""}</div></div>
+      <div class="field"><label for="w-note">ملاحظة للوكيلة (اختياري)</label><textarea class="inp" id="w-note" rows="2">${esc(d.note)}</textarea></div>`;
+    if(step === 3){
+      const late = d.to ? lateBy(d.to) > CONFIG.DEADLINE_DAYS : false;
+      body = `
+      <div class="kv">
+        <div><small>الطالبة</small><span>${esc(d.name)}</span></div>
+        <div><small>الصف والفصل</small><span>${esc(d.grade)} / ${esc(d.section)}</span></div>
+        <div><small>مدة الغياب</small><span>${fmt(d.from)}${d.to!==d.from?" ← "+fmt(d.to):""}</span></div>
+        <div><small>أيام الدراسة</small><span class="num">${sd} يوم</span></div>
+        <div><small>السبب</small><span>${esc(d.reason)}</span></div>
+        <div><small>الجهة الطبية</small><span>${esc(d.provider)} (${esc(d.ptype)})</span></div>
+        ${d.leave ? `<div><small>رقم الإجازة</small><span dir="ltr">${esc(d.leave)}</span></div>` : ""}
+      </div>
+      <div>${prevHTML(d.file)}</div>
+      ${late ? `<div class="note-box">⏰ مضى على عودتك أكثر من ${CONFIG.DEADLINE_DAYS} أيام دراسية، سيصل عذرك للوكيلة مع إشارة «متأخر».</div>` : ""}
+      <label class="check"><input type="checkbox" id="w-pledge" ${d.pledge?"checked":""}><span>أتعهد بأن التقرير المرفق صحيح ويخصني، وأعلم أن تقديم تقرير غير صحيح يعرضني للمساءلة.</span></label>`;
+    }
+    main.innerHTML = `
+    <div class="view narrow" style="max-width:720px">
+      <div class="panel">
+        <div class="role-head">${ic("file","g-coral")}<div><h2>رفع عذر طبي</h2><p style="color:var(--muted)">${labels[step-1]}</p></div></div>
+        <div class="stepper">${labels.map((l,i) => `<div class="${i+1<step?"done":i+1===step?"on":""}">${i+1<step?"✓ ":""}${l}</div>`).join("")}</div>
+        ${body}
+        <div class="err" id="wErr" hidden></div>
+        <div class="actions">
+          <button class="btn ghost" id="wBack" type="button">${ICONS.back} ${step===1?"إلغاء":"السابق"}</button>
+          <button class="btn ${step===3?"warm":"primary"}" id="wNext" type="button">${step===3?"إرسال العذر "+ICONS.upload:"التالي "+ICONS.arrow}</button>
+        </div>
+      </div>
+    </div>`;
+    bind();
+  }
+  const prevHTML = f => !f ? "" : `<div class="preview">${f.type.startsWith("image/") ? `<img src="${f.data}" alt="معاينة التقرير">` : `<div class="pdf">PDF</div>`}<div style="min-width:0"><b style="overflow-wrap:anywhere">${esc(f.name)}</b><div class="hint" style="color:var(--muted);font-size:.85rem">${Math.round(f.size/1024)} كيلوبايت · جاهز ✓</div></div></div>`;
+  function save(){
+    const v = id => { const el = $("#"+id); return el ? el.value.trim() : null; };
+    if(step === 1){ d.name = v("w-name"); d.grade = v("w-grade"); d.section = v("w-sec"); d.from = v("w-from"); d.to = v("w-to"); }
+    if(step === 2){ d.provider = v("w-prov"); d.leave = v("w-leave"); d.note = v("w-note"); }
+    if(step === 3){ d.pledge = $("#w-pledge").checked; }
+  }
+  function check(){
+    if(step === 1){
+      if(d.name.split(/\s+/).length < 3) return "اكتبي اسمك الثلاثي على الأقل.";
+      if(!d.grade || !d.section) return "اختاري الصف والفصل.";
+      if(!d.from) return "حددي أول يوم غياب.";
+      if(!d.to) d.to = d.from;
+      if(toDate(d.to) < toDate(d.from)) return "آخر يوم غياب يجب أن يكون بعد أوله أو في اليوم نفسه.";
+      if(schoolDays(d.from,d.to) === 0) return "الأيام المختارة ليست أيام دراسة.";
+      if(!d.reason) return "اختاري سبب الغياب.";
+    }
+    if(step === 2){ if(!d.provider) return "اكتبي اسم الجهة الطبية."; if(!d.file) return "أرفقي صورة التقرير الطبي."; }
+    if(step === 3 && !d.pledge) return "فضلاً أكّدي التعهد قبل الإرسال.";
+    return "";
+  }
+  function bind(){
+    const err = $("#wErr");
+    if(step === 1){
+      const upd = () => { const f = $("#w-from").value, t = $("#w-to").value || f; $("#sdN").textContent = schoolDays(f,t); $("#sdH").textContent = f ? hijri(f) + (t!==f ? " – " + hijri(t) : "") + " هـ" : "الجمعة والسبت لا تُحسب"; };
+      $("#w-from").oninput = () => { if(!$("#w-to").value) $("#w-to").value = $("#w-from").value; upd(); };
+      $("#w-to").oninput = upd;
+      $("#w-reason").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; d.reason = b.dataset.k; document.querySelectorAll("#w-reason .chip").forEach(c => c.setAttribute("aria-pressed", c === b)); };
+    }
+    if(step === 2){
+      $("#w-ptype").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; d.ptype = b.dataset.k; document.querySelectorAll("#w-ptype .chip").forEach(c => c.setAttribute("aria-pressed", c === b)); };
+      const fi = $("#w-file"), drop = $("#drop");
+      drop.onclick = () => fi.click();
+      drop.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fi.click(); } };
+      drop.ondragover = e => { e.preventDefault(); drop.classList.add("over"); };
+      drop.ondragleave = () => drop.classList.remove("over");
+      drop.ondrop = e => { e.preventDefault(); drop.classList.remove("over"); if(e.dataTransfer.files[0]) take(e.dataTransfer.files[0]); };
+      fi.onchange = () => fi.files[0] && take(fi.files[0]);
+      async function take(file){
+        err.hidden = true;
+        try{ d.file = await readFile(file); $("#fprev").innerHTML = prevHTML(d.file); }
+        catch(e){ err.textContent = e.message; err.hidden = false; }
+      }
+    }
+    $("#wBack").onclick = () => { save(); if(step === 1) return go(() => studentHome()); step--; render(); };
+    $("#wNext").onclick = async () => {
+      save(); const m = check(); if(m){ err.textContent = m; err.hidden = false; return; }
+      if(step < 3){ step++; window.scrollTo({top:0}); return render(); }
+      const btn = $("#wNext"); btn.disabled = true; btn.textContent = "جارٍ الإرسال…";
+      try{
+        const ref = await api.submit({ national_id:me.nid, student_name:d.name, grade:d.grade, section:d.section,
+          from_date:d.from, to_date:d.to, school_days:schoolDays(d.from,d.to), reason:d.reason, provider:d.provider,
+          provider_type:d.ptype, leave_no:d.leave, note:d.note, file_name:d.file.name, file_type:d.file.type, file_data:d.file.data,
+          late: lateBy(d.to) > CONFIG.DEADLINE_DAYS });
+        me = {...me, name:d.name, grade:d.grade, section:d.section}; store.set("student", me, 7);
+        success(ref);
+      }catch(e){ btn.disabled = false; btn.innerHTML = "إرسال العذر " + ICONS.upload; err.textContent = "لم يُرسل العذر بسبب مشكلة في الاتصال. حاولي مرة أخرى."; err.hidden = false; }
+    };
+  }
+  render();
+}
+
+function readFile(file){
+  return new Promise((res, rej) => {
+    const isImg = file.type.startsWith("image/"), isPdf = file.type === "application/pdf";
+    if(!isImg && !isPdf) return rej(new Error("الملف يجب أن يكون صورة أو PDF."));
+    if(isPdf && file.size > 3*1024*1024) return rej(new Error("ملف PDF أكبر من ٣ ميجابايت، صوّري التقرير بدلاً منه."));
+    const fr = new FileReader();
+    fr.onerror = () => rej(new Error("تعذرت قراءة الملف، جربي ملفاً آخر."));
+    fr.onload = () => {
+      if(isPdf) return res({name:file.name, type:file.type, size:file.size, data:fr.result});
+      const img = new Image();
+      img.onload = () => { // تصغير الصورة مع الحفاظ على وضوحها
+        const max = 1600, k = Math.min(1, max / Math.max(img.width, img.height));
+        const c = document.createElement("canvas"); c.width = Math.round(img.width*k); c.height = Math.round(img.height*k);
+        const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0,0,c.width,c.height); x.drawImage(img,0,0,c.width,c.height);
+        const data = c.toDataURL("image/jpeg", .78);
+        res({name:file.name.replace(/\.\w+$/,"") + ".jpg", type:"image/jpeg", size:Math.round(data.length*.75), data});
+      };
+      img.onerror = () => rej(new Error("تعذر فتح الصورة. جربي التقاطها مرة أخرى."));
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  });
+}
+
+function success(ref){
+  setTop(`<button class="pill-btn" id="tb-back" type="button">صفحتي</button>`); $("#tb-back").onclick = () => go(() => studentHome());
+  main.innerHTML = `
+  <div class="view narrow"><div class="panel success">
+    ${ic("check","g-teal")}
+    <h2>وصل عذرك بنجاح</h2>
+    <p style="color:var(--muted)">سجّلي رقم الطلب، وتابعي قرار وكيلة شؤون الطالبات من صفحتك.</p>
+    <div class="refcode num">${esc(ref)}</div>
+    <button class="btn ghost" id="cpy" type="button">نسخ رقم الطلب</button>
+    <div class="quote" style="width:100%">${ic("star","g-sun",1)}<span>انضباطك في تقديم العذر جزء من تميزك 🌟</span></div>
+    <button class="btn primary block" id="toHome" type="button">العودة لصفحتي</button>
+  </div></div>`;
+  $("#cpy").onclick = async () => { try{ await navigator.clipboard.writeText(ref); toast("تم نسخ رقم الطلب"); }catch(e){ const r = document.createRange(); r.selectNodeContents($(".refcode")); getSelection().removeAllRanges(); getSelection().addRange(r); toast("حددي الرقم وانسخيه"); } };
+  $("#toHome").onclick = () => go(() => studentHome());
+  confetti();
+}
+
+function confetti(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const c = $("#confetti"), x = c.getContext("2d"); c.hidden = false; c.width = innerWidth; c.height = innerHeight;
+  const cols = ["#0E9C8D","#FF6A55","#FFB020","#2F7FEA","#E0457B"];
+  const ps = Array.from({length:120}, () => ({x:innerWidth/2, y:innerHeight/3, vx:(Math.random()-.5)*12, vy:Math.random()*-12-2, s:Math.random()*7+4, c:cols[Math.floor(Math.random()*5)], r:Math.random()*6}));
+  let t = 0;
+  (function f(){ x.clearRect(0,0,c.width,c.height);
+    ps.forEach(p => { p.vy += .35; p.x += p.vx; p.y += p.vy; p.r += .1; x.save(); x.translate(p.x,p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); x.restore(); });
+    if(++t < 130) requestAnimationFrame(f); else { x.clearRect(0,0,c.width,c.height); c.hidden = true; } })();
+}
+
+/* ================== الإدارة ================== */
+let adm = null, rows = [], filter = "new", q = "";
+function adminEntry(){ const a = store.get("admin"); if(a){ adm = a; return adminHome(); } adminLogin(); }
+function adminLogin(){
+  showHero(false); setTop(`<button class="pill-btn" id="tb-home" type="button">الرئيسية</button>`); $("#tb-home").onclick = () => go(home);
+  main.innerHTML = `
+  <div class="view narrow"><div class="panel">
+    <div class="role-head">${ic("lock","g-berry")}<div><h2>دخول الإدارة</h2><p style="color:var(--muted)">الرمز السري الخاص بك</p></div></div>
+    ${demoBanner()}
+    <form id="aF" class="view" style="gap:14px" novalidate>
+      <div class="field"><label for="pin">الرمز السري</label><input class="inp big num" id="pin" type="password" inputmode="numeric" maxlength="8" dir="ltr" autocomplete="off"><span class="hint">${DEMO ? "للتجربة: 123456" : "رمز من ٦ أرقام"}</span></div>
+      <div class="err" id="aErr" hidden></div>
+      <button class="btn berry block" type="submit">دخول ${ICONS.arrow}</button>
+    </form>
+  </div></div>`;
+  $("#pin").focus();
+  $("#aF").onsubmit = async e => {
+    e.preventDefault(); const pin = $("#pin").value.replace(/\D/g,""), er = $("#aErr"), b = e.target.querySelector("button");
+    b.disabled = true;
+    try{ const r = await api.adminLogin(pin); if(!r.length){ er.textContent = "الرمز غير صحيح."; er.hidden = false; b.disabled = false; return; }
+      adm = {pin, name:r[0].name, role:r[0].role}; store.set("admin", adm, 7); adminHome(); }
+    catch(err){ er.textContent = "تعذر الاتصال بالمنصة."; er.hidden = false; b.disabled = false; }
+  };
+}
+
+async function adminHome(){
+  showHero(false);
+  setTop(`<button class="pill-btn" id="tb-out" type="button">خروج</button>`);
+  $("#tb-out").onclick = () => { store.del("admin"); adm = null; go(home); };
+  main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تحميل الأعذار…</p></div></div>`;
+  try{ rows = await api.adminList(adm.pin); }catch(e){ rows = []; toast("تعذر تحميل الأعذار"); }
+  renderAdmin();
+}
+function renderAdmin(){
+  const n = k => rows.filter(r => r.status === k).length;
+  const wk = new Date(); wk.setDate(wk.getDate()-7);
+  const week = rows.filter(r => new Date(r.created_at) >= wk).length;
+  const tabs = [["new","جديدة"],["more","مطلوب استكمال"],["accepted","مقبولة"],["rejected","غير مقبولة"],["all","الكل"]];
+  const ql = q.trim();
+  const list = rows.filter(r => (filter === "all" || r.status === filter) && (!ql || (r.student_name||"").includes(ql) || (r.national_id||"").includes(ql) || (r.ref||"").includes(ql.toUpperCase())));
+  main.innerHTML = `
+  <div class="view">
+    ${demoBanner()}
+    <div class="hello">
+      <div class="role-head">${ic("admin","g-berry")}<div><h2>مرحباً أ. ${esc(adm.name)}</h2><p style="color:var(--muted)">${esc(adm.role)}</p></div></div>
+      <div class="toolbar"><button class="btn ghost" id="rf" type="button">${ICONS.refresh} تحديث</button><button class="btn ghost" id="csv" type="button">${ICONS.download} تصدير Excel</button></div>
+    </div>
+    <div class="meter">
+      <div class="tile t1"><b class="num">${n("new")}</b><span>بانتظار قرارك</span></div>
+      <div class="tile t3"><b class="num">${n("more")}</b><span>مطلوب استكمال</span></div>
+      <div class="tile t2"><b class="num">${n("accepted")}</b><span>مقبولة</span></div>
+      <div class="tile t4"><b class="num">${week}</b><span>وصلت هذا الأسبوع</span></div>
+    </div>
+    <div class="toolbar">
+      <input class="inp" id="q" placeholder="ابحثي بالاسم أو السجل المدني أو رقم الطلب" value="${esc(q)}">
+    </div>
+    <div class="tabs" id="tabs">${tabs.map(([k,t]) => `<button class="chip" type="button" aria-pressed="${k===filter}" data-k="${k}">${t} <span class="num">${k==="all"?rows.length:n(k)}</span></button>`).join("")}</div>
+    <div class="list">${list.length ? list.map(r => `
+      <div class="item adm-item" tabindex="0" role="button" data-id="${esc(r.id)}">
+        <div class="item-top"><b>${esc(r.student_name)}</b><span class="status ${STATUS[r.status]?.c}">${STATUS[r.status]?.t}</span></div>
+        <div class="meta"><span>${esc(r.grade)} / ${esc(r.section)}</span><span>${esc(r.reason)}</span><span>${fmt(r.from_date)}${r.to_date!==r.from_date?" ← "+fmt(r.to_date):""}</span><span class="num">${r.school_days} يوم</span>${r.late?`<span class="late-tag">متأخر</span>`:""}</div>
+        <div class="meta"><span>وصل: ${fmtTime(r.created_at)}</span>${r.reviewed_by?`<span>القرار: ${esc(r.reviewed_by)}</span>`:""}</div>
+      </div>`).join("") : `<div class="empty">${ic("check","g-teal")}<p>لا توجد أعذار في هذا القسم.</p></div>`}</div>
+  </div>`;
+  $("#rf").onclick = adminHome;
+  $("#csv").onclick = exportCSV;
+  const qi = $("#q"); qi.oninput = () => { q = qi.value; const pos = qi.selectionStart; renderAdmin(); const n2 = $("#q"); n2.focus(); n2.setSelectionRange(pos,pos); };
+  $("#tabs").onclick = e => { const b = e.target.closest(".chip"); if(b){ filter = b.dataset.k; renderAdmin(); } };
+  document.querySelectorAll(".adm-item").forEach(el => { el.onclick = () => openCase(el.dataset.id); el.onkeydown = e => { if(e.key === "Enter") openCase(el.dataset.id); }; });
+}
+
+async function openCase(id){
+  const r = rows.find(x => x.id === id); if(!r) return;
+  const bg = document.createElement("div"); bg.className = "modal-bg";
+  bg.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="تفاصيل العذر">
+    <div class="item-top"><h2 style="font-size:1.3rem">${esc(r.student_name)}</h2><span class="status ${STATUS[r.status]?.c}">${STATUS[r.status]?.t}</span></div>
+    <div class="kv">
+      <div><small>السجل المدني</small><span class="num" dir="ltr">${esc(r.national_id)}</span></div>
+      <div><small>الصف / الفصل</small><span>${esc(r.grade)} / ${esc(r.section)}</span></div>
+      <div><small>مدة الغياب</small><span>${fmt(r.from_date)}${r.to_date!==r.from_date?" ← "+fmt(r.to_date):""}</span></div>
+      <div><small>أيام الدراسة</small><span class="num">${r.school_days} يوم ${r.late?'<span class="late-tag">متأخر</span>':""}</span></div>
+      <div><small>السبب</small><span>${esc(r.reason)}</span></div>
+      <div><small>الجهة الطبية</small><span>${esc(r.provider)} (${esc(r.provider_type)})</span></div>
+      <div><small>رقم الإجازة (صحة)</small><span dir="ltr">${esc(r.leave_no) || "—"}</span></div>
+      <div><small>رقم الطلب</small><span dir="ltr" class="num">${esc(r.ref)}</span></div>
+      <div><small>وقت الرفع</small><span>${fmtTime(r.created_at)}</span></div>
+    </div>
+    ${r.note ? `<div class="note-box"><b>ملاحظة الطالبة:</b> ${esc(r.note)}</div>` : ""}
+    ${r.leave_no ? `<a class="btn ghost" href="https://www.seha.sa" target="_blank" rel="noopener">${ICONS.search} التحقق من الإجازة في منصة صحة</a>` : ""}
+    <div class="filebox" id="fbox"><p style="color:var(--muted)">جارٍ فتح التقرير…</p></div>
+    <div class="field"><label for="m-note">ملاحظة للطالبة</label><textarea class="inp" id="m-note" rows="2" placeholder="مثال: الصورة غير واضحة، أعيدي الرفع">${esc(r.admin_note)}</textarea></div>
+    <div class="decide">
+      <button class="btn primary" data-s="accepted" type="button">${ICONS.check} قبول العذر</button>
+      <button class="btn ghost" data-s="more" type="button">طلب استكمال</button>
+      <button class="btn warm" data-s="rejected" type="button">عدم القبول</button>
+    </div>
+    <div class="err" id="mErr" hidden></div>
+    <button class="btn ghost block" id="mClose" type="button">إغلاق</button>
+  </div>`;
+  document.body.appendChild(bg);
+  const close = () => { bg.remove(); document.removeEventListener("keydown", onKey); };
+  const onKey = e => { if(e.key === "Escape") close(); };
+  document.addEventListener("keydown", onKey);
+  bg.onclick = e => { if(e.target === bg) close(); };
+  bg.querySelector("#mClose").onclick = close;
+  bg.querySelectorAll("[data-s]").forEach(b => b.onclick = async () => {
+    const s = b.dataset.s, note = bg.querySelector("#m-note").value.trim(), er = bg.querySelector("#mErr");
+    if((s === "more" || s === "rejected") && !note){ er.textContent = "اكتبي ملاحظة توضح للطالبة السبب."; er.hidden = false; return; }
+    b.disabled = true;
+    try{ const ok = await api.review(adm.pin, r.id, s, note, adm.name); if(ok === false) throw 0;
+      Object.assign(r, {status:s, admin_note:note, reviewed_by:adm.name, reviewed_at:new Date().toISOString()});
+      close(); renderAdmin(); toast("تم حفظ القرار: " + STATUS[s].t); }
+    catch(e){ b.disabled = false; er.textContent = "لم يُحفظ القرار، حاولي مرة أخرى."; er.hidden = false; }
+  });
+  try{
+    const f = (await api.adminFile(adm.pin, r.id))[0]; const box = bg.querySelector("#fbox");
+    if(!f || !f.file_data){ box.innerHTML = `<p style="color:var(--muted)">لا يوجد ملف مرفق.</p>`; return; }
+    if((f.file_type||"").startsWith("image/")) box.innerHTML = `<img src="${f.file_data}" alt="التقرير الطبي">`;
+    else { let url = f.file_data; try{ const bin = atob(f.file_data.split(",")[1]); const u = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i] = bin.charCodeAt(i); url = URL.createObjectURL(new Blob([u],{type:"application/pdf"})); }catch(e){}
+      box.innerHTML = `<div style="display:grid;gap:10px;width:100%;padding:12px"><iframe src="${url}" title="التقرير الطبي"></iframe><a class="btn ghost" href="${url}" target="_blank" rel="noopener">${ICONS.file} فتح ملف PDF في نافذة جديدة</a></div>`; }
+  }catch(e){ bg.querySelector("#fbox").innerHTML = `<p class="err">تعذر فتح التقرير.</p>`; }
+}
+
+function exportCSV(){
+  const head = ["رقم الطلب","اسم الطالبة","السجل المدني","الصف","الفصل","من","إلى","أيام الدراسة","السبب","الجهة","نوع الجهة","رقم الإجازة","متأخر","الحالة","ملاحظة الإدارة","صاحبة القرار","وقت الرفع"];
+  const lines = rows.map(r => [r.ref,r.student_name,"'"+r.national_id,r.grade,r.section,r.from_date,r.to_date,r.school_days,r.reason,r.provider,r.provider_type,r.leave_no,r.late?"نعم":"لا",STATUS[r.status]?.t,r.admin_note,r.reviewed_by,(r.created_at||"").slice(0,16).replace("T"," ")]);
+  const csv = "﻿" + [head, ...lines].map(l => l.map(v => `"${String(v ?? "").replace(/"/g,'""')}"`).join(",")).join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+  a.download = `أعذار-انضباطي-${iso(new Date())}.csv`; document.body.appendChild(a); a.click(); a.remove();
+  toast(DEMO ? "التصدير يعمل بعد نشر المنصة على موقعك" : "تم تجهيز ملف Excel");
+}
+
+$("#homeBtn").onclick = () => go(home);
+(async function init(){
+  main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تجهيز المنصة…</p></div></div>`;
+  if(!CONFIG.SUPABASE_ANON_KEY && CONFIG.KEY_SOURCE){
+    try{ const t = await fetch(CONFIG.KEY_SOURCE, {cache:"no-store"}).then(r => r.ok ? r.text() : "");
+      const m = t.match(/SUPABASE_ANON_KEY\s*:\s*["']([^"']+)["']/); if(m) CONFIG.SUPABASE_ANON_KEY = m[1]; }catch(e){}
+  }
+  DEMO = !CONFIG.SUPABASE_URL || !CONFIG.SUPABASE_ANON_KEY;
+  home();
+})();
+</script>
+
+</body>
+</html>
