@@ -1,4 +1,4 @@
-<!-- test --><!doctype html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
@@ -360,6 +360,8 @@ const api = {
 };
 
 /* ---------- أدوات الواجهة ---------- */
+const LOCK_MSG = "أُوقف دخول الإدارة 15 دقيقة بسبب محاولات خاطئة متكررة. حاولي بعد ربع ساعة.";
+const isLocked = e => String(e && e.message || e).includes("locked");
 let toastT;
 function toast(msg){ let t = $(".toast"); if(!t){ t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
   t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3200); }
@@ -679,7 +681,7 @@ function adminLogin(){
     b.disabled = true;
     try{ const r = await api.adminLogin(pin); if(!r.length){ er.textContent = "الرمز غير صحيح."; er.hidden = false; b.disabled = false; return; }
       adm = {pin, name:r[0].name, role:r[0].role}; store.set("admin", adm, 7); adminHome(); }
-    catch(err){ er.textContent = "تعذر الاتصال بالمنصة."; er.hidden = false; b.disabled = false; }
+    catch(err){ er.textContent = isLocked(err) ? LOCK_MSG : "تعذر الاتصال بالمنصة."; er.hidden = false; b.disabled = false; }
   };
 }
 
@@ -688,7 +690,7 @@ async function adminHome(){
   setTop(`<button class="pill-btn" id="tb-out" type="button">خروج</button>`);
   $("#tb-out").onclick = () => { store.del("admin"); adm = null; go(home); };
   main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تحميل الأعذار…</p></div></div>`;
-  try{ rows = await api.adminList(adm.pin); }catch(e){ rows = []; toast("تعذر تحميل الأعذار"); }
+  try{ rows = await api.adminList(adm.pin); }catch(e){ rows = []; toast(isLocked(e) ? LOCK_MSG : "تعذر تحميل الأعذار"); }
   renderAdmin();
 }
 function renderAdmin(){
@@ -770,7 +772,7 @@ async function openCase(id){
     try{ const ok = await api.review(adm.pin, r.id, s, note, adm.name); if(ok === false) throw 0;
       Object.assign(r, {status:s, admin_note:note, reviewed_by:adm.name, reviewed_at:new Date().toISOString()});
       close(); renderAdmin(); toast("تم حفظ القرار: " + STATUS[s].t); }
-    catch(e){ b.disabled = false; er.textContent = "لم يُحفظ القرار، حاولي مرة أخرى."; er.hidden = false; }
+    catch(e){ b.disabled = false; er.textContent = isLocked(e) ? LOCK_MSG : "لم يُحفظ القرار، حاولي مرة أخرى."; er.hidden = false; }
   });
   try{
     const f = (await api.adminFile(adm.pin, r.id))[0]; const box = bg.querySelector("#fbox");
