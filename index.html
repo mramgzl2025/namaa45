@@ -442,6 +442,7 @@ body.has-sbar footer{padding-bottom:120px}
 .miss span{background:color-mix(in srgb,var(--danger) 10%,var(--surface));color:var(--danger);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700}
 .pin{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .pin input{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:9px 12px;width:150px}
+.rem{display:flex;align-items:flex-start;gap:8px;font-size:14px;font-weight:600;cursor:pointer;margin:4px 0 2px;line-height:1.5}.rem input{width:18px!important;height:18px;margin-top:2px;accent-color:var(--gold,#c9a227);flex:none;padding:0!important}.rem small{display:block;font-weight:400;color:var(--muted);font-size:12.5px}
 .tlist textarea{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;line-height:1.9;margin:8px 0}
 
 /* ===== v11: vice hub — النمو المهني + حضور الحصص ===== */
@@ -747,7 +748,7 @@ body.has-sbar footer{padding-bottom:120px}
         <div class="tscroll"><table class="adm-table" id="tb-follow"></table></div>
       </div>
       <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول الإدارة</h3><p class="hint">لمديرة المدرسة ووكيلة شؤون المعلمات، كلٌّ برمزها الخاص.</p></div>
-        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span></form></div>
+        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span><label class="rem" style="flex-basis:100%"><input type="checkbox" id="adm-rem"><span>تذكّريني على هذا الجهاز لمدة ١٢ ساعة</span></label></form></div>
       <div id="adm-body" hidden>
       <div class="vhub" id="vhub" hidden>
         <div class="vhub-h"><span class="crown">✨</span><div><h3 id="vh-title">مساحة وكيلة شؤون المعلمات</h3><p id="vh-sub">أ. ريم الحيسوني — ملفاتكِ الخاصة وبطاقات زيارة الحصص</p></div><span class="vonly" id="vh-only">🔒 خاص بالوكيلة</span></div>
@@ -903,6 +904,7 @@ body.has-sbar footer{padding-bottom:120px}
   <form class="dialog" id="f-pin" style="width:min(420px,100%)">
     <div class="dlg-head"><div class="ht"><span class="hi" id="p-av" style="display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-size:22px;font-weight:700"></span><div style="min-width:0"><div class="hint">ملف سري</div><h2 id="p-name"></h2></div></div><button type="button" class="close" data-close aria-label="إغلاق"><svg><use href="#i-x"/></svg></button></div>
     <div class="field"><label for="p-pin">اكتبي رمزك السري</label><input id="p-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required style="font-size:22px;letter-spacing:.4em;text-align:center"></div>
+    <label class="rem"><input type="checkbox" id="p-rem" checked><span>تذكّري دخولي على هذا الجهاز<small>لن يُطلب الرمز مرة أخرى لمدة ٧ أيام. أزيلي العلامة إذا كان الجهاز مشتركًا.</small></span></label>
     <p class="hint">لا يفتح الملف إلا برمز صاحبته. نسيتِ الرمز؟ اطلبيه من وكيلة شؤون المعلمات.</p>
     <p class="msg" id="p-msg" role="status"></p>
     <div class="actions"><button class="btn btn-primary" id="p-go">فتح ملفي</button><button type="button" class="btn btn-ghost" data-close>إلغاء</button></div>
@@ -1179,7 +1181,25 @@ $("#a-term").innerHTML=termOpts(false);$("#dv-term").innerHTML=termOpts(true);$(
 /* ================= state ================= */
 let teachers=[],items=[],curT=null,curD=null;
 let adminPin=null, adminTeachers=[], adminRole=null;      // admin session (memory only)
-const tPins={};                            // teacher pins unlocked in this tab (memory only)
+const tPins={};                            // teacher pins unlocked on this device
+/* session persistence: survives page reloads/phone tab reloads (sessionStorage), and "remember me" (localStorage, with expiry) */
+const SKEY="namaa45.sess.v1",T_DAYS=7,A_HRS=12,TAB_HRS=10;
+const tRem={};let aRem=false;
+function stGet(st){try{return JSON.parse(st.getItem(SKEY)||"null")||{};}catch(e){return {};}}
+function stPut(st,v){try{if(!v.a&&!Object.keys(v.t||{}).length)st.removeItem(SKEY);else st.setItem(SKEY,JSON.stringify(v));}catch(e){}}
+function sessSave(){const now=Date.now(),old=stGet(localStorage),oldS=stGet(sessionStorage),loc={t:{}},tab={t:{}};
+  for(const [id,p] of Object.entries(tPins)){
+    tab.t[id]={p,exp:now+TAB_HRS*36e5};
+    if(tRem[id]){const prev=old.t&&old.t[id];loc.t[id]={p,exp:(prev&&prev.p===p&&prev.exp>now)?prev.exp:now+T_DAYS*864e5};}}
+  if(adminPin){tab.a={p:adminPin,exp:now+TAB_HRS*36e5};if(aRem){const prev=old.a;loc.a={p:adminPin,exp:(prev&&prev.p===adminPin&&prev.exp>now)?prev.exp:now+A_HRS*36e5};}}
+  stPut(sessionStorage,tab);stPut(localStorage,loc);}
+function sessClear(){try{localStorage.removeItem(SKEY);}catch(e){}try{sessionStorage.removeItem(SKEY);}catch(e){}}
+function sessRead(){const now=Date.now(),L=stGet(localStorage),S=stGet(sessionStorage),o={t:{},a:null,tr:{},ar:false};
+  for(const [id,x] of Object.entries(S.t||{}))if(x&&x.p&&x.exp>now)o.t[id]=x.p;
+  for(const [id,x] of Object.entries(L.t||{}))if(x&&x.p&&x.exp>now){o.t[id]=x.p;o.tr[id]=true;}
+  if(S.a&&S.a.p&&S.a.exp>now)o.a=S.a.p;
+  if(L.a&&L.a.p&&L.a.exp>now){o.a=L.a.p;o.ar=true;}
+  return o;}
 const tItems=tid=>items.filter(x=>x.teacher_id===tid);
 const nonEval=D.filter(d=>!d.step);
 const BADGE={growth:"نجمة النمو المهني",plan:"متقنة التخطيط",strat:"مبدعة الاستراتيجيات",skills:"بانية المهارات والقيم",students:"مُلهمة الطالبات",eval:"خبيرة التقويم"};
@@ -1268,7 +1288,7 @@ async function load(){
   try{teachers=await rpc("list_teachers");}catch(e){console.error(e);showErr("تعذّر الاتصال بقاعدة البيانات. أعيدي تحميل الصفحة.");}
   renderAll();
 }
-async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
+async function refreshTeacher(tid){const r=await rpc("teacher_open",{tid,p:tPins[tid]});if(!r.ok){delete tPins[tid];delete tRem[tid];sessSave();throw r;}items=items.filter(x=>x.teacher_id!==tid).concat(r.items.map(norm));}
 let usage=null;
 const fmtMB=b=>{const mb=b/1048576;return mb>=1024?ar((mb/1024).toFixed(2))+" جيجابايت":ar(mb<10?mb.toFixed(1):Math.round(mb))+" ميجابايت";};
 async function refreshUsage(){try{const u=await rpc("admin_usage",{p:adminPin});if(u.ok){let keep=new Set();try{const pp=await rpc("protected_paths",{p:adminPin});if(pp&&pp.ok)keep=new Set(pp.paths||[]);}catch(_){}u.orphans=(u.orphans||[]).filter(x=>x&&!String(x).startsWith("vice/")&&!keep.has(x));if(!u.orphans.length)u.orphan=0;usage=u;}}catch(e){}renderUsage();}
@@ -1279,7 +1299,7 @@ function renderUsage(){if(!usage)return;const pct=Math.min(100,usage.total/usage
   $("#u-top").innerHTML=top.length?'<span style="border:0;background:none;padding-inline:0;color:var(--muted)">الأكثر استهلاكًا:</span>'+top.map(x=>`<span>${esc(tn[x.id]||"—")}<b>${fmtMB(x.bytes)}</b></span>`).join(""):"";
   $("#u-clean-wrap").hidden=!(usage.orphans&&usage.orphans.length);$("#u-clean").textContent="تنظيف ملفات محذوفة لا تزال تشغل مساحة ("+fmtMB(usage.orphan)+")";}
 async function removeFiles(paths){paths=paths.filter(Boolean);if(!paths.length||!sb)return;try{await sb.storage.from("files").remove(paths);}catch(e){}}
-async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;throw r;}adminRole=r.role;adminTeachers=r.teachers;refreshUsage();items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));if(r.role==="vice"||r.role==="principal")await loadVice();}
+async function refreshAdmin(){const r=await rpc("admin_open",{p:adminPin});if(!r.ok){adminPin=null;aRem=false;sessSave();throw r;}adminRole=r.role;adminTeachers=r.teachers;refreshUsage();items=r.items.map(norm);teachers=r.teachers.map(({id,name,sort})=>({id,name,sort}));if(r.role==="vice"||r.role==="principal")await loadVice();}
 function showErr(t){const b=$("#demo-bar");b.hidden=false;b.style.background="var(--danger)";b.style.color="#fff";b.textContent=t;}
 
 /* ================= render ================= */
@@ -1379,7 +1399,7 @@ function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.
 function updNav(){const logged=!!adminPin||Object.keys(tPins).length>0;const away=curView!=="list";const on=logged||away;
   $("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);
   $("#nb-back").hidden=!away;$("#nb-home").hidden=!away;$("#nb-adm").hidden=!adminPin||curView==="admin";$("#logout").hidden=!logged;}
-function logout(){viceFiles=[];fw=null;fwG=null;visits=[];curG=null;adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(history.state,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
+function logout(){sessClear();Object.keys(tRem).forEach(k=>delete tRem[k]);aRem=false;viceFiles=[];fw=null;fwG=null;visits=[];curG=null;adminPin=null;adminRole=null;adminTeachers=[];Object.keys(tPins).forEach(k=>delete tPins[k]);items=[];curT=null;curD=null;closeAll();try{$("#adm-pin").value="";}catch(e){}showView("list");renderAll();try{history.replaceState(history.state,"",location.pathname+location.search);}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}
 function renderAll(){renderSession();renderStats();renderList();renderTeacher();renderDomain();renderAdmin();}
 renderNav();
 
@@ -1424,16 +1444,16 @@ let pinFor=null;
 function askPin(id){const t=teachers.find(x=>x.id===id);if(!t)return;pinFor=id;$("#p-name").textContent=t.name;const av=$("#p-av");av.textContent=initial(t.name);av.style.background=avColor(t.name);$("#p-pin").value="";$("#p-msg").textContent="";$("#dlg-pin").hidden=false;setTimeout(()=>$("#p-pin").focus(),50);}
 $("#f-pin").addEventListener("submit",async e=>{e.preventDefault();const id=pinFor,pin=$("#p-pin").value.trim(),m=$("#p-msg"),b=$("#p-go");if(!id||!pin)return;b.disabled=true;m.className="msg";m.textContent="جارٍ التحقق…";
   try{const r=await rpc("teacher_open",{tid:id,p:pin});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر الفتح.";return;}
-    tPins[id]=pin;items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;if(curT===id&&(!$("#v-domain").hidden||!$("#v-teacher").hidden))renderAll();else{renderList();openTeacher(id);}
+    tPins[id]=pin;tRem[id]=!!($("#p-rem")&&$("#p-rem").checked);sessSave();items=items.filter(x=>x.teacher_id!==id).concat(r.items.map(norm));$("#dlg-pin").hidden=true;if(curT===id&&(!$("#v-domain").hidden||!$("#v-teacher").hidden))renderAll();else{renderList();openTeacher(id);}
   }catch(err){m.className="msg err";m.textContent="تعذّر الاتصال. حاولي مرة أخرى.";}finally{b.disabled=false;}});
 
 /* admin login + management */
 $("#u-clean").onclick=async()=>{const b=$("#u-clean"),m=$("#u-clean-msg");b.disabled=true;m.className="msg";m.textContent="جارٍ التنظيف…";await removeFiles(usage.orphans||[]);await refreshUsage();m.textContent="تم التنظيف.";b.disabled=false;};
 $("#adm-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#adm-msg");m.className="msg";m.textContent="جارٍ التحقق…";adminPin=$("#adm-pin").value.trim();
-  try{await refreshAdmin();$("#adm-pin").value="";m.textContent="";renderAll();}catch(r){adminPin=null;m.className="msg err";m.textContent=(r&&PINERR[r.error])||"تعذّر الاتصال.";}});
+  try{await refreshAdmin();aRem=!!($("#adm-rem")&&$("#adm-rem").checked);sessSave();$("#adm-pin").value="";m.textContent="";renderAll();}catch(r){adminPin=null;m.className="msg err";m.textContent=(r&&PINERR[r.error])||"تعذّر الاتصال.";}});
 $("#tb-pins").addEventListener("click",async e=>{const b=e.target.closest("[data-reset]");if(!b)return;
   if(b.dataset.armed!=="1"){b.dataset.armed="1";b.textContent="تأكيد؟";setTimeout(()=>{b.dataset.armed="";b.textContent="رمز جديد";},3000);return;}
-  b.disabled=true;try{const r=await rpc("admin_reset_pin",{p:adminPin,tid:b.dataset.reset});if(r.ok){delete tPins[b.dataset.reset];await refreshAdmin();renderAll();}}catch(err){b.textContent="تعذّر";}});
+  b.disabled=true;try{const r=await rpc("admin_reset_pin",{p:adminPin,tid:b.dataset.reset});if(r.ok){delete tPins[b.dataset.reset];delete tRem[b.dataset.reset];sessSave();await refreshAdmin();renderAll();}}catch(err){b.textContent="تعذّر";}});
 let pendingNames=null;
 $("#save-names").onclick=()=>{
   const list=[...new Set($("#t-names").value.split("\n").map(s=>s.trim()).filter(Boolean))];
@@ -1446,7 +1466,7 @@ $("#names-yes").onclick=()=>{$("#names-confirm").hidden=true;applyNames();};
 async function applyNames(){const list=pendingNames;if(!list)return;const m=$("#names-msg");m.className="msg";m.textContent="جارٍ الحفظ…";
   try{const r=await rpc("admin_set_teachers",{p:adminPin,names:list});if(!r.ok)throw r;await refreshAdmin();renderAll();m.textContent=`حُفظت القائمة (${ar(list.length)} معلمة).`;}catch(e){m.className="msg err";m.textContent="تعذّر حفظ القائمة.";}pendingNames=null;}
 if($("#chg-form"))$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#chg-msg"),np=$("#chg-pin").value.trim();m.className="msg";m.textContent="جارٍ الحفظ…";
-  try{const r=await rpc("admin_change_pin",{p:adminPin,np});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر.";return;}adminPin=np;$("#chg-pin").value="";m.textContent="تم تغيير رمزك. احفظيه في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الاتصال.";}});
+  try{const r=await rpc("admin_change_pin",{p:adminPin,np});if(!r.ok){m.className="msg err";m.textContent=PINERR[r.error]||"تعذّر.";return;}adminPin=np;sessSave();$("#chg-pin").value="";m.textContent="تم تغيير رمزك. احفظيه في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الاتصال.";}});
 
 /* ================= add ================= */
 let viewTok=0;
@@ -1881,7 +1901,11 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-adm-back]")){op
 /* ================= start ================= */
 try{history.replaceState({v:"list",t:null,d:null,vt:null,vid:null},"",location.href);}catch(e){}
 $("#nb-back").onclick=goBack;$("#nb-home").onclick=()=>openList();$("#nb-adm").onclick=()=>openAdmin();
-load().then(()=>{const h=(location.hash||"").slice(1);if(h==="admin")openAdmin();else if(h.startsWith("t-")&&teachers.some(t=>t.id===h.slice(2)))openTeacher(h.slice(2));});
+async function restoreSess(){const s=sessRead();const ids=Object.keys(s.t).filter(id=>teachers.some(t=>t.id===id));
+  if(s.a){adminPin=s.a;aRem=s.ar;try{await refreshAdmin();}catch(e){adminPin=null;aRem=false;}}
+  await Promise.all(ids.map(async id=>{tPins[id]=s.t[id];tRem[id]=!!s.tr[id];try{await refreshTeacher(id);}catch(e){delete tPins[id];delete tRem[id];}}));
+  sessSave();if(adminPin||Object.keys(tPins).length)renderAll();}
+load().then(restoreSess).then(()=>{const h=(location.hash||"").slice(1);if(h==="admin")openAdmin();else if(h.startsWith("t-")&&teachers.some(t=>t.id===h.slice(2)))openTeacher(h.slice(2));});
 })();
 </script>
 </body>
