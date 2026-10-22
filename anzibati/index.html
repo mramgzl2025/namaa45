@@ -9,214 +9,360 @@
 <title>انضباطي سر تميزي</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Reem+Kufi:wght@600;700&family=Tajawal:wght@400;500;700;800&display=swap">
 <style>
-/* Layout: a bold teal hero band with a live heartbeat line, then bright role cards; app views swap below it. */
+/* Layout: an emerald clinic band with a live heartbeat, then a phone-first app: top app bar, focused screens, a bottom dock with a raised "new excuse" button. Signature object: the perforated «بطاقة العذر» pass. */
 :root{
-  --bg:#F2F9F7; --surface:#FFFFFF; --surface2:#F7FBFA; --ink:#12302D; --muted:#58716D; --line:#D6E8E3;
-  --teal:#0E9C8D; --teal-deep:#0A6F66; --coral:#FF6A55; --sun:#FFB020; --sky:#2F7FEA; --berry:#E0457B; --gold:#C8962A;
-  --teal-soft:#DDF4F0; --coral-soft:#FFE7E3; --sun-soft:#FFF2D6; --sky-soft:#E2EEFF; --berry-soft:#FCE3EC;
-  --on-accent:#FFFFFF; --shadow:0 10px 30px -14px rgba(10,80,72,.35);
-  --display:"Reem Kufi","Tajawal","Segoe UI",Tahoma,sans-serif;
-  --body:"Tajawal","Segoe UI",Tahoma,sans-serif;
+  --bg:#F1F7F5; --surface:#FFFFFF; --surface2:#F6FAF9; --ink:#10302C; --muted:#5D7571; --line:#DCEAE6;
+  --em:#0E9C8D; --em-deep:#0A5E57; --em-night:#073F3B; --gold:#D9A441; --gold-soft:#FBF1DC;
+  --coral:#FF6A55; --sky:#3B7CF0; --berry:#D63F7A; --violet:#7A5AE0; --sun:#FFB020;
+  --em-soft:#DDF3EF; --coral-soft:#FFE8E4; --sky-soft:#E4EDFF; --berry-soft:#FCE4EE; --violet-soft:#EEE9FD; --sun-soft:#FFF2D9;
+  --ok:#14A37F; --warn:#C57A06; --bad:#E0483A; --info:#3B7CF0;
+  --on:#FFFFFF; --shadow:0 2px 6px rgba(10,70,62,.05),0 16px 36px -12px rgba(10,70,62,.22);
+  --f-display:"El Messiri","Tajawal","Segoe UI",Tahoma,sans-serif;
+  --f-brand:"Reem Kufi","El Messiri","Tajawal",Tahoma,sans-serif;
+  --f-body:"Tajawal","Segoe UI",Tahoma,sans-serif;
+  --dock-h:74px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0C1A19; --surface:#132826; --surface2:#17302D; --ink:#E6F4F1; --muted:#9BB8B2; --line:#24423E;
-  --teal:#22C2AF; --teal-deep:#0B5A53; --coral:#FF7E6B; --sun:#FFC24D; --sky:#5C9BFF; --berry:#FF6A9A; --gold:#E2B653;
-  --teal-soft:#123B37; --coral-soft:#3A201C; --sun-soft:#3A2E12; --sky-soft:#152A47; --berry-soft:#3A1828;
-  --on-accent:#FFFFFF; --shadow:0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}}
+  --bg:#0B1918; --surface:#122725; --surface2:#16302D; --ink:#E6F3F0; --muted:#9DB9B3; --line:#23423E;
+  --em:#25C3AF; --em-deep:#0B524C; --em-night:#062F2C; --gold:#E7BB5E; --gold-soft:#3A2F14;
+  --coral:#FF7E6B; --sky:#6A9DFF; --berry:#FF6E9F; --violet:#A28BFF; --sun:#FFC24D;
+  --em-soft:#11403A; --coral-soft:#3B211C; --sky-soft:#172B4D; --berry-soft:#3B1828; --violet-soft:#271F45; --sun-soft:#3A2D12;
+  --ok:#2FCB9E; --warn:#F0B040; --bad:#FF7466; --info:#6A9DFF;
+  --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 36px -12px rgba(0,0,0,.6); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#0C1A19; --surface:#132826; --surface2:#17302D; --ink:#E6F4F1; --muted:#9BB8B2; --line:#24423E;
-  --teal:#22C2AF; --teal-deep:#0B5A53; --coral:#FF7E6B; --sun:#FFC24D; --sky:#5C9BFF; --berry:#FF6A9A; --gold:#E2B653;
-  --teal-soft:#123B37; --coral-soft:#3A201C; --sun-soft:#3A2E12; --sky-soft:#152A47; --berry-soft:#3A1828;
-  --on-accent:#FFFFFF; --shadow:0 10px 30px -14px rgba(0,0,0,.6); color-scheme:dark}
+  --bg:#0B1918; --surface:#122725; --surface2:#16302D; --ink:#E6F3F0; --muted:#9DB9B3; --line:#23423E;
+  --em:#25C3AF; --em-deep:#0B524C; --em-night:#062F2C; --gold:#E7BB5E; --gold-soft:#3A2F14;
+  --coral:#FF7E6B; --sky:#6A9DFF; --berry:#FF6E9F; --violet:#A28BFF; --sun:#FFC24D;
+  --em-soft:#11403A; --coral-soft:#3B211C; --sky-soft:#172B4D; --berry-soft:#3B1828; --violet-soft:#271F45; --sun-soft:#3A2D12;
+  --ok:#2FCB9E; --warn:#F0B040; --bad:#FF7466; --info:#6A9DFF;
+  --shadow:0 2px 6px rgba(0,0,0,.2),0 16px 36px -12px rgba(0,0,0,.6); color-scheme:dark}
 
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
-.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.3;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+body.has-dock{padding-bottom:calc(var(--dock-h) + 24px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap.app{max-width:760px}
+.wrap.app.wide{max-width:1040px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.35;margin:0;font-weight:700}
 p{margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:10px}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:12px}
 .num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+svg.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 
-/* top bar */
-.top{background:var(--teal-deep);color:#fff}
+/* ---------- icon badges ---------- */
+.badge{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;color:#fff;flex:none;position:relative;isolation:isolate}
+.badge::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(160deg,rgba(255,255,255,.35),rgba(255,255,255,0) 55%);z-index:-1}
+.badge svg.i{width:27px;height:27px;stroke:#fff}
+.badge.sm{width:40px;height:40px;border-radius:13px}.badge.sm svg.i{width:21px;height:21px}
+.badge.lg{width:68px;height:68px;border-radius:22px}.badge.lg svg.i{width:34px;height:34px}
+.g-em{background:linear-gradient(135deg,#1CC4AE,#0A7C70);box-shadow:0 10px 20px -10px #0A7C70}
+.g-coral{background:linear-gradient(135deg,#FF9070,#EE4848);box-shadow:0 10px 20px -10px #EE4848}
+.g-sky{background:linear-gradient(135deg,#62A8FF,#2E5FE0);box-shadow:0 10px 20px -10px #2E5FE0}
+.g-berry{background:linear-gradient(135deg,#FF7EAA,#C4306A);box-shadow:0 10px 20px -10px #C4306A}
+.g-violet{background:linear-gradient(135deg,#A68CFF,#6141D6);box-shadow:0 10px 20px -10px #6141D6}
+.g-sun{background:linear-gradient(135deg,#FFD25A,#FF961F);box-shadow:0 10px 20px -10px #FF961F}
+.g-gold{background:linear-gradient(135deg,#F5D687,#B98320);box-shadow:0 10px 20px -10px #B98320}
+.g-glass{background:rgba(255,255,255,.2);box-shadow:none}
+
+/* ---------- landing (kept) ---------- */
+.top{background:var(--em-night);color:#fff}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
-.brand{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;cursor:pointer;padding:0;text-align:right}
-.brand .mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--sun),var(--coral));display:grid;place-items:center;flex:none}
-.brand b{font-family:var(--display);font-size:1.1rem;display:block;line-height:1.2}
+.brand{display:flex;align-items:center;gap:10px;background:none;border:0;color:#fff;padding:0;text-align:right}
+.brand .mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--sun),var(--coral));display:grid;place-items:center;flex:none}
+.brand b{font-family:var(--f-brand);font-size:1.12rem;display:block;line-height:1.2}
 .brand small{opacity:.8;font-size:.8rem}
-.top-actions{display:flex;gap:8px;align-items:center}
-.pill-btn{border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.1);color:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;font-weight:700;font-size:.85rem}
-.pill-btn:hover{background:rgba(255,255,255,.2)}
-
-/* hero */
-.hero{background:radial-gradient(circle at 12% 20%,rgba(255,176,32,.28),transparent 40%),radial-gradient(circle at 90% 80%,rgba(255,106,85,.3),transparent 45%),var(--teal-deep);color:#fff;position:relative;overflow:hidden}
+.hero{background:radial-gradient(circle at 12% 20%,rgba(255,176,32,.28),transparent 40%),radial-gradient(circle at 90% 80%,rgba(255,106,85,.3),transparent 45%),var(--em-deep);color:#fff;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1.5px,transparent 1.5px);background-size:22px 22px}
-.hero .wrap{position:relative;padding-block:34px 46px;display:grid;gap:18px}
-.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:700;width:max-content;max-width:100%}
-.hero h1{font-size:clamp(2.2rem,6vw,3.8rem);font-weight:700}
+.hero .wrap{position:relative;padding-block:34px 70px;display:grid;gap:18px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:700;width:max-content;max-width:100%}
+.hero h1{font-family:var(--f-brand);font-size:clamp(2.3rem,6vw,3.9rem)}
 .hero h1 span{color:var(--sun)}
 .hero p.lead{font-size:1.1rem;max-width:58ch;opacity:.92}
 .ekg{width:100%;height:56px;display:block}
-.ekg path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:0;animation:beat 3.2s linear infinite}
+.ekg path{fill:none;stroke:var(--sun);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;animation:beat 3.2s linear infinite}
 @keyframes beat{0%{stroke-dashoffset:1200}60%{stroke-dashoffset:0}100%{stroke-dashoffset:-1200}}
 @media (prefers-reduced-motion:reduce){.ekg path{animation:none}}
-.hero-stats{display:flex;flex-wrap:wrap;gap:10px}
-.hero-stats div{background:rgba(255,255,255,.13);border-radius:14px;padding:8px 14px;font-size:.9rem}
-.hero-stats b{font-family:var(--display);font-size:1.15rem;color:var(--sun);margin-left:4px}
-
-main{padding-block:28px 40px}
-.view{display:grid;gap:22px}
-
-/* icons */
-.ic{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;flex:none;color:#fff;box-shadow:0 8px 18px -8px currentColor}
-.ic svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ic.sm{width:42px;height:42px;border-radius:14px}.ic.sm svg{width:22px;height:22px}
-.g-teal{background:linear-gradient(135deg,#19C2AE,#0A7E72)} .g-coral{background:linear-gradient(135deg,#FF8B6B,#F04A4A)}
-.g-sun{background:linear-gradient(135deg,#FFCF4A,#FF9A1F)} .g-sky{background:linear-gradient(135deg,#5AA8FF,#2F63E0)}
-.g-berry{background:linear-gradient(135deg,#FF77A6,#C92D68)} .g-gold{background:linear-gradient(135deg,#F2CB6B,#B9831C)}
-
-/* role cards */
-.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:-58px;position:relative}
-.role{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;display:grid;gap:14px;box-shadow:var(--shadow);text-align:right;cursor:pointer;transition:transform .2s}
+main{padding-block:26px 40px}
+.stack{display:grid;gap:20px}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:-80px;position:relative}
+.role{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:22px;display:grid;gap:14px;box-shadow:var(--shadow);text-align:right;transition:transform .2s}
 .role:hover{transform:translateY(-3px)}
-.role h2{font-size:1.45rem}
+.role h2{font-size:1.5rem}
 .role p{color:var(--muted)}
-.role .go{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--teal)}
+.role .go{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:var(--em)}
 .role.admin .go{color:var(--berry)}
-.role-head{display:flex;gap:14px;align-items:center}
-
+.row{display:flex;gap:14px;align-items:center}
 .sec-title{display:flex;align-items:center;gap:10px}
 .sec-title h2{font-size:1.4rem}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.step{background:var(--surface);border-radius:20px;padding:18px;display:grid;gap:10px;border:1px solid var(--line)}
-.step .n{font-family:var(--display);font-size:.85rem;color:var(--muted)}
-.step h3{font-size:1.1rem}
+.step{background:var(--surface);border-radius:22px;padding:18px;display:grid;gap:10px;border:1px solid var(--line)}
+.step .n{font-family:var(--f-display);font-size:.85rem;color:var(--muted)}
+.step h3{font-size:1.12rem}
 .step p{color:var(--muted);font-size:.95rem}
-
 .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.rule{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:18px}
-.rule p{font-size:.95rem}
+.rule{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:20px}
 .rule b{display:block}
-.r1{background:var(--teal-soft)}.r2{background:var(--sun-soft)}.r3{background:var(--sky-soft)}.r4{background:var(--berry-soft)}
+.r1{background:var(--em-soft)}.r2{background:var(--sun-soft)}.r3{background:var(--sky-soft)}.r4{background:var(--berry-soft)}
 
-/* panels & forms */
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow);display:grid;gap:16px}
-.narrow{max-width:480px;margin-inline:auto;width:100%}
-.field{display:grid;gap:6px}
-.field label{font-weight:700;font-size:.95rem}
-.field .hint{font-size:.82rem;color:var(--muted)}
-.inp{width:100%;border:2px solid var(--line);background:var(--surface2);border-radius:14px;padding:11px 14px;font-size:1rem;transition:border-color .15s}
-.inp:focus{border-color:var(--teal);outline:none}
-.inp.big{font-size:1.5rem;letter-spacing:.12em;text-align:center;font-weight:800}
-.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
-.btn{border:0;border-radius:14px;padding:12px 20px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:1rem;transition:filter .15s,transform .1s}
-.btn:active{transform:scale(.98)}
-.btn:hover{filter:brightness(1.06)}
-.btn.primary{background:linear-gradient(135deg,#17B5A3,#0A7E72);color:var(--on-accent)}
-.btn.warm{background:linear-gradient(135deg,#FF8B6B,#F04A4A);color:var(--on-accent)}
-.btn.berry{background:linear-gradient(135deg,#FF77A6,#C92D68);color:var(--on-accent)}
-.btn.ghost{background:var(--surface2);border:2px solid var(--line);color:var(--ink)}
+/* ---------- app shell ---------- */
+.appbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:linear-gradient(135deg,var(--em-night),var(--em-deep) 70%);color:#fff;box-shadow:0 8px 24px -16px rgba(0,0,0,.6)}
+body.in-app::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--em-night)}
+.appbar .wrap{display:flex;align-items:center;gap:12px;padding-block:10px}
+.appbar .who{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:1.15rem;color:#fff;flex:none;background:linear-gradient(135deg,var(--gold),#E9783F);box-shadow:0 0 0 3px rgba(255,255,255,.18)}
+.avatar svg.i{width:22px;height:22px}
+.appbar .who b{display:block;font-size:1rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.appbar .who small{display:inline-block;font-size:.74rem;background:rgba(255,255,255,.16);border-radius:999px;padding:0 10px;font-weight:700}
+.appbar .mini-brand{font-family:var(--f-brand);font-size:.95rem;opacity:.9;white-space:nowrap}
+.icon-btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:14px;padding:8px 12px;background:rgba(255,255,255,.12);color:#fff;font-weight:700;font-size:.88rem}
+.icon-btn:hover{background:rgba(255,255,255,.22)}
+.icon-btn svg.i{width:20px;height:20px}
+
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));pointer-events:none}
+.dock nav{pointer-events:auto;max-width:520px;margin:0 auto 12px;height:var(--dock-h);background:var(--surface);border:1px solid var(--line);border-radius:26px;box-shadow:0 18px 40px -16px rgba(6,47,44,.45);display:grid;grid-auto-flow:column;grid-auto-columns:1fr;align-items:center;padding-inline:6px}
+.dock button{background:none;border:0;display:grid;justify-items:center;gap:2px;color:var(--muted);font-size:.76rem;font-weight:700;padding:6px 2px;border-radius:18px}
+.dock button svg.i{width:25px;height:25px}
+.dock button[aria-current="page"]{color:var(--em)}
+.dock button[aria-current="page"] .dot{opacity:1}
+.dock .dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:0}
+.dock .fab{margin-top:-34px;color:var(--coral)}
+.dock .fab span.f{width:62px;height:62px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,#FF9070,#EE4848);color:#fff;box-shadow:0 14px 26px -10px #EE4848,0 0 0 6px var(--bg)}
+.dock .fab span.f svg.i{width:30px;height:30px;stroke:#fff;stroke-width:2.4}
+.dock .out{color:var(--bad)}
+
+/* page header band */
+.page-head{display:flex;align-items:center;gap:14px;padding:18px;border-radius:26px;color:#fff;position:relative;overflow:hidden}
+.page-head::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.12) 1.4px,transparent 1.4px);background-size:18px 18px;opacity:.7}
+.page-head>*{position:relative}
+.page-head h1{font-size:1.45rem}
+.page-head p{opacity:.9;font-size:.95rem}
+.ph-em{background:linear-gradient(135deg,#0A6A61,#14A894)}
+.ph-coral{background:linear-gradient(135deg,#E2463F,#FF8A63)}
+.ph-sky{background:linear-gradient(135deg,#2B55C9,#4F96F7)}
+.ph-berry{background:linear-gradient(135deg,#9E2357,#E0558A)}
+.ph-violet{background:linear-gradient(135deg,#4D30B8,#8E73F0)}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow);display:grid;gap:14px}
+.card.flat{box-shadow:none}
+.card h2{font-size:1.2rem}
+.headrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+
+/* welcome */
+.welcome{border-radius:28px;padding:22px;color:#fff;background:radial-gradient(circle at 15% 0%,rgba(255,210,90,.35),transparent 45%),linear-gradient(140deg,#073F3B,#0E8C7E 75%);display:grid;gap:14px;position:relative;overflow:hidden}
+.welcome::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;border:30px solid rgba(255,255,255,.06);left:-60px;bottom:-90px}
+.welcome .hi{font-family:var(--f-display);font-size:1.7rem;line-height:1.3}
+.welcome .date{font-size:.9rem;opacity:.85}
+.welcome .quote{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.12);border-radius:16px;padding:10px 14px;font-weight:700;font-size:.95rem;position:relative}
+.welcome .quote svg.i{color:var(--sun)}
+
+.cta{display:flex;align-items:center;gap:14px;border:0;width:100%;text-align:right;border-radius:24px;padding:18px;color:#fff;background:linear-gradient(135deg,#EE4848,#FF8A63);box-shadow:0 18px 30px -18px #EE4848}
+.cta b{font-family:var(--f-display);font-size:1.25rem;display:block}
+.cta span.t{flex:1}
+
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:640px){.tiles.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{border-radius:22px;padding:14px;display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);min-width:0}
+.tile b{font-family:var(--f-display);font-size:1.75rem;line-height:1.1;display:block}
+.tile span{font-size:.86rem;font-weight:700;color:var(--muted)}
+.tile.t-sky b{color:var(--sky)} .tile.t-em b{color:var(--em)} .tile.t-sun b{color:var(--warn)} .tile.t-coral b{color:var(--coral)} .tile.t-berry b{color:var(--berry)}
+
+/* status tracker */
+.track{display:grid;grid-template-columns:repeat(3,1fr);position:relative;padding-top:4px}
+.track .st{display:grid;justify-items:center;gap:6px;text-align:center;font-size:.8rem;font-weight:700;color:var(--muted);position:relative}
+.track .st::before{content:"";position:absolute;top:17px;right:50%;width:100%;height:4px;background:var(--line);z-index:0}
+.track .st:first-child::before{display:none}
+.track .st.done::before,.track .st.now::before{background:var(--em)}
+.track .st i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--surface2);border:3px solid var(--line);z-index:1;font-style:normal}
+.track .st i svg.i{width:18px;height:18px}
+.track .st.done i{background:var(--em);border-color:var(--em);color:#fff}
+.track .st.now i{background:var(--surface);border-color:var(--em);color:var(--em)}
+.track .st.bad i{background:var(--bad);border-color:var(--bad);color:#fff}
+.track .st.warn i{background:var(--sun);border-color:var(--sun);color:#fff}
+.track .st.bad::before{background:var(--bad)} .track .st.warn::before{background:var(--sun)}
+
+/* pill */
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 12px;font-weight:800;font-size:.8rem;white-space:nowrap}
+.pill svg.i{width:15px;height:15px;stroke-width:2.6}
+.p-new{background:var(--sky-soft);color:var(--info)} .p-accepted{background:var(--em-soft);color:var(--ok)}
+.p-rejected{background:var(--coral-soft);color:var(--bad)} .p-more{background:var(--sun-soft);color:var(--warn)}
+.p-late{background:var(--coral-soft);color:var(--bad)}
+
+/* excuse rows */
+.list{display:grid;gap:12px}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;text-align:right;width:100%}
+button.ex{transition:border-color .15s,transform .15s}
+button.ex:hover{border-color:var(--em);transform:translateY(-1px)}
+.ex .body{min-width:0;display:grid;gap:4px}
+.ex .top-line{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ex .top-line b{font-size:1.05rem}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.86rem}
+.meta span{display:inline-flex;align-items:center;gap:5px}
+.meta svg.i{width:15px;height:15px}
+.note{display:flex;gap:8px;align-items:flex-start;background:var(--sun-soft);border-radius:14px;padding:9px 12px;font-size:.9rem}
+.note svg.i{width:18px;height:18px;color:var(--warn);margin-top:3px}
+.empty{display:grid;justify-items:center;gap:10px;text-align:center;padding:24px 10px;color:var(--muted)}
+.empty h2{color:var(--ink)}
+
+/* buttons & fields */
+.btn{border:0;border-radius:16px;padding:13px 20px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:1rem;transition:filter .15s,transform .1s;text-decoration:none}
+.btn:active{transform:scale(.98)} .btn:hover{filter:brightness(1.05)}
+.btn svg.i{width:20px;height:20px}
+.b-em{background:linear-gradient(135deg,#17B5A3,#0A7C70);color:#fff}
+.b-coral{background:linear-gradient(135deg,#FF8A63,#EE4848);color:#fff}
+.b-berry{background:linear-gradient(135deg,#FF77A6,#C4306A);color:#fff}
+.b-sun{background:linear-gradient(135deg,#FFC94A,#F08C12);color:#fff}
+.b-ghost{background:var(--surface2);border:2px solid var(--line);color:var(--ink)}
 .btn.block{width:100%}
 .btn[disabled]{opacity:.55;cursor:not-allowed}
-.btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.err{color:var(--coral);font-weight:700;font-size:.9rem}
-.demo-note{background:var(--sun-soft);border-radius:14px;padding:10px 14px;font-size:.88rem}
+.field{display:grid;gap:7px}
+.field label,.lbl{font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:8px}
+.field label svg.i,.lbl svg.i{width:19px;height:19px;color:var(--em)}
+.hint{font-size:.82rem;color:var(--muted)}
+.inp{width:100%;border:2px solid var(--line);background:var(--surface2);border-radius:16px;padding:12px 14px;font-size:1rem;transition:border-color .15s,background .15s}
+.inp:focus{border-color:var(--em);background:var(--surface);outline:none}
+.inp.big{font-size:1.6rem;letter-spacing:.14em;text-align:center;font-weight:800;font-family:var(--f-display)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.grid2 .wide{grid-column:1/-1}
+.err{display:flex;gap:8px;align-items:center;color:var(--bad);font-weight:700;font-size:.92rem;background:var(--coral-soft);border-radius:14px;padding:10px 12px}
+.err svg.i{width:19px;height:19px}
+.demo{display:flex;gap:10px;align-items:center;background:var(--sun-soft);border-radius:16px;padding:10px 14px;font-size:.88rem}
+.demo svg.i{color:var(--warn)}
 
-/* chips */
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:2px solid var(--line);background:var(--surface2);border-radius:999px;padding:7px 14px;cursor:pointer;font-weight:700;font-size:.92rem;display:inline-flex;gap:6px;align-items:center}
-.chip[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-soft);color:var(--ink)}
-.status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 12px;font-weight:800;font-size:.82rem;white-space:nowrap}
-.status::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
-.s-new{background:var(--sky-soft);color:var(--sky)} .s-accepted{background:var(--teal-soft);color:var(--teal)}
-.s-rejected{background:var(--coral-soft);color:var(--coral)} .s-more{background:var(--sun-soft);color:#B7740A}
-:root[data-theme="dark"] .s-more{color:var(--sun)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .s-more{color:var(--sun)}}
+/* login */
+.login{max-width:460px;margin-inline:auto;width:100%}
+.login .card{padding:24px}
+.top-icon{display:grid;justify-items:center;gap:10px;text-align:center;margin-bottom:4px}
 
 /* wizard */
-.stepper{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stepper div{border-radius:12px;padding:8px;text-align:center;font-weight:700;font-size:.85rem;background:var(--surface2);color:var(--muted);border:2px solid var(--line)}
-.stepper div.on{background:var(--teal-soft);border-color:var(--teal);color:var(--ink)}
-.stepper div.done{background:var(--teal);border-color:var(--teal);color:var(--on-accent)}
-.days-box{display:flex;align-items:center;gap:12px;background:var(--sky-soft);border-radius:16px;padding:12px 16px}
-.days-box b{font-family:var(--display);font-size:1.8rem;color:var(--sky)}
-.drop{border:2.5px dashed var(--teal);border-radius:20px;padding:24px;text-align:center;background:var(--teal-soft);cursor:pointer;display:grid;gap:8px;justify-items:center}
-.drop.over{background:var(--sun-soft);border-color:var(--sun)}
-.preview{display:flex;gap:12px;align-items:center;background:var(--surface2);border-radius:16px;padding:10px;border:1px solid var(--line)}
-.preview img{width:88px;height:88px;object-fit:cover;border-radius:12px}
-.preview .pdf{width:88px;height:88px;border-radius:12px;display:grid;place-items:center;background:var(--coral-soft);color:var(--coral);font-weight:800;font-family:var(--display)}
-.check{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);padding:12px;border-radius:14px}
-.check input{width:20px;height:20px;accent-color:var(--teal);margin-top:4px;flex:none}
-.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.progress{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.progress .pg{display:grid;gap:6px;justify-items:center;text-align:center;font-size:.8rem;font-weight:800;color:var(--muted)}
+.progress .bar{height:7px;width:100%;border-radius:99px;background:var(--line);overflow:hidden}
+.progress .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--em),var(--gold));border-radius:99px;transition:width .4s}
+.progress .pg.done .bar i,.progress .pg.on .bar i{width:100%}
+.progress .pg.on{color:var(--ink)}
+.reasons{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:10px}
+.reason{border:2px solid var(--line);background:var(--surface);border-radius:20px;padding:12px 6px;display:grid;justify-items:center;gap:8px;font-weight:800;font-size:.88rem;text-align:center;transition:border-color .15s,transform .15s}
+.reason:hover{transform:translateY(-2px)}
+.reason[aria-pressed="true"]{border-color:var(--em);background:var(--em-soft);box-shadow:0 0 0 3px color-mix(in srgb,var(--em) 25%,transparent)}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:420px){.dates{grid-template-columns:1fr}}
+.dcard{border:2px solid var(--line);background:var(--surface2);border-radius:20px;padding:12px;display:grid;gap:6px;min-width:0}
+.dcard .lbl{font-size:.85rem}
+.dcard .inp{background:var(--surface);padding:10px}
+.dcard .hj{font-size:.8rem;color:var(--muted);min-height:1.3em}
+.count{display:flex;align-items:center;gap:14px;border-radius:20px;padding:12px 16px;background:linear-gradient(135deg,var(--sky-soft),var(--violet-soft))}
+.count .ring{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:4px solid var(--sky);font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--sky);flex:none}
+.count b{display:block}
+.choice{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.choice button{border:2px solid var(--line);background:var(--surface);border-radius:18px;padding:12px;display:flex;align-items:center;gap:10px;font-weight:800}
+.choice button[aria-pressed="true"]{border-color:var(--em);background:var(--em-soft)}
+.upload{border:3px dashed color-mix(in srgb,var(--em) 55%,transparent);border-radius:24px;padding:22px 16px;text-align:center;display:grid;justify-items:center;gap:10px;background:var(--em-soft)}
+.upload.over{border-color:var(--sun);background:var(--sun-soft)}
+.upload .ups{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.preview{display:flex;gap:12px;align-items:center;background:var(--surface2);border-radius:18px;padding:10px;border:1px solid var(--line)}
+.preview img{width:84px;height:84px;object-fit:cover;border-radius:14px}
+.preview .pdf{width:84px;height:84px;border-radius:14px;display:grid;place-items:center;background:var(--coral-soft);color:var(--bad);font-weight:800;font-family:var(--f-display);flex:none}
+.preview .x{margin-inline-start:auto;border:0;background:var(--coral-soft);color:var(--bad);width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none}
+.pledge{display:flex;gap:12px;align-items:flex-start;background:var(--surface2);border:2px solid var(--line);padding:14px;border-radius:18px;cursor:pointer}
+.pledge input{width:22px;height:22px;accent-color:var(--em);margin-top:3px;flex:none}
+.wiz-actions{display:flex;gap:10px}
+.wiz-actions .btn{flex:1}
 
-/* student dashboard */
-.hello{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
-.hello h2{font-size:1.5rem}
-.meter{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.tile{border-radius:20px;padding:14px 16px;display:grid;gap:2px}
-.tile b{font-family:var(--display);font-size:1.9rem;line-height:1.2}
-.tile span{font-size:.9rem;font-weight:700}
-.t1{background:var(--sky-soft)}.t1 b{color:var(--sky)}
-.t2{background:var(--teal-soft)}.t2 b{color:var(--teal)}
-.t3{background:var(--sun-soft)}.t3 b{color:#C17A08}
-.t4{background:var(--coral-soft)}.t4 b{color:var(--coral)}
-:root[data-theme="dark"] .t3 b{color:var(--sun)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .t3 b{color:var(--sun)}}
-.quote{background:linear-gradient(135deg,var(--teal-soft),var(--sun-soft));border-radius:20px;padding:16px 18px;display:flex;gap:12px;align-items:center;font-weight:700}
-.list{display:grid;gap:10px}
-.item{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;display:grid;gap:6px}
-.item-top{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-.item-top b{font-size:1.02rem}
-.meta{color:var(--muted);font-size:.88rem;display:flex;flex-wrap:wrap;gap:4px 14px}
-.note-box{background:var(--sun-soft);border-radius:12px;padding:8px 12px;font-size:.9rem}
-.empty{text-align:center;color:var(--muted);padding:26px;display:grid;justify-items:center;gap:10px}
+/* the pass (signature) */
+.pass{border-radius:26px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line)}
+.pass .ph{background:linear-gradient(135deg,#073F3B,#0E9C8D);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px;position:relative}
+.pass .ph b{font-family:var(--f-display);font-size:1.2rem;display:block}
+.pass .ph small{opacity:.85}
+.pass .ph svg.ekg2{position:absolute;left:0;bottom:6px;width:46%;height:26px;opacity:.5}
+.pass .perf{height:24px;position:relative;background:var(--surface)}
+.pass .perf::before{content:"";position:absolute;left:18px;right:18px;top:50%;border-top:3px dashed var(--line)}
+.pass .perf::after,.pass .perf b{content:"";position:absolute;top:0;width:24px;height:24px;border-radius:50%;background:var(--bg)}
+.pass .perf::after{right:-12px} .pass .perf b{left:-12px}
+.sheet .pass .perf::after,.sheet .pass .perf b{background:var(--bg)}
+.pass .pb{padding:4px 18px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}
+.pass .pb div{min-width:0}
+.pass .pb small{display:block;color:var(--muted);font-size:.78rem;font-weight:700}
+.pass .pb span{font-weight:800;overflow-wrap:anywhere}
+.pass .pb .full{grid-column:1/-1}
+.ref{font-family:var(--f-display);direction:ltr;display:inline-block;letter-spacing:.05em}
 
 /* success */
-.success{text-align:center;display:grid;justify-items:center;gap:12px}
-.refcode{font-family:var(--display);font-size:1.6rem;background:var(--sun-soft);border:2px dashed var(--sun);border-radius:16px;padding:8px 22px;direction:ltr;letter-spacing:.06em}
-#confetti{position:fixed;inset:0;pointer-events:none;z-index:50;width:100%;height:100%}
+.done-hero{display:grid;justify-items:center;text-align:center;gap:10px;padding:10px 0}
+.done-hero .big{width:96px;height:96px;border-radius:32px;display:grid;place-items:center;background:linear-gradient(135deg,#1CC4AE,#0A7C70);box-shadow:0 20px 36px -16px #0A7C70;color:#fff;animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+.done-hero .big svg.i{width:52px;height:52px;stroke-width:2.6}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.done-hero .big{animation:none}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;height:100%}
 
 /* admin */
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.toolbar .inp{flex:1 1 220px;width:auto}
-.tabs{display:flex;flex-wrap:wrap;gap:8px}
-.adm-item{cursor:pointer;transition:border-color .15s}
-.adm-item:hover{border-color:var(--teal)}
-.late-tag{background:var(--coral-soft);color:var(--coral);border-radius:8px;padding:0 8px;font-size:.78rem;font-weight:800}
-.modal-bg{position:fixed;inset:0;background:rgba(5,25,23,.55);z-index:40;display:grid;place-items:center;padding:16px}
-.modal{background:var(--surface);border-radius:24px;max-width:720px;width:100%;max-height:90vh;overflow:auto;padding:22px;display:grid;gap:14px}
-.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
-.kv div{background:var(--surface2);border-radius:12px;padding:8px 12px;min-width:0}
-.kv small{display:block;color:var(--muted);font-size:.78rem}
-.kv span{font-weight:700;overflow-wrap:anywhere}
-.filebox{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface2);min-height:120px;display:grid;place-items:center}
+.search{position:relative}
+.search svg.i{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);width:20px;height:20px}
+.search .inp{padding-right:44px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.fchip{flex:none;border:2px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:800;font-size:.9rem;display:inline-flex;align-items:center;gap:8px;color:var(--ink)}
+.fchip .c{min-width:24px;height:24px;border-radius:99px;display:grid;place-items:center;font-size:.78rem;background:var(--surface2);padding:0 6px}
+.fchip[aria-pressed="true"]{color:#fff;border-color:transparent}
+.fchip[aria-pressed="true"] .c{background:rgba(255,255,255,.25)}
+.fchip.k-new[aria-pressed="true"]{background:var(--sky)} .fchip.k-more[aria-pressed="true"]{background:var(--warn)}
+.fchip.k-accepted[aria-pressed="true"]{background:var(--ok)} .fchip.k-rejected[aria-pressed="true"]{background:var(--bad)}
+.fchip.k-all[aria-pressed="true"]{background:var(--em-deep)}
+.initial{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-weight:700;font-size:1.2rem;flex:none}
+.initial.sm{width:36px;height:36px;border-radius:12px;font-size:1rem}
+.adm-grid{display:grid;gap:12px}
+@media (min-width:860px){.adm-grid{grid-template-columns:1fr 1fr}}
+
+/* sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(4,30,28,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+@media (min-width:720px){.sheet-bg{align-items:center;padding:16px}}
+.sheet{background:var(--bg);width:100%;max-width:720px;max-height:92vh;overflow:auto;border-radius:28px 28px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);animation:up .3s ease}
+@media (min-width:720px){.sheet{border-radius:28px}}
+@keyframes up{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}}
+.sh-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:12px;padding:16px 18px;background:linear-gradient(135deg,#9E2357,#E0558A);color:#fff}
+.sh-head.em{background:linear-gradient(135deg,#0A6A61,#14A894)}
+.sh-head h2{font-size:1.2rem;flex:1;min-width:0}
+.sh-body{padding:16px;display:grid;gap:14px}
+.close{border:0;width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;flex:none}
+.filebox{border-radius:20px;overflow:hidden;background:var(--surface);border:1px solid var(--line);min-height:120px;display:grid;place-items:center}
 .filebox img{width:100%;display:block}
 .filebox iframe{width:100%;height:520px;border:0}
-.decide{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.decide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:440px){.decide{grid-template-columns:1fr}}
+.decide .btn{flex-direction:column;gap:4px;padding:12px 8px;font-size:.92rem}
+@media (max-width:440px){.decide .btn{flex-direction:row}}
+.bars{display:grid;gap:12px}
+.barrow{display:grid;grid-template-columns:minmax(0,auto) 1fr auto;gap:10px;align-items:center}
+.barrow .lb{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;min-width:0}
+.barrow .track2{height:12px;border-radius:99px;background:var(--surface2);overflow:hidden;border:1px solid var(--line)}
+.barrow .track2 i{display:block;height:100%;border-radius:99px}
+@media (max-width:460px){.barrow{grid-template-columns:1fr auto}.barrow .track2{grid-column:1/-1;order:3}}
 
-.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:999px;font-weight:700;z-index:60;max-width:calc(100% - 32px);text-align:center}
+.toast{position:fixed;bottom:calc(var(--dock-h) + 30px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 20px;border-radius:999px;font-weight:700;z-index:70;max-width:calc(100% - 32px);text-align:center;box-shadow:var(--shadow)}
 
-footer{border-top:1px solid var(--line);padding-block:20px 28px}
+footer{padding-block:22px 30px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;color:var(--muted);font-size:.88rem}
+body.has-dock footer{padding-block:4px 0}
 .credit{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#F7DC8E,#D9A63A);color:#3E2A00;border-radius:999px;padding:6px 16px;font-weight:800}
 .credit svg{width:18px;height:18px;fill:#3E2A00}
-@media (max-width:560px){.hero .wrap{padding-block:24px 40px}.roles{margin-top:-46px}.stepper div{font-size:.75rem}}
+@media (max-width:560px){.hero .wrap{padding-block:24px 64px}.roles{margin-top:-62px}}
 </style>
 
 <div id="app">
-  <header class="top">
+  <header class="top" id="landTop">
     <div class="wrap">
       <button class="brand" id="homeBtn" type="button" aria-label="الصفحة الرئيسية">
         <span class="mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/><path d="M7.5 12h2.2l1.3-2.5 2 5 1.3-2.5h2.2"/></svg></span>
-        <span><b>انضباطي سر تميزي</b><small id="schoolName">الثانوية الخامسة والأربعون</small></span>
+        <span><b>انضباطي سر تميزي</b><small class="schoolName">الثانوية الخامسة والأربعون</small></span>
       </button>
-      <div class="top-actions" id="topActions"></div>
     </div>
   </header>
-
   <section class="hero" id="hero">
     <div class="wrap">
       <span class="eyebrow">منصة الأعذار الطبية للطالبات</span>
@@ -225,15 +371,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
       <svg class="ekg" viewBox="0 0 1000 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 H300 l18 -4 12 4 H380 l14 -24 16 46 16 -36 10 14 H560 l12 -6 10 6 H700 l14 -22 16 40 14 -30 10 12 H1000"/></svg>
     </div>
   </section>
-
+  <header class="appbar" id="appbar" hidden></header>
   <main class="wrap" id="main"></main>
-
   <footer>
     <div class="wrap">
-      <span>منصة انضباطي · <span id="footSchool">الثانوية الخامسة والأربعون</span></span>
+      <span>منصة انضباطي · <span class="schoolName">الثانوية الخامسة والأربعون</span></span>
       <span class="credit"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>تصميم أ. مديحه علي العبيدي</span>
     </div>
   </footer>
+  <div class="dock" id="dock" hidden></div>
 </div>
 <canvas id="confetti" hidden></canvas>
 
@@ -252,51 +398,88 @@ document.documentElement.lang = "ar";
 document.documentElement.dir = "rtl";
 let DEMO = true;
 const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 const main = $("#main");
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+$$(".schoolName").forEach(e => e.textContent = CONFIG.SCHOOL);
 
-const ICONS = {
-  student:'<svg viewBox="0 0 24 24"><path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg>',
-  admin:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>',
-  id:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.6-1.5 4.4-1.5 5 0M14 10h4M14 13h3"/></svg>',
-  calendar:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
-  upload:'<svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>',
-  check:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>',
-  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
-  file:'<svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>',
-  lock:'<svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>',
-  heart:'<svg viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/></svg>',
-  star:'<svg viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/></svg>',
-  arrow:'<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
-  back:'<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-  plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
-  out:'<svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg>',
-  search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>',
-  download:'<svg viewBox="0 0 24 24"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></svg>',
-  refresh:'<svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/></svg>'
+/* ---------- الأيقونات ---------- */
+const P = {
+  home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  list:'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  out:'<path d="M15 4h3a2 2 0 012 2v12a2 2 0 01-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/>',
+  student:'<path d="M22 9L12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/>',
+  shield:'<path d="M12 3l7 3v5c0 5-3.2 8.3-7 10-3.8-1.7-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  id:'<rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.6-1.5 4.4-1.5 5 0M14 10h4M14 13h3"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/>',
+  upload:'<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/>',
+  camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7"/>',
+  checkc:'<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  alert:'<path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17.5v.5"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+  file:'<path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+  lock:'<rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 018 0v3"/>',
+  heart:'<path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/>',
+  star:'<path d="M12 2.8l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.3l-5.7 3 1.1-6.3L2.8 9.5l6.4-.9z"/>',
+  next:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
+  prev:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  download:'<path d="M12 4v12M7 11l5 5 5-5M4 20h16"/>',
+  refresh:'<path d="M20 11a8 8 0 10-2.3 5.7M20 4v7h-7"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>',
+  inbox:'<path d="M3 13l3-8h12l3 8v6a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M3 13h5l1 3h6l1-3h5"/>',
+  building:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M10 21v-4h4v4"/>',
+  hash:'<path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/>',
+  copy:'<rect x="8" y="8" width="12" height="12" rx="3"/><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
+  thermo:'<path d="M14 14.8V5a2 2 0 10-4 0v9.8a4 4 0 104 0z"/><path d="M12 9v7"/>',
+  hospital:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M12 7v6M9 10h6M10 21v-4h4v4"/>',
+  bed:'<path d="M3 19V6M21 19v-6a3 3 0 00-3-3h-8v6"/><path d="M3 16h18"/><circle cx="6.5" cy="11.5" r="2"/>',
+  pulse:'<path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/><path d="M6.5 12.5h2.8l1.4-2.8 2 5 1.4-2.2h2.9"/>',
+  tooth:'<path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2.8 1.4 4.2 1.9 7 .4 2.5 1 6.6 2.6 6.6 1.5 0 1.8-3.6 2.4-5.8.3-1 2.9-1 3.2 0 .6 2.2.9 5.8 2.4 5.8 1.6 0 2.2-4.1 2.6-6.6.5-2.8 1.9-4.2 1.9-7C20.5 5 19 3 16.5 3c-2 0-2.8 1-4.5 1S9.5 3 7.5 3z"/>',
+  pill:'<path d="M10.5 3.5a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/><path d="M7 7l7 7"/>',
+  dots:'<circle cx="5.5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18.5" cy="12" r="1.6"/>'
 };
-const ic = (name, g, sm) => `<span class="ic ${sm?"sm":""} ${g}">${ICONS[name]}</span>`;
+const I = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${P[n]||""}</svg>`;
+const B = (n, g, size) => `<span class="badge ${size||""} ${g||""}">${I(n)}</span>`;
 
 const STATUS = {
-  new:{t:"قيد المراجعة",c:"s-new"}, accepted:{t:"عذر مقبول",c:"s-accepted"},
-  rejected:{t:"غير مقبول",c:"s-rejected"}, more:{t:"مطلوب استكمال",c:"s-more"}
+  new:{t:"قيد المراجعة", c:"p-new", i:"clock"},
+  accepted:{t:"عذر مقبول", c:"p-accepted", i:"check"},
+  rejected:{t:"غير مقبول", c:"p-rejected", i:"x"},
+  more:{t:"مطلوب استكمال", c:"p-more", i:"alert"}
 };
+const pill = s => `<span class="pill ${STATUS[s]?.c||""}">${I(STATUS[s]?.i)}${STATUS[s]?.t||""}</span>`;
 const REASONS = [
-  {k:"مرض عارض",i:"🤒"},{k:"مراجعة مستشفى",i:"🏥"},{k:"تنويم",i:"🛏️"},{k:"عملية جراحية",i:"🩺"},
-  {k:"موعد أسنان",i:"🦷"},{k:"مرض مزمن",i:"💊"},{k:"أخرى",i:"📝"}
+  {k:"مرض عارض", i:"thermo", g:"g-coral", c:"var(--coral)"},
+  {k:"مراجعة مستشفى", i:"hospital", g:"g-sky", c:"var(--sky)"},
+  {k:"تنويم", i:"bed", g:"g-violet", c:"var(--violet)"},
+  {k:"عملية جراحية", i:"pulse", g:"g-berry", c:"var(--berry)"},
+  {k:"موعد أسنان", i:"tooth", g:"g-em", c:"var(--em)"},
+  {k:"مرض مزمن", i:"pill", g:"g-sun", c:"var(--sun)"},
+  {k:"أخرى", i:"dots", g:"g-gold", c:"var(--gold)"}
 ];
+const reasonOf = k => REASONS.find(r => r.k === k) || REASONS[REASONS.length-1];
 const GRADES = ["الأول الثانوي","الثاني الثانوي","الثالث الثانوي"];
+const GRADE_G = {"الأول الثانوي":"g-sky","الثاني الثانوي":"g-violet","الثالث الثانوي":"g-berry"};
+const GRADE_N = {"الأول الثانوي":"١","الثاني الثانوي":"٢","الثالث الثانوي":"٣"};
 const QUOTES = [
-  "صحتك أولاً، وانضباطك يصنع تميزك 🌟",
-  "كل يوم حضور هو خطوة نحو حلمك",
-  "الطالبة المنضبطة تُخبر مدرستها، ولا تترك غيابها بلا عذر",
-  "عودي بسلامة، دروسك بانتظارك 💚"
+  "صحتك أولاً، وانضباطك يصنع تميزك",
+  "كل يوم حضور خطوة نحو حلمك",
+  "الطالبة المنضبطة تُبلغ مدرستها ولا تترك غيابها بلا عذر",
+  "عودي بسلامة، دروسك بانتظارك"
 ];
-["schoolName","footSchool"].forEach(id => $("#"+id).textContent = CONFIG.SCHOOL);
 
 /* ---------- تخزين الجهاز (تذكر الدخول 7 أيام) ---------- */
 const store = {
-  get(k){ try{ const v = JSON.parse(localStorage.getItem("anz_"+k)); if(!v) return null; if(v.exp && v.exp < Date.now()){ localStorage.removeItem("anz_"+k); return null;} return v.val; }catch(e){ return null; } },
+  get(k){ try{ const v = JSON.parse(localStorage.getItem("anz_"+k)); if(!v) return null; if(v.exp && v.exp < Date.now()){ localStorage.removeItem("anz_"+k); return null; } return v.val; }catch(e){ return null; } },
   set(k,val,days){ try{ localStorage.setItem("anz_"+k, JSON.stringify({val, exp: days ? Date.now()+days*864e5 : 0})); }catch(e){} },
   del(k){ try{ localStorage.removeItem("anz_"+k); }catch(e){} }
 };
@@ -313,17 +496,20 @@ function schoolDays(a, b){
 }
 function lateBy(toStr){
   const d = toDate(toStr); d.setDate(d.getDate()+1);
-  while(!isSchoolDay(d)) d.setDate(d.getDate()+1); // يوم العودة
+  while(!isSchoolDay(d)) d.setDate(d.getDate()+1);
   const today = new Date(); today.setHours(0,0,0,0);
   let n = 0; const c = new Date(d);
   while(c < today){ c.setDate(c.getDate()+1); if(isSchoolDay(c)) n++; }
-  return n; // أيام دراسة مضت بعد يوم العودة
+  return n;
 }
 const fmt = s => { if(!s) return "—"; const d = new Date(s.length<=10 ? s+"T00:00:00" : s);
-  try{ return d.toLocaleDateString("ar-SA-u-ca-gregory-nu-arab",{day:"numeric",month:"long",year:"numeric"}); }catch(e){ return s.slice(0,10); } };
-const hijri = s => { try{ return new Date(s+"T00:00:00").toLocaleDateString("ar-SA-u-ca-islamic-umalqura",{day:"numeric",month:"long"}); }catch(e){ return ""; } };
+  try{ return d.toLocaleDateString("ar-SA-u-ca-gregory-nu-arab",{day:"numeric",month:"long"}); }catch(e){ return s.slice(0,10); } };
+const hijri = s => { try{ return new Date(s+"T00:00:00").toLocaleDateString("ar-SA-u-ca-islamic-umalqura",{day:"numeric",month:"long"}) + " هـ"; }catch(e){ return ""; } };
+const todayHijri = () => { try{ return new Date().toLocaleDateString("ar-SA-u-ca-islamic-umalqura",{weekday:"long",day:"numeric",month:"long",year:"numeric"}); }catch(e){ return ""; } };
 const fmtTime = s => { try{ return new Date(s).toLocaleString("ar-SA-u-ca-gregory",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"}); }catch(e){ return s; } };
+const range = (a,b) => fmt(a) + (b && b !== a ? " – " + fmt(b) : "");
 const validNid = v => /^[12]\d{9}$/.test(v);
+const firstName = n => (n || "").trim().split(/\s+/)[0] || "";
 
 /* ---------- واجهة البيانات ---------- */
 async function rpc(fn, body){
@@ -336,15 +522,16 @@ async function rpc(fn, body){
 }
 const demoDB = (() => {
   const t = new Date(); const ago = n => { const d = new Date(t); d.setDate(d.getDate()-n); return iso(d); };
-  const mk = (o) => Object.assign({id:crypto.randomUUID?crypto.randomUUID():String(Math.random()), file_type:"image/svg+xml", file_name:"تقرير-تجريبي.svg", provider_type:"حكومي", late:false, admin_note:"", reviewed_by:"", reviewed_at:null}, o);
+  const mk = o => Object.assign({id:String(Math.random()).slice(2), file_type:"image/svg+xml", file_name:"تقرير-تجريبي.svg", provider_type:"حكومي", late:false, admin_note:"", reviewed_by:"", reviewed_at:null, note:""}, o);
   return { admins:[{name:"فاطمة فلاتة", role:"وكيلة شؤون الطالبات", pin:"123456"}], rows:[
     mk({ref:"ANZ-DEMO-A1", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(16), to_date:ago(15), school_days:2, reason:"مرض عارض", provider:"مستشفى الملك فهد", leave_no:"PSL-0000000", status:"accepted", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(13)+"T09:10:00", created_at:ago(14)+"T07:40:00"}),
     mk({ref:"ANZ-DEMO-B2", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(3), to_date:ago(3), school_days:1, reason:"موعد أسنان", provider:"مجمع عيادات خاص", provider_type:"خاص", leave_no:"", status:"new", created_at:ago(1)+"T20:15:00"}),
     mk({ref:"ANZ-DEMO-C3", national_id:"1100000002", student_name:"جود (طالبة تجريبية)", grade:"الثاني الثانوي", section:"1", from_date:ago(9), to_date:ago(7), school_days:3, reason:"تنويم", provider:"مستشفى المدينة العام", leave_no:"PSL-1111111", status:"more", admin_note:"الصورة غير واضحة، فضلاً أعيدي رفع التقرير", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(5)+"T10:00:00", created_at:ago(6)+"T18:30:00"}),
-    mk({ref:"ANZ-DEMO-D4", national_id:"1100000003", student_name:"لمى (طالبة تجريبية)", grade:"الثالث الثانوي", section:"2", from_date:ago(12), to_date:ago(12), school_days:1, reason:"مراجعة مستشفى", provider:"مستوصف", provider_type:"خاص", leave_no:"", late:true, status:"new", created_at:ago(2)+"T13:05:00"})
+    mk({ref:"ANZ-DEMO-D4", national_id:"1100000003", student_name:"لمى (طالبة تجريبية)", grade:"الثالث الثانوي", section:"2", from_date:ago(12), to_date:ago(12), school_days:1, reason:"مراجعة مستشفى", provider:"مستوصف", provider_type:"خاص", leave_no:"", late:true, status:"new", created_at:ago(2)+"T13:05:00"}),
+    mk({ref:"ANZ-DEMO-E5", national_id:"1100000004", student_name:"سارة (طالبة تجريبية)", grade:"الأول الثانوي", section:"5", from_date:ago(20), to_date:ago(18), school_days:3, reason:"عملية جراحية", provider:"مستشفى الأنصار", leave_no:"PSL-2222222", status:"rejected", admin_note:"التقرير لا يحمل ختم الجهة الطبية", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(17)+"T08:00:00", created_at:ago(17)+"T06:30:00"})
   ]};
 })();
-const DEMO_FILE = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420"><rect width="600" height="420" fill="#fff"/><rect x="0" y="0" width="600" height="70" fill="#0E9C8D"/><text x="300" y="45" font-size="26" text-anchor="middle" fill="#fff" font-family="Tahoma">تقرير طبي (نموذج تجريبي)</text><g font-family="Tahoma" font-size="18" fill="#333" text-anchor="end"><text x="560" y="130">اسم المريضة: طالبة تجريبية</text><text x="560" y="175">التشخيص: —</text><text x="560" y="220">مدة الإجازة: يوم واحد</text><text x="560" y="265">الجهة: مستشفى تجريبي</text></g><circle cx="110" cy="320" r="55" fill="none" stroke="#2F7FEA" stroke-width="4"/><text x="110" y="327" font-size="16" text-anchor="middle" fill="#2F7FEA" font-family="Tahoma">ختم</text></svg>');
+const DEMO_FILE = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420"><rect width="600" height="420" fill="#fff"/><rect width="600" height="70" fill="#0E9C8D"/><text x="300" y="45" font-size="26" text-anchor="middle" fill="#fff" font-family="Tahoma">تقرير طبي (نموذج تجريبي)</text><g font-family="Tahoma" font-size="18" fill="#333" text-anchor="end"><text x="560" y="130">اسم المريضة: طالبة تجريبية</text><text x="560" y="175">التشخيص: —</text><text x="560" y="220">مدة الإجازة: يوم واحد</text><text x="560" y="265">الجهة: مستشفى تجريبي</text></g><circle cx="110" cy="320" r="55" fill="none" stroke="#2F7FEA" stroke-width="4"/><text x="110" y="327" font-size="16" text-anchor="middle" fill="#2F7FEA" font-family="Tahoma">ختم</text></svg>');
 
 const api = {
   async submit(p){
@@ -365,188 +552,306 @@ const isLocked = e => String(e && e.message || e).includes("locked");
 let toastT;
 function toast(msg){ let t = $(".toast"); if(!t){ t = document.createElement("div"); t.className = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
   t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3200); }
-function setTop(html){ $("#topActions").innerHTML = html; }
-function showHero(on){ $("#hero").hidden = !on; }
-function go(fn){ window.scrollTo({top:0, behavior:"smooth"}); fn(); }
-const demoBanner = () => DEMO ? `<div class="demo-note">⚙️ هذه نسخة معاينة ببيانات تجريبية. بعد ربط المنصة بقاعدة البيانات ستُحفظ أعذار الطالبات فعلياً.</div>` : "";
+const errBox = id => `<div class="err" id="${id}" hidden>${I("alert")}<span></span></div>`;
+function showErr(el, msg){ el.querySelector("span").textContent = msg; el.hidden = false; }
+const demoNote = () => DEMO ? `<div class="demo">${I("info")}<span>نسخة معاينة ببيانات تجريبية. على موقع المدرسة تُحفظ الأعذار فعلياً.</span></div>` : "";
+function top(){ window.scrollTo({top:0, behavior:"smooth"}); }
+const loading = msg => `<div class="stack"><div class="card"><p class="muted">${msg}</p></div></div>`;
+
+/* أوضاع الصفحة */
+function landingMode(){
+  document.body.classList.remove("in-app","has-dock");
+  $("#landTop").hidden = false; $("#hero").hidden = false; $("#appbar").hidden = true; $("#dock").hidden = true;
+  main.className = "wrap";
+}
+function appMode(bar, dock, wide){
+  document.body.classList.add("in-app","has-dock");
+  $("#landTop").hidden = true; $("#hero").hidden = true;
+  const ab = $("#appbar"); ab.hidden = false; ab.innerHTML = `<div class="wrap app ${wide?"wide":""}">${bar}</div>`;
+  const dk = $("#dock"); dk.hidden = false; dk.innerHTML = `<nav aria-label="التنقل">${dock}</nav>`;
+  main.className = "wrap app" + (wide ? " wide" : "");
+}
+function plainMode(){
+  document.body.classList.remove("has-dock"); document.body.classList.add("in-app");
+  $("#landTop").hidden = true; $("#hero").hidden = true; $("#dock").hidden = true;
+  const ab = $("#appbar"); ab.hidden = false;
+  ab.innerHTML = `<div class="wrap app"><div class="who"><span class="avatar" style="background:linear-gradient(135deg,var(--sun),var(--coral))">${I("shield")}</span><div><b style="font-family:var(--f-brand)">انضباطي سر تميزي</b><small>${esc(CONFIG.SCHOOL)}</small></div></div><button class="icon-btn" id="ab-home" type="button">${I("home")}<span>الرئيسية</span></button></div>`;
+  $("#ab-home").onclick = () => { top(); home(); };
+  main.className = "wrap app";
+}
+const dockBtn = (id, icon, label, cur, cls) => `<button type="button" id="${id}" class="${cls||""}" ${cur?'aria-current="page"':""}>${cls==="fab"?`<span class="f">${I(icon)}</span>`:I(icon)}<span>${label}</span>${cls==="fab"?"":'<span class="dot"></span>'}</button>`;
 
 /* ================== الصفحة الرئيسية ================== */
 function home(){
-  showHero(true); setTop("");
+  landingMode();
   main.innerHTML = `
-  <div class="view">
+  <div class="stack">
     <div class="roles">
       <button class="role" id="goStudent" type="button">
-        <div class="role-head">${ic("student","g-teal")}<div><h2>بوابة الطالبة</h2><p>ادخلي بسجلك المدني</p></div></div>
+        <div class="row">${B("student","g-em","lg")}<div><h2>بوابة الطالبة</h2><p>ادخلي بسجلك المدني</p></div></div>
         <p>ارفعي تقريرك الطبي، واعرفي حالة عذرك أولاً بأول، واحتفظي بسجل أعذارك كله في مكان واحد.</p>
-        <span class="go">دخول الطالبة <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+        <span class="go">دخول الطالبة ${I("next")}</span>
       </button>
       <button class="role admin" id="goAdmin" type="button">
-        <div class="role-head">${ic("admin","g-berry")}<div><h2>بوابة الإدارة</h2><p>وكيلة شؤون الطالبات والمديرة</p></div></div>
+        <div class="row">${B("shield","g-berry","lg")}<div><h2>بوابة الإدارة</h2><p>وكيلة شؤون الطالبات والمديرة</p></div></div>
         <p>استلمي الأعذار مرتبة، افتحي التقرير، واعتمدي القرار بضغطة: مقبول، غير مقبول، أو مطلوب استكمال.</p>
-        <span class="go">دخول الإدارة <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
+        <span class="go">دخول الإدارة ${I("next")}</span>
       </button>
     </div>
-
-    <div class="sec-title">${ic("star","g-sun",1)}<h2>كيف أرفع عذري؟</h2></div>
+    <div class="sec-title">${B("star","g-sun","sm")}<h2>كيف أرفع عذري؟</h2></div>
     <div class="steps">
-      <div class="step">${ic("id","g-sky")}<span class="n">الخطوة الأولى</span><h3>ادخلي بسجلك المدني</h3><p>رقم الهوية المكوّن من ١٠ أرقام، بدون كلمات مرور.</p></div>
-      <div class="step">${ic("calendar","g-sun")}<span class="n">الخطوة الثانية</span><h3>حددي أيام الغياب</h3><p>تحسب المنصة أيام الدراسة الفعلية تلقائياً.</p></div>
-      <div class="step">${ic("upload","g-coral")}<span class="n">الخطوة الثالثة</span><h3>صوّري التقرير وارفعيه</h3><p>صورة واضحة أو ملف PDF من جوالك مباشرة.</p></div>
-      <div class="step">${ic("check","g-teal")}<span class="n">الخطوة الرابعة</span><h3>تابعي القرار</h3><p>يظهر لك قرار الوكيلة وملاحظاتها في صفحتك.</p></div>
+      <div class="step">${B("id","g-sky")}<span class="n">الخطوة الأولى</span><h3>ادخلي بسجلك المدني</h3><p>رقم الهوية المكوّن من ١٠ أرقام، بدون كلمات مرور.</p></div>
+      <div class="step">${B("calendar","g-violet")}<span class="n">الخطوة الثانية</span><h3>حددي أيام الغياب</h3><p>تحسب المنصة أيام الدراسة الفعلية تلقائياً.</p></div>
+      <div class="step">${B("camera","g-coral")}<span class="n">الخطوة الثالثة</span><h3>صوّري التقرير وارفعيه</h3><p>صورة واضحة أو ملف PDF من جوالك مباشرة.</p></div>
+      <div class="step">${B("checkc","g-em")}<span class="n">الخطوة الرابعة</span><h3>تابعي القرار</h3><p>يظهر لك قرار الوكيلة وملاحظاتها في صفحتك.</p></div>
     </div>
-
-    <div class="sec-title">${ic("heart","g-coral",1)}<h2>قبل أن ترفعي عذرك</h2></div>
+    <div class="sec-title">${B("heart","g-coral","sm")}<h2>قبل أن ترفعي عذرك</h2></div>
     <div class="rules">
-      <div class="rule r1">${ic("clock","g-teal",1)}<p><b>خلال ${CONFIG.DEADLINE_DAYS} أيام دراسية</b>من يوم عودتك للمدرسة.</p></div>
-      <div class="rule r2">${ic("file","g-sun",1)}<p><b>تقرير واضح ومختوم</b>يظهر فيه الاسم والتاريخ وختم الجهة الطبية.</p></div>
-      <div class="rule r3">${ic("id","g-sky",1)}<p><b>الإجازة المرضية من «صحة»</b>اكتبي رقمها إن وُجد ليسهل التحقق منها.</p></div>
-      <div class="rule r4">${ic("lock","g-berry",1)}<p><b>تقريرك سري</b>لا تراه إلا إدارة المدرسة المخولة.</p></div>
+      <div class="rule r1">${B("clock","g-em","sm")}<p><b>خلال ${CONFIG.DEADLINE_DAYS} أيام دراسية</b>من يوم عودتك للمدرسة.</p></div>
+      <div class="rule r2">${B("file","g-sun","sm")}<p><b>تقرير واضح ومختوم</b>يظهر فيه الاسم والتاريخ وختم الجهة الطبية.</p></div>
+      <div class="rule r3">${B("hash","g-sky","sm")}<p><b>الإجازة المرضية من «صحة»</b>اكتبي رقمها إن وُجد ليسهل التحقق منها.</p></div>
+      <div class="rule r4">${B("lock","g-berry","sm")}<p><b>تقريرك سري</b>لا تراه إلا إدارة المدرسة المخولة.</p></div>
     </div>
   </div>`;
-  $("#goStudent").onclick = () => go(studentEntry);
-  $("#goAdmin").onclick = () => go(adminEntry);
+  $("#goStudent").onclick = () => { top(); studentEntry(); };
+  $("#goAdmin").onclick = () => { top(); adminEntry(); };
 }
 
 /* ================== الطالبة ================== */
-let me = null; // {nid, name, grade, section}
-function studentEntry(){ const s = store.get("student"); if(s){ me = s; return studentHome(); } studentLogin(); }
-
+let me = null, myRows = null;
+function studentEntry(){ const s = store.get("student"); if(s){ me = s; myRows = null; return studentHome(); } studentLogin(); }
 function studentLogin(){
-  showHero(false); setTop(`<button class="pill-btn" id="tb-home" type="button">الرئيسية</button>`); $("#tb-home").onclick = () => go(home);
+  plainMode();
   main.innerHTML = `
-  <div class="view narrow">
-    <div class="panel">
-      <div class="role-head">${ic("id","g-teal")}<div><h2>دخول الطالبة</h2><p style="color:var(--muted)">اكتبي رقم سجلك المدني</p></div></div>
-      ${demoBanner()}
-      <form id="loginF" class="view" style="gap:14px" novalidate>
-        <div class="field"><label for="nid">السجل المدني</label>
-          <input class="inp big num" id="nid" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="١٠ أرقام" dir="ltr">
-          <span class="hint">${DEMO ? "للتجربة: 1100000001" : "يبدأ بالرقم 1 أو 2"}</span></div>
-        <div class="err" id="loginErr" hidden></div>
-        <button class="btn primary block" type="submit">دخول ${ICONS.arrow}</button>
+  <div class="login stack">
+    <div class="card">
+      <div class="top-icon">${B("id","g-em","lg")}<h1 style="font-size:1.5rem">دخول الطالبة</h1><p class="muted">اكتبي رقم سجلك المدني فقط</p></div>
+      ${demoNote()}
+      <form id="loginF" class="stack" style="gap:14px" novalidate>
+        <div class="field"><label for="nid">${I("hash")} السجل المدني</label>
+          <input class="inp big num" id="nid" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="••••••••••" dir="ltr">
+          <span class="hint">${DEMO ? "للتجربة: 1100000001" : "١٠ أرقام تبدأ بـ 1 أو 2"}</span></div>
+        ${errBox("loginErr")}
+        <button class="btn b-em block" type="submit">دخول ${I("next")}</button>
       </form>
     </div>
+    <p class="muted" style="text-align:center;font-size:.9rem">يبقى دخولك محفوظاً على جوالك ٧ أيام.</p>
   </div>`;
   const inp = $("#nid");
   inp.addEventListener("input", () => { inp.value = inp.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/\D/g,"").slice(0,10); });
   inp.focus();
   $("#loginF").onsubmit = async e => {
-    e.preventDefault(); const v = inp.value, er = $("#loginErr");
-    if(!validNid(v)){ er.textContent = "رقم السجل المدني يتكون من ١٠ أرقام ويبدأ بـ 1 أو 2."; er.hidden = false; return; }
-    er.hidden = true;
+    e.preventDefault(); const v = inp.value, er = $("#loginErr"), b = e.target.querySelector("button");
+    if(!validNid(v)){ showErr(er, "رقم السجل المدني يتكون من ١٠ أرقام ويبدأ بـ 1 أو 2."); return; }
+    er.hidden = true; b.disabled = true;
     let rows = [];
-    try{ rows = await api.my(v); }catch(err){ er.textContent = "تعذر الاتصال بالمنصة، تأكدي من الإنترنت وحاولي مرة أخرى."; er.hidden = false; return; }
+    try{ rows = await api.my(v); }catch(err){ b.disabled = false; showErr(er, "تعذر الاتصال بالمنصة. تأكدي من الإنترنت وحاولي مرة أخرى."); return; }
     const last = rows[0];
     me = { nid:v, name:last?.student_name || "", grade:last?.grade || "", section:last?.section || "" };
-    store.set("student", me, 7);
-    studentHome(rows);
+    store.set("student", me, 7); myRows = rows;
+    studentHome();
   };
 }
-
-async function studentHome(pre){
-  showHero(false);
-  setTop(`<button class="pill-btn" id="tb-out" type="button">خروج</button>`);
-  $("#tb-out").onclick = () => { store.del("student"); me = null; go(home); };
-  main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تحميل صفحتك…</p></div></div>`;
-  let rows = pre;
-  if(!rows){ try{ rows = await api.my(me.nid); }catch(e){ rows = []; toast("تعذر تحميل أعذارك الآن"); } }
+function studentShell(cur){
+  const nm = me.name ? firstName(me.name) : "";
+  appMode(
+    `<div class="who"><span class="avatar">${nm ? esc(nm.slice(0,1)) : I("user")}</span><div><b>${esc(me.name || "طالبة")}</b><small>طالبة${me.grade ? " · " + esc(me.grade) : ""}</small></div></div>
+     <span class="mini-brand">انضباطي</span>`,
+    dockBtn("d-home","home","الرئيسية",cur==="home") + dockBtn("d-new","plus","عذر جديد",false,"fab") + dockBtn("d-list","list","أعذاري",cur==="list") + dockBtn("d-out","out","خروج",false,"out")
+  );
+  $("#d-home").onclick = () => { top(); studentHome(); };
+  $("#d-new").onclick = () => { top(); wizard(); };
+  $("#d-list").onclick = () => { top(); studentList(); };
+  $("#d-out").onclick = () => { store.del("student"); me = null; myRows = null; top(); home(); toast("تم تسجيل الخروج"); };
+}
+async function loadMine(force){
+  if(myRows && !force) return myRows;
+  try{ myRows = await api.my(me.nid); }catch(e){ myRows = myRows || []; toast("تعذر تحميل أعذارك الآن"); }
+  return myRows;
+}
+function trackerHTML(r){
+  const s = r.status;
+  const last = s === "accepted" ? ["done","checkc","مقبول"] : s === "rejected" ? ["bad","x","غير مقبول"] : s === "more" ? ["warn","alert","مطلوب استكمال"] : ["","star","القرار"];
+  return `<div class="track">
+    <div class="st done"><i>${I("upload")}</i>وصل العذر</div>
+    <div class="st ${s==="new"?"now":"done"}"><i>${I("eye")}</i>مراجعة الوكيلة</div>
+    <div class="st ${last[0]}"><i>${I(last[1])}</i>${last[2]}</div>
+  </div>`;
+}
+function exRow(r, clickable){
+  const R = reasonOf(r.reason);
+  const tag = clickable ? "button" : "div";
+  return `<${tag} ${clickable?`type="button" data-ref="${esc(r.ref)}"`:""} class="ex">
+    ${B(R.i, R.g, "sm")}
+    <div class="body">
+      <div class="top-line"><b>${esc(r.reason || "عذر طبي")}</b>${pill(r.status)}</div>
+      <div class="meta"><span>${I("calendar")}${range(r.from_date, r.to_date)}</span><span class="num">${I("clock")}${r.school_days || 0} يوم دراسي</span></div>
+      ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</span></div>` : ""}
+    </div>
+  </${tag}>`;
+}
+async function studentHome(){
+  studentShell("home");
+  main.innerHTML = loading("جارٍ تحميل صفحتك…");
+  const rows = await loadMine();
   const c = k => rows.filter(r => r.status === k).length;
   const days = rows.filter(r => r.status !== "rejected").reduce((s,r) => s + (r.school_days||0), 0);
-  const q = QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  const last = rows[0];
+  const q = QUOTES[new Date().getDate() % QUOTES.length];
   main.innerHTML = `
-  <div class="view">
-    ${demoBanner()}
-    <div class="hello">
-      <div class="role-head">${ic("student","g-teal")}<div><h2>أهلاً ${esc(me.name ? me.name.split(" ")[0] : "بك")}</h2><p style="color:var(--muted)" class="num">السجل المدني: ${esc(me.nid.slice(0,2))}••••••${esc(me.nid.slice(-2))}</p></div></div>
-      <button class="btn warm" id="newEx" type="button">${ICONS.plus} رفع عذر طبي جديد</button>
+  <div class="stack">
+    ${demoNote()}
+    <section class="welcome">
+      <div class="date">${esc(todayHijri())}</div>
+      <div class="hi">أهلاً ${esc(me.name ? firstName(me.name) : "بك")}</div>
+      <div class="quote">${I("star")}<span>${esc(q)}</span></div>
+    </section>
+    <button class="cta" id="bigNew" type="button">${B("camera","g-glass","")}<span class="t"><b>ارفعي عذرك الطبي</b><span>صوّري التقرير وأرسليه في دقيقتين</span></span>${I("next")}</button>
+    <div class="tiles four">
+      <div class="tile t-sky">${B("clock","g-sky","sm")}<div><b class="num">${c("new")}</b><span>قيد المراجعة</span></div></div>
+      <div class="tile t-em">${B("check","g-em","sm")}<div><b class="num">${c("accepted")}</b><span>مقبولة</span></div></div>
+      <div class="tile t-sun">${B("alert","g-sun","sm")}<div><b class="num">${c("more")}</b><span>تحتاج استكمال</span></div></div>
+      <div class="tile t-coral">${B("calendar","g-coral","sm")}<div><b class="num">${days}</b><span>أيام بعذر</span></div></div>
     </div>
-    <div class="meter">
-      <div class="tile t1"><b class="num">${c("new")}</b><span>قيد المراجعة</span></div>
-      <div class="tile t2"><b class="num">${c("accepted")}</b><span>أعذار مقبولة</span></div>
-      <div class="tile t3"><b class="num">${c("more")}</b><span>مطلوب استكمالها</span></div>
-      <div class="tile t4"><b class="num">${days}</b><span>أيام غياب بعذر</span></div>
-    </div>
-    <div class="quote">${ic("star","g-sun",1)}<span>${esc(q)}</span></div>
-    <div class="sec-title">${ic("file","g-sky",1)}<h2>سجل أعذاري</h2></div>
-    <div class="list">${rows.length ? rows.map(r => `
-      <div class="item">
-        <div class="item-top"><b>${esc(r.reason || "عذر طبي")}</b><span class="status ${STATUS[r.status]?.c}">${STATUS[r.status]?.t}</span></div>
-        <div class="meta"><span>${fmt(r.from_date)}${r.to_date !== r.from_date ? " ← " + fmt(r.to_date) : ""}</span><span class="num">${r.school_days || 0} يوم دراسي</span><span dir="ltr" class="num">${esc(r.ref)}</span></div>
-        ${r.admin_note ? `<div class="note-box"><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</div>` : ""}
-        ${r.status === "more" ? `<button class="btn ghost redo" type="button" data-ref="${esc(r.ref)}">${ICONS.upload} إعادة رفع التقرير</button>` : ""}
-      </div>`).join("") : `<div class="empty">${ic("heart","g-teal")}<p>لا توجد أعذار مسجلة. نتمنى لك دوام الصحة والحضور 💚</p></div>`}
+    ${last ? `
+    <div class="card">
+      <div class="headrow"><h2>آخر عذر رفعتِه</h2><span class="ref num muted" style="font-size:.85rem">${esc(last.ref)}</span></div>
+      ${trackerHTML(last)}
+      ${exRow(last, false)}
+      ${last.status === "more" ? `<button class="btn b-sun block" id="redoLast" type="button">${I("upload")} إعادة رفع التقرير</button>` : ""}
+      ${rows.length > 1 ? `<button class="btn b-ghost block" id="allMine" type="button">${I("list")} كل أعذاري (${rows.length})</button>` : ""}
+    </div>` : `
+    <div class="card"><div class="empty">${B("heart","g-em","lg")}<h2>لا توجد أعذار مسجلة</h2><p>نتمنى لك دوام الصحة والحضور. إن غبتِ يوماً لظرف صحي، ارفعي عذرك من الزر الأحمر.</p></div></div>`}
+  </div>`;
+  $("#bigNew").onclick = () => { top(); wizard(); };
+  if($("#allMine")) $("#allMine").onclick = () => { top(); studentList(); };
+  if($("#redoLast")) $("#redoLast").onclick = () => { top(); wizard({from:last.from_date, to:last.to_date, reason:last.reason, note:"إعادة رفع للعذر " + last.ref}); };
+}
+async function studentList(){
+  studentShell("list");
+  main.innerHTML = loading("جارٍ التحميل…");
+  const rows = await loadMine(true);
+  main.innerHTML = `
+  <div class="stack">
+    <div class="page-head ph-sky">${B("list","g-glass","")}<div><h1>أعذاري</h1><p>${rows.length ? `${rows.length} عذر مسجل` : "سجلك نظيف"}</p></div></div>
+    <div class="list">${rows.length ? rows.map(r => exRow(r, true)).join("") : `<div class="card"><div class="empty">${B("heart","g-em","lg")}<p>لا توجد أعذار مسجلة بعد.</p></div></div>`}</div>
+  </div>`;
+  $$(".ex[data-ref]").forEach(b => b.onclick = () => { const r = rows.find(x => x.ref === b.dataset.ref); if(r) openMine(r); });
+}
+function passHTML(d, opts){
+  const R = reasonOf(d.reason);
+  return `<div class="pass">
+    <div class="ph">${B(R.i, R.g, "")}<div><b>بطاقة العذر الطبي</b><small>${esc(CONFIG.SCHOOL)}</small></div>
+      <svg class="ekg2" viewBox="0 0 200 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14h60l6-10 8 20 6-14 4 4h116" fill="none" stroke="#FFD25A" stroke-width="2.4"/></svg></div>
+    <div class="perf"><b></b></div>
+    <div class="pb">
+      <div class="full"><small>الطالبة</small><span>${esc(d.name)}</span></div>
+      <div><small>الصف والفصل</small><span>${esc(d.grade)} / ${esc(d.section)}</span></div>
+      <div><small>أيام الدراسة</small><span class="num">${d.days} يوم</span></div>
+      <div class="full"><small>مدة الغياب</small><span>${range(d.from, d.to)}</span></div>
+      <div><small>السبب</small><span>${esc(d.reason)}</span></div>
+      <div><small>الجهة الطبية</small><span>${esc(d.provider || "—")}</span></div>
+      ${d.leave ? `<div class="full"><small>رقم الإجازة المرضية</small><span dir="ltr">${esc(d.leave)}</span></div>` : ""}
+      ${opts && opts.ref ? `<div class="full"><small>رقم الطلب</small><span class="ref num">${esc(opts.ref)}</span></div>` : ""}
     </div>
   </div>`;
-  $("#newEx").onclick = () => go(() => wizard());
-  document.querySelectorAll(".redo").forEach(b => b.onclick = () => { const r = rows.find(x => x.ref === b.dataset.ref); go(() => wizard({from:r.from_date, to:r.to_date, reason:r.reason, note:"إعادة رفع للعذر " + r.ref})); });
+}
+function sheet(html){
+  const bg = document.createElement("div"); bg.className = "sheet-bg";
+  bg.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">${html}</div>`;
+  document.body.appendChild(bg);
+  const close = () => { bg.remove(); document.removeEventListener("keydown", onKey); };
+  const onKey = e => { if(e.key === "Escape") close(); };
+  document.addEventListener("keydown", onKey);
+  bg.onclick = e => { if(e.target === bg) close(); };
+  bg.querySelector(".close").onclick = close;
+  bg.querySelector(".close").focus();
+  return {bg, close};
+}
+function openMine(r){
+  const {bg, close} = sheet(`
+    <div class="sh-head em"><h2>${esc(r.reason)}</h2>${pill(r.status)}<button class="close" type="button" aria-label="إغلاق">${I("x")}</button></div>
+    <div class="sh-body">
+      ${trackerHTML(r)}
+      ${passHTML({name:r.student_name, grade:r.grade, section:r.section, days:r.school_days, from:r.from_date, to:r.to_date, reason:r.reason, provider:r.provider, leave:r.leave_no}, {ref:r.ref})}
+      ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</span></div>` : ""}
+      ${r.status === "more" ? `<button class="btn b-sun block" id="redo" type="button">${I("upload")} إعادة رفع التقرير</button>` : ""}
+    </div>`);
+  const rd = bg.querySelector("#redo"); if(rd) rd.onclick = () => { close(); top(); wizard({from:r.from_date, to:r.to_date, reason:r.reason, note:"إعادة رفع للعذر " + r.ref}); };
 }
 
 /* ---------- معالج رفع العذر ---------- */
 function wizard(prefill){
+  studentShell("new");
   const d = Object.assign({ name:me.name, grade:me.grade, section:me.section, from:"", to:"", reason:"", provider:"", ptype:"حكومي", leave:"", note:"", file:null, pledge:false }, prefill || {});
   let step = 1;
-  setTop(`<button class="pill-btn" id="tb-back" type="button">صفحتي</button>`); $("#tb-back").onclick = () => go(() => studentHome());
-
+  const labels = ["الغياب","التقرير","الإرسال"];
+  const heads = [["calendar","ph-violet","متى غبتِ؟","حددي الأيام وسبب الغياب"],["camera","ph-coral","التقرير الطبي","صوّري التقرير بوضوح"],["checkc","ph-em","راجعي ثم أرسلي","تأكدي من بطاقة عذرك"]];
+  function prevHTML(f, ro){ return !f ? "" : `<div class="preview">${f.type.startsWith("image/") ? `<img src="${f.data}" alt="معاينة التقرير">` : `<div class="pdf">PDF</div>`}<div style="min-width:0"><b style="overflow-wrap:anywhere">${esc(f.name)}</b><div class="hint">${Math.round(f.size/1024)} كيلوبايت · جاهز</div></div>${ro ? "" : `<button class="x" type="button" id="rmFile" aria-label="حذف الصورة">${I("x")}</button>`}</div>`; }
   function render(){
-    const labels = ["بياناتي والغياب","التقرير الطبي","المراجعة والإرسال"];
-    const sd = schoolDays(d.from, d.to);
+    const sd = schoolDays(d.from, d.to || d.from);
+    const h = heads[step-1];
     let body = "";
     if(step === 1) body = `
-      <div class="row2">
-        <div class="field"><label for="w-name">الاسم الرباعي</label><input class="inp" id="w-name" value="${esc(d.name)}" placeholder="كما في السجل المدني"></div>
-        <div class="field"><label for="w-grade">الصف</label><select class="inp" id="w-grade"><option value="">اختاري</option>${GRADES.map(g => `<option ${g===d.grade?"selected":""}>${g}</option>`).join("")}</select></div>
-        <div class="field"><label for="w-sec">الفصل</label><select class="inp" id="w-sec"><option value="">اختاري</option>${[1,2,3,4,5,6,7,8,9,10].map(n => `<option ${String(n)===String(d.section)?"selected":""}>${n}</option>`).join("")}</select></div>
+      <div class="card">
+        <div class="grid2">
+          <div class="field wide"><label for="w-name">${I("user")} الاسم الرباعي</label><input class="inp" id="w-name" value="${esc(d.name)}" placeholder="كما في السجل المدني"></div>
+          <div class="field"><label for="w-grade">${I("student")} الصف</label><select class="inp" id="w-grade"><option value="">اختاري</option>${GRADES.map(g => `<option ${g===d.grade?"selected":""}>${g}</option>`).join("")}</select></div>
+          <div class="field"><label for="w-sec">${I("hash")} الفصل</label><select class="inp" id="w-sec"><option value="">اختاري</option>${[1,2,3,4,5,6,7,8,9,10].map(n => `<option ${String(n)===String(d.section)?"selected":""}>${n}</option>`).join("")}</select></div>
+        </div>
       </div>
-      <div class="row2">
-        <div class="field"><label for="w-from">أول يوم غياب</label><input class="inp" type="date" id="w-from" value="${d.from}" max="${iso(new Date())}"></div>
-        <div class="field"><label for="w-to">آخر يوم غياب</label><input class="inp" type="date" id="w-to" value="${d.to}" max="${iso(new Date())}"></div>
+      <div class="card">
+        <div class="dates">
+          <div class="dcard"><label class="lbl" for="w-from">${I("calendar")} أول يوم غياب</label><input class="inp" type="date" id="w-from" value="${d.from}" max="${iso(new Date())}"><span class="hj" id="hjFrom">${d.from ? hijri(d.from) : ""}</span></div>
+          <div class="dcard"><label class="lbl" for="w-to">${I("calendar")} آخر يوم غياب</label><input class="inp" type="date" id="w-to" value="${d.to}" max="${iso(new Date())}"><span class="hj" id="hjTo">${d.to ? hijri(d.to) : ""}</span></div>
+        </div>
+        <div class="count"><span class="ring num" id="sdN">${sd}</span><div><b>يوم دراسي</b><span class="hint">تُحسب من الأحد إلى الخميس فقط</span></div></div>
       </div>
-      <div class="days-box">${ic("calendar","g-sky",1)}<div><b class="num" id="sdN">${sd}</b> <span>يوم دراسي</span><div class="hint" style="font-size:.82rem;color:var(--muted)" id="sdH">${d.from ? hijri(d.from) + (d.to && d.to!==d.from ? " – " + hijri(d.to) : "") + " هـ" : "الجمعة والسبت لا تُحسب"}</div></div></div>
-      <div class="field"><label>سبب الغياب</label><div class="chips" id="w-reason">${REASONS.map(r => `<button type="button" class="chip" aria-pressed="${r.k===d.reason}" data-k="${r.k}">${r.i} ${r.k}</button>`).join("")}</div></div>`;
+      <div class="card">
+        <span class="lbl">${I("heart")} سبب الغياب</span>
+        <div class="reasons" id="w-reason">${REASONS.map(r => `<button type="button" class="reason" aria-pressed="${r.k===d.reason}" data-k="${r.k}">${B(r.i, r.g, "")}<span>${r.k}</span></button>`).join("")}</div>
+      </div>`;
     if(step === 2) body = `
-      <div class="row2">
-        <div class="field"><label for="w-prov">الجهة الطبية</label><input class="inp" id="w-prov" value="${esc(d.provider)}" placeholder="مثال: مستشفى الولادة والأطفال"></div>
-        <div class="field"><label>نوع الجهة</label><div class="chips" id="w-ptype">${["حكومي","خاص"].map(t => `<button type="button" class="chip" aria-pressed="${t===d.ptype}" data-k="${t}">${t}</button>`).join("")}</div></div>
+      <div class="card">
+        <div class="field"><label for="w-prov">${I("building")} الجهة الطبية</label><input class="inp" id="w-prov" value="${esc(d.provider)}" placeholder="مثال: مستشفى الولادة والأطفال"></div>
+        <span class="lbl">نوع الجهة</span>
+        <div class="choice" id="w-ptype">${[["حكومي","building","g-sky"],["خاص","hospital","g-berry"]].map(([t,ic,g]) => `<button type="button" aria-pressed="${t===d.ptype}" data-k="${t}">${B(ic,g,"sm")}${t}</button>`).join("")}</div>
+        <div class="field"><label for="w-leave">${I("hash")} رقم الإجازة المرضية من «صحة» (إن وُجد)</label><input class="inp num" id="w-leave" dir="ltr" value="${esc(d.leave)}" placeholder="PSL…"><span class="hint">تجدينه في رسالة «صحة» النصية أو تطبيق صحتي.</span></div>
       </div>
-      <div class="field"><label for="w-leave">رقم الإجازة المرضية من منصة «صحة» (إن وُجد)</label><input class="inp num" id="w-leave" dir="ltr" value="${esc(d.leave)}" placeholder="PSL…"><span class="hint">تجدينه في رسالة «صحة» النصية أو تطبيق صحتي.</span></div>
-      <div class="field"><label>صورة التقرير الطبي</label>
+      <div class="card">
+        <span class="lbl">${I("file")} صورة التقرير الطبي</span>
+        <input type="file" id="w-cam" accept="image/*" capture="environment" hidden>
         <input type="file" id="w-file" accept="image/*,application/pdf" hidden>
-        <div class="drop" id="drop" tabindex="0" role="button" aria-label="إرفاق التقرير الطبي">${ic("upload","g-coral")}<b>اضغطي لتصوير التقرير أو اختياره</b><span class="hint">صورة أو PDF · حتى ٣ ميجابايت</span></div>
-        <div id="fprev">${d.file ? prevHTML(d.file) : ""}</div></div>
-      <div class="field"><label for="w-note">ملاحظة للوكيلة (اختياري)</label><textarea class="inp" id="w-note" rows="2">${esc(d.note)}</textarea></div>`;
+        <div class="upload" id="drop">
+          ${B("camera","g-coral","lg")}
+          <b>صوّري التقرير أو اختاري ملفاً</b>
+          <span class="hint">صورة واضحة أو PDF حتى ٣ ميجابايت</span>
+          <div class="ups"><button class="btn b-coral" type="button" id="pickCam">${I("camera")} تصوير</button><button class="btn b-ghost" type="button" id="pickFile">${I("image")} من الملفات</button></div>
+        </div>
+        <div id="fprev">${d.file ? prevHTML(d.file) : ""}</div>
+        <div class="field"><label for="w-note">${I("pen")} ملاحظة للوكيلة (اختياري)</label><textarea class="inp" id="w-note" rows="2">${esc(d.note)}</textarea></div>
+      </div>`;
     if(step === 3){
       const late = d.to ? lateBy(d.to) > CONFIG.DEADLINE_DAYS : false;
       body = `
-      <div class="kv">
-        <div><small>الطالبة</small><span>${esc(d.name)}</span></div>
-        <div><small>الصف والفصل</small><span>${esc(d.grade)} / ${esc(d.section)}</span></div>
-        <div><small>مدة الغياب</small><span>${fmt(d.from)}${d.to!==d.from?" ← "+fmt(d.to):""}</span></div>
-        <div><small>أيام الدراسة</small><span class="num">${sd} يوم</span></div>
-        <div><small>السبب</small><span>${esc(d.reason)}</span></div>
-        <div><small>الجهة الطبية</small><span>${esc(d.provider)} (${esc(d.ptype)})</span></div>
-        ${d.leave ? `<div><small>رقم الإجازة</small><span dir="ltr">${esc(d.leave)}</span></div>` : ""}
-      </div>
-      <div>${prevHTML(d.file)}</div>
-      ${late ? `<div class="note-box">⏰ مضى على عودتك أكثر من ${CONFIG.DEADLINE_DAYS} أيام دراسية، سيصل عذرك للوكيلة مع إشارة «متأخر».</div>` : ""}
-      <label class="check"><input type="checkbox" id="w-pledge" ${d.pledge?"checked":""}><span>أتعهد بأن التقرير المرفق صحيح ويخصني، وأعلم أن تقديم تقرير غير صحيح يعرضني للمساءلة.</span></label>`;
+      ${passHTML({name:d.name, grade:d.grade, section:d.section, days:sd, from:d.from, to:d.to, reason:d.reason, provider:d.provider + (d.ptype ? " (" + d.ptype + ")" : ""), leave:d.leave})}
+      <div class="card">${prevHTML(d.file, true)}
+      ${late ? `<div class="note">${I("clock")}<span>مضى على عودتك أكثر من ${CONFIG.DEADLINE_DAYS} أيام دراسية، سيصل عذرك للوكيلة مع إشارة «متأخر».</span></div>` : ""}
+      <label class="pledge"><input type="checkbox" id="w-pledge" ${d.pledge?"checked":""}><span>أتعهد بأن التقرير المرفق صحيح ويخصني، وأعلم أن تقديم تقرير غير صحيح يعرضني للمساءلة.</span></label></div>`;
     }
     main.innerHTML = `
-    <div class="view narrow" style="max-width:720px">
-      <div class="panel">
-        <div class="role-head">${ic("file","g-coral")}<div><h2>رفع عذر طبي</h2><p style="color:var(--muted)">${labels[step-1]}</p></div></div>
-        <div class="stepper">${labels.map((l,i) => `<div class="${i+1<step?"done":i+1===step?"on":""}">${i+1<step?"✓ ":""}${l}</div>`).join("")}</div>
-        ${body}
-        <div class="err" id="wErr" hidden></div>
-        <div class="actions">
-          <button class="btn ghost" id="wBack" type="button">${ICONS.back} ${step===1?"إلغاء":"السابق"}</button>
-          <button class="btn ${step===3?"warm":"primary"}" id="wNext" type="button">${step===3?"إرسال العذر "+ICONS.upload:"التالي "+ICONS.arrow}</button>
-        </div>
+    <div class="stack">
+      <div class="page-head ${h[1]}">${B(h[0],"g-glass","")}<div><h1>${h[2]}</h1><p>${h[3]}</p></div></div>
+      <div class="progress">${labels.map((l,i) => `<div class="pg ${i+1<step?"done":i+1===step?"on":""}"><div class="bar"><i></i></div>${l}</div>`).join("")}</div>
+      ${body}
+      ${errBox("wErr")}
+      <div class="wiz-actions">
+        <button class="btn b-ghost" id="wBack" type="button">${I("prev")} ${step===1?"إلغاء":"السابق"}</button>
+        <button class="btn ${step===3?"b-coral":"b-em"}" id="wNext" type="button">${step===3?`إرسال العذر ${I("upload")}`:`التالي ${I("next")}`}</button>
       </div>
     </div>`;
     bind();
   }
-  const prevHTML = f => !f ? "" : `<div class="preview">${f.type.startsWith("image/") ? `<img src="${f.data}" alt="معاينة التقرير">` : `<div class="pdf">PDF</div>`}<div style="min-width:0"><b style="overflow-wrap:anywhere">${esc(f.name)}</b><div class="hint" style="color:var(--muted);font-size:.85rem">${Math.round(f.size/1024)} كيلوبايت · جاهز ✓</div></div></div>`;
   function save(){
     const v = id => { const el = $("#"+id); return el ? el.value.trim() : null; };
     if(step === 1){ d.name = v("w-name"); d.grade = v("w-grade"); d.section = v("w-sec"); d.from = v("w-from"); d.to = v("w-to"); }
@@ -555,54 +860,57 @@ function wizard(prefill){
   }
   function check(){
     if(step === 1){
-      if(d.name.split(/\s+/).length < 3) return "اكتبي اسمك الثلاثي على الأقل.";
+      if(d.name.split(/\s+/).filter(Boolean).length < 3) return "اكتبي اسمك الثلاثي على الأقل.";
       if(!d.grade || !d.section) return "اختاري الصف والفصل.";
       if(!d.from) return "حددي أول يوم غياب.";
       if(!d.to) d.to = d.from;
       if(toDate(d.to) < toDate(d.from)) return "آخر يوم غياب يجب أن يكون بعد أوله أو في اليوم نفسه.";
-      if(schoolDays(d.from,d.to) === 0) return "الأيام المختارة ليست أيام دراسة.";
+      if(schoolDays(d.from, d.to) === 0) return "الأيام المختارة ليست أيام دراسة.";
       if(!d.reason) return "اختاري سبب الغياب.";
     }
     if(step === 2){ if(!d.provider) return "اكتبي اسم الجهة الطبية."; if(!d.file) return "أرفقي صورة التقرير الطبي."; }
-    if(step === 3 && !d.pledge) return "فضلاً أكّدي التعهد قبل الإرسال.";
+    if(step === 3 && !d.pledge) return "أكّدي التعهد قبل الإرسال.";
     return "";
   }
   function bind(){
     const err = $("#wErr");
     if(step === 1){
-      const upd = () => { const f = $("#w-from").value, t = $("#w-to").value || f; $("#sdN").textContent = schoolDays(f,t); $("#sdH").textContent = f ? hijri(f) + (t!==f ? " – " + hijri(t) : "") + " هـ" : "الجمعة والسبت لا تُحسب"; };
+      const upd = () => { const f = $("#w-from").value, t = $("#w-to").value || f; $("#sdN").textContent = schoolDays(f,t); $("#hjFrom").textContent = f ? hijri(f) : ""; $("#hjTo").textContent = $("#w-to").value ? hijri($("#w-to").value) : ""; };
       $("#w-from").oninput = () => { if(!$("#w-to").value) $("#w-to").value = $("#w-from").value; upd(); };
       $("#w-to").oninput = upd;
-      $("#w-reason").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; d.reason = b.dataset.k; document.querySelectorAll("#w-reason .chip").forEach(c => c.setAttribute("aria-pressed", c === b)); };
+      $("#w-reason").onclick = e => { const b = e.target.closest(".reason"); if(!b) return; d.reason = b.dataset.k; $$("#w-reason .reason").forEach(c => c.setAttribute("aria-pressed", c === b)); };
     }
     if(step === 2){
-      $("#w-ptype").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; d.ptype = b.dataset.k; document.querySelectorAll("#w-ptype .chip").forEach(c => c.setAttribute("aria-pressed", c === b)); };
-      const fi = $("#w-file"), drop = $("#drop");
-      drop.onclick = () => fi.click();
-      drop.onkeydown = e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); fi.click(); } };
+      $("#w-ptype").onclick = e => { const b = e.target.closest("button"); if(!b) return; d.ptype = b.dataset.k; $$("#w-ptype button").forEach(c => c.setAttribute("aria-pressed", c === b)); };
+      const cam = $("#w-cam"), fi = $("#w-file"), drop = $("#drop");
+      $("#pickCam").onclick = () => cam.click();
+      $("#pickFile").onclick = () => fi.click();
       drop.ondragover = e => { e.preventDefault(); drop.classList.add("over"); };
       drop.ondragleave = () => drop.classList.remove("over");
       drop.ondrop = e => { e.preventDefault(); drop.classList.remove("over"); if(e.dataTransfer.files[0]) take(e.dataTransfer.files[0]); };
+      cam.onchange = () => cam.files[0] && take(cam.files[0]);
       fi.onchange = () => fi.files[0] && take(fi.files[0]);
+      const bindRm = () => { const rm = $("#rmFile"); if(rm) rm.onclick = () => { d.file = null; $("#fprev").innerHTML = ""; }; };
+      bindRm();
       async function take(file){
         err.hidden = true;
-        try{ d.file = await readFile(file); $("#fprev").innerHTML = prevHTML(d.file); }
-        catch(e){ err.textContent = e.message; err.hidden = false; }
+        try{ d.file = await readFile(file); $("#fprev").innerHTML = prevHTML(d.file); bindRm(); }
+        catch(e){ showErr(err, e.message); }
       }
     }
-    $("#wBack").onclick = () => { save(); if(step === 1) return go(() => studentHome()); step--; render(); };
+    $("#wBack").onclick = () => { save(); if(step === 1){ top(); return studentHome(); } step--; top(); render(); };
     $("#wNext").onclick = async () => {
-      save(); const m = check(); if(m){ err.textContent = m; err.hidden = false; return; }
-      if(step < 3){ step++; window.scrollTo({top:0}); return render(); }
+      save(); const m = check(); if(m){ showErr(err, m); return; }
+      if(step < 3){ step++; top(); return render(); }
       const btn = $("#wNext"); btn.disabled = true; btn.textContent = "جارٍ الإرسال…";
       try{
         const ref = await api.submit({ national_id:me.nid, student_name:d.name, grade:d.grade, section:d.section,
           from_date:d.from, to_date:d.to, school_days:schoolDays(d.from,d.to), reason:d.reason, provider:d.provider,
           provider_type:d.ptype, leave_no:d.leave, note:d.note, file_name:d.file.name, file_type:d.file.type, file_data:d.file.data,
           late: lateBy(d.to) > CONFIG.DEADLINE_DAYS });
-        me = {...me, name:d.name, grade:d.grade, section:d.section}; store.set("student", me, 7);
-        success(ref);
-      }catch(e){ btn.disabled = false; btn.innerHTML = "إرسال العذر " + ICONS.upload; err.textContent = "لم يُرسل العذر بسبب مشكلة في الاتصال. حاولي مرة أخرى."; err.hidden = false; }
+        me = {...me, name:d.name, grade:d.grade, section:d.section}; store.set("student", me, 7); myRows = null;
+        success(ref, d);
+      }catch(e){ btn.disabled = false; btn.innerHTML = "إرسال العذر " + I("upload"); showErr(err, "لم يُرسل العذر بسبب مشكلة في الاتصال. حاولي مرة أخرى."); }
     };
   }
   render();
@@ -618,7 +926,7 @@ function readFile(file){
     fr.onload = () => {
       if(isPdf) return res({name:file.name, type:file.type, size:file.size, data:fr.result});
       const img = new Image();
-      img.onload = () => { // تصغير الصورة مع الحفاظ على وضوحها
+      img.onload = () => {
         const max = 1600, k = Math.min(1, max / Math.max(img.width, img.height));
         const c = document.createElement("canvas"); c.width = Math.round(img.width*k); c.height = Math.round(img.height*k);
         const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0,0,c.width,c.height); x.drawImage(img,0,0,c.width,c.height);
@@ -632,28 +940,25 @@ function readFile(file){
   });
 }
 
-function success(ref){
-  setTop(`<button class="pill-btn" id="tb-back" type="button">صفحتي</button>`); $("#tb-back").onclick = () => go(() => studentHome());
+function success(ref, d){
+  studentShell("new");
   main.innerHTML = `
-  <div class="view narrow"><div class="panel success">
-    ${ic("check","g-teal")}
-    <h2>وصل عذرك بنجاح</h2>
-    <p style="color:var(--muted)">سجّلي رقم الطلب، وتابعي قرار وكيلة شؤون الطالبات من صفحتك.</p>
-    <div class="refcode num">${esc(ref)}</div>
-    <button class="btn ghost" id="cpy" type="button">نسخ رقم الطلب</button>
-    <div class="quote" style="width:100%">${ic("star","g-sun",1)}<span>انضباطك في تقديم العذر جزء من تميزك 🌟</span></div>
-    <button class="btn primary block" id="toHome" type="button">العودة لصفحتي</button>
-  </div></div>`;
-  $("#cpy").onclick = async () => { try{ await navigator.clipboard.writeText(ref); toast("تم نسخ رقم الطلب"); }catch(e){ const r = document.createRange(); r.selectNodeContents($(".refcode")); getSelection().removeAllRanges(); getSelection().addRange(r); toast("حددي الرقم وانسخيه"); } };
-  $("#toHome").onclick = () => go(() => studentHome());
+  <div class="stack">
+    <div class="done-hero"><span class="big">${I("check")}</span><h1 style="font-size:1.7rem">وصل عذرك بنجاح</h1><p class="muted">ستراجعه وكيلة شؤون الطالبات، ويظهر قرارها في صفحتك.</p></div>
+    ${passHTML({name:d.name, grade:d.grade, section:d.section, days:schoolDays(d.from,d.to), from:d.from, to:d.to, reason:d.reason, provider:d.provider, leave:d.leave}, {ref})}
+    <button class="btn b-ghost block" id="cpy" type="button">${I("copy")} نسخ رقم الطلب</button>
+    <button class="btn b-em block" id="toHome" type="button">${I("home")} العودة لصفحتي</button>
+  </div>`;
+  $("#cpy").onclick = async () => { try{ await navigator.clipboard.writeText(ref); toast("تم نسخ رقم الطلب"); }catch(e){ const el = $(".pass .ref"); const r = document.createRange(); r.selectNodeContents(el); getSelection().removeAllRanges(); getSelection().addRange(r); toast("حددي الرقم وانسخيه"); } };
+  $("#toHome").onclick = () => { top(); studentHome(); };
   confetti();
 }
 
 function confetti(){
   if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const c = $("#confetti"), x = c.getContext("2d"); c.hidden = false; c.width = innerWidth; c.height = innerHeight;
-  const cols = ["#0E9C8D","#FF6A55","#FFB020","#2F7FEA","#E0457B"];
-  const ps = Array.from({length:120}, () => ({x:innerWidth/2, y:innerHeight/3, vx:(Math.random()-.5)*12, vy:Math.random()*-12-2, s:Math.random()*7+4, c:cols[Math.floor(Math.random()*5)], r:Math.random()*6}));
+  const cols = ["#0E9C8D","#FF6A55","#FFB020","#3B7CF0","#D63F7A","#D9A441"];
+  const ps = Array.from({length:130}, () => ({x:innerWidth/2, y:innerHeight/3, vx:(Math.random()-.5)*13, vy:Math.random()*-13-2, s:Math.random()*7+4, c:cols[Math.floor(Math.random()*cols.length)], r:Math.random()*6}));
   let t = 0;
   (function f(){ x.clearRect(0,0,c.width,c.height);
     ps.forEach(p => { p.vy += .35; p.x += p.vx; p.y += p.vy; p.r += .1; x.save(); x.translate(p.x,p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); x.restore(); });
@@ -662,38 +967,56 @@ function confetti(){
 
 /* ================== الإدارة ================== */
 let adm = null, rows = [], filter = "new", q = "";
-function adminEntry(){ const a = store.get("admin"); if(a){ adm = a; return adminHome(); } adminLogin(); }
+function adminEntry(){ const a = store.get("admin"); if(a){ adm = a; rows = []; return adminHome(); } adminLogin(); }
 function adminLogin(){
-  showHero(false); setTop(`<button class="pill-btn" id="tb-home" type="button">الرئيسية</button>`); $("#tb-home").onclick = () => go(home);
+  plainMode();
   main.innerHTML = `
-  <div class="view narrow"><div class="panel">
-    <div class="role-head">${ic("lock","g-berry")}<div><h2>دخول الإدارة</h2><p style="color:var(--muted)">الرمز السري الخاص بك</p></div></div>
-    ${demoBanner()}
-    <form id="aF" class="view" style="gap:14px" novalidate>
-      <div class="field"><label for="pin">الرمز السري</label><input class="inp big num" id="pin" type="password" inputmode="numeric" maxlength="8" dir="ltr" autocomplete="off"><span class="hint">${DEMO ? "للتجربة: 123456" : "رمز من ٦ أرقام"}</span></div>
-      <div class="err" id="aErr" hidden></div>
-      <button class="btn berry block" type="submit">دخول ${ICONS.arrow}</button>
-    </form>
-  </div></div>`;
+  <div class="login stack">
+    <div class="card">
+      <div class="top-icon">${B("lock","g-berry","lg")}<h1 style="font-size:1.5rem">دخول الإدارة</h1><p class="muted">الرمز السري الخاص بك</p></div>
+      ${demoNote()}
+      <form id="aF" class="stack" style="gap:14px" novalidate>
+        <div class="field"><label for="pin">${I("lock")} الرمز السري</label><input class="inp big num" id="pin" type="password" inputmode="numeric" maxlength="8" dir="ltr" autocomplete="off"><span class="hint">${DEMO ? "للتجربة: 123456" : "رمز من ٦ أرقام"}</span></div>
+        ${errBox("aErr")}
+        <button class="btn b-berry block" type="submit">دخول ${I("next")}</button>
+      </form>
+    </div>
+  </div>`;
   $("#pin").focus();
   $("#aF").onsubmit = async e => {
     e.preventDefault(); const pin = $("#pin").value.replace(/\D/g,""), er = $("#aErr"), b = e.target.querySelector("button");
+    if(!pin){ showErr(er, "اكتبي الرمز السري."); return; }
     b.disabled = true;
-    try{ const r = await api.adminLogin(pin); if(!r.length){ er.textContent = "الرمز غير صحيح."; er.hidden = false; b.disabled = false; return; }
-      adm = {pin, name:r[0].name, role:r[0].role}; store.set("admin", adm, 7); adminHome(); }
-    catch(err){ er.textContent = isLocked(err) ? LOCK_MSG : "تعذر الاتصال بالمنصة."; er.hidden = false; b.disabled = false; }
+    try{ const r = await api.adminLogin(pin); if(!r.length){ showErr(er, "الرمز غير صحيح."); b.disabled = false; return; }
+      adm = {pin, name:r[0].name, role:r[0].role}; store.set("admin", adm, 7); rows = []; adminHome(); }
+    catch(err){ showErr(er, isLocked(err) ? LOCK_MSG : "تعذر الاتصال بالمنصة."); b.disabled = false; }
   };
 }
-
+function adminShell(cur){
+  appMode(
+    `<div class="who"><span class="avatar" style="background:linear-gradient(135deg,#FF7EAA,#C4306A)">${esc((adm.name||"إ").slice(0,1))}</span><div><b>أ. ${esc(adm.name)}</b><small>${esc(adm.role)}</small></div></div>
+     <button class="icon-btn" id="ab-rf" type="button" aria-label="تحديث">${I("refresh")}<span>تحديث</span></button>`,
+    dockBtn("d-in","inbox","الأعذار",cur==="in") + dockBtn("d-rep","chart","الإحصاء",cur==="rep") + dockBtn("d-out","out","خروج",false,"out"),
+    true
+  );
+  $("#ab-rf").onclick = async () => { await loadAll(true); cur === "rep" ? adminReport() : renderAdmin(); toast("تم التحديث"); };
+  $("#d-in").onclick = () => { top(); adminHome(); };
+  $("#d-rep").onclick = () => { top(); adminReport(); };
+  $("#d-out").onclick = () => { store.del("admin"); adm = null; rows = []; top(); home(); toast("تم تسجيل الخروج"); };
+}
+async function loadAll(force){
+  if(rows.length && !force) return rows;
+  try{ rows = await api.adminList(adm.pin); }catch(e){ rows = rows || []; toast(isLocked(e) ? LOCK_MSG : "تعذر تحميل الأعذار"); }
+  return rows;
+}
 async function adminHome(){
-  showHero(false);
-  setTop(`<button class="pill-btn" id="tb-out" type="button">خروج</button>`);
-  $("#tb-out").onclick = () => { store.del("admin"); adm = null; go(home); };
-  main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تحميل الأعذار…</p></div></div>`;
-  try{ rows = await api.adminList(adm.pin); }catch(e){ rows = []; toast(isLocked(e) ? LOCK_MSG : "تعذر تحميل الأعذار"); }
+  adminShell("in");
+  main.innerHTML = loading("جارٍ تحميل الأعذار…");
+  await loadAll();
   renderAdmin();
 }
 function renderAdmin(){
+  adminShell("in");
   const n = k => rows.filter(r => r.status === k).length;
   const wk = new Date(); wk.setDate(wk.getDate()-7);
   const week = rows.filter(r => new Date(r.created_at) >= wk).length;
@@ -701,86 +1024,119 @@ function renderAdmin(){
   const ql = q.trim();
   const list = rows.filter(r => (filter === "all" || r.status === filter) && (!ql || (r.student_name||"").includes(ql) || (r.national_id||"").includes(ql) || (r.ref||"").includes(ql.toUpperCase())));
   main.innerHTML = `
-  <div class="view">
-    ${demoBanner()}
-    <div class="hello">
-      <div class="role-head">${ic("admin","g-berry")}<div><h2>مرحباً أ. ${esc(adm.name)}</h2><p style="color:var(--muted)">${esc(adm.role)}</p></div></div>
-      <div class="toolbar"><button class="btn ghost" id="rf" type="button">${ICONS.refresh} تحديث</button><button class="btn ghost" id="csv" type="button">${ICONS.download} تصدير Excel</button></div>
+  <div class="stack">
+    ${demoNote()}
+    <div class="page-head ph-berry">${B("inbox","g-glass","")}<div><h1>الأعذار الطبية</h1><p>${n("new") ? `${n("new")} عذر بانتظار قرارك` : "لا توجد أعذار جديدة"}</p></div></div>
+    <div class="tiles four">
+      <div class="tile t-sky">${B("clock","g-sky","sm")}<div><b class="num">${n("new")}</b><span>بانتظار القرار</span></div></div>
+      <div class="tile t-sun">${B("alert","g-sun","sm")}<div><b class="num">${n("more")}</b><span>مطلوب استكمال</span></div></div>
+      <div class="tile t-em">${B("check","g-em","sm")}<div><b class="num">${n("accepted")}</b><span>مقبولة</span></div></div>
+      <div class="tile t-berry">${B("calendar","g-berry","sm")}<div><b class="num">${week}</b><span>هذا الأسبوع</span></div></div>
     </div>
-    <div class="meter">
-      <div class="tile t1"><b class="num">${n("new")}</b><span>بانتظار قرارك</span></div>
-      <div class="tile t3"><b class="num">${n("more")}</b><span>مطلوب استكمال</span></div>
-      <div class="tile t2"><b class="num">${n("accepted")}</b><span>مقبولة</span></div>
-      <div class="tile t4"><b class="num">${week}</b><span>وصلت هذا الأسبوع</span></div>
-    </div>
-    <div class="toolbar">
-      <input class="inp" id="q" placeholder="ابحثي بالاسم أو السجل المدني أو رقم الطلب" value="${esc(q)}">
-    </div>
-    <div class="tabs" id="tabs">${tabs.map(([k,t]) => `<button class="chip" type="button" aria-pressed="${k===filter}" data-k="${k}">${t} <span class="num">${k==="all"?rows.length:n(k)}</span></button>`).join("")}</div>
-    <div class="list">${list.length ? list.map(r => `
-      <div class="item adm-item" tabindex="0" role="button" data-id="${esc(r.id)}">
-        <div class="item-top"><b>${esc(r.student_name)}</b><span class="status ${STATUS[r.status]?.c}">${STATUS[r.status]?.t}</span></div>
-        <div class="meta"><span>${esc(r.grade)} / ${esc(r.section)}</span><span>${esc(r.reason)}</span><span>${fmt(r.from_date)}${r.to_date!==r.from_date?" ← "+fmt(r.to_date):""}</span><span class="num">${r.school_days} يوم</span>${r.late?`<span class="late-tag">متأخر</span>`:""}</div>
-        <div class="meta"><span>وصل: ${fmtTime(r.created_at)}</span>${r.reviewed_by?`<span>القرار: ${esc(r.reviewed_by)}</span>`:""}</div>
-      </div>`).join("") : `<div class="empty">${ic("check","g-teal")}<p>لا توجد أعذار في هذا القسم.</p></div>`}</div>
+    <div class="search">${I("search")}<input class="inp" id="q" placeholder="ابحثي بالاسم أو السجل المدني أو رقم الطلب" value="${esc(q)}" aria-label="بحث"></div>
+    <div class="chips" id="tabs" role="toolbar" aria-label="تصفية الأعذار">${tabs.map(([k,t]) => `<button class="fchip k-${k}" type="button" aria-pressed="${k===filter}" data-k="${k}">${t}<span class="c num">${k==="all"?rows.length:n(k)}</span></button>`).join("")}</div>
+    <div class="adm-grid">${list.length ? list.map(r => { const R = reasonOf(r.reason); return `
+      <button class="ex" type="button" data-id="${esc(r.id)}">
+        <span class="initial ${GRADE_G[r.grade] || "g-em"}">${esc((r.student_name||"ط").slice(0,1))}</span>
+        <div class="body">
+          <div class="top-line"><b>${esc(r.student_name)}</b>${pill(r.status)}</div>
+          <div class="meta"><span>${I("student")}${esc(r.grade)} / ${esc(r.section)}</span><span style="color:${R.c}">${I(R.i)}${esc(r.reason)}</span></div>
+          <div class="meta"><span>${I("calendar")}${range(r.from_date, r.to_date)}</span><span class="num">${r.school_days} يوم</span>${r.late ? `<span class="pill p-late">${I("clock")}متأخر</span>` : ""}</div>
+          <div class="meta"><span>${I("upload")}وصل ${fmtTime(r.created_at)}</span>${r.reviewed_by ? `<span>${I("pen")}${esc(r.reviewed_by)}</span>` : ""}</div>
+        </div>
+      </button>`; }).join("") : `<div class="card" style="grid-column:1/-1"><div class="empty">${B("checkc","g-em","lg")}<h2>القسم فارغ</h2><p>لا توجد أعذار هنا الآن.</p></div></div>`}</div>
   </div>`;
-  $("#rf").onclick = adminHome;
-  $("#csv").onclick = exportCSV;
   const qi = $("#q"); qi.oninput = () => { q = qi.value; const pos = qi.selectionStart; renderAdmin(); const n2 = $("#q"); n2.focus(); n2.setSelectionRange(pos,pos); };
-  $("#tabs").onclick = e => { const b = e.target.closest(".chip"); if(b){ filter = b.dataset.k; renderAdmin(); } };
-  document.querySelectorAll(".adm-item").forEach(el => { el.onclick = () => openCase(el.dataset.id); el.onkeydown = e => { if(e.key === "Enter") openCase(el.dataset.id); }; });
+  $("#tabs").onclick = e => { const b = e.target.closest(".fchip"); if(b){ filter = b.dataset.k; renderAdmin(); } };
+  $$(".ex[data-id]").forEach(el => el.onclick = () => openCase(el.dataset.id));
 }
 
 async function openCase(id){
   const r = rows.find(x => x.id === id); if(!r) return;
-  const bg = document.createElement("div"); bg.className = "modal-bg";
-  bg.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="تفاصيل العذر">
-    <div class="item-top"><h2 style="font-size:1.3rem">${esc(r.student_name)}</h2><span class="status ${STATUS[r.status]?.c}">${STATUS[r.status]?.t}</span></div>
-    <div class="kv">
-      <div><small>السجل المدني</small><span class="num" dir="ltr">${esc(r.national_id)}</span></div>
-      <div><small>الصف / الفصل</small><span>${esc(r.grade)} / ${esc(r.section)}</span></div>
-      <div><small>مدة الغياب</small><span>${fmt(r.from_date)}${r.to_date!==r.from_date?" ← "+fmt(r.to_date):""}</span></div>
-      <div><small>أيام الدراسة</small><span class="num">${r.school_days} يوم ${r.late?'<span class="late-tag">متأخر</span>':""}</span></div>
-      <div><small>السبب</small><span>${esc(r.reason)}</span></div>
-      <div><small>الجهة الطبية</small><span>${esc(r.provider)} (${esc(r.provider_type)})</span></div>
-      <div><small>رقم الإجازة (صحة)</small><span dir="ltr">${esc(r.leave_no) || "—"}</span></div>
-      <div><small>رقم الطلب</small><span dir="ltr" class="num">${esc(r.ref)}</span></div>
-      <div><small>وقت الرفع</small><span>${fmtTime(r.created_at)}</span></div>
-    </div>
-    ${r.note ? `<div class="note-box"><b>ملاحظة الطالبة:</b> ${esc(r.note)}</div>` : ""}
-    ${r.leave_no ? `<a class="btn ghost" href="https://www.seha.sa" target="_blank" rel="noopener">${ICONS.search} التحقق من الإجازة في منصة صحة</a>` : ""}
-    <div class="filebox" id="fbox"><p style="color:var(--muted)">جارٍ فتح التقرير…</p></div>
-    <div class="field"><label for="m-note">ملاحظة للطالبة</label><textarea class="inp" id="m-note" rows="2" placeholder="مثال: الصورة غير واضحة، أعيدي الرفع">${esc(r.admin_note)}</textarea></div>
-    <div class="decide">
-      <button class="btn primary" data-s="accepted" type="button">${ICONS.check} قبول العذر</button>
-      <button class="btn ghost" data-s="more" type="button">طلب استكمال</button>
-      <button class="btn warm" data-s="rejected" type="button">عدم القبول</button>
-    </div>
-    <div class="err" id="mErr" hidden></div>
-    <button class="btn ghost block" id="mClose" type="button">إغلاق</button>
-  </div>`;
-  document.body.appendChild(bg);
-  const close = () => { bg.remove(); document.removeEventListener("keydown", onKey); };
-  const onKey = e => { if(e.key === "Escape") close(); };
-  document.addEventListener("keydown", onKey);
-  bg.onclick = e => { if(e.target === bg) close(); };
-  bg.querySelector("#mClose").onclick = close;
+  const R = reasonOf(r.reason);
+  const {bg, close} = sheet(`
+    <div class="sh-head"><span class="initial sm" style="background:rgba(255,255,255,.2)">${esc((r.student_name||"ط").slice(0,1))}</span><h2>${esc(r.student_name)}</h2><button class="close" type="button" aria-label="إغلاق">${I("x")}</button></div>
+    <div class="sh-body">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${pill(r.status)}${r.late ? `<span class="pill p-late">${I("clock")}قُدّم متأخراً</span>` : ""}</div>
+      <div class="pass">
+        <div class="ph">${B(R.i, R.g, "")}<div><b>${esc(r.reason)}</b><small>رقم الطلب <span class="ref num">${esc(r.ref)}</span></small></div></div>
+        <div class="perf"><b></b></div>
+        <div class="pb">
+          <div><small>السجل المدني</small><span class="num" dir="ltr">${esc(r.national_id)}</span></div>
+          <div><small>الصف / الفصل</small><span>${esc(r.grade)} / ${esc(r.section)}</span></div>
+          <div class="full"><small>مدة الغياب</small><span>${range(r.from_date, r.to_date)} · ${r.school_days} يوم دراسي</span></div>
+          <div><small>الجهة الطبية</small><span>${esc(r.provider)} (${esc(r.provider_type)})</span></div>
+          <div><small>رقم الإجازة (صحة)</small><span dir="ltr">${esc(r.leave_no) || "—"}</span></div>
+          <div class="full"><small>وقت الرفع</small><span>${fmtTime(r.created_at)}</span></div>
+        </div>
+      </div>
+      ${r.note ? `<div class="note">${I("pen")}<span><b>ملاحظة الطالبة:</b> ${esc(r.note)}</span></div>` : ""}
+      ${r.leave_no ? `<a class="btn b-ghost" href="https://www.seha.sa" target="_blank" rel="noopener">${I("search")} التحقق من الإجازة في منصة صحة</a>` : ""}
+      <span class="lbl">${I("file")} التقرير الطبي</span>
+      <div class="filebox" id="fbox"><p class="muted">جارٍ فتح التقرير…</p></div>
+      <div class="card flat">
+        <div class="field"><label for="m-note">${I("pen")} ملاحظة للطالبة</label><textarea class="inp" id="m-note" rows="2" placeholder="مثال: الصورة غير واضحة، أعيدي الرفع">${esc(r.admin_note)}</textarea><span class="hint">مطلوبة عند «طلب استكمال» أو «عدم القبول».</span></div>
+        <div class="decide">
+          <button class="btn b-em" data-s="accepted" type="button">${I("checkc")} قبول العذر</button>
+          <button class="btn b-sun" data-s="more" type="button">${I("alert")} طلب استكمال</button>
+          <button class="btn b-coral" data-s="rejected" type="button">${I("x")} عدم القبول</button>
+        </div>
+        ${errBox("mErr")}
+      </div>
+    </div>`);
   bg.querySelectorAll("[data-s]").forEach(b => b.onclick = async () => {
     const s = b.dataset.s, note = bg.querySelector("#m-note").value.trim(), er = bg.querySelector("#mErr");
-    if((s === "more" || s === "rejected") && !note){ er.textContent = "اكتبي ملاحظة توضح للطالبة السبب."; er.hidden = false; return; }
+    if((s === "more" || s === "rejected") && !note){ showErr(er, "اكتبي ملاحظة توضح للطالبة السبب."); return; }
     b.disabled = true;
     try{ const ok = await api.review(adm.pin, r.id, s, note, adm.name); if(ok === false) throw 0;
       Object.assign(r, {status:s, admin_note:note, reviewed_by:adm.name, reviewed_at:new Date().toISOString()});
       close(); renderAdmin(); toast("تم حفظ القرار: " + STATUS[s].t); }
-    catch(e){ b.disabled = false; er.textContent = isLocked(e) ? LOCK_MSG : "لم يُحفظ القرار، حاولي مرة أخرى."; er.hidden = false; }
+    catch(e){ b.disabled = false; showErr(er, isLocked(e) ? LOCK_MSG : "لم يُحفظ القرار، حاولي مرة أخرى."); }
   });
   try{
     const f = (await api.adminFile(adm.pin, r.id))[0]; const box = bg.querySelector("#fbox");
-    if(!f || !f.file_data){ box.innerHTML = `<p style="color:var(--muted)">لا يوجد ملف مرفق.</p>`; return; }
+    if(!f || !f.file_data){ box.innerHTML = `<p class="muted">لا يوجد ملف مرفق.</p>`; return; }
     if((f.file_type||"").startsWith("image/")) box.innerHTML = `<img src="${f.file_data}" alt="التقرير الطبي">`;
     else { let url = f.file_data; try{ const bin = atob(f.file_data.split(",")[1]); const u = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i] = bin.charCodeAt(i); url = URL.createObjectURL(new Blob([u],{type:"application/pdf"})); }catch(e){}
-      box.innerHTML = `<div style="display:grid;gap:10px;width:100%;padding:12px"><iframe src="${url}" title="التقرير الطبي"></iframe><a class="btn ghost" href="${url}" target="_blank" rel="noopener">${ICONS.file} فتح ملف PDF في نافذة جديدة</a></div>`; }
-  }catch(e){ bg.querySelector("#fbox").innerHTML = `<p class="err">تعذر فتح التقرير.</p>`; }
+      box.innerHTML = `<div style="display:grid;gap:10px;width:100%;padding:12px"><iframe src="${url}" title="التقرير الطبي"></iframe><a class="btn b-ghost" href="${url}" target="_blank" rel="noopener">${I("file")} فتح ملف PDF في نافذة جديدة</a></div>`; }
+  }catch(e){ bg.querySelector("#fbox").innerHTML = `<div class="err" style="margin:12px">${I("alert")}<span>تعذر فتح التقرير.</span></div>`; }
+}
+
+async function adminReport(){
+  adminShell("rep");
+  main.innerHTML = loading("جارٍ تجهيز الإحصاء…");
+  await loadAll();
+  const total = rows.length;
+  const byReason = REASONS.map(R => ({R, n: rows.filter(r => reasonOf(r.reason).k === R.k).length})).filter(x => x.n).sort((a,b) => b.n - a.n);
+  const byGrade = GRADES.map(g => ({g, n: rows.filter(r => r.grade === g).length, d: rows.filter(r => r.grade === g && r.status !== "rejected").reduce((s,r) => s + (r.school_days||0), 0)}));
+  const maxR = Math.max(1, ...byReason.map(x => x.n)), maxG = Math.max(1, ...byGrade.map(x => x.n));
+  const late = rows.filter(r => r.late).length;
+  const acc = rows.filter(r => r.status === "accepted").length;
+  const decided = rows.filter(r => r.status !== "new").length;
+  const daysAll = rows.filter(r => r.status !== "rejected").reduce((s,r)=>s+(r.school_days||0),0);
+  main.innerHTML = `
+  <div class="stack">
+    ${demoNote()}
+    <div class="page-head ph-violet">${B("chart","g-glass","")}<div><h1>الإحصاء</h1><p>${total} عذر مسجل حتى اليوم</p></div></div>
+    <div class="tiles four">
+      <div class="tile t-em">${B("check","g-em","sm")}<div><b class="num">${decided ? Math.round(acc/decided*100) : 0}٪</b><span>نسبة القبول</span></div></div>
+      <div class="tile t-coral">${B("clock","g-coral","sm")}<div><b class="num">${late}</b><span>قُدّمت متأخرة</span></div></div>
+      <div class="tile t-sky">${B("calendar","g-sky","sm")}<div><b class="num">${daysAll}</b><span>أيام غياب بعذر</span></div></div>
+      <div class="tile t-berry">${B("hash","g-berry","sm")}<div><b class="num">${rows.filter(r => r.leave_no).length}</b><span>بإجازة من «صحة»</span></div></div>
+    </div>
+    <div class="card"><h2>الأعذار حسب السبب</h2>
+      ${byReason.length ? `<div class="bars">${byReason.map(x => `<div class="barrow"><span class="lb">${B(x.R.i, x.R.g, "sm")}${x.R.k}</span><span class="track2"><i style="width:${x.n/maxR*100}%;background:${x.R.c}"></i></span><b class="num">${x.n}</b></div>`).join("")}</div>` : `<p class="muted">تظهر هنا الأسباب عند وصول أول عذر.</p>`}
+    </div>
+    <div class="card"><h2>الأعذار حسب الصف</h2>
+      <div class="bars">${byGrade.map(x => `<div class="barrow"><span class="lb"><span class="initial sm ${GRADE_G[x.g]}">${GRADE_N[x.g]}</span>${x.g}</span><span class="track2"><i style="width:${x.n/maxG*100}%;background:linear-gradient(90deg,var(--em),var(--gold))"></i></span><b class="num">${x.n}</b></div>`).join("")}</div>
+      <p class="hint">أيام الغياب بعذر: ${byGrade.map(x => `${x.g} ${x.d}`).join("، ")}.</p>
+    </div>
+    <div class="card">
+      <div class="row">${B("download","g-gold","")}<div><h2>تصدير إلى Excel</h2><p class="muted">ملف بكل الأعذار وقراراتها لحفظه أو مشاركته.</p></div></div>
+      <button class="btn b-em block" id="csv" type="button">${I("download")} تحميل الملف</button>
+    </div>
+  </div>`;
+  $("#csv").onclick = exportCSV;
 }
 
 function exportCSV(){
@@ -789,12 +1145,12 @@ function exportCSV(){
   const csv = "﻿" + [head, ...lines].map(l => l.map(v => `"${String(v ?? "").replace(/"/g,'""')}"`).join(",")).join("\n");
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
   a.download = `أعذار-انضباطي-${iso(new Date())}.csv`; document.body.appendChild(a); a.click(); a.remove();
-  toast(DEMO ? "التصدير يعمل بعد نشر المنصة على موقعك" : "تم تجهيز ملف Excel");
+  toast(DEMO ? "التصدير يعمل على موقع المدرسة" : "تم تجهيز ملف Excel");
 }
 
-$("#homeBtn").onclick = () => go(home);
+$("#homeBtn").onclick = () => { top(); home(); };
 (async function init(){
-  main.innerHTML = `<div class="view"><div class="panel"><p>جارٍ تجهيز المنصة…</p></div></div>`;
+  main.innerHTML = loading("جارٍ تجهيز المنصة…");
   if(!CONFIG.SUPABASE_ANON_KEY && CONFIG.KEY_SOURCE){
     try{ const t = await fetch(CONFIG.KEY_SOURCE, {cache:"no-store"}).then(r => r.ok ? r.text() : "");
       const m = t.match(/SUPABASE_ANON_KEY\s*:\s*["']([^"']+)["']/); if(m) CONFIG.SUPABASE_ANON_KEY = m[1]; }catch(e){}
