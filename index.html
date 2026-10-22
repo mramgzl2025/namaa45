@@ -79,6 +79,14 @@ svg text{font-family:var(--f-display)}
 .btn-ghost{background:var(--surface);border-color:var(--line);color:var(--ink)}
 .btn-danger{background:transparent;border-color:var(--danger);color:var(--danger)}
 .btn:disabled{opacity:.55;cursor:progress}
+.credit{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding:10px 22px;border-radius:14px;border:1.5px solid var(--gold);background:rgba(217,164,65,.10);color:#F6DFA8;font-weight:700;font-size:15.5px;box-shadow:0 0 0 4px rgba(217,164,65,.08),0 6px 22px rgba(217,164,65,.18)}
+.credit .cs{color:var(--gold);font-size:14px}
+.who-chips{display:flex;flex-wrap:wrap;gap:8px}
+.who-chip{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);font-weight:700;font-size:15px;color:var(--hero-ink);max-width:100%}
+.who-chip svg{width:22px;height:22px;color:#5FD3A0;flex:none}
+.who-chip .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who-chip .role{padding:3px 11px;border-radius:999px;background:#3CC48A;color:#0B3B26;font-size:12.5px;font-weight:700;white-space:nowrap}
+.who-chip .role.adm{background:var(--gold);color:#3A2A08}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:24px;max-width:580px}
 @media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .stat{border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:10px 12px;display:grid;gap:2px}
@@ -666,6 +674,7 @@ body.has-sbar footer{padding-bottom:120px}
   <div class="wrap">
     <div class="topbar">
       <div class="school"><span class="seal"><svg class="ico"><use href="#i-star"/></svg></span>الثانوية الخامسة والأربعون</div>
+      <div class="who-chips" id="who-chips" hidden aria-live="polite"></div>
     </div>
     <div>
       <span class="kicker">ملفات الإنجاز والنمو المهني للمعلمات</span>
@@ -682,6 +691,7 @@ body.has-sbar footer{padding-bottom:120px}
         <div class="stat"><svg class="si"><use href="#i-file"/></svg><strong id="s-files">٠</strong><span>مرفق</span></div>
         <div class="stat"><svg class="si"><use href="#i-layers"/></svg><strong id="s-active">٠</strong><span>معلمة بدأت التوثيق</span></div>
       </div>
+      <div class="credit"><span class="cs">✦</span>تصميم أ. مديحه علي العبيدي</div>
     </div>
     <div class="orbit" aria-hidden="true">
       <div class="ring"></div><div class="ring r2"></div>
@@ -1395,6 +1405,8 @@ function renderAdmin(){
   renderViceHub();renderBackup();
 }
 function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const logged=parts.length>0;
+  const ch=[];if(adminPin)ch.push([adminRole==="principal"?"أ. فاطمة البدراني":adminRole==="vice"?"أ. ريم الحيسوني":"الإدارة",adminRole==="principal"?"مديرة المدرسة":adminRole==="vice"?"وكيلة شؤون المعلمات":"الإدارة",1]);tn.forEach(n=>ch.push([n,"معلمة",0]));
+  const wc=$("#who-chips");if(wc){wc.hidden=!ch.length;wc.innerHTML=ch.map(([n,r,a])=>`<span class="who-chip"><svg><use href="#i-user"/></svg><span class="nm">${esc(n)}</span><span class="role${a?" adm":""}">${r}</span></span>`).join("");}
   $("#swho-w").hidden=!logged;if(logged)$("#swho").textContent="داخلة الآن: "+parts.join(" · ");updNav();}
 function updNav(){const logged=!!adminPin||Object.keys(tPins).length>0;const away=curView!=="list";const on=logged||away;
   $("#sbar").hidden=!on;document.body.classList.toggle("has-sbar",on);
