@@ -760,7 +760,7 @@ body.has-sbar footer{padding-bottom:120px}
         <div class="tscroll"><table class="adm-table" id="tb-follow"></table></div>
       </div>
       <div class="panel" id="adm-gate"><div class="p-head"><h3>دخول الإدارة</h3><p class="hint">لمديرة المدرسة ووكيلة شؤون المعلمات، كلٌّ برمزها الخاص.</p></div>
-        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span><label class="rem" style="flex-basis:100%"><input type="checkbox" id="adm-rem"><span>تذكّريني على هذا الجهاز لمدة ١٢ ساعة</span></label></form></div>
+        <form class="pin" id="adm-form"><label for="adm-pin" class="hint">رمزك (٤ أرقام)</label><input id="adm-pin" type="password" inputmode="numeric" autocomplete="off" maxlength="4" required><button class="btn btn-primary">دخول</button><span class="msg" id="adm-msg" role="status"></span><label class="rem" style="flex-basis:100%"><input type="checkbox" id="adm-rem" checked><span>تذكّري دخولي على هذا الجهاز<small>لن يُطلب الرمز مرة أخرى لمدة ٧ أيام. أزيلي العلامة إذا كان الجهاز مشتركًا.</small></span></label></form></div>
       <div id="adm-body" hidden>
       <div class="vhub" id="vhub" hidden>
         <div class="vhub-h"><span class="crown">✨</span><div><h3 id="vh-title">مساحة وكيلة شؤون المعلمات</h3><p id="vh-sub">أ. ريم الحيسوني — ملفاتكِ الخاصة وبطاقات زيارة الحصص</p></div><span class="vonly" id="vh-only">🔒 خاص بالوكيلة</span></div>
@@ -1195,7 +1195,7 @@ let teachers=[],items=[],curT=null,curD=null;
 let adminPin=null, adminTeachers=[], adminRole=null;      // admin session (memory only)
 const tPins={};                            // teacher pins unlocked on this device
 /* session persistence: survives page reloads/phone tab reloads (sessionStorage), and "remember me" (localStorage, with expiry) */
-const SKEY="namaa45.sess.v1",T_DAYS=7,A_HRS=12,TAB_HRS=10;
+const SKEY="namaa45.sess.v1",T_DAYS=7,A_HRS=168,TAB_HRS=10;
 const tRem={};let aRem=false;
 function stGet(st){try{return JSON.parse(st.getItem(SKEY)||"null")||{};}catch(e){return {};}}
 function stPut(st,v){try{if(!v.a&&!Object.keys(v.t||{}).length)st.removeItem(SKEY);else st.setItem(SKEY,JSON.stringify(v));}catch(e){}}
