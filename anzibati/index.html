@@ -555,7 +555,7 @@ function toast(msg){ let t = $(".toast"); if(!t){ t = document.createElement("di
 const errBox = id => `<div class="err" id="${id}" hidden>${I("alert")}<span></span></div>`;
 function showErr(el, msg){ el.querySelector("span").textContent = msg; el.hidden = false; }
 const demoNote = () => DEMO ? `<div class="demo">${I("info")}<span>نسخة معاينة ببيانات تجريبية. على موقع المدرسة تُحفظ الأعذار فعلياً.</span></div>` : "";
-function top(){ window.scrollTo({top:0, behavior:"smooth"}); }
+function toTop(){ window.scrollTo({top:0, behavior:"smooth"}); }
 const loading = msg => `<div class="stack"><div class="card"><p class="muted">${msg}</p></div></div>`;
 
 /* أوضاع الصفحة */
@@ -576,7 +576,7 @@ function plainMode(){
   $("#landTop").hidden = true; $("#hero").hidden = true; $("#dock").hidden = true;
   const ab = $("#appbar"); ab.hidden = false;
   ab.innerHTML = `<div class="wrap app"><div class="who"><span class="avatar" style="background:linear-gradient(135deg,var(--sun),var(--coral))">${I("shield")}</span><div><b style="font-family:var(--f-brand)">انضباطي سر تميزي</b><small>${esc(CONFIG.SCHOOL)}</small></div></div><button class="icon-btn" id="ab-home" type="button">${I("home")}<span>الرئيسية</span></button></div>`;
-  $("#ab-home").onclick = () => { top(); home(); };
+  $("#ab-home").onclick = () => { toTop(); home(); };
   main.className = "wrap app";
 }
 const dockBtn = (id, icon, label, cur, cls) => `<button type="button" id="${id}" class="${cls||""}" ${cur?'aria-current="page"':""}>${cls==="fab"?`<span class="f">${I(icon)}</span>`:I(icon)}<span>${label}</span>${cls==="fab"?"":'<span class="dot"></span>'}</button>`;
@@ -613,8 +613,8 @@ function home(){
       <div class="rule r4">${B("lock","g-berry","sm")}<p><b>تقريرك سري</b>لا تراه إلا إدارة المدرسة المخولة.</p></div>
     </div>
   </div>`;
-  $("#goStudent").onclick = () => { top(); studentEntry(); };
-  $("#goAdmin").onclick = () => { top(); adminEntry(); };
+  $("#goStudent").onclick = () => { toTop(); studentEntry(); };
+  $("#goAdmin").onclick = () => { toTop(); adminEntry(); };
 }
 
 /* ================== الطالبة ================== */
@@ -659,10 +659,10 @@ function studentShell(cur){
      <span class="mini-brand">انضباطي</span>`,
     dockBtn("d-home","home","الرئيسية",cur==="home") + dockBtn("d-new","plus","عذر جديد",false,"fab") + dockBtn("d-list","list","أعذاري",cur==="list") + dockBtn("d-out","out","خروج",false,"out")
   );
-  $("#d-home").onclick = () => { top(); studentHome(); };
-  $("#d-new").onclick = () => { top(); wizard(); };
-  $("#d-list").onclick = () => { top(); studentList(); };
-  $("#d-out").onclick = () => { store.del("student"); me = null; myRows = null; top(); home(); toast("تم تسجيل الخروج"); };
+  $("#d-home").onclick = () => { toTop(); studentHome(); };
+  $("#d-new").onclick = () => { toTop(); wizard(); };
+  $("#d-list").onclick = () => { toTop(); studentList(); };
+  $("#d-out").onclick = () => { store.del("student"); me = null; myRows = null; toTop(); home(); toast("تم تسجيل الخروج"); };
 }
 async function loadMine(force){
   if(myRows && !force) return myRows;
@@ -723,9 +723,9 @@ async function studentHome(){
     </div>` : `
     <div class="card"><div class="empty">${B("heart","g-em","lg")}<h2>لا توجد أعذار مسجلة</h2><p>نتمنى لك دوام الصحة والحضور. إن غبتِ يوماً لظرف صحي، ارفعي عذرك من الزر الأحمر.</p></div></div>`}
   </div>`;
-  $("#bigNew").onclick = () => { top(); wizard(); };
-  if($("#allMine")) $("#allMine").onclick = () => { top(); studentList(); };
-  if($("#redoLast")) $("#redoLast").onclick = () => { top(); wizard({from:last.from_date, to:last.to_date, reason:last.reason, note:"إعادة رفع للعذر " + last.ref}); };
+  $("#bigNew").onclick = () => { toTop(); wizard(); };
+  if($("#allMine")) $("#allMine").onclick = () => { toTop(); studentList(); };
+  if($("#redoLast")) $("#redoLast").onclick = () => { toTop(); wizard({from:last.from_date, to:last.to_date, reason:last.reason, note:"إعادة رفع للعذر " + last.ref}); };
 }
 async function studentList(){
   studentShell("list");
@@ -777,7 +777,7 @@ function openMine(r){
       ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</span></div>` : ""}
       ${r.status === "more" ? `<button class="btn b-sun block" id="redo" type="button">${I("upload")} إعادة رفع التقرير</button>` : ""}
     </div>`);
-  const rd = bg.querySelector("#redo"); if(rd) rd.onclick = () => { close(); top(); wizard({from:r.from_date, to:r.to_date, reason:r.reason, note:"إعادة رفع للعذر " + r.ref}); };
+  const rd = bg.querySelector("#redo"); if(rd) rd.onclick = () => { close(); toTop(); wizard({from:r.from_date, to:r.to_date, reason:r.reason, note:"إعادة رفع للعذر " + r.ref}); };
 }
 
 /* ---------- معالج رفع العذر ---------- */
@@ -898,10 +898,10 @@ function wizard(prefill){
         catch(e){ showErr(err, e.message); }
       }
     }
-    $("#wBack").onclick = () => { save(); if(step === 1){ top(); return studentHome(); } step--; top(); render(); };
+    $("#wBack").onclick = () => { save(); if(step === 1){ toTop(); return studentHome(); } step--; toTop(); render(); };
     $("#wNext").onclick = async () => {
       save(); const m = check(); if(m){ showErr(err, m); return; }
-      if(step < 3){ step++; top(); return render(); }
+      if(step < 3){ step++; toTop(); return render(); }
       const btn = $("#wNext"); btn.disabled = true; btn.textContent = "جارٍ الإرسال…";
       try{
         const ref = await api.submit({ national_id:me.nid, student_name:d.name, grade:d.grade, section:d.section,
@@ -950,7 +950,7 @@ function success(ref, d){
     <button class="btn b-em block" id="toHome" type="button">${I("home")} العودة لصفحتي</button>
   </div>`;
   $("#cpy").onclick = async () => { try{ await navigator.clipboard.writeText(ref); toast("تم نسخ رقم الطلب"); }catch(e){ const el = $(".pass .ref"); const r = document.createRange(); r.selectNodeContents(el); getSelection().removeAllRanges(); getSelection().addRange(r); toast("حددي الرقم وانسخيه"); } };
-  $("#toHome").onclick = () => { top(); studentHome(); };
+  $("#toHome").onclick = () => { toTop(); studentHome(); };
   confetti();
 }
 
@@ -1000,9 +1000,9 @@ function adminShell(cur){
     true
   );
   $("#ab-rf").onclick = async () => { await loadAll(true); cur === "rep" ? adminReport() : renderAdmin(); toast("تم التحديث"); };
-  $("#d-in").onclick = () => { top(); adminHome(); };
-  $("#d-rep").onclick = () => { top(); adminReport(); };
-  $("#d-out").onclick = () => { store.del("admin"); adm = null; rows = []; top(); home(); toast("تم تسجيل الخروج"); };
+  $("#d-in").onclick = () => { toTop(); adminHome(); };
+  $("#d-rep").onclick = () => { toTop(); adminReport(); };
+  $("#d-out").onclick = () => { store.del("admin"); adm = null; rows = []; toTop(); home(); toast("تم تسجيل الخروج"); };
 }
 async function loadAll(force){
   if(rows.length && !force) return rows;
@@ -1148,7 +1148,7 @@ function exportCSV(){
   toast(DEMO ? "التصدير يعمل على موقع المدرسة" : "تم تجهيز ملف Excel");
 }
 
-$("#homeBtn").onclick = () => { top(); home(); };
+$("#homeBtn").onclick = () => { toTop(); home(); };
 (async function init(){
   main.innerHTML = loading("جارٍ تجهيز المنصة…");
   if(!CONFIG.SUPABASE_ANON_KEY && CONFIG.KEY_SOURCE){
