@@ -935,6 +935,7 @@ body.has-sbar footer{padding-bottom:120px}
       <div class="field"><label for="a-date">التاريخ (اختياري)</label><input id="a-date" type="date"></div>
     </div>
     <div class="field"><label for="a-cls">الصف / الفصل (اختياري)</label><input id="a-cls" maxlength="60" placeholder="مثال: ثاني ثانوي ٢"></div>
+    <div class="field"><label for="a-target">الفئة المستهدفة (اختياري)</label><input id="a-target" maxlength="80" list="a-target-l" placeholder="مثال: طالبات الصف الأول الثانوي"><datalist id="a-target-l"><option value="الطالبات"><option value="الطالبات المتعثرات"><option value="الطالبات المتفوقات"><option value="المعلمات"><option value="أولياء الأمور"><option value="الإدارة المدرسية"><option value="المجتمع المحلي"></datalist></div>
     <div class="field"><label for="a-desc">وصف مختصر (اختياري)</label><textarea id="a-desc" maxlength="700"></textarea></div>
     <div class="field"><span class="lbl">المرفقات — اختاري نوع ما تريدين رفعه</span>
       <div class="atypes" id="a-types">
@@ -1545,7 +1546,7 @@ $("#f-add").addEventListener("submit",async e=>{
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
     msg.textContent="جارٍ الحفظ…";
-    const doc={teacher:curT,domain:d.id,sec:d.sec,title:$("#a-name").value.trim(),term:$("#a-term").value,date:$("#a-date").value||"",cls:$("#a-cls").value.trim(),desc:$("#a-desc").value.trim(),files:out};
+    const doc={teacher:curT,domain:d.id,sec:d.sec,title:$("#a-name").value.trim(),term:$("#a-term").value,date:$("#a-date").value||"",cls:$("#a-cls").value.trim(),desc:(($("#a-target").value.trim()?"🎯 الفئة المستهدفة: "+$("#a-target").value.trim()+"\n":"")+$("#a-desc").value.trim()).trim(),files:out};
     if(d.kinds)doc.kind=$("#a-kind").value;
     if(d.checks)doc.checks=[...document.querySelectorAll("#a-checks input:checked")].map(x=>x.value);
     const it={domain:doc.domain,sec:doc.sec,title:doc.title,kind:doc.kind||null,term:doc.term,date:doc.date||"",cls:doc.cls,descr:doc.desc,checks:doc.checks||[],files:doc.files};
@@ -1563,7 +1564,7 @@ function openView(id){
   $("#v-meta").innerHTML=`${x.term?`<span><svg><use href="#i-cal"/></svg>${esc(x.term)}</span>`:""}${x.date?`<span>${fmtDate(x.date)}</span>`:""}${x.cls?`<span><svg><use href="#i-class"/></svg>${esc(x.cls)}</span>`:""}`;
   $("#v-stamp").innerHTML=x.createdAt?`<span class="si">🕒</span><span><small>تاريخ ووقت إضافة الشاهد</small><b>${esc(fullT(x.createdAt))}</b></span>`:"";$("#v-stamp").hidden=!x.createdAt;
   $("#v-tags").innerHTML=(x.checks||[]).map(c=>`<span>✓ ${esc(c)}</span>`).join("");
-  $("#v-desc").textContent=x.descr||"";$("#v-desc").hidden=!x.descr;
+  $("#v-desc").textContent=x.descr||"";$("#v-desc").style.whiteSpace="pre-line";$("#v-desc").hidden=!x.descr;
   $("#v-del").hidden=!(adminPin||tPins[x.teacher_id]);$("#v-confirm").hidden=true;$("#v-msg").textContent="";
   const fs=x.files||[];$("#v-tabs").innerHTML=fs.length>1?fs.map((f,i)=>`<button class="ftab" data-i="${i}" aria-pressed="${i===0}">${(AT[kindOf(f)]||AT.image).ic} ${esc(kindOf(f)==="link"?"رابط "+ar(i+1):(f.name||("ملف "+ar(i+1))))}</button>`).join(""):"";
   $("#dlg-view").hidden=false;loadFile(0);
