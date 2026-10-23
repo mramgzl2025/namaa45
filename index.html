@@ -811,6 +811,8 @@ body.has-sbar footer{padding-bottom:120px}
         <div class="panel"><div class="p-head"><h3>آخر ما أُضيف</h3></div><ol class="feed" id="feed"></ol></div>
       </div>
 
+      <div class="panel" id="vpin" hidden style="margin-top:16px"><div class="p-head"><h3>🔑 تغيير الرموز السرية للإدارة</h3><p class="hint">خاص بوكيلة شؤون المعلمات. رموز المعلمات ثابتة ولا تتغير من هنا.</p></div><form class="vpf" data-k="admin_pin" style="margin-top:12px"><label class="hint" style="display:block;margin-bottom:6px">رمزي — أ. ريم الحيسوني</label><div style="display:flex;gap:8px;align-items:center"><input type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="الرمز الجديد (٤ أرقام)" style="flex:1;min-width:0"><button class="btn btn-primary">حفظ</button></div><p class="msg" role="status"></p></form><form class="vpf" data-k="principal_pin" style="margin-top:12px"><label class="hint" style="display:block;margin-bottom:6px">رمز المديرة — أ. فاطمة البدراني</label><div style="display:flex;gap:8px;align-items:center"><input type="password" inputmode="numeric" maxlength="4" autocomplete="new-password" placeholder="الرمز الجديد (٤ أرقام)" style="flex:1;min-width:0"><button class="btn btn-primary">حفظ</button></div><p class="msg" role="status"></p></form></div>
+
       <div class="panel tlist" style="margin-top:16px">
         <div class="p-head"><h3>أسماء المعلمات ورموزهن السرية</h3><p class="hint">أعطي كل معلمة رمزها على الخاص. الرموز ثابتة 🔒 ولا يمكن تغييرها.</p></div>
         <div class="tscroll"><table class="adm-table" id="tb-pins" style="min-width:520px"></table></div>
@@ -1405,7 +1407,7 @@ function renderAdmin(){
   $("#feed").innerHTML=fl.length?fl.map(x=>{const d=DM[x.domain]||D[0];return `<li class="fi" data-item="${esc(x.id)}" style="--c:${d.c}"><span class="fd"></span><div class="ft"><b>${esc(tn[x.teacher_id]||"")}</b> — ${esc(x.title)}<small>${esc(d.name)}${x.kind?" · "+esc(x.kind):""} · ${shortDT(x.createdAt)}</small></div></li>`;}).join(""):'<li class="hint" style="padding:12px">لا توجد شواهد في هذه الفترة.</li>';
   $("#tb-pins").innerHTML=`<thead><tr><th>م</th><th>الاسم</th><th>الرمز السري</th></tr></thead><tbody>${adminTeachers.map((t,i)=>`<tr><td>${ar(i+1)}</td><td class="nm">${esc(t.name)}</td><td><b style="font-family:var(--f-display);font-size:17px;letter-spacing:.15em">${esc(t.pin||"—")}</b></td></tr>`).join("")}</tbody>`;
   if(document.activeElement!==$("#t-names")) $("#t-names").value=teachers.map(t=>t.name).join("\n");
-  renderViceHub();renderBackup();
+  renderViceHub();renderBackup();if(typeof renderVPin==="function")renderVPin();
 }
 function renderSession(){const tn=Object.keys(tPins).map(id=>teachers.find(t=>t.id===id)?.name).filter(Boolean);const parts=[];if(adminPin)parts.push(adminRole==="principal"?"أ. فاطمة البدراني (الإدارة)":adminRole==="vice"?"أ. ريم الحيسوني (الإدارة)":"الإدارة");tn.forEach(n=>parts.push(n));const logged=parts.length>0;
   const ch=[];if(adminPin)ch.push([adminRole==="principal"?"أ. فاطمة البدراني":adminRole==="vice"?"أ. ريم الحيسوني":"الإدارة",adminRole==="principal"?"مديرة المدرسة":adminRole==="vice"?"وكيلة شؤون المعلمات":"الإدارة",1]);tn.forEach(n=>ch.push([n,"معلمة",0]));
@@ -1467,6 +1469,9 @@ $("#f-pin").addEventListener("submit",async e=>{e.preventDefault();const id=pinF
 $("#u-clean").onclick=async()=>{const b=$("#u-clean"),m=$("#u-clean-msg");b.disabled=true;m.className="msg";m.textContent="جارٍ التنظيف…";await removeFiles(usage.orphans||[]);await refreshUsage();m.textContent="تم التنظيف.";b.disabled=false;};
 $("#adm-form").addEventListener("submit",async e=>{e.preventDefault();const m=$("#adm-msg");m.className="msg";m.textContent="جارٍ التحقق…";adminPin=$("#adm-pin").value.trim();
   try{await refreshAdmin();aRem=!!($("#adm-rem")&&$("#adm-rem").checked);sessSave();$("#adm-pin").value="";m.textContent="";renderAll();}catch(r){adminPin=null;m.className="msg err";m.textContent=(r&&PINERR[r.error])||"تعذّر الاتصال.";}});
+function renderVPin(){const el=$("#vpin");if(el)el.hidden=!(adminPin&&adminRole==="vice");}
+document.querySelectorAll("#vpin form").forEach(f=>f.addEventListener("submit",async e=>{e.preventDefault();const inp=f.querySelector("input"),m=f.querySelector(".msg");const np=inp.value.trim().replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d));m.className="msg";if(!/^\d{4}$/.test(np)){m.className="msg err";m.textContent="الرمز يجب أن يكون ٤ أرقام.";return;}m.textContent="جارٍ الحفظ…";
+  try{const r=await rpc("vice_set_pin",{p:adminPin,which:f.dataset.k,np});if(!r||!r.ok){m.className="msg err";m.textContent=({taken:"هذا الرمز مستخدم للحساب الآخر، اختاري رمزًا مختلفًا.",locked:"مقفل مؤقتًا، حاولي بعد ١٥ دقيقة.",pin:"انتهت الجلسة، سجّلي الدخول من جديد.",format:"الرمز يجب أن يكون ٤ أرقام."})[r&&r.error]||"تعذّر الحفظ.";return;}if(f.dataset.k==="admin_pin"){adminPin=np;sessSave();}inp.value="";m.textContent="تم الحفظ ✓ احفظي الرمز الجديد في مكان آمن.";}catch(err){m.className="msg err";m.textContent="تعذّر الحفظ، حاولي لاحقًا.";}}));
 $("#tb-pins").addEventListener("click",async e=>{const b=e.target.closest("[data-reset]");if(!b)return;
   if(b.dataset.armed!=="1"){b.dataset.armed="1";b.textContent="تأكيد؟";setTimeout(()=>{b.dataset.armed="";b.textContent="رمز جديد";},3000);return;}
   b.disabled=true;try{const r=await rpc("admin_reset_pin",{p:adminPin,tid:b.dataset.reset});if(r.ok){delete tPins[b.dataset.reset];delete tRem[b.dataset.reset];sessSave();await refreshAdmin();renderAll();}}catch(err){b.textContent="تعذّر";}});
