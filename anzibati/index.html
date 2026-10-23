@@ -416,7 +416,7 @@ body.has-dock footer{padding-block:4px 0}
   <footer>
     <div class="wrap">
       <span>منصة انضباطي · <span class="schoolName">الثانوية الخامسة والأربعون</span></span>
-      <span class="credit"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>تصميم أ. مديحه علي العبيدي</span>
+      <span class="credit"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>فكرة وتصميم فريق التقويم الذاتي</span>
     </div>
   </footer>
   <div class="dock" id="dock" hidden></div>
@@ -567,7 +567,7 @@ async function rpc(fn, body){
 const demoDB = (() => {
   const t = new Date(); const ago = n => { const d = new Date(t); d.setDate(d.getDate()-n); return iso(d); };
   const mk = o => Object.assign({id:String(Math.random()).slice(2), file_type:"image/svg+xml", file_name:"تقرير-تجريبي.svg", provider_type:"حكومي", late:false, admin_note:"", reviewed_by:"", reviewed_at:null, note:""}, o);
-  return { admins:[{name:"بينة العلوي", role:"إدارية الغياب", pin:"1234"},{name:"عائشة المطيري", role:"إدارية الغياب", pin:"1234"},{name:"ريم الحربي", role:"إدارية الغياب", pin:"1234"},{name:"مديحه علي العبيدي", role:"مشرفة المنصة", pin:"4321"}], rows:[
+  return { admins:[{name:"بينة العلوي", role:"إدارية الغياب", pin:"1234"},{name:"عائشة المطيري", role:"إدارية الغياب", pin:"1234"},{name:"ريم الحربي", role:"إدارية الغياب", pin:"1234"},{name:"فاطمة البدراني", role:"مديرة المدرسة", pin:"4321"}], rows:[
     mk({ref:"ANZ-DEMO-A1", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(16), to_date:ago(15), school_days:2, reason:"مرض عارض", provider:"مستشفى الملك فهد", leave_no:"PSL-0000000", status:"accepted", reviewed_by:"بينة العلوي", reviewed_at:ago(13)+"T09:10:00", created_at:ago(14)+"T07:40:00"}),
     mk({ref:"ANZ-DEMO-B2", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(3), to_date:ago(3), school_days:1, reason:"موعد أسنان", provider:"مجمع عيادات خاص", provider_type:"خاص", leave_no:"", status:"new", created_at:ago(1)+"T20:15:00", kind:"letter", letter:"غبت يوم الأحد لأن عندي موعد أسنان في الصباح الباكر، وأرفقت ورقة الموعد. أعتذر عن الغياب وسأعوض ما فاتني من دروس."}),
     mk({ref:"ANZ-DEMO-C3", national_id:"1100000002", student_name:"جود (طالبة تجريبية)", grade:"الثاني الثانوي", section:"1", from_date:ago(9), to_date:ago(7), school_days:3, reason:"تنويم", provider:"مستشفى المدينة العام", leave_no:"PSL-1111111", status:"more", admin_note:"الصورة غير واضحة، فضلاً أعيدي رفع التقرير", reviewed_by:"بينة العلوي", reviewed_at:ago(5)+"T10:00:00", created_at:ago(6)+"T18:30:00"}),
