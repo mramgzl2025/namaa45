@@ -935,7 +935,7 @@ body.has-sbar footer{padding-bottom:120px}
       <div class="field"><label for="a-date">التاريخ (اختياري)</label><input id="a-date" type="date"></div>
     </div>
     <div class="field"><label for="a-cls">الصف / الفصل (اختياري)</label><input id="a-cls" maxlength="60" placeholder="مثال: ثاني ثانوي ٢"></div>
-    <div class="field"><label for="a-target">الفئة المستهدفة (اختياري)</label><input id="a-target" maxlength="80" list="a-target-l" placeholder="مثال: طالبات الصف الأول الثانوي"><datalist id="a-target-l"><option value="الطالبات"><option value="الطالبات المتعثرات"><option value="الطالبات المتفوقات"><option value="المعلمات"><option value="أولياء الأمور"><option value="الإدارة المدرسية"><option value="المجتمع المحلي"></datalist></div>
+    <div class="field"><label for="a-target-s">الفئة المستهدفة (اختياري)</label><select id="a-target-s"><option value="">— اختاري الفئة —</option><option>الطالبات</option><option>الطالبات المتعثرات</option><option>الطالبات المتفوقات</option><option>المعلمات</option><option>أولياء الأمور</option><option>الإدارة المدرسية</option><option>المجتمع المحلي</option><option value="أخرى">أخرى (أكتبها بنفسي)</option></select><input id="a-target" maxlength="80" placeholder="اكتبي الفئة المستهدفة" style="display:none;margin-top:8px"></div>
     <div class="field"><label for="a-desc">وصف مختصر (اختياري)</label><textarea id="a-desc" maxlength="700"></textarea></div>
     <div class="field"><span class="lbl">المرفقات — اختاري نوع ما تريدين رفعه</span>
       <div class="atypes" id="a-types">
@@ -1546,13 +1546,13 @@ $("#f-add").addEventListener("submit",async e=>{
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
     msg.textContent="جارٍ الحفظ…";
-    const doc={teacher:curT,domain:d.id,sec:d.sec,title:$("#a-name").value.trim(),term:$("#a-term").value,date:$("#a-date").value||"",cls:$("#a-cls").value.trim(),desc:(($("#a-target").value.trim()?"🎯 الفئة المستهدفة: "+$("#a-target").value.trim()+"\n":"")+$("#a-desc").value.trim()).trim(),files:out};
+    const doc={teacher:curT,domain:d.id,sec:d.sec,title:$("#a-name").value.trim(),term:$("#a-term").value,date:$("#a-date").value||"",cls:$("#a-cls").value.trim(),desc:((tg=>(tg?"🎯 الفئة المستهدفة: "+tg+"\n":""))($("#a-target-s").value==="أخرى"?$("#a-target").value.trim():$("#a-target-s").value)+$("#a-desc").value.trim()).trim(),files:out};
     if(d.kinds)doc.kind=$("#a-kind").value;
     if(d.checks)doc.checks=[...document.querySelectorAll("#a-checks input:checked")].map(x=>x.value);
     const it={domain:doc.domain,sec:doc.sec,title:doc.title,kind:doc.kind||null,term:doc.term,date:doc.date||"",cls:doc.cls,descr:doc.desc,checks:doc.checks||[],files:doc.files};
     const r=adminPin&&!tPins[curT]?null:await rpc("teacher_add",{tid:curT,p:tPins[curT],it});
     if(!r||!r.ok)throw r||{error:"pin"};
-    $("#f-add").reset();att=[];renderAtt();closeAll();if(adminPin)await refreshAdmin();else await refreshTeacher(curT);renderAll();
+    $("#f-add").reset();$("#a-target").style.display="none";att=[];renderAtt();closeAll();if(adminPin)await refreshAdmin();else await refreshTeacher(curT);renderAll();
   }catch(err){console.error(err);msg.className="msg err";msg.textContent=err&&err.upl?`تعذّر رفع الملف «${err.upl}». قد يكون نوعه غير مسموح في التخزين أو الاتصال ضعيف.`:"تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}
 });
 
@@ -2043,5 +2043,6 @@ load().then(()=>(restoring=restoreSess().finally(()=>{restoring=null;}))).then((
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
 </script>
+<script id="tg-js">(function(){var ts=document.getElementById("a-target-s"),ti=document.getElementById("a-target");if(!ts||!ti)return;ts.addEventListener("change",function(){var o=ts.value==="أخرى";ti.style.display=o?"":"none";if(o)ti.focus();else ti.value="";});})();</script>
 </body>
 </html>
