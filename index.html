@@ -1926,5 +1926,121 @@ async function restoreSess(){if(!teachers.length)return;/* list did not load: ke
 load().then(()=>(restoring=restoreSess().finally(()=>{restoring=null;}))).then(()=>{const h=(location.hash||"").slice(1);if(h==="admin")openAdmin();else if(h.startsWith("t-")&&teachers.some(t=>t.id===h.slice(2)))openTeacher(h.slice(2));});
 })();
 </script>
+<!-- التقويم الهجري لاختيار التاريخ (أُضيف 23 أكتوبر 2026) -->
+<style id="hcal-css">
+.hc-trig{width:100%;display:flex;align-items:center;gap:12px;padding:9px 12px;border:1.5px solid var(--line,#E2E5F1);border-radius:12px;background:var(--surface,#fff);color:var(--ink,#1B2245);font:inherit;cursor:pointer;text-align:right}
+.hc-trig:hover{border-color:var(--accent,#3D4DB8)}
+.hc-trig .hc-t{flex:1;min-width:0}
+.hc-trig b{display:block;font-weight:700}
+.hc-trig small{display:block;color:var(--muted,#646B8C);font-size:.8em}
+.hc-trig .hc-ph{color:var(--muted,#646B8C);font-weight:500}
+.hc-ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#2B2F7A,#5B2C7E);color:#fff;flex:none}
+.hc-ic svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hc-bg{position:fixed;inset:0;background:rgba(21,27,61,.55);z-index:100000;display:flex;align-items:center;justify-content:center;padding:16px}
+.hc{background:var(--surface,#fff);color:var(--ink,#1B2245);width:100%;max-width:370px;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);direction:rtl}
+.hc-h{display:flex;align-items:center;gap:8px;padding:12px;background:linear-gradient(135deg,#151B3D,#2B2F7A 55%,#5B2C7E);color:#F4F1E8}
+.hc-h div{text-align:center;flex:1;min-width:0}
+.hc-h b{display:block;font-size:1.2rem;font-family:"El Messiri","Tajawal",Tahoma,sans-serif}
+.hc-h small{opacity:.8;font-size:.78rem}
+.hc-nav{border:0;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.16);color:#fff;font-size:1.25rem;cursor:pointer;flex:none}
+.hc-nav:hover{background:rgba(255,255,255,.26)}
+.hc-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;padding:10px}
+.hc-g .hc-wd{text-align:center;font-size:.72rem;font-weight:700;color:var(--muted,#646B8C);padding-bottom:4px}
+.hc-d{aspect-ratio:1;border:0;border-radius:11px;background:none;color:inherit;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;padding:0}
+.hc-d small{font-size:.58rem;font-weight:500;color:var(--muted,#646B8C)}
+.hc-d:hover{background:var(--accent-soft,#E8EBFA)}
+.hc-d.hc-we{color:var(--muted,#646B8C)}
+.hc-d.hc-today{box-shadow:inset 0 0 0 2px #D9A441}
+.hc-d.hc-sel{background:linear-gradient(135deg,#2B2F7A,#5B2C7E);color:#fff}
+.hc-d.hc-sel small{color:#E8DDF5}
+.hc-f{display:flex;gap:8px;padding:0 10px 12px}
+.hc-f button{flex:1;border:0;border-radius:12px;padding:10px 6px;font:inherit;font-weight:700;cursor:pointer}
+.hc-b-today{background:linear-gradient(120deg,#F7DFA4,#D9A441);color:#3E2A00}
+.hc-b-clear{background:var(--bg,#F5F6FB);color:var(--muted,#646B8C)}
+.hc-b-close{background:var(--accent-soft,#E8EBFA);color:#2B2F7A}
+.hc-sum{padding:0 12px 10px;text-align:center;font-size:.86rem;color:var(--muted,#646B8C);font-weight:700;min-height:1.4em}
+</style>
+<script id="hcal-js">
+(function(){
+  if(window.__hcal) return; window.__hcal = true;
+  var partsF = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura-nu-latn",{year:"numeric",month:"numeric",day:"numeric"});
+  function H(dt){ var p = {}; partsF.formatToParts(dt).forEach(function(x){ p[x.type] = x.value; }); return {y:+p.year, m:+p.month, d:+p.day}; }
+  function noon(d){ var x = new Date(d); x.setHours(12,0,0,0); return x; }
+  function add(d,n){ var x = new Date(d); x.setDate(x.getDate()+n); return x; }
+  function iso(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function parse(s){ var a = String(s).split("-").map(Number); return new Date(a[0], a[1]-1, a[2], 12); }
+  function startOf(d){ var x = noon(d); var g = 0; while(H(x).d > 1 && g++ < 31) x = add(x,-1); return x; }
+  function ar(n){ return Number(n).toLocaleString("ar-SA",{useGrouping:false}); }
+  function fmtH(d){ try{ return new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(d); }catch(e){ return iso(d); } }
+  function fmtG(d){ try{ return new Intl.DateTimeFormat("ar-SA-u-ca-gregory",{day:"numeric",month:"long",year:"numeric"}).format(d) + " م"; }catch(e){ return iso(d); } }
+  function monthH(d){ try{ return new Intl.DateTimeFormat("ar-SA-u-ca-islamic-umalqura",{month:"long",year:"numeric"}).format(d); }catch(e){ return ""; } }
+  function monthG(a,b){ try{ var f = new Intl.DateTimeFormat("ar-SA-u-ca-gregory",{month:"long"}); var x = f.format(a), y = f.format(b); return (x === y ? x : x + " – " + y) + " " + ar(b.getFullYear()) + " م"; }catch(e){ return ""; } }
+  var DAYS = ["أحد","إثنين","ثلاثاء","أربعاء","خميس","جمعة","سبت"];
+  var ICON = '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M15.5 15.5a2.5 2.5 0 1 1-1.2-2.1"/></svg>';
+
+  function open(inp){
+    var today = noon(new Date()), todayKey = iso(today);
+    var sel = inp.value ? noon(parse(inp.value)) : null;
+    var view = startOf(sel || today);
+    var bg = document.createElement("div"); bg.className = "hc-bg";
+    document.body.appendChild(bg);
+    function close(){ bg.remove(); document.removeEventListener("keydown", onKey); try{ inp._hcTrig.focus(); }catch(e){} }
+    function onKey(e){ if(e.key === "Escape") close(); }
+    document.addEventListener("keydown", onKey);
+    bg.addEventListener("click", function(e){ if(e.target === bg) close(); });
+    function pick(d){ inp.value = d ? iso(d) : ""; inp.dispatchEvent(new Event("input",{bubbles:true})); inp.dispatchEvent(new Event("change",{bubbles:true})); close(); }
+    function draw(){
+      var hm = H(view), days = [], x = new Date(view), g = 0;
+      while(H(x).m === hm.m && g++ < 31){ days.push(new Date(x)); x = add(x,1); }
+      var cells = DAYS.map(function(d){ return '<span class="hc-wd">'+d+'</span>'; }).join("");
+      for(var i = 0; i < view.getDay(); i++) cells += "<span></span>";
+      days.forEach(function(d){
+        var k = iso(d), c = "hc-d";
+        if(d.getDay() === 5 || d.getDay() === 6) c += " hc-we";
+        if(k === todayKey) c += " hc-today";
+        if(sel && k === iso(sel)) c += " hc-sel";
+        cells += '<button type="button" class="'+c+'" data-k="'+k+'" aria-label="'+fmtH(d)+'">'+ar(H(d).d)+'<small>'+ar(d.getDate())+'</small></button>';
+      });
+      bg.innerHTML = '<div class="hc" role="dialog" aria-modal="true" aria-label="اختيار التاريخ الهجري">'
+        + '<div class="hc-h"><button type="button" class="hc-nav" data-n="-1" aria-label="الشهر السابق">›</button>'
+        + '<div><b>'+monthH(view)+'</b><small>'+monthG(days[0], days[days.length-1])+'</small></div>'
+        + '<button type="button" class="hc-nav" data-n="1" aria-label="الشهر التالي">‹</button></div>'
+        + '<div class="hc-g">'+cells+'</div>'
+        + '<div class="hc-sum">'+(sel ? fmtH(sel) : "اختاري اليوم من التقويم")+'</div>'
+        + '<div class="hc-f"><button type="button" class="hc-b-today">اليوم</button><button type="button" class="hc-b-clear">مسح</button><button type="button" class="hc-b-close">إغلاق</button></div>'
+        + '</div>';
+      bg.querySelectorAll(".hc-nav").forEach(function(b){ b.onclick = function(){ view = +b.dataset.n > 0 ? startOf(add(days[days.length-1], 2)) : startOf(add(view, -2)); draw(); }; });
+      bg.querySelectorAll(".hc-d").forEach(function(b){ b.onclick = function(){ pick(parse(b.dataset.k)); }; });
+      bg.querySelector(".hc-b-today").onclick = function(){ pick(today); };
+      bg.querySelector(".hc-b-clear").onclick = function(){ pick(null); };
+      bg.querySelector(".hc-b-close").onclick = close;
+      var s = bg.querySelector(".hc-sel") || bg.querySelector(".hc-today") || bg.querySelector(".hc-d"); if(s) s.focus();
+    }
+    draw();
+  }
+
+  function enhance(inp){
+    if(inp.dataset.hcal) return; inp.dataset.hcal = "1";
+    var b = document.createElement("button"); b.type = "button"; b.className = "hc-trig";
+    inp._hcTrig = b;
+    function upd(){
+      var v = inp.value;
+      if(v){ var d = parse(v); b.innerHTML = '<span class="hc-ic">'+ICON+'</span><span class="hc-t"><b>'+fmtH(d)+'</b><small>'+fmtG(d)+'</small></span>'; }
+      else b.innerHTML = '<span class="hc-ic">'+ICON+'</span><span class="hc-t"><span class="hc-ph">اضغطي لاختيار التاريخ من التقويم الهجري</span></span>';
+    }
+    var desc = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
+    Object.defineProperty(inp, "value", { configurable:true, get:function(){ return desc.get.call(this); }, set:function(v){ desc.set.call(this, v); upd(); } });
+    inp.style.display = "none";
+    inp.parentNode.insertBefore(b, inp.nextSibling);
+    b.addEventListener("click", function(){ open(inp); });
+    if(inp.id){ document.querySelectorAll('label[for="'+inp.id+'"]').forEach(function(l){ l.addEventListener("click", function(e){ e.preventDefault(); open(inp); }); }); }
+    if(inp.form) inp.form.addEventListener("reset", function(){ setTimeout(upd, 0); });
+    upd();
+  }
+  function scan(root){ (root || document).querySelectorAll('input[type="date"]:not([data-hcal])').forEach(enhance); }
+  function start(){ scan(); new MutationObserver(function(ms){ for(var i = 0; i < ms.length; i++){ if(ms[i].addedNodes.length){ scan(); break; } } }).observe(document.body, {childList:true, subtree:true}); }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+})();
+</script>
 </body>
 </html>
