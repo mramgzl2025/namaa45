@@ -301,6 +301,45 @@ button.ex:hover{border-color:var(--em);transform:translateY(-1px)}
 @media (prefers-reduced-motion:reduce){.done-hero .big{animation:none}}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:60;width:100%;height:100%}
 
+/* calendar */
+.cal{border:2px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface)}
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:linear-gradient(135deg,#4D30B8,#8E73F0);color:#fff}
+.cal-h div{text-align:center;flex:1;min-width:0}
+.cal-h b{font-family:var(--f-display);font-size:1.2rem;display:block;line-height:1.3}
+.cal-h small{display:block;opacity:.85;font-size:.78rem}
+.cal-nav{border:0;width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,.18);color:#fff;display:grid;place-items:center;flex:none}
+.cal-nav[disabled]{opacity:.3;cursor:not-allowed}
+.cal-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;padding:10px}
+.cal-g .wd{text-align:center;font-size:.72rem;font-weight:800;color:var(--muted);padding-bottom:4px}
+.cal-d{aspect-ratio:1;border:0;border-radius:12px;background:none;font-weight:700;font-size:1.02rem;display:grid;place-items:center;color:var(--ink);font-family:var(--f-display);padding:0}
+.cal-d:hover:not([disabled]){background:var(--violet-soft)}
+.cal-d[disabled]{color:var(--muted);opacity:.35;cursor:not-allowed}
+.cal-d.today{box-shadow:inset 0 0 0 2px var(--violet)}
+.cal-d.in{background:var(--violet-soft);border-radius:0}
+.cal-d.s,.cal-d.e{background:linear-gradient(135deg,#8E73F0,#4D30B8);color:#fff}
+.cal-d.s{border-radius:0 12px 12px 0}.cal-d.e{border-radius:12px 0 0 12px}.cal-d.s.e{border-radius:12px}
+.cal-sum{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}
+.cal-sum div{background:var(--surface2);border-radius:14px;padding:8px 10px;border:2px solid var(--line);min-width:0}
+.cal-sum div.on{border-color:var(--violet);background:var(--violet-soft)}
+.cal-sum small{display:block;color:var(--muted);font-size:.74rem;font-weight:800}
+.cal-sum b{font-size:.92rem}
+.cal-tip{padding:0 12px 12px;font-size:.84rem;color:var(--muted);text-align:center;font-weight:700}
+.letter{background:var(--surface);border:2px dashed var(--violet);border-radius:18px;padding:14px 16px;line-height:2;white-space:pre-wrap;overflow-wrap:anywhere}
+.letter-in{min-height:170px;line-height:1.9;resize:vertical}
+.kpill{background:var(--violet-soft);color:var(--violet)}
+/* team */
+.role.admin{cursor:default}
+.role.admin:hover{transform:none}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.member{border:2px solid var(--line);background:var(--surface2);border-radius:20px;padding:12px;display:flex;align-items:center;gap:10px;font-weight:800;text-align:right;transition:border-color .15s,transform .15s}
+.member:hover{border-color:var(--berry);transform:translateY(-2px)}
+.member small{display:block;color:var(--muted);font-weight:700;font-size:.78rem}
+.linkbtn{border:0;background:none;color:var(--muted);font-weight:800;display:inline-flex;align-items:center;gap:6px;padding:4px 0;font-size:.9rem;justify-self:start}
+.linkbtn svg.i{width:18px;height:18px}
+.xl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.xl{border:2px solid var(--line);background:var(--surface);border-radius:20px;padding:14px;display:flex;align-items:center;gap:12px;text-align:right;font-weight:800}
+.xl:hover{border-color:var(--em)}
+.xl small{display:block;color:var(--muted);font-weight:700;font-size:.8rem}
 /* admin */
 .search{position:relative}
 .search svg.i{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted);width:20px;height:20px}
@@ -368,7 +407,7 @@ body.has-dock footer{padding-block:4px 0}
     <div class="wrap">
       <span class="eyebrow">منصة الأعذار الطبية للطالبات</span>
       <h1>انضباطي <span>سر تميزي</span></h1>
-      <p class="lead">غبتِ لظرف صحي؟ ارفعي تقريرك الطبي من جوالك في دقيقتين، وتابعي قبول عذرك من وكيلة شؤون الطالبات بدون أوراق ولا انتظار.</p>
+      <p class="lead">غبتِ لظرف صحي أو طارئ؟ ارفعي تقريرك الطبي أو اكتبي عذرك من جوالك في دقيقتين، وتابعي قبوله من إدارة الغياب بدون أوراق ولا انتظار.</p>
       <svg class="ekg" viewBox="0 0 1000 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 H300 l18 -4 12 4 H380 l14 -24 16 46 16 -36 10 14 H560 l12 -6 10 6 H700 l14 -22 16 40 14 -30 10 12 H1000"/></svg>
     </div>
   </section>
@@ -446,6 +485,8 @@ const P = {
   pulse:'<path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/><path d="M6.5 12.5h2.8l1.4-2.8 2 5 1.4-2.2h2.9"/>',
   tooth:'<path d="M7.5 3C5 3 3.5 5 3.5 7.4c0 2.8 1.4 4.2 1.9 7 .4 2.5 1 6.6 2.6 6.6 1.5 0 1.8-3.6 2.4-5.8.3-1 2.9-1 3.2 0 .6 2.2.9 5.8 2.4 5.8 1.6 0 2.2-4.1 2.6-6.6.5-2.8 1.9-4.2 1.9-7C20.5 5 19 3 16.5 3c-2 0-2.8 1-4.5 1S9.5 3 7.5 3z"/>',
   pill:'<path d="M10.5 3.5a5 5 0 017 7l-7 7a5 5 0 01-7-7z"/><path d="M7 7l7 7"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.4.2 4.2 1.9 5 4.9"/>',
+  sheet:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M3 15h18M9 3v18"/>',
   dots:'<circle cx="5.5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18.5" cy="12" r="1.6"/>'
 };
 const I = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${P[n]||""}</svg>`;
@@ -468,6 +509,8 @@ const REASONS = [
   {k:"أخرى", i:"dots", g:"g-gold", c:"var(--gold)"}
 ];
 const reasonOf = k => REASONS.find(r => r.k === k) || REASONS[REASONS.length-1];
+const TEAM = [{n:"بينة العلوي", g:"g-violet"},{n:"عائشة المطيري", g:"g-sky"},{n:"ريم الحربي", g:"g-berry"}];
+const teamOf = n => TEAM.find(m => m.n === n);
 const GRADES = ["الأول الثانوي","الثاني الثانوي","الثالث الثانوي"];
 const GRADE_G = {"الأول الثانوي":"g-sky","الثاني الثانوي":"g-violet","الثالث الثانوي":"g-berry"};
 const GRADE_N = {"الأول الثانوي":"١","الثاني الثانوي":"٢","الثالث الثانوي":"٣"};
@@ -524,12 +567,12 @@ async function rpc(fn, body){
 const demoDB = (() => {
   const t = new Date(); const ago = n => { const d = new Date(t); d.setDate(d.getDate()-n); return iso(d); };
   const mk = o => Object.assign({id:String(Math.random()).slice(2), file_type:"image/svg+xml", file_name:"تقرير-تجريبي.svg", provider_type:"حكومي", late:false, admin_note:"", reviewed_by:"", reviewed_at:null, note:""}, o);
-  return { admins:[{name:"فاطمة فلاتة", role:"وكيلة شؤون الطالبات", pin:"123456"}], rows:[
-    mk({ref:"ANZ-DEMO-A1", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(16), to_date:ago(15), school_days:2, reason:"مرض عارض", provider:"مستشفى الملك فهد", leave_no:"PSL-0000000", status:"accepted", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(13)+"T09:10:00", created_at:ago(14)+"T07:40:00"}),
-    mk({ref:"ANZ-DEMO-B2", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(3), to_date:ago(3), school_days:1, reason:"موعد أسنان", provider:"مجمع عيادات خاص", provider_type:"خاص", leave_no:"", status:"new", created_at:ago(1)+"T20:15:00"}),
-    mk({ref:"ANZ-DEMO-C3", national_id:"1100000002", student_name:"جود (طالبة تجريبية)", grade:"الثاني الثانوي", section:"1", from_date:ago(9), to_date:ago(7), school_days:3, reason:"تنويم", provider:"مستشفى المدينة العام", leave_no:"PSL-1111111", status:"more", admin_note:"الصورة غير واضحة، فضلاً أعيدي رفع التقرير", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(5)+"T10:00:00", created_at:ago(6)+"T18:30:00"}),
+  return { admins:[{name:"بينة العلوي", role:"إدارية الغياب", pin:"123456"},{name:"عائشة المطيري", role:"إدارية الغياب", pin:"123456"},{name:"ريم الحربي", role:"إدارية الغياب", pin:"123456"},{name:"مديحه علي العبيدي", role:"مشرفة المنصة", pin:"654321"}], rows:[
+    mk({ref:"ANZ-DEMO-A1", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(16), to_date:ago(15), school_days:2, reason:"مرض عارض", provider:"مستشفى الملك فهد", leave_no:"PSL-0000000", status:"accepted", reviewed_by:"بينة العلوي", reviewed_at:ago(13)+"T09:10:00", created_at:ago(14)+"T07:40:00"}),
+    mk({ref:"ANZ-DEMO-B2", national_id:"1100000001", student_name:"ريما (طالبة تجريبية)", grade:"الأول الثانوي", section:"3", from_date:ago(3), to_date:ago(3), school_days:1, reason:"موعد أسنان", provider:"مجمع عيادات خاص", provider_type:"خاص", leave_no:"", status:"new", created_at:ago(1)+"T20:15:00", kind:"letter", letter:"غبت يوم الأحد لأن عندي موعد أسنان في الصباح الباكر، وأرفقت ورقة الموعد. أعتذر عن الغياب وسأعوض ما فاتني من دروس."}),
+    mk({ref:"ANZ-DEMO-C3", national_id:"1100000002", student_name:"جود (طالبة تجريبية)", grade:"الثاني الثانوي", section:"1", from_date:ago(9), to_date:ago(7), school_days:3, reason:"تنويم", provider:"مستشفى المدينة العام", leave_no:"PSL-1111111", status:"more", admin_note:"الصورة غير واضحة، فضلاً أعيدي رفع التقرير", reviewed_by:"بينة العلوي", reviewed_at:ago(5)+"T10:00:00", created_at:ago(6)+"T18:30:00"}),
     mk({ref:"ANZ-DEMO-D4", national_id:"1100000003", student_name:"لمى (طالبة تجريبية)", grade:"الثالث الثانوي", section:"2", from_date:ago(12), to_date:ago(12), school_days:1, reason:"مراجعة مستشفى", provider:"مستوصف", provider_type:"خاص", leave_no:"", late:true, status:"new", created_at:ago(2)+"T13:05:00"}),
-    mk({ref:"ANZ-DEMO-E5", national_id:"1100000004", student_name:"سارة (طالبة تجريبية)", grade:"الأول الثانوي", section:"5", from_date:ago(20), to_date:ago(18), school_days:3, reason:"عملية جراحية", provider:"مستشفى الأنصار", leave_no:"PSL-2222222", status:"rejected", admin_note:"التقرير لا يحمل ختم الجهة الطبية", reviewed_by:"فاطمة فلاتة", reviewed_at:ago(17)+"T08:00:00", created_at:ago(17)+"T06:30:00"})
+    mk({ref:"ANZ-DEMO-E5", national_id:"1100000004", student_name:"سارة (طالبة تجريبية)", grade:"الأول الثانوي", section:"5", from_date:ago(20), to_date:ago(18), school_days:3, reason:"عملية جراحية", provider:"مستشفى الأنصار", leave_no:"PSL-2222222", status:"rejected", admin_note:"التقرير لا يحمل ختم الجهة الطبية", reviewed_by:"بينة العلوي", reviewed_at:ago(17)+"T08:00:00", created_at:ago(17)+"T06:30:00"})
   ]};
 })();
 const DEMO_FILE = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420"><rect width="600" height="420" fill="#fff"/><rect width="600" height="70" fill="#0E9C8D"/><text x="300" y="45" font-size="26" text-anchor="middle" fill="#fff" font-family="Tahoma">تقرير طبي (نموذج تجريبي)</text><g font-family="Tahoma" font-size="18" fill="#333" text-anchor="end"><text x="560" y="130">اسم المريضة: طالبة تجريبية</text><text x="560" y="175">التشخيص: —</text><text x="560" y="220">مدة الإجازة: يوم واحد</text><text x="560" y="265">الجهة: مستشفى تجريبي</text></g><circle cx="110" cy="320" r="55" fill="none" stroke="#2F7FEA" stroke-width="4"/><text x="110" y="327" font-size="16" text-anchor="middle" fill="#2F7FEA" font-family="Tahoma">ختم</text></svg>');
@@ -541,10 +584,10 @@ const api = {
     return rpc("anz_submit", {p});
   },
   async my(nid){ if(DEMO) return demoDB.rows.filter(r => r.national_id === nid); return rpc("anz_my", {p_nid:nid}); },
-  async adminLogin(pin){ if(DEMO){ await new Promise(r=>setTimeout(r,300)); return demoDB.admins.filter(a => a.pin === pin).map(({name,role})=>({name,role})); } return rpc("anz_admin_login", {p_pin:pin}); },
-  async adminList(pin){ if(DEMO) return demoDB.rows.map(({file_data, ...r}) => r); return rpc("anz_admin_list", {p_pin:pin}); },
-  async adminFile(pin,id){ if(DEMO){ const r = demoDB.rows.find(x => x.id === id); return [{file_name:r.file_name, file_type:r.file_type, file_data:r.file_data || DEMO_FILE}]; } return rpc("anz_admin_file", {p_pin:pin, p_id:id}); },
-  async review(pin,id,status,note,who){ if(DEMO){ const r = demoDB.rows.find(x => x.id === id); Object.assign(r,{status, admin_note:note, reviewed_by:who, reviewed_at:new Date().toISOString()}); return true; } return rpc("anz_admin_review", {p_pin:pin, p_id:id, p_status:status, p_note:note}); }
+  async adminLogin(pin, name){ if(DEMO){ await new Promise(r=>setTimeout(r,300)); const m = demoDB.admins.filter(a => a.pin === pin && (name ? a.name === name : true)); return (name || m.length === 1 ? m : []).slice(0,1).map(({name,role})=>({name,role})); } return rpc("anz_admin_login", name ? {p_pin:pin, p_name:name} : {p_pin:pin}); },
+  async adminList(pin){ if(DEMO) return demoDB.rows.map(({file_data, ...r}) => r); return rpc("anz_admin_list", {p_pin:pin, p_name:adm && adm.team ? adm.name : null}); },
+  async adminFile(pin,id){ if(DEMO){ const r = demoDB.rows.find(x => x.id === id); return [{file_name:r.file_name, file_type:r.file_type, file_data:r.file_data || DEMO_FILE}]; } return rpc("anz_admin_file", {p_pin:pin, p_id:id, p_name:adm && adm.team ? adm.name : null}); },
+  async review(pin,id,status,note,who){ if(DEMO){ const r = demoDB.rows.find(x => x.id === id); Object.assign(r,{status, admin_note:note, reviewed_by:who, reviewed_at:new Date().toISOString()}); return true; } return rpc("anz_admin_review", {p_pin:pin, p_id:id, p_status:status, p_note:note, p_name:adm && adm.team ? adm.name : null}); }
 };
 
 /* ---------- أدوات الواجهة ---------- */
@@ -593,18 +636,18 @@ function home(){
         <p>ارفعي تقريرك الطبي، واعرفي حالة عذرك أولاً بأول، واحتفظي بسجل أعذارك كله في مكان واحد.</p>
         <span class="go">دخول الطالبة ${I("next")}</span>
       </button>
-      <button class="role admin" id="goAdmin" type="button">
-        <div class="row">${B("shield","g-berry","lg")}<div><h2>بوابة الإدارة</h2><p>وكيلة شؤون الطالبات والمديرة</p></div></div>
-        <p>استلمي الأعذار مرتبة، افتحي التقرير، واعتمدي القرار بضغطة: مقبول، غير مقبول، أو مطلوب استكمال.</p>
-        <span class="go">دخول الإدارة ${I("next")}</span>
-      </button>
+      <div class="role admin">
+        <div class="row">${B("shield","g-berry","lg")}<div><h2>بوابة الإدارة</h2><p>الإداريات المسؤولات عن الغياب</p></div></div>
+        <div class="team">${TEAM.map((m,i) => `<button class="member" type="button" data-m="${i}"><span class="initial ${m.g}">${m.n.slice(0,1)}</span><span>${m.n}<small>إدارية الغياب</small></span></button>`).join("")}</div>
+        <button class="linkbtn" id="goAdmin" type="button">${I("lock")} دخول المديرة ومشرفة المنصة</button>
+      </div>
     </div>
     <div class="sec-title">${B("star","g-sun","sm")}<h2>كيف أرفع عذري؟</h2></div>
     <div class="steps">
       <div class="step">${B("id","g-sky")}<span class="n">الخطوة الأولى</span><h3>ادخلي بسجلك المدني</h3><p>رقم الهوية المكوّن من ١٠ أرقام، بدون كلمات مرور.</p></div>
-      <div class="step">${B("calendar","g-violet")}<span class="n">الخطوة الثانية</span><h3>حددي أيام الغياب</h3><p>تحسب المنصة أيام الدراسة الفعلية تلقائياً.</p></div>
-      <div class="step">${B("camera","g-coral")}<span class="n">الخطوة الثالثة</span><h3>صوّري التقرير وارفعيه</h3><p>صورة واضحة أو ملف PDF من جوالك مباشرة.</p></div>
-      <div class="step">${B("checkc","g-em")}<span class="n">الخطوة الرابعة</span><h3>تابعي القرار</h3><p>يظهر لك قرار الوكيلة وملاحظاتها في صفحتك.</p></div>
+      <div class="step">${B("calendar","g-violet")}<span class="n">الخطوة الثانية</span><h3>اختاري الأيام من التقويم</h3><p>تحسب المنصة أيام الدراسة الفعلية تلقائياً.</p></div>
+      <div class="step">${B("camera","g-coral")}<span class="n">الخطوة الثالثة</span><h3>ارفعي التقرير أو اكتبي عذرك</h3><p>صورة التقرير من جوالك، أو عذر خطي تكتبينه بنفسك.</p></div>
+      <div class="step">${B("checkc","g-em")}<span class="n">الخطوة الرابعة</span><h3>تابعي القرار</h3><p>يظهر لك قرار الإدارية وملاحظاتها في صفحتك.</p></div>
     </div>
     <div class="sec-title">${B("heart","g-coral","sm")}<h2>قبل أن ترفعي عذرك</h2></div>
     <div class="rules">
@@ -616,6 +659,7 @@ function home(){
   </div>`;
   $("#goStudent").onclick = () => { toTop(); studentEntry(); };
   $("#goAdmin").onclick = () => { toTop(); adminEntry(); };
+  $$(".member").forEach(b => b.onclick = () => { toTop(); adminEntry(TEAM[+b.dataset.m].n); });
 }
 
 /* ================== الطالبة ================== */
@@ -675,7 +719,7 @@ function trackerHTML(r){
   const last = s === "accepted" ? ["done","checkc","مقبول"] : s === "rejected" ? ["bad","x","غير مقبول"] : s === "more" ? ["warn","alert","مطلوب استكمال"] : ["","star","القرار"];
   return `<div class="track">
     <div class="st done"><i>${I("upload")}</i>وصل العذر</div>
-    <div class="st ${s==="new"?"now":"done"}"><i>${I("eye")}</i>مراجعة الوكيلة</div>
+    <div class="st ${s==="new"?"now":"done"}"><i>${I("eye")}</i>مراجعة الإدارية</div>
     <div class="st ${last[0]}"><i>${I(last[1])}</i>${last[2]}</div>
   </div>`;
 }
@@ -686,8 +730,9 @@ function exRow(r, clickable){
     ${B(R.i, R.g, "sm")}
     <div class="body">
       <div class="top-line"><b>${esc(r.reason || "عذر طبي")}</b>${pill(r.status)}</div>
+      ${r.kind === "letter" ? `<div class="meta"><span class="pill kpill">${I("pen")}عذر خطي</span></div>` : ""}
       <div class="meta"><span>${I("calendar")}${range(r.from_date, r.to_date)}</span><span class="num">${I("clock")}${r.school_days || 0} يوم دراسي</span></div>
-      ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</span></div>` : ""}
+      ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الإدارية:</b> ${esc(r.admin_note)}</span></div>` : ""}
     </div>
   </${tag}>`;
 }
@@ -742,7 +787,7 @@ async function studentList(){
 function passHTML(d, opts){
   const R = reasonOf(d.reason);
   return `<div class="pass">
-    <div class="ph">${B(R.i, R.g, "")}<div><b>بطاقة العذر الطبي</b><small>${esc(CONFIG.SCHOOL)}</small></div>
+    <div class="ph">${B(d.kind === "letter" ? "pen" : R.i, d.kind === "letter" ? "g-violet" : R.g, "")}<div><b>${d.kind === "letter" ? "بطاقة العذر الخطي" : "بطاقة العذر الطبي"}</b><small>${esc(CONFIG.SCHOOL)}</small></div>
       <svg class="ekg2" viewBox="0 0 200 26" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14h60l6-10 8 20 6-14 4 4h116" fill="none" stroke="#FFD25A" stroke-width="2.4"/></svg></div>
     <div class="perf"><b></b></div>
     <div class="pb">
@@ -751,7 +796,8 @@ function passHTML(d, opts){
       <div><small>أيام الدراسة</small><span class="num">${d.days} يوم</span></div>
       <div class="full"><small>مدة الغياب</small><span>${range(d.from, d.to)}</span></div>
       <div><small>السبب</small><span>${esc(d.reason)}</span></div>
-      <div><small>الجهة الطبية</small><span>${esc(d.provider || "—")}</span></div>
+      <div><small>${d.kind === "letter" ? "نوع العذر" : "الجهة الطبية"}</small><span>${d.kind === "letter" ? "عذر خطي" : esc(d.provider || "—")}</span></div>
+      ${d.kind === "letter" && d.letter ? `<div class="full"><small>نص العذر</small><div class="letter" style="margin-top:6px">${esc(d.letter)}</div></div>` : ""}
       ${d.leave ? `<div class="full"><small>رقم الإجازة المرضية</small><span dir="ltr">${esc(d.leave)}</span></div>` : ""}
       ${opts && opts.ref ? `<div class="full"><small>رقم الطلب</small><span class="ref num">${esc(opts.ref)}</span></div>` : ""}
     </div>
@@ -774,20 +820,68 @@ function openMine(r){
     <div class="sh-head em"><h2>${esc(r.reason)}</h2>${pill(r.status)}<button class="close" type="button" aria-label="إغلاق">${I("x")}</button></div>
     <div class="sh-body">
       ${trackerHTML(r)}
-      ${passHTML({name:r.student_name, grade:r.grade, section:r.section, days:r.school_days, from:r.from_date, to:r.to_date, reason:r.reason, provider:r.provider, leave:r.leave_no}, {ref:r.ref})}
-      ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الوكيلة:</b> ${esc(r.admin_note)}</span></div>` : ""}
+      ${passHTML({name:r.student_name, grade:r.grade, section:r.section, days:r.school_days, from:r.from_date, to:r.to_date, reason:r.reason, provider:r.provider, leave:r.leave_no, kind:r.kind, letter:r.letter}, {ref:r.ref})}
+      ${r.admin_note ? `<div class="note">${I("pen")}<span><b>ملاحظة الإدارية:</b> ${esc(r.admin_note)}</span></div>` : ""}
       ${r.status === "more" ? `<button class="btn b-sun block" id="redo" type="button">${I("upload")} إعادة رفع التقرير</button>` : ""}
     </div>`);
   const rd = bg.querySelector("#redo"); if(rd) rd.onclick = () => { close(); toTop(); wizard({from:r.from_date, to:r.to_date, reason:r.reason, note:"إعادة رفع للعذر " + r.ref}); };
 }
 
+/* ---------- التقويم ---------- */
+const AR_DAYS = ["أحد","إثنين","ثلاثاء","أربعاء","خميس","جمعة","سبت"];
+function calendar(host, st, onChange){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const minM = new Date(today.getFullYear(), today.getMonth()-4, 1);
+  let view = st.from ? toDate(st.from) : new Date(today); view = new Date(view.getFullYear(), view.getMonth(), 1);
+  function draw(){
+    const y = view.getFullYear(), m = view.getMonth();
+    let gName = "", hName = "";
+    try{ gName = view.toLocaleDateString("ar-SA-u-ca-gregory-nu-arab",{month:"long",year:"numeric"}); }catch(e){ gName = (m+1)+"/"+y; }
+    try{ const f = h => h.toLocaleDateString("ar-SA-u-ca-islamic-umalqura",{month:"long"}); const a = f(new Date(y,m,1)), b = f(new Date(y,m+1,0)); hName = (a === b ? a : a + " – " + b) + " هـ"; }catch(e){}
+    const first = new Date(y, m, 1).getDay(), days = new Date(y, m+1, 0).getDate();
+    const from = st.from, to = st.to || st.from;
+    let cells = AR_DAYS.map(d => `<span class="wd">${d}</span>`).join("");
+    for(let i = 0; i < first; i++) cells += "<span></span>";
+    for(let d = 1; d <= days; d++){
+      const dt = new Date(y, m, d), key = iso(dt);
+      const dis = dt > today || !isSchoolDay(dt);
+      let c = "cal-d";
+      if(dt.getTime() === today.getTime()) c += " today";
+      if(from && key === from) c += " s";
+      if(to && key === to) c += " e";
+      if(from && to && key > from && key < to) c += " in";
+      cells += `<button type="button" class="${c}" data-d="${key}" ${dis?"disabled":""} aria-label="${fmt(key)}">${d.toLocaleString("ar-SA")}</button>`;
+    }
+    const nextOk = new Date(y, m+1, 1) <= today, prevOk = new Date(y, m-1, 1) >= minM;
+    const tip = !st.from ? "اضغطي على أول يوم غبتِ فيه" : !st.to ? "إن كان الغياب يوماً واحداً اضغطي «التالي»، أو اضغطي على آخر يوم غياب" : "تم تحديد الأيام، ويمكنك الضغط لإعادة الاختيار";
+    host.innerHTML = `<div class="cal">
+      <div class="cal-h"><button type="button" class="cal-nav" data-nav="-1" ${prevOk?"":"disabled"} aria-label="الشهر السابق">${I("prev")}</button>
+        <div><b>${gName}</b><small>${hName}</small></div>
+        <button type="button" class="cal-nav" data-nav="1" ${nextOk?"":"disabled"} aria-label="الشهر التالي">${I("next")}</button></div>
+      <div class="cal-g">${cells}</div>
+      <div class="cal-sum"><div class="${!st.to?"on":""}"><small>من</small><b>${st.from ? fmt(st.from) : "—"}</b></div><div class="${st.from&&!st.to?"on":""}"><small>إلى</small><b>${st.from ? fmt(st.to || st.from) : "—"}</b></div></div>
+      <div class="cal-tip">${tip}</div>
+    </div>`;
+    host.querySelectorAll("[data-nav]").forEach(b => b.onclick = () => { view = new Date(y, m + (+b.dataset.nav), 1); draw(); });
+    host.querySelectorAll(".cal-d[data-d]").forEach(b => b.onclick = () => {
+      const k = b.dataset.d;
+      if(!st.from || st.to) { st.from = k; st.to = ""; }
+      else if(k < st.from) { st.from = k; }
+      else if(k === st.from) { st.to = ""; }
+      else { st.to = k; }
+      draw(); onChange && onChange();
+    });
+  }
+  draw();
+}
+
 /* ---------- معالج رفع العذر ---------- */
 function wizard(prefill){
   studentShell("new");
-  const d = Object.assign({ name:me.name, grade:me.grade, section:me.section, from:"", to:"", reason:"", provider:"", ptype:"حكومي", leave:"", note:"", file:null, pledge:false }, prefill || {});
+  const d = Object.assign({ name:me.name, grade:me.grade, section:me.section, from:"", to:"", reason:"", kind:"medical", letter:"", provider:"", ptype:"حكومي", leave:"", note:"", file:null, pledge:false }, prefill || {});
   let step = 1;
-  const labels = ["الغياب","التقرير","الإرسال"];
-  const heads = [["calendar","ph-violet","متى غبتِ؟","حددي الأيام وسبب الغياب"],["camera","ph-coral","التقرير الطبي","صوّري التقرير بوضوح"],["checkc","ph-em","راجعي ثم أرسلي","تأكدي من بطاقة عذرك"]];
+  const labels = ["الغياب","العذر","الإرسال"];
+  const heads = [["calendar","ph-violet","متى غبتِ؟","اختاري الأيام من التقويم وسبب الغياب"],["file","ph-coral","العذر","تقرير طبي أو عذر مكتوب"],["checkc","ph-em","راجعي ثم أرسلي","تأكدي من بطاقة عذرك"]];
   function prevHTML(f, ro){ return !f ? "" : `<div class="preview">${f.type.startsWith("image/") ? `<img src="${f.data}" alt="معاينة التقرير">` : `<div class="pdf">PDF</div>`}<div style="min-width:0"><b style="overflow-wrap:anywhere">${esc(f.name)}</b><div class="hint">${Math.round(f.size/1024)} كيلوبايت · جاهز</div></div>${ro ? "" : `<button class="x" type="button" id="rmFile" aria-label="حذف الصورة">${I("x")}</button>`}</div>`; }
   function render(){
     const sd = schoolDays(d.from, d.to || d.from);
@@ -802,17 +896,35 @@ function wizard(prefill){
         </div>
       </div>
       <div class="card">
-        <div class="dates">
-          <div class="dcard"><label class="lbl" for="w-from">${I("calendar")} أول يوم غياب</label><input class="inp" type="date" id="w-from" value="${d.from}" max="${iso(new Date())}"><span class="hj" id="hjFrom">${d.from ? hijri(d.from) : ""}</span></div>
-          <div class="dcard"><label class="lbl" for="w-to">${I("calendar")} آخر يوم غياب</label><input class="inp" type="date" id="w-to" value="${d.to}" max="${iso(new Date())}"><span class="hj" id="hjTo">${d.to ? hijri(d.to) : ""}</span></div>
-        </div>
-        <div class="count"><span class="ring num" id="sdN">${sd}</span><div><b>يوم دراسي</b><span class="hint">تُحسب من الأحد إلى الخميس فقط</span></div></div>
+        <span class="lbl">${I("calendar")} أيام الغياب</span>
+        <div id="calHost"></div>
+        <div class="count"><span class="ring num" id="sdN">${sd}</span><div><b>يوم دراسي</b><span class="hint" id="hjR">${d.from ? hijri(d.from) + (d.to && d.to !== d.from ? " – " + hijri(d.to) : "") : "الجمعة والسبت لا تُحسب"}</span></div></div>
       </div>
       <div class="card">
         <span class="lbl">${I("heart")} سبب الغياب</span>
         <div class="reasons" id="w-reason">${REASONS.map(r => `<button type="button" class="reason" aria-pressed="${r.k===d.reason}" data-k="${r.k}">${B(r.i, r.g, "")}<span>${r.k}</span></button>`).join("")}</div>
       </div>`;
     if(step === 2) body = `
+      <div class="card">
+        <span class="lbl">${I("file")} نوع العذر</span>
+        <div class="choice" id="w-kind">${[["medical","تقرير طبي","hospital","g-coral"],["letter","عذر خطي","pen","g-violet"]].map(([k,t,ic,g]) => `<button type="button" aria-pressed="${k===d.kind}" data-k="${k}">${B(ic,g,"sm")}${t}</button>`).join("")}</div>
+      </div>
+      ${d.kind === "letter" ? `
+      <div class="card">
+        <div class="field"><label for="w-letter">${I("pen")} اكتبي عذرك</label>
+          <textarea class="inp letter-in" id="w-letter" placeholder="اكتبي سبب غيابك بأسلوبك، مثال: غبت يوم الأحد بسبب…">${esc(d.letter)}</textarea>
+          <span class="hint" id="lcount">${(d.letter||"").length} حرف · اكتبي ١٥ حرفاً على الأقل</span></div>
+      </div>
+      <div class="card">
+        <span class="lbl">${I("image")} مرفق (اختياري)</span>
+        <input type="file" id="w-cam" accept="image/*" capture="environment" hidden>
+        <input type="file" id="w-file" accept="image/*,application/pdf" hidden>
+        <div class="upload" id="drop">
+          <b>إن كان معك ورقة تدعم عذرك أرفقيها</b>
+          <div class="ups"><button class="btn b-coral" type="button" id="pickCam">${I("camera")} تصوير</button><button class="btn b-ghost" type="button" id="pickFile">${I("image")} من الملفات</button></div>
+        </div>
+        <div id="fprev">${d.file ? prevHTML(d.file) : ""}</div>
+      </div>` : `
       <div class="card">
         <div class="field"><label for="w-prov">${I("building")} الجهة الطبية</label><input class="inp" id="w-prov" value="${esc(d.provider)}" placeholder="مثال: مستشفى الولادة والأطفال"></div>
         <span class="lbl">نوع الجهة</span>
@@ -830,14 +942,14 @@ function wizard(prefill){
           <div class="ups"><button class="btn b-coral" type="button" id="pickCam">${I("camera")} تصوير</button><button class="btn b-ghost" type="button" id="pickFile">${I("image")} من الملفات</button></div>
         </div>
         <div id="fprev">${d.file ? prevHTML(d.file) : ""}</div>
-        <div class="field"><label for="w-note">${I("pen")} ملاحظة للوكيلة (اختياري)</label><textarea class="inp" id="w-note" rows="2">${esc(d.note)}</textarea></div>
-      </div>`;
+        <div class="field"><label for="w-note">${I("pen")} ملاحظة للإدارية (اختياري)</label><textarea class="inp" id="w-note" rows="2">${esc(d.note)}</textarea></div>
+      </div>`}`;
     if(step === 3){
       const late = d.to ? lateBy(d.to) > CONFIG.DEADLINE_DAYS : false;
       body = `
-      ${passHTML({name:d.name, grade:d.grade, section:d.section, days:sd, from:d.from, to:d.to, reason:d.reason, provider:d.provider + (d.ptype ? " (" + d.ptype + ")" : ""), leave:d.leave})}
-      <div class="card">${prevHTML(d.file, true)}
-      ${late ? `<div class="note">${I("clock")}<span>مضى على عودتك أكثر من ${CONFIG.DEADLINE_DAYS} أيام دراسية، سيصل عذرك للوكيلة مع إشارة «متأخر».</span></div>` : ""}
+      ${passHTML({name:d.name, grade:d.grade, section:d.section, days:sd, from:d.from, to:d.to, reason:d.reason, provider:d.kind === "letter" ? "" : d.provider + (d.ptype ? " (" + d.ptype + ")" : ""), leave:d.leave, kind:d.kind, letter:d.letter})}
+      <div class="card">${d.file ? prevHTML(d.file, true) : ""}
+      ${late ? `<div class="note">${I("clock")}<span>مضى على عودتك أكثر من ${CONFIG.DEADLINE_DAYS} أيام دراسية، سيصل عذرك للإدارية مع إشارة «متأخر».</span></div>` : ""}
       <label class="pledge"><input type="checkbox" id="w-pledge" ${d.pledge?"checked":""}><span>أتعهد بأن التقرير المرفق صحيح ويخصني، وأعلم أن تقديم تقرير غير صحيح يعرضني للمساءلة.</span></label></div>`;
     }
     main.innerHTML = `
@@ -855,34 +967,34 @@ function wizard(prefill){
   }
   function save(){
     const v = id => { const el = $("#"+id); return el ? el.value.trim() : null; };
-    if(step === 1){ d.name = v("w-name"); d.grade = v("w-grade"); d.section = v("w-sec"); d.from = v("w-from"); d.to = v("w-to"); }
-    if(step === 2){ d.provider = v("w-prov"); d.leave = v("w-leave"); d.note = v("w-note"); }
+    if(step === 1){ d.name = v("w-name"); d.grade = v("w-grade"); d.section = v("w-sec"); }
+    if(step === 2){ if(d.kind === "letter"){ d.letter = v("w-letter"); } else { d.provider = v("w-prov"); d.leave = v("w-leave"); d.note = v("w-note"); } }
     if(step === 3){ d.pledge = $("#w-pledge").checked; }
   }
   function check(){
     if(step === 1){
       if(d.name.split(/\s+/).filter(Boolean).length < 3) return "اكتبي اسمك الثلاثي على الأقل.";
       if(!d.grade || !d.section) return "اختاري الصف والفصل.";
-      if(!d.from) return "حددي أول يوم غياب.";
+      if(!d.from) return "اختاري يوم الغياب من التقويم.";
       if(!d.to) d.to = d.from;
       if(toDate(d.to) < toDate(d.from)) return "آخر يوم غياب يجب أن يكون بعد أوله أو في اليوم نفسه.";
       if(schoolDays(d.from, d.to) === 0) return "الأيام المختارة ليست أيام دراسة.";
       if(!d.reason) return "اختاري سبب الغياب.";
     }
-    if(step === 2){ if(!d.provider) return "اكتبي اسم الجهة الطبية."; if(!d.file) return "أرفقي صورة التقرير الطبي."; }
+    if(step === 2){ if(d.kind === "letter"){ if((d.letter||"").length < 15) return "اكتبي عذرك بوضوح (١٥ حرفاً على الأقل)."; } else { if(!d.provider) return "اكتبي اسم الجهة الطبية."; if(!d.file) return "أرفقي صورة التقرير الطبي."; } }
     if(step === 3 && !d.pledge) return "أكّدي التعهد قبل الإرسال.";
     return "";
   }
   function bind(){
     const err = $("#wErr");
     if(step === 1){
-      const upd = () => { const f = $("#w-from").value, t = $("#w-to").value || f; $("#sdN").textContent = schoolDays(f,t); $("#hjFrom").textContent = f ? hijri(f) : ""; $("#hjTo").textContent = $("#w-to").value ? hijri($("#w-to").value) : ""; };
-      $("#w-from").oninput = () => { if(!$("#w-to").value) $("#w-to").value = $("#w-from").value; upd(); };
-      $("#w-to").oninput = upd;
+      calendar($("#calHost"), d, () => { const t = d.to || d.from; $("#sdN").textContent = schoolDays(d.from, t); $("#hjR").textContent = d.from ? hijri(d.from) + (d.to && d.to !== d.from ? " – " + hijri(d.to) : "") : ""; });
       $("#w-reason").onclick = e => { const b = e.target.closest(".reason"); if(!b) return; d.reason = b.dataset.k; $$("#w-reason .reason").forEach(c => c.setAttribute("aria-pressed", c === b)); };
     }
     if(step === 2){
-      $("#w-ptype").onclick = e => { const b = e.target.closest("button"); if(!b) return; d.ptype = b.dataset.k; $$("#w-ptype button").forEach(c => c.setAttribute("aria-pressed", c === b)); };
+      $("#w-kind").onclick = e => { const b = e.target.closest("button"); if(!b || b.dataset.k === d.kind) return; save(); d.kind = b.dataset.k; render(); };
+      const lt = $("#w-letter"); if(lt) lt.oninput = () => { $("#lcount").textContent = lt.value.trim().length + " حرف · اكتبي ١٥ حرفاً على الأقل"; };
+      if($("#w-ptype")) $("#w-ptype").onclick = e => { const b = e.target.closest("button"); if(!b) return; d.ptype = b.dataset.k; $$("#w-ptype button").forEach(c => c.setAttribute("aria-pressed", c === b)); };
       const cam = $("#w-cam"), fi = $("#w-file"), drop = $("#drop");
       $("#pickCam").onclick = () => cam.click();
       $("#pickFile").onclick = () => fi.click();
@@ -907,7 +1019,7 @@ function wizard(prefill){
       try{
         const ref = await api.submit({ national_id:me.nid, student_name:d.name, grade:d.grade, section:d.section,
           from_date:d.from, to_date:d.to, school_days:schoolDays(d.from,d.to), reason:d.reason, provider:d.provider,
-          provider_type:d.ptype, leave_no:d.leave, note:d.note, file_name:d.file.name, file_type:d.file.type, file_data:d.file.data,
+          provider_type:d.kind === "letter" ? "" : d.ptype, leave_no:d.kind === "letter" ? "" : d.leave, note:d.note, kind:d.kind, letter:d.kind === "letter" ? d.letter : "", file_name:d.file ? d.file.name : "", file_type:d.file ? d.file.type : "", file_data:d.file ? d.file.data : "",
           late: lateBy(d.to) > CONFIG.DEADLINE_DAYS });
         me = {...me, name:d.name, grade:d.grade, section:d.section}; store.set("student", me, 7); myRows = null;
         success(ref, d);
@@ -945,8 +1057,8 @@ function success(ref, d){
   studentShell("new");
   main.innerHTML = `
   <div class="stack">
-    <div class="done-hero"><span class="big">${I("check")}</span><h1 style="font-size:1.7rem">وصل عذرك بنجاح</h1><p class="muted">ستراجعه وكيلة شؤون الطالبات، ويظهر قرارها في صفحتك.</p></div>
-    ${passHTML({name:d.name, grade:d.grade, section:d.section, days:schoolDays(d.from,d.to), from:d.from, to:d.to, reason:d.reason, provider:d.provider, leave:d.leave}, {ref})}
+    <div class="done-hero"><span class="big">${I("check")}</span><h1 style="font-size:1.7rem">وصل عذرك بنجاح</h1><p class="muted">ستراجعه الإدارية المسؤولة عن الغياب، ويظهر قرارها في صفحتك.</p></div>
+    ${passHTML({name:d.name, grade:d.grade, section:d.section, days:schoolDays(d.from,d.to), from:d.from, to:d.to, reason:d.reason, provider:d.kind === "letter" ? "" : d.provider, leave:d.leave, kind:d.kind, letter:d.letter}, {ref})}
     <button class="btn b-ghost block" id="cpy" type="button">${I("copy")} نسخ رقم الطلب</button>
     <button class="btn b-em block" id="toHome" type="button">${I("home")} العودة لصفحتي</button>
   </div>`;
@@ -968,13 +1080,14 @@ function confetti(){
 
 /* ================== الإدارة ================== */
 let adm = null, rows = [], filter = "new", q = "";
-function adminEntry(){ const a = store.get("admin"); if(a){ adm = a; rows = []; return adminHome(); } adminLogin(); }
-function adminLogin(){
+function adminEntry(name){ const a = store.get("admin"); if(a && (!name || a.name === name)){ adm = a; rows = []; return adminHome(); } adminLogin(name); }
+function adminLogin(who){
+  const tm = who ? teamOf(who) : null;
   plainMode();
   main.innerHTML = `
   <div class="login stack">
     <div class="card">
-      <div class="top-icon">${B("lock","g-berry","lg")}<h1 style="font-size:1.5rem">دخول الإدارة</h1><p class="muted">الرمز السري الخاص بك</p></div>
+      <div class="top-icon">${tm ? `<span class="initial ${tm.g}" style="width:76px;height:76px;border-radius:24px;font-size:2rem">${tm.n.slice(0,1)}</span><h1 style="font-size:1.5rem">أهلاً أ. ${esc(tm.n)}</h1><p class="muted">اكتبي الرمز السري لإداريات الغياب</p>` : `${B("lock","g-berry","lg")}<h1 style="font-size:1.5rem">دخول المديرة ومشرفة المنصة</h1><p class="muted">الرمز السري الخاص بك</p>`}</div>
       ${demoNote()}
       <form id="aF" class="stack" style="gap:14px" novalidate>
         <div class="field"><label for="pin">${I("lock")} الرمز السري</label><input class="inp big num" id="pin" type="password" inputmode="numeric" maxlength="8" dir="ltr" autocomplete="off"><span class="hint">${DEMO ? "للتجربة: 123456" : "رمز من ٦ أرقام"}</span></div>
@@ -988,14 +1101,14 @@ function adminLogin(){
     e.preventDefault(); const pin = $("#pin").value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d)).replace(/\D/g,""), er = $("#aErr"), b = e.target.querySelector("button");
     if(!pin){ showErr(er, "اكتبي الرمز السري."); return; }
     b.disabled = true;
-    try{ const r = await api.adminLogin(pin); if(!r.length){ showErr(er, "الرمز غير صحيح."); b.disabled = false; return; }
-      adm = {pin, name:r[0].name, role:r[0].role}; store.set("admin", adm, 7); rows = []; adminHome(); }
+    try{ const r = await api.adminLogin(pin, who || null); if(!r.length){ showErr(er, "الرمز غير صحيح."); b.disabled = false; return; }
+      adm = {pin, name:r[0].name, role:r[0].role, team:!!who}; store.set("admin", adm, 7); rows = []; adminHome(); }
     catch(err){ showErr(er, isLocked(err) ? LOCK_MSG : "تعذر الاتصال بالمنصة."); b.disabled = false; }
   };
 }
 function adminShell(cur){
   appMode(
-    `<div class="who"><span class="avatar" style="background:linear-gradient(135deg,#FF7EAA,#C4306A)">${esc((adm.name||"إ").slice(0,1))}</span><div><b>أ. ${esc(adm.name)}</b><small>${esc(adm.role)}</small></div></div>
+    `<div class="who"><span class="avatar ${teamOf(adm.name) ? teamOf(adm.name).g : ""}" style="${teamOf(adm.name) ? "" : "background:linear-gradient(135deg,#FF7EAA,#C4306A)"}">${esc((adm.name||"إ").slice(0,1))}</span><div><b>أ. ${esc(adm.name)}</b><small>${esc(adm.role)}</small></div></div>
      <button class="icon-btn" id="ab-rf" type="button" aria-label="تحديث">${I("refresh")}<span>تحديث</span></button>`,
     dockBtn("d-in","inbox","الأعذار",cur==="in") + dockBtn("d-rep","chart","الإحصاء",cur==="rep") + dockBtn("d-out","out","خروج",false,"out"),
     true
@@ -1041,7 +1154,7 @@ function renderAdmin(){
         <span class="initial ${GRADE_G[r.grade] || "g-em"}">${esc((r.student_name||"ط").slice(0,1))}</span>
         <div class="body">
           <div class="top-line"><b>${esc(r.student_name)}</b>${pill(r.status)}</div>
-          <div class="meta"><span>${I("student")}${esc(r.grade)} / ${esc(r.section)}</span><span style="color:${R.c}">${I(R.i)}${esc(r.reason)}</span></div>
+          <div class="meta"><span>${I("student")}${esc(r.grade)} / ${esc(r.section)}</span><span style="color:${R.c}">${I(R.i)}${esc(r.reason)}</span>${r.kind === "letter" ? `<span class="pill kpill">${I("pen")}عذر خطي</span>` : ""}</div>
           <div class="meta"><span>${I("calendar")}${range(r.from_date, r.to_date)}</span><span class="num">${r.school_days} يوم</span>${r.late ? `<span class="pill p-late">${I("clock")}متأخر</span>` : ""}</div>
           <div class="meta"><span>${I("upload")}وصل ${fmtTime(r.created_at)}</span>${r.reviewed_by ? `<span>${I("pen")}${esc(r.reviewed_by)}</span>` : ""}</div>
         </div>
@@ -1066,15 +1179,16 @@ async function openCase(id){
           <div><small>السجل المدني</small><span class="num" dir="ltr">${esc(r.national_id)}</span></div>
           <div><small>الصف / الفصل</small><span>${esc(r.grade)} / ${esc(r.section)}</span></div>
           <div class="full"><small>مدة الغياب</small><span>${range(r.from_date, r.to_date)} · ${r.school_days} يوم دراسي</span></div>
-          <div><small>الجهة الطبية</small><span>${esc(r.provider)} (${esc(r.provider_type)})</span></div>
-          <div><small>رقم الإجازة (صحة)</small><span dir="ltr">${esc(r.leave_no) || "—"}</span></div>
+          ${r.kind === "letter" ? `<div class="full"><small>نوع العذر</small><span>عذر خطي</span></div>` : `<div><small>الجهة الطبية</small><span>${esc(r.provider)} (${esc(r.provider_type)})</span></div>
+          <div><small>رقم الإجازة (صحة)</small><span dir="ltr">${esc(r.leave_no) || "—"}</span></div>`}
           <div class="full"><small>وقت الرفع</small><span>${fmtTime(r.created_at)}</span></div>
         </div>
       </div>
       ${r.note ? `<div class="note">${I("pen")}<span><b>ملاحظة الطالبة:</b> ${esc(r.note)}</span></div>` : ""}
       ${r.leave_no ? `<a class="btn b-ghost" href="https://www.seha.sa" target="_blank" rel="noopener">${I("search")} التحقق من الإجازة في منصة صحة</a>` : ""}
-      <span class="lbl">${I("file")} التقرير الطبي</span>
-      <div class="filebox" id="fbox"><p class="muted">جارٍ فتح التقرير…</p></div>
+      ${r.kind === "letter" ? `<span class="lbl">${I("pen")} نص العذر الخطي</span><div class="letter">${esc(r.letter || "")}</div>` : ""}
+      ${r.kind !== "letter" || r.file_name ? `<span class="lbl">${I("file")} ${r.kind === "letter" ? "المرفق" : "التقرير الطبي"}</span>
+      <div class="filebox" id="fbox"><p class="muted">جارٍ فتح الملف…</p></div>` : ""}
       <div class="card flat">
         <div class="field"><label for="m-note">${I("pen")} ملاحظة للطالبة</label><textarea class="inp" id="m-note" rows="2" placeholder="مثال: الصورة غير واضحة، أعيدي الرفع">${esc(r.admin_note)}</textarea><span class="hint">مطلوبة عند «طلب استكمال» أو «عدم القبول».</span></div>
         <div class="decide">
@@ -1095,12 +1209,13 @@ async function openCase(id){
     catch(e){ b.disabled = false; showErr(er, isLocked(e) ? LOCK_MSG : "لم يُحفظ القرار، حاولي مرة أخرى."); }
   });
   try{
-    const f = (await api.adminFile(adm.pin, r.id))[0]; const box = bg.querySelector("#fbox");
+    const box = bg.querySelector("#fbox"); if(!box) return;
+    const f = (await api.adminFile(adm.pin, r.id))[0];
     if(!f || !f.file_data){ box.innerHTML = `<p class="muted">لا يوجد ملف مرفق.</p>`; return; }
     if((f.file_type||"").startsWith("image/")) box.innerHTML = `<img src="${f.file_data}" alt="التقرير الطبي">`;
     else { let url = f.file_data; try{ const bin = atob(f.file_data.split(",")[1]); const u = new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) u[i] = bin.charCodeAt(i); url = URL.createObjectURL(new Blob([u],{type:"application/pdf"})); }catch(e){}
       box.innerHTML = `<div style="display:grid;gap:10px;width:100%;padding:12px"><iframe src="${url}" title="التقرير الطبي"></iframe><a class="btn b-ghost" href="${url}" target="_blank" rel="noopener">${I("file")} فتح ملف PDF في نافذة جديدة</a></div>`; }
-  }catch(e){ bg.querySelector("#fbox").innerHTML = `<div class="err" style="margin:12px">${I("alert")}<span>تعذر فتح التقرير.</span></div>`; }
+  }catch(e){ const fb = bg.querySelector("#fbox"); if(fb) fb.innerHTML = `<div class="err" style="margin:12px">${I("alert")}<span>تعذر فتح التقرير.</span></div>`; }
 }
 
 async function adminReport(){
@@ -1123,7 +1238,7 @@ async function adminReport(){
       <div class="tile t-em">${B("check","g-em","sm")}<div><b class="num">${decided ? Math.round(acc/decided*100) : 0}٪</b><span>نسبة القبول</span></div></div>
       <div class="tile t-coral">${B("clock","g-coral","sm")}<div><b class="num">${late}</b><span>قُدّمت متأخرة</span></div></div>
       <div class="tile t-sky">${B("calendar","g-sky","sm")}<div><b class="num">${daysAll}</b><span>أيام غياب بعذر</span></div></div>
-      <div class="tile t-berry">${B("hash","g-berry","sm")}<div><b class="num">${rows.filter(r => r.leave_no).length}</b><span>بإجازة من «صحة»</span></div></div>
+      <div class="tile t-berry">${B("pen","g-violet","sm")}<div><b class="num">${rows.filter(r => r.kind === "letter").length}</b><span>أعذار خطية</span></div></div>
     </div>
     <div class="card"><h2>الأعذار حسب السبب</h2>
       ${byReason.length ? `<div class="bars">${byReason.map(x => `<div class="barrow"><span class="lb">${B(x.R.i, x.R.g, "sm")}${x.R.k}</span><span class="track2"><i style="width:${x.n/maxR*100}%;background:${x.R.c}"></i></span><b class="num">${x.n}</b></div>`).join("")}</div>` : `<p class="muted">تظهر هنا الأسباب عند وصول أول عذر.</p>`}
@@ -1133,20 +1248,86 @@ async function adminReport(){
       <p class="hint">أيام الغياب بعذر: ${byGrade.map(x => `${x.g} ${x.d}`).join("، ")}.</p>
     </div>
     <div class="card">
-      <div class="row">${B("download","g-gold","")}<div><h2>تصدير إلى Excel</h2><p class="muted">ملف بكل الأعذار وقراراتها لحفظه أو مشاركته.</p></div></div>
-      <button class="btn b-em block" id="csv" type="button">${I("download")} تحميل الملف</button>
+      <div class="row">${B("sheet","g-em","")}<div><h2>ملفات Excel لكل صف</h2><p class="muted">ملف منسق لكل صف فيه الإحصائية وأسماء الطالبات وعدد أعذار كل طالبة، ثم تفاصيل الأعذار.</p></div></div>
+      <div class="xl-grid">${GRADES.map((g,i) => `<button class="xl" type="button" data-g="${i}"><span class="initial ${GRADE_G[g]}">${GRADE_N[g]}</span><span>${g}<small>${rows.filter(r => r.grade === g).length} عذر · تحميل Excel</small></span></button>`).join("")}</div>
     </div>
   </div>`;
-  $("#csv").onclick = exportCSV;
+  $$(".xl").forEach(b => b.onclick = () => exportGrade(GRADES[+b.dataset.g], b));
 }
 
-function exportCSV(){
-  const head = ["رقم الطلب","اسم الطالبة","السجل المدني","الصف","الفصل","من","إلى","أيام الدراسة","السبب","الجهة","نوع الجهة","رقم الإجازة","متأخر","الحالة","ملاحظة الإدارة","صاحبة القرار","وقت الرفع"];
-  const lines = rows.map(r => [r.ref,r.student_name,"'"+r.national_id,r.grade,r.section,r.from_date,r.to_date,r.school_days,r.reason,r.provider,r.provider_type,r.leave_no,r.late?"نعم":"لا",STATUS[r.status]?.t,r.admin_note,r.reviewed_by,(r.created_at||"").slice(0,16).replace("T"," ")]);
-  const csv = "﻿" + [head, ...lines].map(l => l.map(v => `"${String(v ?? "").replace(/"/g,'""')}"`).join(",")).join("\n");
-  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
-  a.download = `أعذار-انضباطي-${iso(new Date())}.csv`; document.body.appendChild(a); a.click(); a.remove();
-  toast(DEMO ? "التصدير يعمل على موقع المدرسة" : "تم تجهيز ملف Excel");
+function loadXLSX(){
+  if(window.XLSX && window.XLSX.utils) return Promise.resolve(window.XLSX);
+  return new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = "https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"; sc.onload = () => res(window.XLSX); sc.onerror = () => rej(new Error("lib")); document.head.appendChild(sc); });
+}
+async function exportGrade(g, btn){
+  const list = rows.filter(r => r.grade === g);
+  if(!list.length){ toast("لا توجد أعذار في " + g + " بعد"); return; }
+  if(btn) btn.disabled = true;
+  let X; try{ X = await loadXLSX(); }catch(e){ if(btn) btn.disabled = false; toast("تعذر تجهيز ملف Excel، تأكدي من الإنترنت"); return; }
+  const today = new Date().toLocaleDateString("ar-SA-u-ca-gregory-nu-latn",{day:"numeric",month:"long",year:"numeric"});
+  const C = {title:"073F3B", head:"0E9C8D", sub:"0A5E57", zebra:"F1F7F5", line:"CFE3DE", gold:"FBF1DC", ok:"DDF3EF", bad:"FFE8E4", warn:"FFF2D9", info:"E4EDFF", violet:"EEE9FD"};
+  const ln = {style:"thin", color:{rgb:C.line}};
+  const base = {font:{name:"Arial", sz:12, color:{rgb:"10302C"}}, alignment:{horizontal:"center", vertical:"center", wrapText:true, readingOrder:2}, border:{top:ln, bottom:ln, left:ln, right:ln}};
+  const st = o => ({...base, ...o, font:{...base.font, ...(o.font||{})}, alignment:{...base.alignment, ...(o.alignment||{})}});
+  const STF = {new:C.info, accepted:C.ok, rejected:C.bad, more:C.warn};
+  const by = {};
+  list.forEach(r => {
+    const s = by[r.national_id] || (by[r.national_id] = {name:r.student_name, nid:r.national_id, sec:r.section, n:0, med:0, let:0, acc:0, nw:0, more:0, rej:0, days:0, last:""});
+    s.n++; (r.kind === "letter" ? s.let++ : s.med++);
+    if(r.status === "accepted") s.acc++; else if(r.status === "new") s.nw++; else if(r.status === "more") s.more++; else if(r.status === "rejected") s.rej++;
+    if(r.status !== "rejected") s.days += r.school_days || 0;
+    if(!s.last || r.from_date > s.last) s.last = r.from_date;
+  });
+  const studs = Object.values(by).sort((a,b) => (Number(a.sec)||0) - (Number(b.sec)||0) || b.n - a.n || String(a.name).localeCompare(String(b.name), "ar"));
+  const cnt = k => list.filter(r => r.status === k).length;
+  const days = list.filter(r => r.status !== "rejected").reduce((a,r) => a + (r.school_days||0), 0);
+  const H1 = ["م","اسم الطالبة","السجل المدني","الفصل","عدد الأعذار","طبية","خطية","مقبولة","قيد المراجعة","مطلوب استكمال","غير مقبولة","أيام الغياب بعذر","آخر غياب"];
+  const W = H1.length;
+  const SUM = ["عدد الطالبات","إجمالي الأعذار","مقبولة","قيد المراجعة","مطلوب استكمال","غير مقبولة","أيام الغياب بعذر","أعذار طبية","أعذار خطية"];
+  const sumV = [studs.length, list.length, cnt("accepted"), cnt("new"), cnt("more"), cnt("rejected"), days, list.filter(r => r.kind !== "letter").length, list.filter(r => r.kind === "letter").length];
+  const aoa = [[`إحصائية أعذار الغياب — ${g}`], [`${CONFIG.SCHOOL} · منصة انضباطي سر تميزي · تاريخ التصدير: ${today}`], [], SUM, sumV, [], H1,
+    ...studs.map((s,i) => [i+1, s.name, s.nid, s.sec, s.n, s.med, s.let, s.acc, s.nw, s.more, s.rej, s.days, s.last])];
+  const ws = X.utils.aoa_to_sheet(aoa);
+  const put = (w, r, c, style) => { const a = X.utils.encode_cell({r, c}); if(!w[a]) w[a] = {t:"s", v:""}; w[a].s = style; };
+  ws["!merges"] = [{s:{r:0,c:0},e:{r:0,c:W-1}}, {s:{r:1,c:0},e:{r:1,c:W-1}}];
+  ws["!cols"] = [5,30,15,7,11,8,8,9,12,13,11,14,13].map(w => ({wch:w}));
+  ws["!rows"] = [{hpt:38},{hpt:24},{hpt:10},{hpt:30},{hpt:34},{hpt:10},{hpt:32}];
+  for(let c = 0; c < W; c++){ put(ws,0,c, st({font:{bold:true, sz:18, color:{rgb:"FFFFFF"}}, fill:{fgColor:{rgb:C.title}}})); put(ws,1,c, st({font:{sz:11, bold:true, color:{rgb:"7A5A12"}}, fill:{fgColor:{rgb:C.gold}}})); }
+  const sf = [C.gold, C.info, C.ok, C.info, C.warn, C.bad, C.violet, C.ok, C.violet];
+  for(let c = 0; c < SUM.length; c++){ put(ws,3,c, st({font:{bold:true, color:{rgb:"FFFFFF"}}, fill:{fgColor:{rgb:C.sub}}})); put(ws,4,c, st({font:{bold:true, sz:18}, fill:{fgColor:{rgb:sf[c]}}})); }
+  for(let c = 0; c < W; c++) put(ws,6,c, st({font:{bold:true, color:{rgb:"FFFFFF"}}, fill:{fgColor:{rgb:C.head}}}));
+  studs.forEach((s,i) => { for(let c = 0; c < W; c++){ const z = i % 2 ? C.zebra : "FFFFFF";
+    let o = {fill:{fgColor:{rgb:z}}};
+    if(c === 1) o = {fill:{fgColor:{rgb:z}}, font:{bold:true}, alignment:{horizontal:"right"}};
+    if(c === 4) o = {fill:{fgColor:{rgb:C.gold}}, font:{bold:true, sz:14, color:{rgb:"0A5E57"}}};
+    if(c === 7 && s.acc) o = {fill:{fgColor:{rgb:C.ok}}, font:{bold:true}};
+    if(c === 10 && s.rej) o = {fill:{fgColor:{rgb:C.bad}}, font:{bold:true}};
+    put(ws, 7+i, c, st(o)); } });
+  ws["!views"] = [{RTL:true}];
+  const H2 = ["رقم الطلب","اسم الطالبة","السجل المدني","الفصل","نوع العذر","السبب","من","إلى","أيام الدراسة","الجهة الطبية","رقم الإجازة","نص العذر الخطي","متأخر","الحالة","ملاحظة الإدارة","صاحبة القرار","وقت الرفع"];
+  const sorted = [...list].sort((a,b) => (Number(a.section)||0) - (Number(b.section)||0) || String(a.student_name).localeCompare(String(b.student_name), "ar") || String(b.from_date).localeCompare(String(a.from_date)));
+  const aoa2 = [[`تفاصيل الأعذار — ${g}`], H2, ...sorted.map(r => [r.ref, r.student_name, r.national_id, r.section, r.kind === "letter" ? "عذر خطي" : "تقرير طبي", r.reason, r.from_date, r.to_date, r.school_days, r.provider || "", r.leave_no || "", r.letter || "", r.late ? "نعم" : "لا", STATUS[r.status]?.t || "", r.admin_note || "", r.reviewed_by || "", (r.created_at||"").slice(0,16).replace("T"," ")])];
+  const ws2 = X.utils.aoa_to_sheet(aoa2);
+  const W2 = H2.length;
+  ws2["!merges"] = [{s:{r:0,c:0},e:{r:0,c:W2-1}}];
+  ws2["!cols"] = [17,28,14,7,11,15,12,12,10,22,15,40,8,14,30,16,17].map(w => ({wch:w}));
+  ws2["!rows"] = [{hpt:34},{hpt:30}];
+  for(let c = 0; c < W2; c++){ put(ws2,0,c, st({font:{bold:true, sz:16, color:{rgb:"FFFFFF"}}, fill:{fgColor:{rgb:C.title}}})); put(ws2,1,c, st({font:{bold:true, color:{rgb:"FFFFFF"}}, fill:{fgColor:{rgb:C.head}}})); }
+  sorted.forEach((r,i) => { for(let c = 0; c < W2; c++){ const z = i % 2 ? C.zebra : "FFFFFF";
+    let o = {fill:{fgColor:{rgb:z}}};
+    if(c === 1) o = {fill:{fgColor:{rgb:z}}, font:{bold:true}, alignment:{horizontal:"right"}};
+    if(c === 11 || c === 14) o = {fill:{fgColor:{rgb:z}}, alignment:{horizontal:"right"}};
+    if(c === 13) o = {fill:{fgColor:{rgb:STF[r.status] || z}}, font:{bold:true}};
+    if(c === 4 && r.kind === "letter") o = {fill:{fgColor:{rgb:C.violet}}, font:{bold:true}};
+    put(ws2, 2+i, c, st(o)); } });
+  ws2["!views"] = [{RTL:true}];
+  const wb = X.utils.book_new();
+  wb.Workbook = {Views:[{RTL:true}]};
+  X.utils.book_append_sheet(wb, ws, "الإحصائية");
+  X.utils.book_append_sheet(wb, ws2, "تفاصيل الأعذار");
+  try{ X.writeFile(wb, `أعذار ${g} - ${iso(new Date())}.xlsx`); toast(DEMO ? "التحميل يعمل على موقع المدرسة" : "تم تجهيز ملف " + g); }
+  catch(e){ toast("تعذر حفظ الملف"); }
+  if(btn) btn.disabled = false;
 }
 
 $("#homeBtn").onclick = () => { toTop(); home(); };
