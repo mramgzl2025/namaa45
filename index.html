@@ -944,6 +944,7 @@ body.has-sbar footer{padding-bottom:120px}
         <button type="button" data-at="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
         <button type="button" data-at="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-at="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
+        <button type="button" data-at="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
         <button type="button" data-at="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-at="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
       </div>
@@ -982,6 +983,7 @@ body.has-sbar footer{padding-bottom:120px}
         <button type="button" data-gat="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
         <button type="button" data-gat="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-gat="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
+        <button type="button" data-gat="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
         <button type="button" data-gat="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-gat="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
       </div>
@@ -1103,6 +1105,7 @@ const D=[
  {id:"demo",sec:"growth",name:"الدروس التطبيقية",c:"#D14D4D",desc:"دروس نموذجية قدّمتِها أمام الزميلات.",scene:[["board",130,74,1.4],["person",220,104,1.05],["person",60,138,.7,"#3D4DB8"],["person",276,138,.7,"#2E9D6A"],["spark",250,36]],hints:["خطة الدرس التطبيقي","كشف الحضور واستمارات التقييم","صور من التنفيذ"]},
  {id:"programs",sec:"growth",name:"البرامج المقدّمة",c:"#E07A3F",desc:"برامج ومبادرات قدّمتِها للمدرسة.",scene:[["easel",120,96,1.3],["rocket",220,84,1.3],["spark",270,40],["spark",60,50]],hints:["فكرة البرنامج وأهدافه","خطة التنفيذ والفئة المستهدفة","تقرير الأثر والصور"]},
  {id:"portfolioT",sec:"growth",name:"ملف إنجاز المعلمة",c:"#B88A1E",desc:"ملف الإنجاز الشامل.",scene:[["folder",150,96,1.6],["medal",250,80,1.1],["spark",80,46]],hints:["ملف الإنجاز بصيغة PDF","فهرس الشواهد"]},
+ {id:"activity",sec:"growth",name:"النشاط",c:"#D9467A",desc:"الأنشطة الصفية واللاصفية وتوثيق تنفيذها.",scene:[["person",120,108,1.1,"#D9467A"],["medal",200,86,1.2],["bulb",262,70,.8],["spark",70,44]],hints:["خطة النشاط وأهدافه","صور من تنفيذ النشاط","تقرير النشاط أو شهادات المشاركة"]},
  {id:"other",sec:"growth",name:"أخرى",c:"#646B8C",desc:"مشاركات مهنية لا تندرج تحت ما سبق.",scene:[["tag",150,80,1.4],["spark",210,50],["doc",230,110,.9]],hints:["أي شاهد مهني آخر مع وصفه"]},
  // plan
  {id:"termplan",sec:"plan",name:"الخطة الفصلية",c:"#1F87B8",desc:"أهداف الفصل الدراسي ومحاوره وخطة تنفيذه.",scene:[["sheets",130,94,1.4],["pencil",220,96,1.1],["spark",270,40]],hints:["الخطة الفصلية المعتمدة","أهداف الفصل الدراسي ومحاوره"]},
@@ -1515,8 +1518,8 @@ document.addEventListener("click",async e=>{
 document.addEventListener("click",e=>{if(e.target.closest("[data-unlock]")&&curT)askPin(curT);});
 /* attachments: image / pdf / word / link / barcode */
 let att=[],pickKind=null;
-const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
-const kindOf=f=>f.kind||(f.type==="link"?"link":f.type==="application/pdf"?"pdf":/word|msword/.test(f.type||"")?"word":"image");
+const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},excel:{ic:"📊",l:"إكسل",acc:".xls,.xlsx,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
+const kindOf=f=>f.kind||(f.type==="link"?"link":f.type==="application/pdf"?"pdf":/word|msword/.test(f.type||"")?"word":/sheet|excel|csv/.test(f.type||"")?"excel":"image");
 const fmtSize=n=>n>1048576?(n/1048576).toFixed(1)+" م.ب":Math.max(1,Math.round(n/1024))+" ك.ب";
 function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?a.url:a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
 $("#a-list").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){att.splice(+b.dataset.rm,1);renderAtt();}});
@@ -1529,8 +1532,8 @@ function addUrl(){let u=$("#a-url").value.trim();if(!u)return;if(!/^[a-z]+:\/\//
 $("#a-url-add").onclick=addUrl;$("#a-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addUrl();}});
 async function readBarcode(file){try{if(!("BarcodeDetector" in window))return "";const bd=new BarcodeDetector();const bmp=await createImageBitmap(file);const r=await bd.detect(bmp);return (r[0]&&r[0].rawValue)||"";}catch(e){return "";}}
 $("#a-pick").addEventListener("change",async()=>{const k=pickKind;const fs=[...$("#a-pick").files];
-  for(const f of fs){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
-    const ok=k==="pdf"?isPdf:k==="word"?isWord:isImg;if(!ok){$("#a-msg").className="msg err";$("#a-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}
+  for(const f of fs){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
+    const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:isImg;if(!ok){$("#a-msg").className="msg err";$("#a-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}
     const a={kind:k,file:f};if(k==="barcode")a.url=await readBarcode(f);att.push(a);}
   renderAtt();});
 $("#f-add").addEventListener("submit",async e=>{
@@ -1545,9 +1548,9 @@ $("#f-add").addEventListener("submit",async e=>{
     for(const a of att){
       if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
       const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;
-      const isPdf=a.kind==="pdf";const isWord=a.kind==="word";
+      const isPdf=a.kind==="pdf";const isWord=a.kind==="word";const isXl=a.kind==="excel";
       const ext=(f.name.split(".").pop()||(isPdf?"pdf":"jpg")).toLowerCase();
-      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):(f.type||"image/jpeg");
+      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):(f.type||"image/jpeg");
       let path;try{path=await uploadFile(f,ext,type);}catch(er){throw {upl:f.name,er};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
@@ -1585,6 +1588,7 @@ async function loadFile(i){
   if(k==="link"){dl.hidden=true;box.innerHTML=linkBox(f.url,"فتح الرابط");drawQR(f.url);return;}
   const url=fileUrl(f.path);dl.hidden=!url;dl.href=url;
   if(url&&k==="word"){box.innerHTML=`<p class="msg">📝 ملف وورد — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p><iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`;return;}
+  if(url&&k==="excel"){box.innerHTML=`<p class="msg">📊 ملف إكسل — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p>`+(f.type==="text/csv"?"":`<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`);return;}
   if(url&&k==="barcode"){box.innerHTML=`<img src="${esc(url)}" alt="${esc(f.name)}" style="max-height:340px">${f.url?linkBox(f.url,"فتح رابط الباركود"):""}`;if(f.url)drawQR(f.url);return;}
   if(!url){box.innerHTML='<p class="msg">في وضع التجربة لا تبقى الملفات بعد إعادة تحميل الصفحة.</p>';return;}
   if(f.type&&f.type.startsWith("image/")){box.innerHTML=`<img src="${esc(url)}" alt="${esc(f.name)}">`;return;}
@@ -1602,7 +1606,7 @@ $("#v-yes").onclick=async()=>{const x=curItem;if(!x)return;$("#v-yes").disabled=
 /* ================= export (Excel) ================= */
 let xlLoading=null;
 function loadXL(){if(window.ExcelJS)return Promise.resolve();return xlLoading||(xlLoading=new Promise((ok,no)=>{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js";sc.onload=ok;sc.onerror=()=>{xlLoading=null;no();};document.head.appendChild(sc);}));}
-const AR_KIND={image:"صورة",pdf:"PDF",word:"وورد",link:"رابط",barcode:"باركود"};
+const AR_KIND={image:"صورة",pdf:"PDF",word:"وورد",excel:"إكسل",link:"رابط",barcode:"باركود"};
 $("#export").onclick=async()=>{
   const btn=$("#export"),m=$("#exp-msg");btn.disabled=true;m.className="msg";m.textContent="جارٍ تجهيز الملف…";
   try{await loadXL();}catch(e){m.className="msg err";m.textContent="تعذّر تحميل أداة الإكسل. تحققي من الاتصال.";btn.disabled=false;return;}
@@ -1764,8 +1768,8 @@ $("#ga-types").addEventListener("click",e=>{const b=e.target.closest("[data-gat]
   gKind=k;const inp=$("#ga-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
 function gAddUrl(){let u=$("#ga-url").value.trim();if(!u)return true;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#ga-msg").className="msg err";$("#ga-msg").textContent="الرابط غير صحيح.";return false;}gAtt.push({kind:"link",url:u});$("#ga-url").value="";$("#ga-link").hidden=true;renderGAtt();return true;}
 $("#ga-url-add").onclick=gAddUrl;$("#ga-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gAddUrl();}});
-$("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
-  const ok=k==="pdf"?isPdf:k==="word"?isWord:isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
+$("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
+  const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
 async function uploadVice(blob,ext,type){const path=`vice/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)return uploadFile(blob,ext,type);return path;}
 $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()||!curG)return;if(!gAddUrl())return;const msg=$("#ga-msg"),btn=$("#ga-save");
   if(!gAtt.length){msg.className="msg err";msg.textContent="أضيفي ملفًا أو رابطًا واحدًا على الأقل.";return;}
@@ -1773,8 +1777,8 @@ $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()
   btn.disabled=true;msg.className="msg";
   try{const out=[];const ups=gAtt.filter(a=>a.file);let ui=0;
     for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
-      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word";const ext=(f.name.split(".").pop()||(isPdf?"pdf":"jpg")).toLowerCase();
-      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):(f.type||"image/jpeg");
+      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=(f.name.split(".").pop()||(isPdf?"pdf":"jpg")).toLowerCase();
+      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):(f.type||"image/jpeg");
       let path;try{path=await uploadVice(f,ext,type);}catch(er){throw {upl:f.name};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,600);const bl=await new Promise(r=>cv.toBlob(r,"image/jpeg",.8));if(bl)thumb=await uploadVice(bl,"jpg","image/jpeg");}catch(_){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
