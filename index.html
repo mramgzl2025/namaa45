@@ -262,10 +262,10 @@ footer b{color:var(--hero-ink)}
 .drop .dt b{color:var(--accent);font-size:15px}
 .drop .dt small{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
 .drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
-.atypes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-@media (max-width:420px){.atypes{grid-template-columns:repeat(3,1fr)}}
-.atypes button{display:grid;justify-items:center;gap:4px;padding:12px 4px;border:1.5px solid color-mix(in srgb,var(--c) 35%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--c) 8%,var(--surface));color:var(--ink);font:inherit;font-weight:700;font-size:14px;cursor:pointer}
-.atypes button span{font-size:24px;line-height:1;color:var(--c)}
+.atypes{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+@media (max-width:420px){.atypes{gap:4px}.atypes button{font-size:10.5px!important;padding:6px 1px!important}.atypes button span{font-size:16px!important}}
+.atypes button{display:grid;justify-items:center;gap:2px;padding:7px 2px;border:1.5px solid color-mix(in srgb,var(--c) 35%,var(--line));border-radius:11px;background:color-mix(in srgb,var(--c) 8%,var(--surface));color:var(--ink);font:inherit;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
+.atypes button span{font-size:18px;line-height:1;color:var(--c)}
 .atypes button:hover,.atypes button[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--surface))}
 .alink{display:flex;gap:8px;margin-top:10px}.alink input{flex:1;min-width:0}.alink .btn{flex:none}
 .alist{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
