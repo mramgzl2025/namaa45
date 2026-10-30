@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>السعودية خط أحمر | الثانوية الخامسة والأربعون</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g9:#03140c; --g8:#062a18; --g7:#0a3d23; --g6:#0f5132; --g5:#167a4a; --g4:#1f9d5f;
+  --gold:#d4af5a; --gold2:#f3dc9a; --red:#c8102e; --red2:#ff3b52;
+  --paper:#fbf7ec; --ink:#1b2a21; --muted:#6c7d72; --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:var(--g9);color:#fff;min-height:100vh;overflow-x:hidden;line-height:1.7}
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer}
+.bgpat{position:fixed;inset:0;z-index:-1;background:
+ radial-gradient(1200px 600px at 85% -10%,rgba(31,157,95,.35),transparent 60%),
+ radial-gradient(900px 500px at -10% 110%,rgba(200,16,46,.18),transparent 60%),
+ linear-gradient(180deg,var(--g8),var(--g9));}
+.bgpat::after{content:"";position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23fff' stroke-width='1'%3E%3Cpath d='M40 4l10 26 26 10-26 10-10 26-10-26L4 40l26-10z'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3C/g%3E%3C/svg%3E");}
+
+/* ticker */
+.ticker{background:var(--red);overflow:hidden;white-space:nowrap;font-weight:800;font-size:14px;padding:6px 0;border-bottom:2px solid var(--gold)}
+.ticker span{display:inline-block;animation:tick 30s linear infinite;padding-inline-start:100%}
+@keyframes tick{to{transform:translateX(100%)}}
+
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;max-width:1100px;margin:auto}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--g5),var(--g7));display:grid;place-items:center;border:1px solid var(--gold);box-shadow:0 0 0 4px rgba(212,175,90,.12)}
+.brand b{display:block;font-size:15px}
+.brand small{color:var(--gold2);font-size:12px}
+.boardbtn{background:transparent;border:1px solid var(--line);color:#cfe;padding:8px 14px;border-radius:12px;font-size:13px}
+.boardbtn:hover{border-color:var(--gold);color:var(--gold2)}
+
+.wrap{max-width:1100px;margin:auto;padding:0 18px 40px}
+
+/* hero */
+.hero{text-align:center;padding:30px 10px 10px}
+.verse{font-family:'Amiri',serif;color:var(--gold2);font-size:22px;margin-bottom:8px}
+.hero h1{font-family:'Reem Kufi',sans-serif;font-size:clamp(44px,9vw,92px);line-height:1.1;letter-spacing:0}
+.hero h1 .red{color:var(--red2);position:relative;display:inline-block}
+.hero h1 .red::after{content:"";position:absolute;inset-inline:0;bottom:4px;height:8px;background:var(--red);border-radius:4px;z-index:-1;transform:skewX(-12deg);box-shadow:0 0 30px var(--red)}
+.hero p.sub{color:#cfe3d6;max-width:640px;margin:14px auto 0;font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:620px;margin:26px auto 0}
+.stat{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:14px 8px}
+.stat .n{font-size:30px;font-weight:900;color:var(--gold2)}
+.stat .l{font-size:13px;color:#b9d2c3}
+
+/* progress */
+.progress{margin:28px auto 0;max-width:620px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:20px;padding:14px 18px}
+.progress .row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px}
+.bar{height:10px;background:rgba(255,255,255,.08);border-radius:10px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--red2));transition:width .6s}
+.medal{display:none;margin-top:10px;text-align:center;color:var(--gold2);font-weight:800}
+
+/* tabs */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:26px 2px 10px;position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--g9) 70%,transparent)}
+.tab{flex:0 0 auto;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#dfeee5;padding:10px 16px;border-radius:999px;font-weight:700;font-size:15px}
+.tab.on{background:linear-gradient(135deg,var(--g5),var(--g6));border-color:var(--gold);color:#fff;box-shadow:0 6px 20px rgba(31,157,95,.35)}
+.tab .ck{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:12px}
+.tab .ck.done{background:var(--gold);color:var(--g9)}
+
+section.view{display:none;animation:fade .45s}
+section.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.card{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:24px;padding:24px}
+.h2{font-family:'Reem Kufi',sans-serif;font-size:28px;display:flex;align-items:center;gap:10px}
+.lead{color:#bcd5c6;margin:4px 0 18px}
+
+/* home missions */
+.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.mission{position:relative;text-align:right;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:20px;color:#fff;transition:.25s;overflow:hidden}
+.mission:hover{transform:translateY(-4px);border-color:var(--gold)}
+.mission .ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;margin-bottom:12px}
+.mission h3{font-size:20px}
+.mission p{color:#b9d2c3;font-size:14px}
+.mission .num{position:absolute;left:16px;top:12px;font-family:'Reem Kufi';font-size:46px;opacity:.12}
+.mission .st{display:inline-block;margin-top:10px;font-size:12px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08)}
+.mission .st.done{background:var(--gold);color:var(--g9);font-weight:800}
+
+/* forms */
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:14px;color:#cfe3d6;font-weight:700}
+.inp{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:14px;padding:12px 14px;font-size:16px;outline:none;width:100%}
+.inp:focus{border-color:var(--gold)}
+select.inp option{color:#000}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{border:none;border-radius:14px;padding:13px 22px;font-weight:800;font-size:16px;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--g9)}
+.btn.red{background:linear-gradient(135deg,var(--red2),var(--red));color:#fff}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn.green{background:linear-gradient(135deg,var(--g4),var(--g6));color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.note{font-size:13px;color:var(--muted)}
+
+/* pledge document */
+.scroll{background:var(--paper);color:var(--ink);border-radius:8px;padding:34px 30px;position:relative;max-width:720px;margin:0 auto;box-shadow:0 30px 60px rgba(0,0,0,.45);border:2px solid var(--gold)}
+.scroll::before{content:"";position:absolute;inset:10px;border:1px solid rgba(212,175,90,.7);border-radius:4px;pointer-events:none}
+.scroll .sv{font-family:'Amiri',serif;text-align:center;color:var(--g6);font-size:20px}
+.scroll h3{font-family:'Reem Kufi';text-align:center;font-size:34px;color:var(--g7);margin:6px 0}
+.scroll h3 .r{color:var(--red)}
+.scroll .txt{font-family:'Amiri',serif;font-size:21px;line-height:2.1;text-align:justify;margin-top:12px}
+.scroll .nm{color:var(--red);font-weight:700;border-bottom:2px dotted var(--red);padding:0 6px}
+.scroll .sig{display:flex;justify-content:space-between;align-items:end;margin-top:24px;gap:10px}
+.scroll .sig div{font-size:14px;color:var(--muted)}
+.seal{width:110px;height:110px;border-radius:50%;display:grid;place-items:center;text-align:center;color:#fff;font-weight:900;font-size:13px;line-height:1.3;
+ background:radial-gradient(circle at 35% 30%,#ff5a6c,var(--red) 55%,#7c0919);box-shadow:0 0 0 5px rgba(200,16,46,.25),inset 0 0 0 3px rgba(255,255,255,.35);transform:rotate(-12deg) scale(0);transition:transform .6s cubic-bezier(.2,1.6,.4,1)}
+.seal.on{transform:rotate(-12deg) scale(1)}
+.pledgebtns{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.certimg{max-width:100%;border-radius:10px;display:block;margin:16px auto 0;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+
+/* rumors */
+.deckwrap{max-width:520px;margin:auto}
+.deck{position:relative;height:330px;margin:10px 0 18px}
+.rcard{position:absolute;inset:0;border-radius:24px;padding:24px;background:linear-gradient(160deg,#fff,#eef5f0);color:var(--ink);box-shadow:0 20px 40px rgba(0,0,0,.4);display:flex;flex-direction:column;justify-content:center;text-align:center;transition:transform .45s,opacity .45s;touch-action:pan-y;user-select:none}
+.rcard .tag{align-self:center;font-size:12px;font-weight:800;padding:3px 12px;border-radius:999px;background:#e6efe9;color:var(--g6);margin-bottom:12px}
+.rcard .q{font-size:20px;font-weight:800;line-height:1.6}
+.rcard .src{margin-top:12px;color:var(--muted);font-size:14px}
+.rcard.out-l{transform:translateX(-140%) rotate(-18deg);opacity:0}
+.rcard.out-r{transform:translateX(140%) rotate(18deg);opacity:0}
+.rcard .crack{position:absolute;inset:0;border-radius:24px;pointer-events:none;opacity:0;transition:.3s;background:rgba(200,16,46,.92);color:#fff;display:grid;place-items:center;font-size:26px;font-weight:900}
+.rcard.broken .crack{opacity:1}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feedback{min-height:70px;margin-top:14px;border-radius:16px;padding:12px 14px;font-size:15px;display:none}
+.feedback.ok{display:block;background:rgba(31,157,95,.18);border:1px solid var(--g4)}
+.feedback.no{display:block;background:rgba(200,16,46,.15);border:1px solid var(--red2)}
+.score{display:flex;justify-content:space-between;color:#cfe3d6;font-size:14px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:22px}
+.rule{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:18px;padding:16px;transform:translateY(10px);opacity:0;animation:up .5s forwards}
+.rule b{display:block;font-size:17px;color:var(--gold2);margin:6px 0 2px}
+.rule p{font-size:14px;color:#c7dccf}
+.rule .e{font-size:28px}
+@keyframes up{to{transform:none;opacity:1}}
+
+/* share */
+.drop{border:2px dashed rgba(255,255,255,.25);border-radius:18px;padding:18px;text-align:center;color:#cfe3d6;cursor:pointer}
+.drop img{max-height:180px;border-radius:12px;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{background:rgba(255,255,255,.07);border:1px solid var(--line);color:#e5f1ea;border-radius:999px;padding:6px 12px;font-size:13px}
+.chip:hover{border-color:var(--gold)}
+
+/* mural */
+.mural{columns:3 240px;column-gap:14px}
+.post{break-inside:avoid;margin-bottom:14px;border-radius:20px;overflow:hidden;background:var(--paper);color:var(--ink);box-shadow:0 10px 30px rgba(0,0,0,.35);position:relative}
+.post img{width:100%;display:block}
+.post .b{padding:14px 16px}
+.post .m{font-family:'Amiri',serif;font-size:19px;line-height:1.9}
+.post .w{margin-top:8px;font-size:13px;color:var(--g6);font-weight:800}
+.post .flag{position:absolute;top:10px;left:10px;font-size:20px}
+.post.pinned{background:linear-gradient(160deg,var(--g6),var(--g7));color:#fff}
+.post.pinned .w{color:var(--gold2)}
+.empty{text-align:center;color:#9fb9aa;padding:30px}
+.prayer{text-align:center;font-family:'Amiri',serif;color:var(--gold2);font-size:20px;margin-top:16px}
+
+/* board */
+.lock{max-width:380px;margin:auto;text-align:center}
+.pin{letter-spacing:14px;text-align:center;font-size:26px}
+.bstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.bstats .stat{text-align:center}
+.pend{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px}
+.pend img{width:90px;height:90px;object-fit:cover;border-radius:12px}
+.pend .t{flex:1}
+.pend .acts{display:flex;flex-direction:column;gap:6px}
+.pend .acts .btn{padding:8px 12px;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:8px;border-bottom:1px solid var(--line);text-align:right}
+th{color:var(--gold2)}
+.bsub{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.gbars .gb{display:flex;align-items:center;gap:10px;margin:6px 0;font-size:14px}
+.gbars .gb span{width:90px}
+.gbars .gb .bar{flex:1}
+
+.whoBox{margin:24px auto 0;max-width:680px}
+.whoT{font-weight:800;color:var(--gold2);margin-bottom:10px}
+.who{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.who button{background:rgba(255,255,255,.05);border:1px solid var(--line);color:#fff;border-radius:16px;padding:10px 4px;font-size:26px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.2s}
+.who button span{font-size:14px;font-weight:700}
+.who button.on{background:linear-gradient(135deg,var(--g5),var(--g6));border-color:var(--gold);box-shadow:0 6px 18px rgba(31,157,95,.4);transform:translateY(-2px)}
+.who.shake{animation:shk .5s}
+@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media(max-width:600px){.who{grid-template-columns:repeat(3,1fr)}}
+footer{text-align:center;color:#8fae9c;font-size:13px;padding:26px 10px 36px;border-top:1px solid var(--line);margin-top:30px}
+footer b{color:var(--gold2)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--g6);border:1px solid var(--gold);padding:12px 20px;border-radius:14px;font-weight:700;z-index:50;transition:.35s;max-width:90vw;text-align:center}
+.toast.on{transform:translateX(-50%)}
+.modebadge{font-size:11px;background:rgba(212,175,90,.15);color:var(--gold2);border:1px solid rgba(212,175,90,.4);padding:2px 8px;border-radius:999px;margin-inline-start:6px}
+.confetti{position:fixed;top:-10px;width:10px;height:14px;z-index:60;animation:fall linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}.scroll{padding:26px 18px}.scroll .txt{font-size:18px}.stat .n{font-size:24px}.hero p.sub{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="bgpat"></div>
+<div class="ticker"><span>السعودية خط أحمر ✦ وثيقة العهد والولاء ✦ أمن الوطن مسؤوليتي ✦ لا للشائعات ✦ الثانوية الخامسة والأربعون ✦ السعودية خط أحمر ✦ وثيقة العهد والولاء ✦ أمن الوطن مسؤوليتي ✦ لا للشائعات ✦</span></div>
+
+<header class="top">
+  <div class="brand">
+    <div class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 5.6L20 10l-5.6 2.4L12 18l-2.4-5.6L4 10l5.6-2.4z" fill="#d4af5a"/><path d="M5 21h14" stroke="#ff3b52" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <div><b>الثانوية الخامسة والأربعون</b><small>مبادرة وطنية لأسرة مدرستنا</small></div>
+  </div>
+  <button class="boardbtn" onclick="go('board')">🔐 لوحة المدرسة</button>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="verse">﴿ رَبِّ اجْعَلْ هَٰذَا بَلَدًا آمِنًا ﴾</div>
+    <h1>السعودية <span class="red">خط أحمر</span></h1>
+    <p class="sub">مبادرة لطالبات الثانوية الخامسة والأربعين ومعلماتها وكادرها الإداري وأولياء الأمور: وثيقة عهد، وصدّ للشائعات، ورسالة حب للوطن على جدارية المدرسة.</p>
+    <div class="stats">
+      <div class="stat"><div class="n" id="sP">0</div><div class="l">📜 وثيقة عهد</div></div>
+      <div class="stat"><div class="n" id="sR">0</div><div class="l">🛡️ شائعة مصدودة</div></div>
+      <div class="stat"><div class="n" id="sM">0</div><div class="l">💚 رسالة فخر</div></div>
+    </div>
+    <div class="whoBox">
+      <div class="whoT">من أنتِ / أنتَ؟</div>
+      <div class="who" id="who">
+        <button data-r="student">👩‍🎓<span>طالبة</span></button>
+        <button data-r="teacher">👩‍🏫<span>معلمة</span></button>
+        <button data-r="staff">🗂️<span>إدارية</span></button>
+        <button data-r="father">👨<span>ولي أمر</span></button>
+        <button data-r="mother">👩<span>ولية أمر</span></button>
+      </div>
+    </div>
+    <div class="progress">
+      <div class="row"><span>مراحلي</span><b id="progT">0 من 3</b></div>
+      <div class="bar"><i id="progB"></i></div>
+      <div class="medal" id="medal">🏅 أتممتِ المهمات الثلاث، أنتِ من حارسات الوطن</div>
+    </div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-v="home">🏠 الرئيسية</button>
+    <button class="tab" data-v="pledge"><span class="ck" id="ck1">1</span>وثيقة العهد</button>
+    <button class="tab" data-v="rumors"><span class="ck" id="ck2">2</span>أصدّ الشائعات</button>
+    <button class="tab" data-v="share"><span class="ck" id="ck3">3</span>شاركي حبّك</button>
+    <button class="tab" data-v="mural">🧱 جدارية الوطن</button>
+  </nav>
+
+  <!-- HOME -->
+  <section class="view on" id="v-home">
+    <div class="missions">
+      <button class="mission" onclick="go('pledge')"><span class="num">1</span>
+        <div class="ic" style="background:linear-gradient(135deg,#d4af5a,#a67c2b)"><span style="font-size:30px">📜</span></div>
+        <h3>وثيقة العهد</h3><p>اكتبي اسمك ووقّعي العهد، تُختم وثيقتك بختم الولاء وتحفظينها صورة في جوالك.</p><span class="st" id="st1">لم تبدأ</span></button>
+      <button class="mission" onclick="go('rumors')"><span class="num">2</span>
+        <div class="ic" style="background:linear-gradient(135deg,#ff3b52,#8c0b20)"><span style="font-size:30px">🛡️</span></div>
+        <h3>أصدّ الشائعات</h3><p>مواقف من جوالك اليومي: هل تنشرينها أو تصدّينها؟ وبعدها قواعد ذهبية للتعامل مع الشائعة.</p><span class="st" id="st2">لم تبدأ</span></button>
+      <button class="mission" onclick="go('share')"><span class="num">3</span>
+        <div class="ic" style="background:linear-gradient(135deg,#1f9d5f,#0a3d23)"><span style="font-size:30px">💚</span></div>
+        <h3>شاركي حبّك</h3><p>اكتبي رسالة لوطنك وأرفقي صورة إن أحببتِ، وبعد موافقة المعلمة تظهر في جدارية الوطن.</p><span class="st" id="st3">لم تبدأ</span></button>
+    </div>
+  </section>
+
+  <!-- PLEDGE -->
+  <section class="view" id="v-pledge">
+    <div class="card">
+      <div class="h2">📜 وثيقة العهد</div>
+      <p class="lead">اكتب/ي الاسم الثلاثي، ثم اقرأ/ي العهد واضغط/ي «أعاهد».</p>
+      <div class="grid2">
+        <div class="field"><label>الاسم الثلاثي</label><input class="inp" id="pName" placeholder="الاسم الثلاثي" oninput="fillDoc()"></div>
+        <div class="grid2" id="stuF">
+          <div class="field"><label>الصف</label><select class="inp" id="pGrade" onchange="fillDoc()"><option>الأول الثانوي</option><option>الثاني الثانوي</option><option>الثالث الثانوي</option></select></div>
+          <div class="field"><label>الفصل</label><select class="inp" id="pClass" onchange="fillDoc()"></select></div>
+        </div>
+        <div class="field" id="parF" style="display:none"><label>اسم ابنتك الطالبة</label><input class="inp" id="pKid" placeholder="اسم الطالبة" oninput="fillDoc()"></div>
+        <div class="field" id="tchF" style="display:none"><label>التخصص / العمل</label><input class="inp" id="pJob" placeholder="مثال: أحياء، الإرشاد الطلابي…" oninput="fillDoc()"></div>
+      </div>
+      <div class="scroll" id="scroll">
+        <div class="sv">﴿ رَبِّ اجْعَلْ هَٰذَا بَلَدًا آمِنًا ﴾</div>
+        <h3>وثيقة عهد <span class="r">وولاء</span></h3>
+        <div class="txt" id="docTxt"></div>
+        <div class="sig">
+          <div>التاريخ: <span id="docDate"></span><br><span id="docMeta"></span></div>
+          <div class="seal" id="seal">مختومة<br>بالولاء<br>🇸🇦</div>
+        </div>
+      </div>
+      <div class="pledgebtns">
+        <button class="btn red" id="pBtn" onclick="signPledge()">✋ نعم، أعاهد</button>
+      </div>
+      <div id="certOut" style="display:none;text-align:center">
+        <p class="lead" style="margin-top:18px">📲 وثيقتك المختومة: اضغطي على الصورة مطوّلًا ثم اختاري «حفظ الصورة».</p>
+        <img class="certimg" id="certImg" alt="وثيقتي المختومة">
+        <div class="pledgebtns"><button class="btn green" onclick="go('rumors')">المهمة التالية: أصدّ الشائعات ←</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUMORS -->
+  <section class="view" id="v-rumors">
+    <div class="card">
+      <div class="h2">🛡️ أصدّ الشائعات</div>
+      <p class="lead">وصلك هذا في جوالك.. وش بتسوين؟ اسحبي البطاقة يمين «أصدّها» أو يسار «أنشرها»، أو استخدمي الأزرار.</p>
+      <div class="deckwrap" id="deckWrap">
+        <div class="score"><span id="rIdx">البطاقة 1 من 8</span><span>✅ <b id="rOk">0</b> إجابة واعية</span></div>
+        <div class="deck" id="deck"></div>
+        <div class="choice">
+          <button class="btn red" onclick="answer('stop')">🛑 أصدّها</button>
+          <button class="btn ghost" onclick="answer('share')">📤 أنشرها</button>
+        </div>
+        <div class="feedback" id="fb"></div>
+      </div>
+      <div id="rumorDone" style="display:none;text-align:center">
+        <div style="font-size:60px">🛡️</div>
+        <div class="h2" style="justify-content:center">أحسنتِ يا حارسة الوطن</div>
+        <p class="lead" id="rumorRes"></p>
+        <div class="pledgebtns"><button class="btn ghost" onclick="resetDeck()">🔁 أعيدي المحاولة</button><button class="btn green" onclick="go('share')">المهمة التالية: شاركي حبّك ←</button></div>
+      </div>
+      <div id="rulesBox" style="display:none">
+        <div class="h2" style="margin-top:26px;font-size:22px">✨ قواعد ذهبية مع أي شائعة</div>
+        <div class="rules" id="rules"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHARE -->
+  <section class="view" id="v-share">
+    <div class="card">
+      <div class="h2">💚 شاركي حبّك</div>
+      <p class="lead">رسالتك تُرسل للمعلمة، وبعد موافقتها تظهر في جدارية الوطن لكل الطالبات.</p>
+      <div class="grid2">
+        <div class="field"><label>الاسم (يظهر في الجدارية)</label><input class="inp" id="sName" placeholder="الاسم كما يظهر في الجدارية"></div>
+        <div class="field"><label>الصف / الصفة</label><select class="inp" id="sGrade"><option>الأول الثانوي</option><option>الثاني الثانوي</option><option>الثالث الثانوي</option><option>معلمة</option><option>إدارية</option><option>ولي أمر</option><option>ولية أمر</option></select></div>
+      </div>
+      <div class="field"><label>رسالتك لوطنك</label>
+        <div class="chips" id="chips"></div>
+        <textarea class="inp" id="sMsg" rows="3" maxlength="220" placeholder="اكتبي من قلبك..."></textarea>
+        <span class="note"><span id="cnt">0</span> / 220 حرف</span>
+      </div>
+      <div class="field"><label>صورة (اختياري)</label>
+        <div class="drop" id="drop" onclick="document.getElementById('sFile').click()">📸 اضغطي لاختيار صورة: علم، رسمة، عمل فني…<div id="prev"></div></div>
+        <input type="file" id="sFile" accept="image/*" hidden>
+        <span class="note">يُفضّل ألا تظهر فيها وجوه الطالبات.</span>
+      </div>
+      <button class="btn gold" onclick="sendPost()" id="sBtn">💌 أرسلي للجدارية</button>
+    </div>
+  </section>
+
+  <!-- MURAL -->
+  <section class="view" id="v-mural">
+    <div class="card">
+      <div class="h2">🧱 جدارية الوطن</div>
+      <p class="lead">رسائل أسرة الثانوية الخامسة والأربعين لوطنها: طالبات ومعلمات وإداريات وأولياء أمور، بعد الاعتماد.</p>
+      <div class="mural" id="mural"></div>
+      <div class="prayer">اللهم احفظ بلادنا وولاة أمرنا، وانصر جنودنا المرابطين على الحدود 🇸🇦</div>
+    </div>
+  </section>
+
+  <!-- BOARD -->
+  <section class="view" id="v-board">
+    <div class="card">
+      <div id="lockBox" class="lock">
+        <div style="font-size:48px">🔐</div>
+        <div class="h2" style="justify-content:center">لوحة المدرسة</div>
+        <p class="lead">خاصة بالمعلمة المسؤولة والإدارة. أدخلي الرمز.</p>
+        <input class="inp pin" id="pinIn" maxlength="4" inputmode="numeric" placeholder="••••">
+        <button class="btn green" style="margin-top:12px;width:100%" onclick="unlock()">دخول</button>
+      </div>
+      <div id="boardBox" style="display:none">
+        <div class="h2">📋 لوحة المدرسة <span class="modebadge" id="modeB"></span></div>
+        <p class="lead">اعتماد مشاركات الجدارية، ومتابعة الموقِّعات، وتقرير المبادرة.</p>
+        <div class="bstats">
+          <div class="stat"><div class="n" id="bP">0</div><div class="l">وثيقة موقّعة</div></div>
+          <div class="stat"><div class="n" id="bPend">0</div><div class="l">بانتظار الاعتماد</div></div>
+          <div class="stat"><div class="n" id="bApp">0</div><div class="l">معتمدة في الجدارية</div></div>
+          <div class="stat"><div class="n" id="bR">0</div><div class="l">شائعة مصدودة</div></div>
+        </div>
+        <div class="bsub">
+          <button class="btn gold" data-b="pending" onclick="bTab('pending')">⏳ بانتظار الاعتماد</button>
+          <button class="btn ghost" data-b="signers" onclick="bTab('signers')">📜 الموقِّعات</button>
+          <button class="btn ghost" data-b="report" onclick="bTab('report')">📊 تقرير المبادرة</button>
+          <button class="btn ghost" onclick="lockBoard()">🚪 خروج</button>
+        </div>
+        <div id="bBody"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  مبادرة «السعودية خط أحمر» · الثانوية الخامسة والأربعون · قائدة المدرسة: أ. فاطمة البدراني<br>
+  فكرة وتصميم: <b>المعلمة مديحه علي العبيدي</b>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= الإعدادات =================
+   لربط المنصة بقاعدة بيانات مشتركة (Supabase) ضعي الرابط والمفتاح هنا.
+   إذا تُركت فارغة تعمل المنصة في «وضع التجربة» وتُحفظ البيانات في هذا الجهاز فقط. */
+const CONFIG = {
+  SUPABASE_URL: "https://fjvtdpiblvunztvlocvy.supabase.co",
+  SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqdnRkcGlibHZ1bnp0dmxvY3Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MTAxNjQsImV4cCI6MjEwODA4NjE2NH0.xbi6NgVfe54NH7-PClPWLCxP-6yvmlSgFUoVBNS_Nes",
+  BOARD_PIN: "4545",
+  CLASSES: 10
+};
+const ONLINE = !!(CONFIG.SUPABASE_URL && CONFIG.SUPABASE_KEY);
+
+/* ================= طبقة التخزين ================= */
+const LS = {
+  get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const mem = {pledges:LS.get('khat_pledges',[]), posts:LS.get('khat_posts',[]), stats:LS.get('khat_stats',{rumors:0})};
+async function sb(path,opt={}){
+  const r = await fetch(CONFIG.SUPABASE_URL+'/rest/v1/'+path,{...opt,headers:{apikey:CONFIG.SUPABASE_KEY,Authorization:'Bearer '+CONFIG.SUPABASE_KEY,'Content-Type':'application/json',Prefer:'return=representation',...(opt.headers||{})}});
+  if(!r.ok) throw new Error(await r.text());
+  const t = await r.text(); return t?JSON.parse(t):null;
+}
+let PIN='';
+const rpc=(fn,args)=>sb('rpc/'+fn,{method:'POST',body:JSON.stringify(args||{})});
+const store = {
+  async counts(){
+    if(ONLINE) return rpc('khat_counts');
+    return {pledges:mem.pledges.length, approved:mem.posts.filter(x=>x.status==='approved').length, rumors:mem.stats.rumors};
+  },
+  async addPledge(p){ if(ONLINE) return sb('khat_pledges',{method:'POST',body:JSON.stringify(p),headers:{Prefer:'return=minimal'}}); p.created_at=new Date().toISOString(); mem.pledges.unshift(p); LS.set('khat_pledges',mem.pledges); },
+  async approved(){ if(ONLINE) return sb('khat_posts?select=id,name,grade,message,photo,created_at&status=eq.approved&order=created_at.desc'); return mem.posts.filter(x=>x.status==='approved'); },
+  async addPost(p){ if(ONLINE) return sb('khat_posts',{method:'POST',body:JSON.stringify(p),headers:{Prefer:'return=minimal'}}); p.id=Date.now()+''; p.created_at=new Date().toISOString(); mem.posts.unshift(p); LS.set('khat_posts',mem.posts); },
+  async addRumors(n){ if(ONLINE) return rpc('khat_add_rumors',{n}); mem.stats.rumors+=n; LS.set('khat_stats',mem.stats); },
+  async login(pin){ if(ONLINE){ await rpc('khat_admin',{p:pin}); return true;} return pin===CONFIG.BOARD_PIN; },
+  async admin(){ if(ONLINE) return rpc('khat_admin',{p:PIN}); return {pledges:mem.pledges, posts:mem.posts, rumors:mem.stats.rumors}; },
+  async moderate(id,act){
+    if(ONLINE) return rpc('khat_moderate',{p:PIN,pid:+id,act});
+    if(act==='del') mem.posts=mem.posts.filter(p=>p.id!=id); else { const x=mem.posts.find(p=>p.id==id); if(x) x.status=act; }
+    LS.set('khat_posts',mem.posts);
+  }
+};
+
+/* ================= تقدّم الطالبة (على جهازها) ================= */
+const me = LS.get('khat_me',{p:false,r:false,s:false,name:''});
+function saveMe(){LS.set('khat_me',me); renderProgress();}
+function renderProgress(){
+  const n=[me.p,me.r,me.s].filter(Boolean).length;
+  progT.textContent=n+' من 3'; progB.style.width=(n/3*100)+'%';
+  medal.style.display=n===3?'block':'none';
+  [['p',1],['r',2],['s',3]].forEach(([k,i])=>{
+    const ck=document.getElementById('ck'+i), st=document.getElementById('st'+i);
+    ck.classList.toggle('done',me[k]); ck.textContent=me[k]?'✓':i;
+    st.classList.toggle('done',me[k]); st.textContent=me[k]?'✓ أنجزتِها':'لم تبدأ';
+  });
+}
+async function refreshStats(){
+  try{
+    const c=await store.counts();
+    countUp(sP,c.pledges); countUp(sM,c.approved); countUp(sR,c.rumors);
+  }catch(e){console.log(e)}
+}
+function countUp(el,to){const from=+el.textContent||0;const t0=performance.now();const f=t=>{const k=Math.min(1,(t-t0)/700);el.textContent=Math.round(from+(to-from)*k);if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+
+/* ================= التنقّل ================= */
+function go(v){
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.v===v));
+  if(v==='mural') renderMural();
+  if(v==='board' && boardOpen) renderBoard();
+  document.getElementById('tabs').scrollIntoView({behavior:'smooth'});
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>go(t.dataset.v));
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2800)}
+function confetti(){const c=['#c8102e','#d4af5a','#1f9d5f','#fff'];for(let i=0;i<70;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'vw';d.style.background=c[i%4];d.style.animationDuration=(1.8+Math.random()*2)+'s';d.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),4500)}}
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ================= 1) وثيقة العهد ================= */
+const today=new Date().toLocaleDateString('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'});
+docDate.textContent=today;
+for(let i=1;i<=CONFIG.CLASSES;i++){pClass.add(new Option(i,i))}
+/* الفئات ونص العهد لكل فئة */
+const ROLES={
+  student:{label:'طالبة',f:true},
+  teacher:{label:'معلمة',f:true},
+  staff:{label:'إدارية',f:true},
+  father:{label:'ولي أمر',f:false},
+  mother:{label:'ولية أمر',f:true}
+};
+function pledgeData(){
+  const r=me.role||'student', n=pName.value.trim()||'.................', kid=pKid.value.trim()||'..........', job=pJob.value.trim();
+  const S='الثانوية الخامسة والأربعين';
+  const T={
+    student:{who:'أنا الطالبة',after:`من ${pGrade.value} / فصل ${pClass.value} ب${S}`,
+      body:['أعاهد الله ثم وطني المملكة العربية السعودية أن أكون وفيّةً لديني ثم لمليكي ووطني،','وأن أحفظ أمنه وأصون سمعته، وألّا أنشر خبرًا قبل التحقق منه من مصادره الرسمية،','وأن أصدّ كل شائعة تمسّ وطني، وأن أكون سفيرةً لقيمه بأخلاقي وعلمي وعملي.'],
+      meta:`الصف: ${pGrade.value} / ${pClass.value}`},
+    teacher:{who:'أنا المعلمة',after:`${job?'معلمة '+job+' ':''}ب${S}`,
+      body:['أعاهد الله ثم وطني المملكة العربية السعودية أن أكون وفيّةً لديني ثم لمليكي ووطني،','وأن أغرس حب الوطن والانتماء إليه في نفوس طالباتي، وأكون لهن قدوةً في الوعي والتحقق،','وأن أصدّ كل شائعة تمسّ وطني، وأؤدي رسالتي التعليمية بأمانة وإخلاص.'],
+      meta:'الصفة: معلمة'+(job?' – '+job:'')},
+    staff:{who:'أنا',after:`من منسوبات الكادر الإداري ب${S}${job?' ('+job+')':''}`,
+      body:['أعاهد الله ثم وطني المملكة العربية السعودية أن أكون وفيّةً لديني ثم لمليكي ووطني،','وأن أؤدي أمانتي في خدمة مدرستي وطالباتها بإخلاص، وأحفظ أمن وطني وأصون سمعته،','وألّا أنشر خبرًا قبل التحقق منه، وأن أصدّ كل شائعة تمسّ وطني وقيادته وأهله.'],
+      meta:'الصفة: إدارية'+(job?' – '+job:'')},
+    father:{who:'أنا',after:`ولي أمر الطالبة ${kid} ب${S}`,
+      body:['أعاهد الله ثم وطني المملكة العربية السعودية أن أكون وفيًّا لديني ثم لمليكي ووطني،','وأن أربّي أبنائي على حب الوطن والانتماء إليه والوعي بما يُحاك ضده،','وألّا أنشر خبرًا قبل التحقق منه، وأن أصدّ كل شائعة تمسّ وطني وقيادته وأهله.'],
+      meta:'الصفة: ولي أمر'},
+    mother:{who:'أنا',after:`ولية أمر الطالبة ${kid} ب${S}`,
+      body:['أعاهد الله ثم وطني المملكة العربية السعودية أن أكون وفيّةً لديني ثم لمليكي ووطني،','وأن أربّي أبنائي على حب الوطن والانتماء إليه والوعي بما يُحاك ضده،','وألّا أنشر خبرًا قبل التحقق منه، وأن أصدّ كل شائعة تمسّ وطني وقيادته وأهله.'],
+      meta:'الصفة: ولية أمر'}
+  }[r];
+  return {...T,name:n};
+}
+function fillDoc(){
+  const d=pledgeData();
+  docTxt.innerHTML=`${d.who} <span class="nm">${esc(d.name)}</span> ${esc(d.after)}، ${d.body.map(esc).join(' ')} ففي قلبي: <b style="color:var(--red)">السعودية خطٌّ أحمر</b>.`;
+  docMeta.textContent=d.meta;
+}
+function setRole(r,silent){
+  me.role=r; LS.set('khat_me',me);
+  document.querySelectorAll('#who button').forEach(b=>b.classList.toggle('on',b.dataset.r===r));
+  stuF.style.display=r==='student'?'':'none';
+  parF.style.display=(r==='father'||r==='mother')?'':'none';
+  tchF.style.display=(r==='teacher'||r==='staff')?'':'none';
+  document.querySelector('#tchF label').textContent=r==='teacher'?'التخصص':'العمل / المسمى';
+  const sg={student:pGrade.value,teacher:'معلمة',staff:'إدارية',father:'ولي أمر',mother:'ولية أمر'}[r];
+  [...sGrade.options].forEach(o=>{if(o.value===sg)sGrade.value=sg});
+  fillDoc();
+  if(!silent) toast('أهلًا بك: '+ROLES[r].label+' 🌿');
+}
+document.querySelectorAll('#who button').forEach(b=>b.onclick=()=>setRole(b.dataset.r));
+async function signPledge(){
+  if(!me.role){toast('اختر/ي الفئة أولًا: طالبة، معلمة، إدارية، ولي أمر');const w=document.getElementById('who');w.scrollIntoView({behavior:'smooth',block:'center'});w.classList.add('shake');setTimeout(()=>w.classList.remove('shake'),600);return}
+  const name=pName.value.trim();
+  if(name.split(/\s+/).length<2){toast('اكتب/ي الاسم الثلاثي أولًا ✍️');pName.focus();return}
+  if((me.role==='father'||me.role==='mother')&&!pKid.value.trim()){toast('اكتب/ي اسم الطالبة');pKid.focus();return}
+  pBtn.disabled=true; fillDoc();
+  const r=me.role, grade=r==='student'?pGrade.value:ROLES[r].label, klass=r==='student'?pClass.value:(r==='father'||r==='mother'?'الطالبة: '+pKid.value.trim():pJob.value.trim());
+  try{
+    if(!me.p) await store.addPledge({name,role:ROLES[r].label,grade,klass});
+    document.getElementById('seal').classList.add('on');
+    me.p=true; me.name=name; saveMe(); confetti(); refreshStats();
+    const d=pledgeData();
+    setTimeout(async()=>{certImg.src=await makeCert(d);certOut.style.display='block';certOut.scrollIntoView({behavior:'smooth'})},700);
+    toast('خُتمت الوثيقة بختم الولاء 🇸🇦');
+  }catch(e){toast('تعذّر الحفظ، تأكد/ي من الاتصال وحاول/ي مرة ثانية');pBtn.disabled=false}
+}
+async function makeCert(d){
+  await Promise.all(['700 40px Amiri','400 30px Amiri','700 40px "Reem Kufi"','800 30px Tajawal'].map(f=>document.fonts.load(f)));
+  const W=1400,H=1000,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  x.fillStyle='#fbf7ec';x.fillRect(0,0,W,H);
+  x.strokeStyle='#0f5132';x.lineWidth=18;x.strokeRect(24,24,W-48,H-48);
+  x.strokeStyle='#d4af5a';x.lineWidth=4;x.strokeRect(50,50,W-100,H-100);
+  // corner stars
+  x.fillStyle='#d4af5a';[[90,90],[W-90,90],[90,H-90],[W-90,H-90]].forEach(([a,b])=>{x.save();x.translate(a,b);x.beginPath();for(let i=0;i<8;i++){const r=i%2?10:26,t=i*Math.PI/4;x.lineTo(r*Math.cos(t),r*Math.sin(t))}x.fill();x.restore()});
+  x.direction='rtl';x.textAlign='center';
+  x.fillStyle='#0f5132';x.font='400 34px Amiri';x.fillText('﴿ رَبِّ اجْعَلْ هَٰذَا بَلَدًا آمِنًا ﴾',W/2,140);
+  x.font='700 76px "Reem Kufi"';x.fillStyle='#0a3d23';x.fillText('وثيقة عهد وولاء',W/2,240);
+  x.fillStyle='#c8102e';x.fillRect(W/2-170,262,340,8);
+  x.font='400 36px Amiri';x.fillStyle='#1b2a21';
+  const lines=[d.who,'@',d.after,...d.body];
+  let y=340;
+  lines.forEach(l=>{
+    if(l==='@'){x.font='700 62px Amiri';x.fillStyle='#c8102e';x.fillText(d.name,W/2,y+16);y+=96;x.font='400 36px Amiri';x.fillStyle='#1b2a21';return}
+    let fs=36; x.font=`400 ${fs}px Amiri`; while(x.measureText(l).width>W-200&&fs>24){fs-=2;x.font=`400 ${fs}px Amiri`}
+    x.fillText(l,W/2,y);y+=62;
+  });
+  x.font='400 36px Amiri';
+  x.font='700 54px "Reem Kufi"';x.fillStyle='#c8102e';x.fillText('السعودية خطٌّ أحمر',W/2,y+30);
+  // seal
+  const sx=230,sy=H-200;x.save();x.translate(sx,sy);x.rotate(-.2);
+  const g=x.createRadialGradient(-20,-20,10,0,0,95);g.addColorStop(0,'#ff5a6c');g.addColorStop(.6,'#c8102e');g.addColorStop(1,'#7c0919');
+  x.fillStyle=g;x.beginPath();x.arc(0,0,95,0,7);x.fill();x.strokeStyle='rgba(255,255,255,.6)';x.lineWidth=4;x.beginPath();x.arc(0,0,80,0,7);x.stroke();
+  x.fillStyle='#fff';x.font='800 28px Tajawal';x.fillText('مختومة',0,-8);x.fillText('بالولاء',0,30);x.restore();
+  x.textAlign='right';x.font='800 26px Tajawal';x.fillStyle='#0f5132';
+  x.fillText('التاريخ: '+today,W-110,H-150);x.fillText(d.meta+' · الثانوية الخامسة والأربعون',W-110,H-110);
+  return c.toDataURL('image/png');
+}
+
+/* ================= 2) أصدّ الشائعات ================= */
+const CARDS=[
+ {tag:'رسالة واتساب',q:'«عاجل! انشروا قبل الحذف: قرار رسمي بتعطيل الدراسة أسبوعًا كاملًا»',src:'بدون مصدر · مُعاد توجيهه كثيرًا',a:'stop',why:'«انشروا قبل الحذف» علامة شائعة. القرارات الرسمية تُعلن من حسابات وزارة التعليم وإدارة التعليم، لا من رسائل مجهولة.'},
+ {tag:'مقطع فيديو',q:'مقطع قديم لحادثة في دولة أخرى منشور على أنه «يحدث الآن في الرياض»',src:'حساب مجهول',a:'stop',why:'إعادة نشر مقاطع قديمة بعناوين جديدة من أشهر أساليب التضليل. اسألي: من صوّره؟ ومتى؟ وأين؟'},
+ {tag:'خبر رسمي',q:'تنبيه من المركز الوطني للأرصاد عن أمطار غزيرة في منطقتك منشور على حسابه الرسمي الموثّق',src:'@NCMKSA · حساب رسمي',a:'share',why:'هذا مصدر رسمي موثّق، ومشاركة التنبيه تساعد أهلك. التحقق من المصدر هو الفيصل.'},
+ {tag:'منشور مثير',q:'«مصدر مطّلع يكشف أسرارًا خطيرة عن الدولة لا يريدونك أن تعرفها!»',src:'حساب خارجي حديث الإنشاء',a:'stop',why:'«مصدر مطّلع» بلا اسم، ولغة الإثارة، وحساب حديث: هذه شائعة هدفها زعزعة الثقة في الوطن. لا تتفاعلي ولا تعيدي النشر.'},
+ {tag:'رابط جائزة',q:'«بمناسبة اليوم الوطني: الدولة توزّع 5000 ريال لكل طالبة، سجّلي بياناتك من الرابط»',src:'رابط غريب',a:'stop',why:'احتيال لسرقة البيانات. الجهات الرسمية لا تطلب بياناتك عبر روابط مجهولة. بلّغي عنه ولا تفتحيه.'},
+ {tag:'صورة مركّبة',q:'صورة لمسؤول بتصريح مسيء لم يقله، والصورة عليها شعار قناة معروفة',src:'منتشرة في المجموعات',a:'stop',why:'الصور المركّبة سهلة الصنع. ابحثي عن التصريح في الموقع الرسمي للقناة أو في وكالة الأنباء السعودية (واس) قبل أي تصديق.'},
+ {tag:'إعلان المدرسة',q:'إعلان من إدارة الثانوية الخامسة والأربعين في مجموعة أولياء الأمور الرسمية عن موعد الاختبارات',src:'المجموعة الرسمية للمدرسة',a:'share',why:'مصدر رسمي معروف للمدرسة، ومشاركته مع زميلاتك مفيدة.'},
+ {tag:'هاشتاق',q:'هاشتاق يسيء لبلدنا وأهله، وكثيرون يردّون عليه بغضب لإبطاله',src:'ترند',a:'stop',why:'الرد على الوسم المسيء يرفعه في الترند ويخدم من أطلقه. الأفضل: تجاهليه، وبلّغي عن الحسابات المسيئة.'}
+];
+const RULES=[
+ {e:'🔎',t:'تحقّقي من المصدر',p:'هل الخبر من حساب رسمي موثّق أو من وكالة الأنباء السعودية (واس)؟ إن لم يكن فتوقّفي.'},
+ {e:'✋',t:'لا تعيدي التوجيه',p:'«انشروا تؤجروا» و«قبل الحذف» علامات تحذير. ضغطة «إعادة توجيه» قد تنشر كذبة لآلاف.'},
+ {e:'📅',t:'انظري للتاريخ والمكان',p:'كثير من المقاطع قديمة أو من دول أخرى، تُنشر بعناوين جديدة.'},
+ {e:'🧠',t:'احذري لغة الإثارة',p:'الخبر الصادق هادئ وواضح المصدر، والشائعة تعتمد على الخوف والغضب.'},
+ {e:'🛡️',t:'لا تشاركي بياناتك',p:'لا روابط مجهولة ولا أرقام هويات أو رموز تحقق، مهما كانت الجائزة مغرية.'},
+ {e:'📣',t:'بلّغي',p:'بلّغي عن الحسابات المسيئة في المنصة نفسها، وعن ما يمسّ أمن الوطن عبر تطبيق «كلنا أمن».'}
+];
+let ri=0, rok=0, rstop=0;
+function renderCard(){
+  deck.innerHTML='';
+  if(ri>=CARDS.length){finishDeck();return}
+  rIdx.textContent='البطاقة '+(ri+1)+' من '+CARDS.length; rOk.textContent=rok;
+  const c=CARDS[ri], el=document.createElement('div');el.className='rcard';
+  el.innerHTML=`<span class="tag">${c.tag}</span><div class="q">${c.q}</div><div class="src">📍 ${c.src}</div><div class="crack">🛑 صدّيتها!</div>`;
+  deck.appendChild(el); swipe(el); fb.className='feedback';
+}
+function swipe(el){
+  let sx=null,dx=0;
+  el.addEventListener('pointerdown',e=>{sx=e.clientX;el.style.transition='none';el.setPointerCapture(e.pointerId)});
+  el.addEventListener('pointermove',e=>{if(sx===null)return;dx=e.clientX-sx;el.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`});
+  el.addEventListener('pointerup',()=>{el.style.transition='';if(Math.abs(dx)>90){answer(dx>0?'stop':'share')}else el.style.transform='';sx=null;dx=0});
+}
+let busy=false;
+function answer(a){
+  if(busy||ri>=CARDS.length)return; busy=true;
+  const c=CARDS[ri], el=deck.querySelector('.rcard'), right=a===c.a;
+  if(right)rok++; if(a==='stop'&&c.a==='stop')rstop++;
+  if(a==='stop')el.classList.add('broken');
+  fb.className='feedback '+(right?'ok':'no');
+  fb.innerHTML=(right?'<b>✅ تصرّف واعٍ!</b> ':'<b>⚠️ انتبهي!</b> ')+c.why;
+  rOk.textContent=rok;
+  setTimeout(()=>{el.classList.add(a==='stop'?'out-r':'out-l');setTimeout(()=>{ri++;busy=false;renderCard()},420)},a==='stop'?1500:1200);
+}
+async function finishDeck(){
+  deckWrap.style.display='none'; rumorDone.style.display='block';
+  rumorRes.textContent=`أجبتِ إجابة واعية في ${rok} من ${CARDS.length} مواقف، وصددتِ ${rstop} شائعات.`;
+  rules.innerHTML=RULES.map((r,i)=>`<div class="rule" style="animation-delay:${i*.12}s"><span class="e">${r.e}</span><b>${r.t}</b><p>${r.p}</p></div>`).join('');
+  rulesBox.style.display='block';
+  if(!me.r){me.r=true;saveMe();try{await store.addRumors(rstop)}catch(e){} refreshStats(); confetti();}
+}
+function resetDeck(){ri=0;rok=0;rstop=0;deckWrap.style.display='block';rumorDone.style.display='none';renderCard()}
+
+/* ================= 3) شاركي حبّك ================= */
+const CHIPS=['يا وطني، أمنك أمانة في عنقي 🇸🇦','دام عزّك يا وطن 💚','فداك يا وطني روحي وعلمي','بلادي خط أحمر، وأنا جندية بعلمي','شكرًا لجنودنا المرابطين على الحدود 🤍'];
+chips.innerHTML=CHIPS.map(c=>`<button class="chip" type="button">${c}</button>`).join('');
+chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sMsg.value=b.textContent;cnt.textContent=sMsg.value.length});
+sMsg.oninput=()=>cnt.textContent=sMsg.value.length;
+let photo=null;
+sFile.onchange=async()=>{
+  const f=sFile.files[0]; if(!f)return;
+  photo=await shrink(f,900,.78);
+  prev.innerHTML=`<img src="${photo}">`;
+};
+function shrink(file,max,q){return new Promise(res=>{const img=new Image();img.onload=()=>{const k=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=img.width*k;c.height=img.height*k;c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',q))};img.src=URL.createObjectURL(file)})}
+if(me.name) sName.value=me.name;
+async function sendPost(){
+  const name=sName.value.trim(), msg=sMsg.value.trim();
+  if(!name){toast('اكتبي الاسم');return} if(msg.length<5){toast('اكتبي رسالتك لوطنك 💚');return}
+  sBtn.disabled=true;
+  try{
+    await store.addPost({name,grade:sGrade.value,message:msg,photo,status:'pending'});
+    me.s=true;saveMe();confetti();
+    toast('وصلت رسالتك 💌 ستظهر في الجدارية بعد موافقة المعلمة');
+    sMsg.value='';cnt.textContent=0;photo=null;prev.innerHTML='';sFile.value='';
+  }catch(e){toast('تعذّر الإرسال، حاولي مرة ثانية')}
+  sBtn.disabled=false;
+}
+
+/* ================= الجدارية ================= */
+const PINNED=[{name:'إدارة الثانوية الخامسة والأربعين',message:'وطنٌ نحمله في قلوبنا قبل أن نحمل اسمه في هويّاتنا. السعودية خط أحمر.'}];
+async function renderMural(){
+  mural.innerHTML='<div class="empty">جارٍ التحميل…</div>';
+  let posts=[];try{posts=await store.approved()}catch(e){}
+  const html=PINNED.map(p=>`<div class="post pinned"><span class="flag">📌</span><div class="b"><div class="m">${esc(p.message)}</div><div class="w">— ${esc(p.name)}</div></div></div>`)
+   .concat(posts.map(p=>`<div class="post">${p.photo?`<img src="${p.photo}" alt="">`:''}<span class="flag">🇸🇦</span><div class="b"><div class="m">${esc(p.message)}</div><div class="w">— ${esc(p.name)} · ${esc(p.grade)}</div></div></div>`));
+  mural.innerHTML=html.join('')+(posts.length?'':'<div class="empty">كوني أول من يزيّن الجدارية 💚 <br><button class="btn gold" style="margin-top:10px" onclick="go(\'share\')">شاركي حبّك</button></div>');
+}
+
+/* ================= لوحة المدرسة ================= */
+let boardOpen=false, bView='pending';
+async function unlock(){ let ok=false; try{ok=await store.login(pinIn.value)}catch(e){ok=false} if(ok){PIN=pinIn.value;boardOpen=true;lockBox.style.display='none';boardBox.style.display='block';renderBoard()} else {toast('الرمز غير صحيح');pinIn.value=''} }
+pinIn.addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+function lockBoard(){boardOpen=false;PIN='';boardBox.style.display='none';lockBox.style.display='block';pinIn.value='';go('home')}
+function bTab(v){bView=v;document.querySelectorAll('[data-b]').forEach(b=>b.className='btn '+(b.dataset.b===v?'gold':'ghost'));renderBoard()}
+async function renderBoard(){
+  modeB.textContent=ONLINE?'متصلة بقاعدة البيانات':'وضع التجربة · محفوظ في هذا الجهاز';
+  let pl=[],all=[],r=0;
+  try{const a=await store.admin(); pl=a.pledges||[]; all=a.posts||[]; r=a.rumors||0;}catch(e){bBody.innerHTML='<div class="empty">تعذّر الاتصال</div>';return}
+  const pend=all.filter(p=>p.status==='pending'), app=all.filter(p=>p.status==='approved');
+  bP.textContent=pl.length;bPend.textContent=pend.length;bApp.textContent=app.length;bR.textContent=r;
+  const fd=d=>d?new Date(d).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'}):'';
+  if(bView==='pending'){
+    bBody.innerHTML=pend.length?pend.map(p=>`<div class="pend">${p.photo?`<img src="${p.photo}">`:''}<div class="t"><b>${esc(p.name)}</b> <span class="note">· ${esc(p.grade)} · ${fd(p.created_at)}</span><div>${esc(p.message)}</div></div>
+      <div class="acts"><button class="btn green" onclick="mod('${p.id}','approved')">✅ اعتماد</button><button class="btn red" onclick="mod('${p.id}','del')">🗑️ حذف</button></div></div>`).join('')
+      :'<div class="empty">لا توجد مشاركات بانتظار الاعتماد ✨</div>';
+    if(app.length) bBody.innerHTML+=`<h4 style="margin:18px 0 8px;color:var(--gold2)">المعتمدة في الجدارية (${app.length})</h4>`+app.map(p=>`<div class="pend"><div class="t"><b>${esc(p.name)}</b> <span class="note">· ${esc(p.grade)}</span><div>${esc(p.message)}</div></div><div class="acts"><button class="btn ghost" onclick="mod('${p.id}','pending')">↩️ إخفاء</button></div></div>`).join('');
+  }else if(bView==='signers'){
+    bBody.innerHTML=`<button class="btn ghost" style="margin-bottom:10px" onclick="copyList()">📋 نسخ القائمة</button>`+
+      (pl.length?`<div style="overflow:auto"><table><tr><th>#</th><th>الاسم</th><th>الفئة</th><th>الصف</th><th>الفصل / تفاصيل</th><th>وقت التوقيع</th></tr>${pl.map((p,i)=>`<tr><td>${i+1}</td><td>${esc(p.name)}</td><td>${esc(p.role||'طالبة')}</td><td>${(p.role||'طالبة')==='طالبة'?esc(p.grade):'—'}</td><td>${esc(p.klass)}</td><td>${fd(p.created_at)}</td></tr>`).join('')}</table></div>`:'<div class="empty">لا توجد توقيعات بعد</div>');
+    window._pl=pl;
+  }else{
+    window._plR=pl;
+    const RL=['طالبة','معلمة','إدارية','ولي أمر','ولية أمر'], byR=g=>pl.filter(p=>(p.role||'طالبة')===g).length, mxR=Math.max(1,...RL.map(byR)), GL=['الأول الثانوي','الثاني الثانوي','الثالث الثانوي'], by=g=>pl.filter(p=>(p.role||'طالبة')==='طالبة'&&p.grade===g).length, mx=Math.max(1,...GL.map(by));
+    bBody.innerHTML=`<div class="card" style="background:rgba(0,0,0,.2)">
+      <h3 style="color:var(--gold2)">تقرير مبادرة «السعودية خط أحمر»</h3>
+      <p class="note" style="color:#b9d2c3">الثانوية الخامسة والأربعون · ${today}</p>
+      <ul style="margin:12px 22px 14px;line-height:2.1">
+        <li>عدد وثائق العهد الموقّعة: <b>${pl.length}</b></li>
+        <li>الشائعات المصدودة في نشاط «أصدّ الشائعات»: <b>${r}</b></li>
+        <li>رسائل الفخر المرسلة: <b>${all.length}</b>، المعتمدة منها في الجدارية: <b>${app.length}</b></li>
+      </ul>
+      <h4 style="color:var(--gold2);margin-top:6px">التوقيعات حسب الفئة</h4><div class="gbars">${RL.map(g=>`<div class="gb"><span>${g}</span><div class="bar"><i style="width:${byR(g)/mxR*100}%"></i></div><b>${byR(g)}</b></div>`).join('')}</div><h4 style="color:var(--gold2);margin-top:12px">الطالبات حسب الصف</h4><div class="gbars">${GL.map(g=>`<div class="gb"><span>${g}</span><div class="bar"><i style="width:${by(g)/mx*100}%"></i></div><b>${by(g)}</b></div>`).join('')}</div>
+      <button class="btn ghost" style="margin-top:14px" onclick="copyReport(${pl.length},${r},${all.length},${app.length})">📋 نسخ نص التقرير</button>
+    </div>`;
+  }
+}
+async function mod(id,s){ try{ await store.moderate(id,s); toast(s==='approved'?'اعتُمدت وظهرت في الجدارية ✅':s==='del'?'حُذفت':'أُخفيت من الجدارية'); renderBoard(); refreshStats(); }catch(e){toast('تعذّر التنفيذ')} }
+async function copy(t){try{await navigator.clipboard.writeText(t);toast('نُسخ ✅')}catch(e){toast('لم يتم النسخ')}}
+function copyList(){copy((window._pl||[]).map((p,i)=>`${i+1}\t${p.name}\t${p.role||'طالبة'}\t${p.grade}\t${p.klass}`).join('\n'))}
+function copyReport(a,b,c,d){const pl=window._plR||[];copy(`تقرير مبادرة «السعودية خط أحمر» – الثانوية الخامسة والأربعون\nالتاريخ: ${today}\n- وثائق العهد الموقّعة: ${a} (${['طالبة','معلمة','إدارية','ولي أمر','ولية أمر'].map(g=>g+': '+pl.filter(p=>(p.role||'طالبة')===g).length).join('، ')})\n- الشائعات المصدودة: ${b}\n- رسائل الفخر المرسلة: ${c} (المعتمدة: ${d})`)}
+
+/* ================= تشغيل ================= */
+renderProgress(); renderCard(); refreshStats();
+if(me.p){ pName.value=me.name; document.getElementById('seal').classList.add('on'); }
+if(me.role) setRole(me.role,true); else fillDoc();
+</script>
+</body>
+</html>
