@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>السعودية خط أحمر | الثانوية الخامسة والأربعون</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Amiri:wght@400;700&family=Reem+Kufi:wght@500;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --g9:#03140c; --g8:#062a18; --g7:#0a3d23; --g6:#0f5132; --g5:#167a4a; --g4:#1f9d5f;
@@ -211,6 +211,38 @@ th{color:var(--gold2)}
 .mapform{margin-top:18px;background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:20px;padding:18px}
 .mapempty{position:absolute;inset:0;display:grid;place-items:center;z-index:3;pointer-events:none}
 .mapempty span{background:rgba(255,255,255,.92);color:var(--g7);font-weight:800;padding:8px 16px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.kinds{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kindbtn{background:rgba(255,255,255,.05);border:2px solid var(--line);color:#fff;border-radius:18px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.2s}
+.kindbtn .kic{font-size:30px}.kindbtn b{font-size:15px}.kindbtn small{font-size:12px;color:#b9d2c3}
+.kindbtn.on{border-color:var(--gold);background:linear-gradient(135deg,var(--g5),var(--g6));transform:translateY(-2px)}
+.kindbtn[data-k="soldiers"].on{background:linear-gradient(135deg,#a51c30,#6e0f1f)}
+.mfilters{display:flex;gap:8px;flex-wrap:wrap;margin:-6px 0 16px}
+.mfilter{background:rgba(255,255,255,.06);border:1px solid var(--line);color:#e5f1ea;border-radius:999px;padding:7px 14px;font-weight:700;font-size:14px}
+.mfilter.on{background:var(--gold);color:var(--g9);border-color:var(--gold)}
+#mural{columns:3 220px;column-gap:18px;background:#f4f1ea;border-radius:20px;padding:22px 16px 6px;box-shadow:inset 0 0 40px rgba(0,0,0,.08)}
+#mural .empty{color:#6c7d72}
+.mcard{break-inside:avoid;position:relative;margin:0 0 22px;border-radius:6px;transform:rotate(var(--rot));box-shadow:0 8px 18px rgba(0,0,0,.18);transition:transform .25s}
+.mcard:hover{transform:rotate(0) scale(1.03);z-index:2}
+.pushpin{position:absolute;top:-9px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;z-index:3;background:radial-gradient(circle at 35% 30%,#fff8,transparent 40%),var(--pin);box-shadow:0 3px 5px rgba(0,0,0,.35)}
+.mphoto{width:100%;display:block;border-radius:6px;margin-bottom:8px}
+.mcard.soldier{background:#fbfaf5;color:#1d3b8f;padding:10px 10px 0;overflow:hidden}
+.hhead{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.hflag{width:44px;flex:0 0 auto}
+.htitle{flex:1;text-align:center;background:#0f5132;color:#fff;border-radius:4px;padding:3px 6px;line-height:1.35;clip-path:polygon(4% 0,100% 0,96% 50%,100% 100%,4% 100%,0 50%)}
+.htitle b{display:block;font-size:13px}.htitle span{font-size:12px;color:#f3dc9a}
+.heart{position:relative;aspect-ratio:200/180;width:100%;margin:4px auto 0}
+.hsvg{position:absolute;inset:0;width:100%;height:100%}
+.htext{position:absolute;left:18%;right:18%;top:20%;bottom:24%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hm{font-family:'Aref Ruqaa',serif;font-size:clamp(14px,4.2vw,19px);line-height:1.5;color:#1d3b8f}
+.hw{font-family:'Aref Ruqaa',serif;font-size:13px;color:#4a5fa8;margin-top:4px}
+.hsky{display:block;width:100%;height:18px;margin-top:-4px}
+.mcard.watan{background:linear-gradient(160deg,#16804c,#0a4a2b);color:#fff;padding:22px 16px 18px;overflow:hidden;border:2px solid rgba(243,220,154,.6)}
+.mcard.watan.pinned{background:linear-gradient(160deg,#0a3d23,#03140c)}
+.wmap{position:absolute;width:85%;left:7%;top:12%;pointer-events:none}
+.whead{position:relative;display:inline-block;background:rgba(255,255,255,.14);border-radius:999px;padding:3px 12px;font-size:12px;font-weight:800;color:#f3dc9a;margin-bottom:10px}
+.wm{position:relative;font-family:'Amiri',serif;font-size:19px;line-height:1.9}
+.ww{position:relative;margin-top:8px;font-size:13px;font-weight:800;color:#f3dc9a}
+.wstripe{position:absolute;left:-20px;right:-20px;bottom:10px;height:7px;background:#c8102e;transform:rotate(-4deg);opacity:.85}
 footer{text-align:center;color:#8fae9c;font-size:13px;padding:26px 10px 36px;border-top:1px solid var(--line);margin-top:30px}
 footer b{color:var(--gold2)}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(200%);opacity:0;background:var(--g6);border:1px solid var(--gold);padding:12px 20px;border-radius:14px;font-weight:700;z-index:50;transition:.35s;max-width:90vw;text-align:center}
@@ -352,15 +384,21 @@ footer b{color:var(--gold2)}
   <section class="view" id="v-share">
     <div class="card">
       <div class="h2">💚 شاركي حبّك</div>
-      <p class="lead">رسالتك تُرسل للمعلمة، وبعد موافقتها تظهر في جدارية الوطن لكل الطالبات.</p>
+      <p class="lead">اختاري: رسالة لوطنك أو رسالة شكر لجنودنا البواسل. تُرسل للمعلمة، وبعد موافقتها تظهر في جدارية الوطن للجميع.</p>
       <div class="grid2">
         <div class="field"><label>الاسم (يظهر في الجدارية)</label><input class="inp" id="sName" placeholder="الاسم كما يظهر في الجدارية"></div>
         <div class="field"><label>الصف / الصفة</label><select class="inp" id="sGrade"><option>الأول الثانوي</option><option>الثاني الثانوي</option><option>الثالث الثانوي</option><option>معلمة</option><option>إدارية</option><option>ولي أمر</option><option>ولية أمر</option></select></div>
       </div>
-      <div class="field"><label>رسالتك لوطنك</label>
+      <div class="field"><label>نوع رسالتك</label>
+        <div class="kinds" id="kinds">
+          <button type="button" class="kindbtn on" data-k="mural"><span class="kic">💚</span><b>رسالة للوطن</b><small>بطاقة خضراء بخريطة المملكة</small></button>
+          <button type="button" class="kindbtn" data-k="soldiers"><span class="kic">🪖</span><b>رسالة لجنودنا البواسل</b><small>بطاقة شكر بقلب أحمر</small></button>
+        </div>
+      </div>
+      <div class="field"><label id="msgLbl">رسالتك لوطنك</label>
         <div class="chips" id="chips"></div>
         <textarea class="inp" id="sMsg" rows="3" maxlength="220" placeholder="اكتبي من قلبك..."></textarea>
-        <span class="note"><span id="cnt">0</span> / 220 حرف</span>
+        <span class="note"><span id="cnt">0</span> / <span id="cntMax">220</span> حرف</span>
       </div>
       <div class="field"><label>صورة (اختياري)</label>
         <div class="drop" id="drop" onclick="document.getElementById('sFile').click()">📸 اضغطي لاختيار صورة: علم، رسمة، عمل فني…<div id="prev"></div></div>
@@ -375,7 +413,8 @@ footer b{color:var(--gold2)}
   <section class="view" id="v-mural">
     <div class="card">
       <div class="h2">🧱 جدارية الوطن</div>
-      <p class="lead">رسائل أسرة الثانوية الخامسة والأربعين لوطنها: طالبات ومعلمات وإداريات وأولياء أمور، بعد الاعتماد.</p>
+      <p class="lead">رسائل أسرة الثانوية الخامسة والأربعين لوطنها ولجنودنا البواسل، بعد الاعتماد.</p>
+      <div class="mfilters"><button class="mfilter on" data-f="all" id="mfAll">الكل</button><button class="mfilter" data-f="watan" id="mfW">💚 للوطن</button><button class="mfilter" data-f="soldiers" id="mfS">🪖 للجنود</button></div>
       <div class="mural" id="mural"></div>
       <div class="prayer">اللهم احفظ بلادنا وولاة أمرنا، وانصر جنودنا المرابطين على الحدود 🇸🇦</div>
     </div>
@@ -698,9 +737,21 @@ async function finishDeck(){
 function resetDeck(){ri=0;rok=0;rstop=0;deckWrap.style.display='block';rumorDone.style.display='none';renderCard()}
 
 /* ================= 3) شاركي حبّك ================= */
-const CHIPS=['يا وطني، أمنك أمانة في عنقي 🇸🇦','دام عزّك يا وطن 💚','فداك يا وطني روحي وعلمي','بلادي خط أحمر، وأنا جندية بعلمي','شكرًا لجنودنا المرابطين على الحدود 🤍'];
-chips.innerHTML=CHIPS.map(c=>`<button class="chip" type="button">${c}</button>`).join('');
-chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sMsg.value=b.textContent;cnt.textContent=sMsg.value.length});
+const CHIPS={
+  mural:['يا وطني، أمنك أمانة في عنقي 🇸🇦','دام عزّك يا وطن 💚','فداك يا وطني روحي وعلمي','بلادي خط أحمر، وأنا جندية بعلمي'],
+  soldiers:['شكرًا لكم يا حماة الوطن 🤍','اللهم احفظهم وانصرهم وردّهم سالمين','بفضل الله ثم بكم ننام آمنين','أنتم فخرنا وعزّنا يا جنودنا البواسل']
+};
+let postKind='mural';
+function setKind(k){
+  postKind=k;
+  document.querySelectorAll('.kindbtn').forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+  msgLbl.textContent=k==='soldiers'?'رسالتك لجنودنا البواسل':'رسالتك لوطنك';
+  sMsg.maxLength=k==='soldiers'?120:220; cntMax.textContent=sMsg.maxLength; if(sMsg.value.length>sMsg.maxLength){sMsg.value=sMsg.value.slice(0,sMsg.maxLength);cnt.textContent=sMsg.value.length}
+  chips.innerHTML=CHIPS[k].map(c=>`<button class="chip" type="button">${c}</button>`).join('');
+  chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{sMsg.value=b.textContent;cnt.textContent=sMsg.value.length});
+}
+document.querySelectorAll('.kindbtn').forEach(b=>b.onclick=()=>setKind(b.dataset.k));
+setKind('mural');
 sMsg.oninput=()=>cnt.textContent=sMsg.value.length;
 let photo=null;
 sFile.onchange=async()=>{
@@ -712,10 +763,10 @@ function shrink(file,max,q){return new Promise(res=>{const img=new Image();img.o
 if(me.name){ sName.value=me.name; mName.value=me.name; }
 async function sendPost(){
   const name=sName.value.trim(), msg=sMsg.value.trim();
-  if(!name){toast('اكتبي الاسم');return} if(msg.length<5){toast('اكتبي رسالتك لوطنك 💚');return}
+  if(!name){toast('اكتبي الاسم');return} if(msg.length<5){toast(postKind==='soldiers'?'اكتبي رسالتك لجنودنا 🤍':'اكتبي رسالتك لوطنك 💚');return}
   sBtn.disabled=true;
   try{
-    await store.addPost({name,grade:sGrade.value,message:msg,photo,status:'pending'});
+    await store.addPost({name,grade:sGrade.value,message:msg,photo,status:'pending',kind:postKind});
     me.s=true;saveMe();confetti();
     toast('وصلت رسالتك 💌 ستظهر في الجدارية بعد موافقة المعلمة');
     sMsg.value='';cnt.textContent=0;photo=null;prev.innerHTML='';sFile.value='';
@@ -725,13 +776,35 @@ async function sendPost(){
 
 /* ================= الجدارية ================= */
 const PINNED=[{name:'إدارة الثانوية الخامسة والأربعين',message:'وطنٌ نحمله في قلوبنا قبل أن نحمل اسمه في هويّاتنا. السعودية خط أحمر.'}];
+const SA_D=document.getElementById('saPath').getAttribute('d');
+let muralFilter='all';
+const PIN_COLORS=['#e53950','#f39c12','#2ecc71','#3498db','#e84393','#1abc9c','#f1c40f'];
+const FLAG_SVG=`<svg class="hflag" viewBox="0 0 64 44"><path d="M4 4 L4 42" stroke="#7a5a2b" stroke-width="3" stroke-linecap="round"/><path d="M6 5 C20 0 32 10 46 5 C52 3 58 4 60 6 L60 30 C52 27 46 30 40 31 C28 34 18 25 6 29 Z" fill="#0f7a43"/><path d="M14 22 L48 20" stroke="#fff" stroke-width="2" stroke-linecap="round"/><path d="M16 13 q4 -3 8 0 t8 0 t8 0" stroke="#fff" stroke-width="1.6" fill="none"/></svg>`;
+const HEART_SVG=`<svg class="hsvg" viewBox="0 0 200 180" preserveAspectRatio="none"><g fill="#3f8a4f" opacity=".85"><ellipse cx="22" cy="80" rx="5" ry="11" transform="rotate(-25 22 80)"/><ellipse cx="18" cy="104" rx="5" ry="11" transform="rotate(-5 18 104)"/><ellipse cx="26" cy="127" rx="5" ry="11" transform="rotate(25 26 127)"/><ellipse cx="178" cy="80" rx="5" ry="11" transform="rotate(25 178 80)"/><ellipse cx="182" cy="104" rx="5" ry="11" transform="rotate(5 182 104)"/><ellipse cx="174" cy="127" rx="5" ry="11" transform="rotate(-25 174 127)"/></g><path d="M100 168 C48 130 14 104 14 62 C14 34 34 14 60 14 C78 14 92 24 100 40 C108 24 122 14 140 14 C166 14 186 34 186 62 C186 104 152 130 100 168 Z" fill="#fff" stroke="#9e1b32" stroke-width="5"/><path d="M100 160 C54 126 22 102 22 63 C22 39 40 22 61 22 C77 22 90 31 100 46 C110 31 123 22 139 22 C160 22 178 39 178 63 C178 102 146 126 100 160 Z" fill="none" stroke="#d98b97" stroke-width="1.5"/></svg>`;
+function muralCard(p,i){
+  const rot=((i*37)%7-3)*.6, pin=PIN_COLORS[i%PIN_COLORS.length], w=`${esc(p.name)}${p.grade?' · '+esc(p.grade):''}`;
+  if(p.kind==='soldiers') return `<div class="mcard soldier" style="--rot:${rot}deg;--pin:${pin}"><i class="pushpin"></i>
+    <div class="hhead">${FLAG_SVG}<div class="htitle"><b>رسالة شكر من القلب</b><span>إلى جنودنا البواسل ♥</span></div></div>
+    ${p.photo?`<img class="mphoto" src="${p.photo}" alt="">`:''}
+    <div class="heart">${HEART_SVG}<div class="htext"><div class="hm">${esc(p.message)}</div><div class="hw">${w}</div></div></div>
+    <svg class="hsky" viewBox="0 0 200 24" preserveAspectRatio="none"><path d="M0 24V16h12v-6h8v6h10V8h6v8h14v-4h10v4h20V4l4-4 4 4v12h18v-7h10v7h16v-5h8v5h12v-9h8v9h20v8z" fill="#c9d9c4"/></svg></div>`;
+  return `<div class="mcard watan${p.pinned?' pinned':''}" style="--rot:${rot}deg;--pin:${pin}"><i class="pushpin"></i>
+    <svg class="wmap" viewBox="0 0 1000 817"><path d="${SA_D}" fill="rgba(255,255,255,.12)"/></svg>
+    <div class="whead">💚 رسالة حب للوطن</div>
+    ${p.photo?`<img class="mphoto" src="${p.photo}" alt="">`:''}
+    <div class="wm">${esc(p.message)}</div><div class="ww">— ${w}</div>
+    <div class="wstripe"></div></div>`;
+}
 async function renderMural(){
   mural.innerHTML='<div class="empty">جارٍ التحميل…</div>';
   let posts=[];try{posts=(await store.approved()).filter(p=>p.kind!=='map')}catch(e){}
-  const html=PINNED.map(p=>`<div class="post pinned"><span class="flag">📌</span><div class="b"><div class="m">${esc(p.message)}</div><div class="w">— ${esc(p.name)}</div></div></div>`)
-   .concat(posts.map(p=>`<div class="post">${p.photo?`<img src="${p.photo}" alt="">`:''}<span class="flag">🇸🇦</span><div class="b"><div class="m">${esc(p.message)}</div><div class="w">— ${esc(p.name)} · ${esc(p.grade)}</div></div></div>`));
-  mural.innerHTML=html.join('')+(posts.length?'':'<div class="empty">كوني أول من يزيّن الجدارية 💚 <br><button class="btn gold" style="margin-top:10px" onclick="go(\'share\')">شاركي حبّك</button></div>');
+  const nS=posts.filter(p=>p.kind==='soldiers').length, nW=posts.length-nS;
+  mfAll.textContent=`الكل (${posts.length})`; mfW.textContent=`💚 للوطن (${nW})`; mfS.textContent=`🪖 للجنود (${nS})`;
+  let list=posts; if(muralFilter==='watan') list=posts.filter(p=>p.kind!=='soldiers'); if(muralFilter==='soldiers') list=posts.filter(p=>p.kind==='soldiers');
+  const pinned=muralFilter==='soldiers'?[]:PINNED.map(p=>({...p,pinned:true,kind:'mural',grade:''}));
+  mural.innerHTML=pinned.concat(list).map(muralCard).join('')+(list.length?'':'<div class="empty">كوني أول من يزيّن الجدارية 💚 <br><button class="btn gold" style="margin-top:10px" onclick="go(\'share\')">شاركي برسالتك</button></div>');
 }
+document.querySelectorAll('.mfilter').forEach(b=>b.onclick=()=>{muralFilter=b.dataset.f;document.querySelectorAll('.mfilter').forEach(x=>x.classList.toggle('on',x===b));renderMural()});
 
 /* ================= خريطة الوطن ================= */
 const SA_PTS=(()=>{const n=document.getElementById('saPath').getAttribute('d').match(/-?[\d.]+/g).map(Number);const a=[];for(let i=0;i<n.length;i+=2)a.push([n[i],n[i+1]]);return a})();
@@ -796,10 +869,10 @@ async function renderBoard(){
   bP.textContent=pl.length;bPend.textContent=pend.length;bApp.textContent=app.length;bR.textContent=r;
   const fd=d=>d?new Date(d).toLocaleString('ar-SA',{dateStyle:'medium',timeStyle:'short'}):'';
   if(bView==='pending'){
-    bBody.innerHTML=pend.length?pend.map(p=>`<div class="pend">${p.photo?`<img src="${p.photo}">`:''}<div class="t"><b>${esc(p.name)}</b> <span class="note">· ${esc(p.grade)} · ${fd(p.created_at)}</span> <span class="modebadge">${p.kind==='map'?'📍 خريطة الوطن':'🧱 الجدارية'}</span><div>${esc(p.message)}</div></div>
+    bBody.innerHTML=pend.length?pend.map(p=>`<div class="pend">${p.photo?`<img src="${p.photo}">`:''}<div class="t"><b>${esc(p.name)}</b> <span class="note">· ${esc(p.grade)} · ${fd(p.created_at)}</span> <span class="modebadge">${p.kind==='map'?'📍 خريطة الوطن':p.kind==='soldiers'?'🪖 رسالة للجنود':'💚 رسالة للوطن'}</span><div>${esc(p.message)}</div></div>
       <div class="acts"><button class="btn green" onclick="mod('${p.id}','approved')">✅ اعتماد</button><button class="btn red" onclick="mod('${p.id}','del')">🗑️ حذف</button></div></div>`).join('')
       :'<div class="empty">لا توجد مشاركات بانتظار الاعتماد ✨</div>';
-    if(app.length) bBody.innerHTML+=`<h4 style="margin:18px 0 8px;color:var(--gold2)">المعتمدة والظاهرة للجميع (${app.length})</h4>`+app.map(p=>`<div class="pend"><div class="t"><b>${esc(p.name)}</b> <span class="note">· ${esc(p.grade)}</span> <span class="modebadge">${p.kind==='map'?'📍 خريطة':'🧱 جدارية'}</span><div>${esc(p.message)}</div></div><div class="acts"><button class="btn ghost" onclick="mod('${p.id}','pending')">↩️ إخفاء</button></div></div>`).join('');
+    if(app.length) bBody.innerHTML+=`<h4 style="margin:18px 0 8px;color:var(--gold2)">المعتمدة والظاهرة للجميع (${app.length})</h4>`+app.map(p=>`<div class="pend"><div class="t"><b>${esc(p.name)}</b> <span class="note">· ${esc(p.grade)}</span> <span class="modebadge">${p.kind==='map'?'📍 خريطة':p.kind==='soldiers'?'🪖 للجنود':'💚 للوطن'}</span><div>${esc(p.message)}</div></div><div class="acts"><button class="btn ghost" onclick="mod('${p.id}','pending')">↩️ إخفاء</button></div></div>`).join('');
   }else if(bView==='signers'){
     bBody.innerHTML=`<button class="btn ghost" style="margin-bottom:10px" onclick="copyList()">📋 نسخ القائمة</button>`+
       (pl.length?`<div style="overflow:auto"><table><tr><th>#</th><th>الاسم</th><th>الفئة</th><th>الصف</th><th>الفصل / تفاصيل</th><th>وقت التوقيع</th></tr>${pl.map((p,i)=>`<tr><td>${i+1}</td><td>${esc(p.name)}</td><td>${esc(p.role||'طالبة')}</td><td>${(p.role||'طالبة')==='طالبة'?esc(p.grade):'—'}</td><td>${esc(p.klass)}</td><td>${fd(p.created_at)}</td></tr>`).join('')}</table></div>`:'<div class="empty">لا توجد توقيعات بعد</div>');
