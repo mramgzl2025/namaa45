@@ -243,6 +243,33 @@ th{color:var(--gold2)}
 .wm{position:relative;font-family:'Amiri',serif;font-size:19px;line-height:1.9}
 .ww{position:relative;margin-top:8px;font-size:13px;font-weight:800;color:#f3dc9a}
 .wstripe{position:absolute;left:-20px;right:-20px;bottom:10px;height:7px;background:#c8102e;transform:rotate(-4deg);opacity:.85}
+.intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:opacity .7s,visibility .7s}
+.intro.gone{opacity:0;visibility:hidden}
+.isky{position:absolute;inset:0;width:100%;height:100%}
+.iskip{position:absolute;top:18px;right:18px;z-index:2;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:999px;padding:7px 20px;font-size:15px}
+.icenter{position:relative;width:min(62vw,270px);aspect-ratio:1;z-index:1;margin-top:-6vh}
+.wax{position:absolute;inset:0;border:none;background:none;padding:0;cursor:pointer;filter:drop-shadow(0 14px 22px rgba(0,0,0,.55));animation:waxPulse 2.2s ease-in-out infinite}
+.wax svg{width:100%;height:100%}
+.wax.pressed{animation:waxPress .9s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes waxPulse{50%{transform:scale(1.04)}}
+@keyframes waxPress{0%{transform:scale(1)}25%{transform:scale(.82) rotate(-6deg)}60%{transform:scale(1.12) rotate(3deg)}100%{transform:scale(1.02)}}
+.iring{position:absolute;inset:-14%;border-radius:50%;border:2px solid rgba(255,90,104,.55);animation:ring 2.4s ease-out infinite}
+.iring.r2{animation-delay:1.2s}
+@keyframes ring{from{transform:scale(.75);opacity:1}to{transform:scale(1.25);opacity:0}}
+.ititle{position:relative;z-index:1;margin-top:5vh;font-family:'Reem Kufi',sans-serif;font-size:clamp(28px,8vw,40px);text-shadow:0 3px 12px rgba(0,0,0,.7)}
+.ihint{position:relative;z-index:1;color:#f0dcc0;opacity:.9;animation:fade 1.6s ease-in-out infinite alternate}
+.listen{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:8px 16px;font-weight:700;font-size:14px;margin-bottom:12px}
+.scroll .w{transition:background .2s,color .2s;border-radius:4px}
+.scroll .w.hl{background:rgba(212,175,90,.45);color:#0a3d23}
+.scroll.reveal .dl{opacity:0;display:inline;animation:lineIn .7s forwards}
+.scroll.reveal .dl:nth-of-type(1){animation-delay:.1s}.scroll.reveal .dl:nth-of-type(2){animation-delay:.7s}.scroll.reveal .dl:nth-of-type(3){animation-delay:1.3s}.scroll.reveal .dl:nth-of-type(4){animation-delay:1.9s}.scroll.reveal .dl:nth-of-type(5){animation-delay:2.5s}
+@keyframes lineIn{to{opacity:1}}
+.saybar{display:flex;align-items:center;gap:10px;background:rgba(212,175,90,.12);border:1px solid rgba(212,175,90,.35);border-radius:14px;padding:8px 12px;margin-bottom:14px;font-size:14px;color:#f3e6c4}
+.saybar .eq{display:inline-flex;gap:2px;align-items:flex-end;height:16px}
+.saybar .eq i{width:3px;background:var(--gold);animation:eq .8s ease-in-out infinite}
+.saybar .eq i:nth-child(2){animation-delay:.2s}.saybar .eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:4px}50%{height:16px}}
+.saybar.off .eq i{animation:none;height:4px}
 footer{text-align:center;color:#8fae9c;font-size:13px;padding:26px 10px 36px;border-top:1px solid var(--line);margin-top:30px}
 footer b{color:var(--gold2)}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(200%);opacity:0;background:var(--g6);border:1px solid var(--gold);padding:12px 20px;border-radius:14px;font-weight:700;z-index:50;transition:.35s;max-width:90vw;text-align:center}
@@ -255,6 +282,41 @@ footer b{color:var(--gold2)}
 </head>
 <body>
 <div class="bgpat"></div>
+<div class="intro" id="intro">
+  <svg class="isky" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06120b"/><stop offset=".35" stop-color="#2b3a2a"/><stop offset=".55" stop-color="#b8662a"/><stop offset=".66" stop-color="#f2b453"/><stop offset=".7" stop-color="#7a4a22"/><stop offset="1" stop-color="#140c06"/></linearGradient>
+      <radialGradient id="sunG"><stop offset="0" stop-color="#fff3c4"/><stop offset=".4" stop-color="#ffd27a" stop-opacity=".9"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="400" height="800" fill="url(#skyG)"/>
+    <circle cx="300" cy="530" r="120" fill="url(#sunG)"/>
+    <rect x="0" y="250" width="400" height="60" fill="#c8102e" opacity=".12"/>
+    <path d="M0 560 Q60 520 120 548 T240 540 T400 530 V800 H0Z" fill="#5a3518"/>
+    <path d="M0 610 Q90 570 180 600 T400 585 V800 H0Z" fill="#3b220f"/>
+    <path d="M0 680 Q120 640 230 672 T400 660 V800 H0Z" fill="#1d1108"/>
+    <g fill="#120a05" transform="translate(0 130) scale(1)">
+      <path d="M62 560v-58M62 502c-14-4-24 2-30 9M62 502c12-6 24-3 31 6M62 502c-5-12-17-16-27-13M62 502c7-10 19-13 28-8" stroke="#120a05" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M356 548v-46M356 502c-12-4-20 2-26 8M356 502c11-5 21-3 27 5M356 502c-4-10-14-14-23-11M356 502c6-9 16-11 24-7" stroke="#120a05" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+  <button class="iskip" onclick="closeIntro()">تخطّي</button>
+  <div class="icenter">
+    <div class="iring"></div><div class="iring r2"></div>
+    <button class="wax" id="wax" aria-label="اضغطي على الختم">
+      <svg viewBox="0 0 200 200"><defs><radialGradient id="waxG" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="#ff5a68"/><stop offset=".5" stop-color="#c8102e"/><stop offset="1" stop-color="#6d0716"/></radialGradient></defs>
+        <path id="waxEdge" fill="url(#waxG)"/>
+        <circle cx="100" cy="100" r="66" fill="#b40d28" stroke="#8a0a1f" stroke-width="4"/>
+        <circle cx="100" cy="100" r="52" fill="none" stroke="#ffd7dc" stroke-width="2.2" opacity=".85"/>
+        <text x="100" y="82" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="22" fill="#ffe9ec">عهد</text>
+        <rect x="58" y="94" width="84" height="13" rx="6" fill="#fff1f3"/>
+        <text x="100" y="134" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="20" fill="#ffe9ec">ولاء</text>
+        <ellipse cx="72" cy="58" rx="22" ry="9" fill="#fff" opacity=".18" transform="rotate(-25 72 58)"/>
+      </svg>
+    </button>
+  </div>
+  <h2 class="ititle">اختمي عهدكِ للوطن</h2>
+  <p class="ihint">اضغطي على الختم 👆</p>
+</div>
 <div class="ticker"><span>السعودية خط أحمر ✦ وثيقة العهد والولاء ✦ أمن الوطن مسؤوليتي ✦ لا للشائعات ✦ الثانوية الخامسة والأربعون ✦ السعودية خط أحمر ✦ وثيقة العهد والولاء ✦ أمن الوطن مسؤوليتي ✦ لا للشائعات ✦</span></div>
 
 <header class="top">
@@ -262,7 +324,7 @@ footer b{color:var(--gold2)}
     <div class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 5.6L20 10l-5.6 2.4L12 18l-2.4-5.6L4 10l5.6-2.4z" fill="#d4af5a"/><path d="M5 21h14" stroke="#ff3b52" stroke-width="2.4" stroke-linecap="round"/></svg></div>
     <div><b>الثانوية الخامسة والأربعون</b><small>مبادرة وطنية لأسرة مدرستنا</small></div>
   </div>
-  <button class="boardbtn" onclick="go('board')">🔐 لوحة المدرسة</button>
+  <div style="display:flex;gap:8px"><button class="boardbtn" id="muteBtn" onclick="toggleMute()" aria-label="الصوت">🔊</button><button class="boardbtn" onclick="go('board')">🔐 لوحة المدرسة</button></div>
 </header>
 
 <div class="wrap">
@@ -323,6 +385,7 @@ footer b{color:var(--gold2)}
   <section class="view" id="v-pledge">
     <div class="card">
       <div class="h2">📜 وثيقة العهد</div>
+      <div class="saybar off" data-say="مهمتك الأولى: اكتبي اسمك، واستمعي لعهدك، ثم اختميه."><span class="eq"><i></i><i></i><i></i></span><span>مهمتك الأولى: اكتبي اسمك، واستمعي لعهدك، ثم اختميه.</span></div>
       <p class="lead">اكتب/ي الاسم الثلاثي، ثم اقرأ/ي العهد واضغط/ي «أعاهد».</p>
       <div class="grid2">
         <div class="field"><label>الاسم الثلاثي</label><input class="inp" id="pName" placeholder="الاسم الثلاثي" oninput="fillDoc()"></div>
@@ -333,6 +396,7 @@ footer b{color:var(--gold2)}
         <div class="field" id="parF" style="display:none"><label>اسم ابنتك الطالبة</label><input class="inp" id="pKid" placeholder="اسم الطالبة" oninput="fillDoc()"></div>
         <div class="field" id="tchF" style="display:none"><label>التخصص / العمل</label><input class="inp" id="pJob" placeholder="مثال: أحياء، الإرشاد الطلابي…" oninput="fillDoc()"></div>
       </div>
+      <div style="text-align:center"><button class="listen" type="button" onclick="readPledge()">🔊 استمعي لنص العهد</button></div>
       <div class="scroll" id="scroll">
         <div class="sv">﴿ رَبِّ اجْعَلْ هَٰذَا بَلَدًا آمِنًا ﴾</div>
         <h3>وثيقة عهد <span class="r">وولاء</span></h3>
@@ -357,6 +421,7 @@ footer b{color:var(--gold2)}
   <section class="view" id="v-rumors">
     <div class="card">
       <div class="h2">🛡️ أصدّ الشائعات</div>
+      <div class="saybar off" data-say="مهمتك الثانية: صدّي كل شائعة تمسّ وطنك."><span class="eq"><i></i><i></i><i></i></span><span>مهمتك الثانية: صدّي كل شائعة تمسّ وطنك.</span></div>
       <p class="lead">وصلك هذا في جوالك.. وش بتسوين؟ اسحبي البطاقة يمين «أصدّها» أو يسار «أنشرها»، أو استخدمي الأزرار.</p>
       <div class="deckwrap" id="deckWrap">
         <div class="score"><span id="rIdx">البطاقة 1 من 8</span><span>✅ <b id="rOk">0</b> إجابة واعية</span></div>
@@ -384,6 +449,7 @@ footer b{color:var(--gold2)}
   <section class="view" id="v-share">
     <div class="card">
       <div class="h2">💚 شاركي حبّك</div>
+      <div class="saybar off" data-say="مهمتك الثالثة: شاركي برسالة لوطنك أو لجنودنا البواسل."><span class="eq"><i></i><i></i><i></i></span><span>مهمتك الثالثة: شاركي برسالة لوطنك أو لجنودنا البواسل.</span></div>
       <p class="lead">اختاري: رسالة لوطنك أو رسالة شكر لجنودنا البواسل. تُرسل للمعلمة، وبعد موافقتها تظهر في جدارية الوطن للجميع.</p>
       <div class="grid2">
         <div class="field"><label>الاسم (يظهر في الجدارية)</label><input class="inp" id="sName" placeholder="الاسم كما يظهر في الجدارية"></div>
@@ -427,6 +493,7 @@ footer b{color:var(--gold2)}
         <div><div class="h2">📍 خريطة الوطن</div><div class="mapslogan">معًا.. نرفع شعار وطننا الغالي</div></div>
         <div class="mapcount"><b id="mapN">0</b><span>كلمة على الخريطة</span></div>
       </div>
+      <div class="saybar off" data-say="اكتبي كلمتك وثبّتيها على خريطة الوطن."><span class="eq"><i></i><i></i><i></i></span><span>اكتبي كلمتك وثبّتيها على خريطة الوطن.</span></div>
       <div class="mapstage" id="mapStage">
         <svg class="skyline" viewBox="0 0 1000 160" preserveAspectRatio="none" aria-hidden="true">
           <g fill="rgba(31,157,95,.22)">
@@ -574,6 +641,8 @@ function go(v){
   if(v==='mural') renderMural();
   if(v==='map') renderMap();
   if(v==='board' && boardOpen) renderBoard();
+  if(v==='pledge'){const sc=document.getElementById('scroll');sc.classList.remove('reveal');void sc.offsetWidth;sc.classList.add('reveal');sfx.paper&&sfx.paper()}
+  const bar=document.querySelector('#v-'+v+' .saybar'); if(bar&&!(v==='pledge'&&me.p)) setTimeout(()=>sayBar(bar),350); else hush();
   document.getElementById('tabs').scrollIntoView({behavior:'smooth'});
 }
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>go(t.dataset.v));
@@ -617,7 +686,8 @@ function pledgeData(){
 }
 function fillDoc(){
   const d=pledgeData();
-  docTxt.innerHTML=`${d.who} <span class="nm">${esc(d.name)}</span> ${esc(d.after)}، ${d.body.map(esc).join(' ')} ففي قلبي: <b style="color:var(--red)">السعودية خطٌّ أحمر</b>.`;
+  const W=t=>esc(t).split(/\s+/).filter(Boolean).map(w=>`<span class="w">${w}</span>`).join(' ');
+  docTxt.innerHTML=`<span class="dl">${W(d.who)} <span class="nm">${esc(d.name)}</span> ${W(d.after)}،</span> `+d.body.map(b=>`<span class="dl">${W(b)}</span>`).join(' ')+` <span class="dl">${W('ففي قلبي:')} <b style="color:var(--red)">${W('السعودية خطٌّ أحمر.')}</b></span>`;
   docMeta.textContent=d.meta;
 }
 function setRole(r,silent){
@@ -643,9 +713,10 @@ async function signPledge(){
   const r=me.role, grade=r==='student'?pGrade.value:ROLES[r].label, klass=r==='student'?pClass.value:(r==='father'||r==='mother'?'الطالبة: '+pKid.value.trim():pJob.value.trim());
   try{
     if(!me.p) await store.addPledge({name,role:ROLES[r].label,grade,klass});
-    document.getElementById('seal').classList.add('on');
+    document.getElementById('seal').classList.add('on'); sfx.stamp();
     me.p=true; me.name=name; saveMe(); confetti(); refreshStats();
     const d=pledgeData();
+    setTimeout(()=>speak('تمّ عهدكِ، وطنكِ يفخر بكِ'),600);
     setTimeout(async()=>{certImg.src=await makeCert(d);certOut.style.display='block';certOut.scrollIntoView({behavior:'smooth'})},700);
     toast('خُتمت الوثيقة بختم الولاء 🇸🇦');
   }catch(e){toast('تعذّر الحفظ، تأكد/ي من الاتصال وحاول/ي مرة ثانية');pBtn.disabled=false}
@@ -721,13 +792,14 @@ function answer(a){
   if(busy||ri>=CARDS.length)return; busy=true;
   const c=CARDS[ri], el=deck.querySelector('.rcard'), right=a===c.a;
   if(right)rok++; if(a==='stop'&&c.a==='stop')rstop++;
-  if(a==='stop')el.classList.add('broken');
+  if(a==='stop'){el.classList.add('broken');sfx.crack()}else sfx.pop();
   fb.className='feedback '+(right?'ok':'no');
   fb.innerHTML=(right?'<b>✅ تصرّف واعٍ!</b> ':'<b>⚠️ انتبهي!</b> ')+c.why;
   rOk.textContent=rok;
   setTimeout(()=>{el.classList.add(a==='stop'?'out-r':'out-l');setTimeout(()=>{ri++;busy=false;renderCard()},420)},a==='stop'?1500:1200);
 }
 async function finishDeck(){
+  sfx.win();
   deckWrap.style.display='none'; rumorDone.style.display='block';
   rumorRes.textContent=`أجبتِ إجابة واعية في ${rok} من ${CARDS.length} مواقف، وصددتِ ${rstop} شائعات.`;
   rules.innerHTML=RULES.map((r,i)=>`<div class="rule" style="animation-delay:${i*.12}s"><span class="e">${r.e}</span><b>${r.t}</b><p>${r.p}</p></div>`).join('');
@@ -898,7 +970,44 @@ async function copy(t){try{await navigator.clipboard.writeText(t);toast('نُس�
 function copyList(){copy((window._pl||[]).map((p,i)=>`${i+1}\t${p.name}\t${p.role||'طالبة'}\t${p.grade}\t${p.klass}`).join('\n'))}
 function copyReport(a,b,c,d){const pl=window._plR||[];copy(`تقرير مبادرة «السعودية خط أحمر» – الثانوية الخامسة والأربعون\nالتاريخ: ${today}\n- وثائق العهد الموقّعة: ${a} (${['طالبة','معلمة','إدارية','ولي أمر','ولية أمر'].map(g=>g+': '+pl.filter(p=>(p.role||'طالبة')===g).length).join('، ')})\n- الشائعات المصدودة: ${b}\n- رسائل الفخر المرسلة: ${c} (المعتمدة: ${d})`)}
 
+/* ================= الأصوات وشاشة البداية ================= */
+let AC=null;function ac(){try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}return AC}
+function tone(f,t0,d,type,vol,f2){const a=ac();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);if(f2)o.frequency.exponentialRampToValueAtTime(f2,a.currentTime+t0+d);g.gain.setValueAtTime(vol||.3,a.currentTime+t0);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g).connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d)}
+function noise(t0,d,vol,hp){const a=ac();if(!a)return;const n=a.sampleRate*d,b=a.createBuffer(1,n,a.sampleRate),c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=(Math.random()*2-1)*(1-i/n)**2;const s=a.createBufferSource(),g=a.createGain(),f=a.createBiquadFilter();f.type='highpass';f.frequency.value=hp||800;s.buffer=b;g.gain.value=vol||.4;s.connect(f).connect(g).connect(a.destination);s.start(a.currentTime+t0)}
+const sfx={
+  stamp(){tone(140,0,.35,'sine',.6,45);noise(0,.12,.35,300)},
+  crack(){noise(0,.25,.5,1500);tone(900,0,.15,'square',.08,200)},
+  win(){[523,659,784,1047].forEach((f,i)=>tone(f,i*.12,.35,'triangle',.18))},
+  pop(){tone(600,0,.12,'sine',.2,1200)},
+  paper(){noise(0,.35,.12,2500)}
+};
+let muted=LS.get('khat_mute',false);
+function paintMute(){muteBtn.textContent=muted?'🔇':'🔊'}
+function toggleMute(){muted=!muted;LS.set('khat_mute',muted);paintMute();if(muted)hush();else speak('تم تشغيل الصوت')}
+function hush(){try{speechSynthesis.cancel()}catch(e){}document.querySelectorAll('.saybar').forEach(b=>b.classList.add('off'));document.querySelectorAll('.scroll .w.hl').forEach(w=>w.classList.remove('hl'))}
+function speak(text,opt={}){if(muted)return true;try{if(!('speechSynthesis' in window))return false;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';u.rate=opt.rate||.9;const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;if(opt.onb)u.onboundary=opt.onb;u.onend=()=>{opt.onend&&opt.onend()};speechSynthesis.speak(u);return true}catch(e){return false}}
+function sayBar(bar){bar.classList.remove('off');speak(bar.dataset.say,{onend:()=>bar.classList.add('off')})}
+function readPledge(){
+  if(muted){toast('الصوت مقفل، اضغطي 🔇 فوق لتشغيله');return}
+  const words=[...document.querySelectorAll('#docTxt .w, #docTxt .nm')];
+  const text=words.map(w=>w.textContent.includes('...')?'':w.textContent).join(' ');
+  // map char offsets to word index
+  const starts=[];let pos=0;words.forEach(w=>{starts.push(pos);pos+=(w.textContent.includes('...')?0:w.textContent.length)+1});
+  let fallback=null,got=false,k=0;
+  const mark=i=>{words.forEach((w,j)=>w.classList.toggle('hl',j===i))};
+  const ok=speak(text,{rate:.85,onb:e=>{got=true;let i=starts.findIndex((s,j)=>e.charIndex>=s&&(j===starts.length-1||e.charIndex<starts[j+1]));if(i>=0)mark(i)},onend:()=>{clearInterval(fallback);mark(-1)}});
+  if(!ok){toast('القراءة الصوتية غير متاحة في هذا الجهاز');return}
+  fallback=setInterval(()=>{if(got){clearInterval(fallback);return}mark(k++);if(k>words.length){clearInterval(fallback);mark(-1)}},430);
+}
+(function(){ // wax edge
+  let d='';for(let i=0;i<=72;i++){const t=i/72*Math.PI*2,r=88+6*Math.sin(t*12)+2*Math.sin(t*31);d+=(i?'L':'M')+(100+r*Math.cos(t)).toFixed(1)+','+(100+r*Math.sin(t)).toFixed(1)}
+  document.getElementById('waxEdge').setAttribute('d',d+'Z');
+})();
+function closeIntro(){intro.classList.add('gone');setTimeout(()=>intro.style.display='none',800)}
+wax.onclick=()=>{if(wax.classList.contains('pressed'))return;wax.classList.add('pressed');sfx.stamp();setTimeout(()=>speak('السعودية خطٌّ أحمر'),250);setTimeout(()=>{confetti();closeIntro()},1400)};
+
 /* ================= تشغيل ================= */
+paintMute();
 renderProgress(); renderCard(); refreshStats();
 if(me.p){ pName.value=me.name; document.getElementById('seal').classList.add('on'); }
 if(me.role) setRole(me.role,true); else fillDoc();
