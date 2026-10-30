@@ -274,6 +274,8 @@ th{color:var(--gold2)}
 .saybar .eq i:nth-child(2){animation-delay:.2s}.saybar .eq i:nth-child(3){animation-delay:.4s}
 @keyframes eq{0%,100%{height:4px}50%{height:16px}}
 .saybar.off .eq i{animation:none;height:4px}
+.saybar.pop{animation:barPop .6s cubic-bezier(.2,1.5,.4,1)}
+@keyframes barPop{0%{transform:scale(.92);opacity:.3}100%{transform:none;opacity:1}}
 footer{text-align:center;color:#8fae9c;font-size:13px;padding:26px 10px 36px;border-top:1px solid var(--line);margin-top:30px}
 footer b{color:var(--gold2)}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(200%);opacity:0;background:var(--g6);border:1px solid var(--gold);padding:12px 20px;border-radius:14px;font-weight:700;z-index:50;transition:.35s;max-width:90vw;text-align:center}
@@ -389,7 +391,7 @@ footer b{color:var(--gold2)}
   <section class="view" id="v-pledge">
     <div class="card">
       <div class="h2">📜 وثيقة العهد</div>
-      <div class="saybar off" data-say="مهمتك الأولى: اكتبي اسمك، واستمعي لعهدك، ثم اختميه."><span class="eq"><i></i><i></i><i></i></span><span>مهمتك الأولى: اكتبي اسمك، واستمعي لعهدك، ثم اختميه.</span></div>
+      <div class="saybar off" data-say="مهمتك الأولى: اكتبي اسمك، واقرئي عهدك، ثم اختميه."><span class="eq"><i></i><i></i><i></i></span><span>مهمتك الأولى: اكتبي اسمك، واقرئي عهدك، ثم اختميه.</span></div>
       <p class="lead">اكتب/ي الاسم الثلاثي، ثم اقرأ/ي العهد واضغط/ي «أعاهد».</p>
       <div class="grid2">
         <div class="field"><label>الاسم الثلاثي</label><input class="inp" id="pName" placeholder="الاسم الثلاثي" oninput="fillDoc()"></div>
@@ -400,7 +402,7 @@ footer b{color:var(--gold2)}
         <div class="field" id="parF" style="display:none"><label>اسم ابنتك الطالبة</label><input class="inp" id="pKid" placeholder="اسم الطالبة" oninput="fillDoc()"></div>
         <div class="field" id="tchF" style="display:none"><label>التخصص / العمل</label><input class="inp" id="pJob" placeholder="مثال: أحياء، الإرشاد الطلابي…" oninput="fillDoc()"></div>
       </div>
-      <div style="text-align:center"><button class="listen" type="button" onclick="readPledge()">🔊 استمعي لنص العهد</button></div>
+      
       <div class="scroll" id="scroll">
         <div class="sv">﴿ رَبِّ اجْعَلْ هَٰذَا بَلَدًا آمِنًا ﴾</div>
         <h3>وثيقة عهد <span class="r">وولاء</span></h3>
@@ -1001,14 +1003,16 @@ const sfx={
   crack(){noise(0,.25,.5,1500);tone(900,0,.15,'square',.08,200)},
   win(){[523,659,784,1047].forEach((f,i)=>tone(f,i*.12,.35,'triangle',.18))},
   pop(){tone(600,0,.12,'sine',.2,1200)},
-  paper(){noise(0,.35,.12,2500)}
+  paper(){noise(0,.35,.12,2500)},
+  chime(){tone(880,0,.5,'sine',.15);tone(1320,.08,.6,'sine',.1)}
 };
 let muted=LS.get('khat_mute',false);
 function paintMute(){muteBtn.textContent=muted?'🔇':'🔊'}
 function toggleMute(){muted=!muted;LS.set('khat_mute',muted);paintMute();if(muted)hush();else speak('تم تشغيل الصوت')}
 function hush(){try{speechSynthesis.cancel()}catch(e){}document.querySelectorAll('.saybar').forEach(b=>b.classList.add('off'));document.querySelectorAll('.scroll .w.hl').forEach(w=>w.classList.remove('hl'))}
-function speak(text,opt={}){if(muted)return true;try{if(!('speechSynthesis' in window))return false;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';u.rate=opt.rate||.9;const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;if(opt.onb)u.onboundary=opt.onb;u.onend=()=>{opt.onend&&opt.onend()};speechSynthesis.speak(u);return true}catch(e){return false}}
-function sayBar(bar){bar.classList.remove('off');speak(bar.dataset.say,{onend:()=>bar.classList.add('off')})}
+const VOICE=false; // الصوت الآلي مقفل بطلب المشرفة، تبقى المؤثرات فقط
+function speak(text,opt={}){if(muted||!VOICE){opt.onend&&setTimeout(opt.onend,2500);return true}try{if(!('speechSynthesis' in window))return false;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';u.rate=opt.rate||.9;const v=speechSynthesis.getVoices().find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;if(opt.onb)u.onboundary=opt.onb;u.onend=()=>{opt.onend&&opt.onend()};speechSynthesis.speak(u);return true}catch(e){return false}}
+function sayBar(bar){bar.classList.remove('off');bar.classList.remove('pop');void bar.offsetWidth;bar.classList.add('pop');if(!muted)sfx.chime();speak(bar.dataset.say,{onend:()=>bar.classList.add('off')})}
 function readPledge(){
   if(muted){toast('الصوت مقفل، اضغطي 🔇 فوق لتشغيله');return}
   const words=[...document.querySelectorAll('#docTxt .w, #docTxt .nm')];
