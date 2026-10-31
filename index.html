@@ -263,6 +263,7 @@ footer b{color:var(--hero-ink)}
 .drop .dt small{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
 .drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
 .atypes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.vbox{margin-top:10px;padding:12px;border:1.5px dashed color-mix(in srgb,#B4233C 45%,var(--line));border-radius:14px;background:color-mix(in srgb,#B4233C 5%,var(--surface));display:grid;gap:9px}.vbox .vb-t{margin:0;font-weight:800;font-size:14px}.vb-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.vb-btns .btn{justify-content:center;padding:10px 6px;font-size:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}.vb-btns .btn:hover{border-color:#B4233C}.vbox .alink{margin-top:0}
 .vvid{display:grid;gap:10px;justify-items:center}.vvid video,.vvid iframe{width:100%;max-height:70vh;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
 @media (max-width:420px){.atypes{gap:4px}.atypes button{font-size:10.5px!important;padding:6px 1px!important}.atypes button span{font-size:16px!important}}
 .atypes button{display:grid;justify-items:center;gap:2px;padding:7px 2px;border:1.5px solid color-mix(in srgb,var(--c) 35%,var(--line));border-radius:11px;background:color-mix(in srgb,var(--c) 8%,var(--surface));color:var(--ink);font:inherit;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
@@ -955,8 +956,9 @@ body.has-sbar footer{padding-bottom:120px}
       </div>
       <input id="a-pick" type="file" hidden multiple>
       <div class="alink" id="a-link" hidden><input id="a-url" type="url" inputmode="url" dir="ltr" placeholder="https://"><button type="button" class="btn btn-primary" id="a-url-add">إضافة الرابط</button></div>
+      <div class="vbox" id="a-vbox" hidden><p class="vb-t">🎬 أضيفي الفيديو بأي طريقة — وبأي حجم:</p><div class="vb-btns"><button type="button" class="btn" data-v="dev">📁 من جهازي</button><button type="button" class="btn" data-v="drive"><svg viewBox="0 0 87.3 78" width="18" height="16" aria-hidden="true"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg> من درايف</button></div><div class="alink"><input id="a-vurl" type="text" inputmode="url" dir="auto" placeholder="أو الصقي رابط الفيديو هنا"><button type="button" class="btn btn-primary" data-v="url">إضافة</button></div><p class="hint" style="margin:0">الفيديو الصغير يُحفظ في الموقع، والكبير يُحفظ تلقائيًا في درايفك ويُعرض هنا.</p></div>
       <ul class="alist" id="a-list"></ul>
-      <p class="hint">يمكن إضافة أكثر من مرفق وبأنواع مختلفة، حتى 20 ميجابايت للملف، والفيديو حتى 50 ميجابايت (الفيديو الأكبر: اختاريه من الدرايف أو أضيفي رابط يوتيوب). الباركود: صوّري الباركود أو ارفعي صورته.</p></div>
+      <p class="hint">يمكن إضافة أكثر من مرفق وبأنواع مختلفة، حتى 20 ميجابايت للملف، والفيديو بأي حجم. الباركود: صوّري الباركود أو ارفعي صورته.</p></div>
     <p class="msg" id="a-msg" role="status"></p>
     <div class="actions"><button class="btn btn-primary" id="a-save">حفظ الشاهد</button><button type="button" class="btn btn-ghost" data-close>إلغاء</button></div>
   </form>
@@ -996,8 +998,9 @@ body.has-sbar footer{padding-bottom:120px}
       </div>
       <input id="ga-pick" type="file" hidden multiple>
       <div class="alink" id="ga-link" hidden><input id="ga-url" type="text" inputmode="url" dir="ltr" placeholder="https://"><button type="button" class="btn btn-primary" id="ga-url-add">إضافة الرابط</button></div>
+      <div class="vbox" id="ga-vbox" hidden><p class="vb-t">🎬 أضيفي الفيديو بأي طريقة — وبأي حجم:</p><div class="vb-btns"><button type="button" class="btn" data-v="dev">📁 من جهازي</button><button type="button" class="btn" data-v="drive"><svg viewBox="0 0 87.3 78" width="18" height="16" aria-hidden="true"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg> من درايف</button></div><div class="alink"><input id="ga-vurl" type="text" inputmode="url" dir="auto" placeholder="أو الصقي رابط الفيديو هنا"><button type="button" class="btn btn-primary" data-v="url">إضافة</button></div><p class="hint" style="margin:0">الفيديو الصغير يُحفظ في الموقع، والكبير يُحفظ تلقائيًا في درايفك ويُعرض هنا.</p></div>
       <ul class="alist" id="ga-list"></ul>
-      <p class="hint">يمكن إضافة أكثر من مرفق، حتى 20 ميجابايت للملف، والفيديو حتى 50 ميجابايت (الأكبر: من الدرايف أو رابط يوتيوب).</p></div>
+      <p class="hint">يمكن إضافة أكثر من مرفق، حتى 20 ميجابايت للملف، والفيديو بأي حجم.</p></div>
     <div class="actions"><button class="btn btn-primary" id="ga-save"><svg><use href="#i-upload"/></svg>حفظ</button><span class="msg" id="ga-msg" role="status"></span></div>
   </form>
 </div>
@@ -1532,20 +1535,21 @@ document.addEventListener("click",e=>{if(e.target.closest("[data-unlock]")&&curT
 /* attachments: image / pdf / word / link / barcode */
 let att=[],pickKind=null;
 const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},excel:{ic:"📊",l:"إكسل",acc:".xls,.xlsx,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"},video:{ic:"🎬",l:"فيديو",acc:"video/*,.mp4,.mov,.m4v,.webm,.3gp"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
-const VMAX=50*1024*1024,FMAX=20*1024*1024;const isVidF=f=>(f.type||"").startsWith("video/")||/\.(mp4|mov|m4v|webm|3gp)$/i.test(f.name||"");const maxOf=a=>a.kind==="video"?VMAX:FMAX;
+const VMAX=20*1024*1024,FMAX=20*1024*1024;const isVidF=f=>(f.type||"").startsWith("video/")||/\.(mp4|mov|m4v|webm|3gp)$/i.test(f.name||"");const maxOf=a=>a.kind==="video"?Infinity:FMAX;const bigVid=a=>a.kind==="video"&&a.file&&a.file.size>VMAX;
 const tooBig=a=>a.kind==="video"?`الفيديو «${a.file.name}» أكبر من 50 ميجابايت. ارفعيه على الدرايف ثم اختاريه بزر «اختيار من درايف»، أو أضيفي رابط يوتيوب.`:`الملف «${a.file.name}» أكبر من 20 ميجابايت.`;
 const kindOf=f=>f.kind||(f.type==="link"?"link":f.type==="application/pdf"?"pdf":/word|msword/.test(f.type||"")?"word":/sheet|excel|csv/.test(f.type||"")?"excel":/^video\//.test(f.type||"")?"video":"image");
 const fmtSize=n=>n>1048576?(n/1048576).toFixed(1)+" م.ب":Math.max(1,Math.round(n/1024))+" ك.ب";
-function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
+function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${bigVid(a)?" · كبير: سيُحفظ في درايفك تلقائيًا":""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
 $("#a-list").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){att.splice(+b.dataset.rm,1);renderAtt();}});
 $("#a-types").addEventListener("click",e=>{const b=e.target.closest("[data-at]");if(!b)return;const k=b.dataset.at;
+  if(k==="video"){const V=$("#a-vbox");V.hidden=!V.hidden;$("#a-link").hidden=true;return;}
   if(k==="drive"){gdPick($("#a-msg"),a=>{att.push(a);renderAtt();});return;}
   if(k==="link"){const L=$("#a-link");L.hidden=!L.hidden;if(!L.hidden)$("#a-url").focus();return;}
   pickKind=k;const inp=$("#a-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";
   if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
 function addUrl(){let u=$("#a-url").value.trim();if(!u)return;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#a-msg").className="msg err";$("#a-msg").textContent="الرابط غير صحيح.";return;}
   att.push({kind:"link",url:u});$("#a-url").value="";$("#a-link").hidden=true;$("#a-msg").textContent="";renderAtt();}
-$("#a-url-add").onclick=addUrl;$("#a-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addUrl();}});
+$("#a-url-add").onclick=addUrl;const aVidAdd=vidPanel("a",x=>{att.push(x);renderAtt();},k=>{pickKind=k;});$("#a-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addUrl();}});
 /* Google Drive picker — يملأ الإعداد مرة واحدة من Google Cloud */
 const GDRIVE={clientId:"993783176366-1v15gbroam95e5tsss68chiit7gpku54.apps.googleusercontent.com",apiKey:"AIzaSyAONCV-Krpz7ajhQZ_y76VtOTW_aIYTIq0",appId:"993783176366"};
 let gdTok=null,gdTokExp=0,gdTC=null;
@@ -1568,6 +1572,30 @@ function gdToken(){return new Promise((ok,no)=>{if(gdTok&&Date.now()<gdTokExp)re
 const GD_EXPORT={"application/vnd.google-apps.document":["application/vnd.openxmlformats-officedocument.wordprocessingml.document","docx"],"application/vnd.google-apps.spreadsheet":["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","xlsx"],"application/vnd.google-apps.presentation":["application/pdf","pdf"],"application/vnd.google-apps.drawing":["image/png","png"]};
 function gdKind(name,type){if(type==="application/pdf"||/\.pdf$/i.test(name))return "pdf";if(/\.docx?$/i.test(name)||/word|msword/.test(type))return "word";if(/\.(xlsx?|csv)$/i.test(name)||/sheet|excel|csv/.test(type))return "excel";if(type.startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(name))return "image";return "";}
 async function gdShare(id){try{if(!gdTok)return;await fetch(`https://www.googleapis.com/drive/v3/files/${id}/permissions?supportsAllDrives=true`,{method:"POST",headers:{Authorization:"Bearer "+gdTok,"Content-Type":"application/json"},body:JSON.stringify({role:"reader",type:"anyone"})});}catch(e){}}
+/* ===== فيديو موحّد: من الجهاز / درايف / أي رابط ===== */
+function vidPanel(P,push,setKind){const V=$("#"+P+"-vbox"),U=$("#"+P+"-vurl"),M=$("#"+P+"-msg");
+  const addU=()=>{let u=U.value.trim();if(!u)return true;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){M.className="msg err";M.textContent="رابط الفيديو غير صحيح.";return false;}push({kind:"link",url:u,gdName:"🎬 "+u});U.value="";V.hidden=true;M.textContent="";return true;};
+  V.addEventListener("click",e=>{const b=e.target.closest("[data-v]");if(!b)return;const v=b.dataset.v;
+    if(v==="dev"){setKind("video");const inp=$("#"+P+"-pick");inp.value="";inp.accept=AT.video.acc;inp.multiple=true;inp.removeAttribute("capture");inp.click();V.hidden=true;}
+    else if(v==="drive"){V.hidden=true;gdPick(M,push);}
+    else addU();});
+  U.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addU();}});return addU;}
+let vidTokP=null;
+function vidTokEarly(list){if(!list.some(bigVid)||gdInApp())return;if(gdTok&&Date.now()<gdTokExp)return;if(gdIsReady()){vidTokP=gdToken();vidTokP.catch(()=>{});}}
+async function vidToDrive(f,msg){
+  if(gdInApp())throw {vmsg:"الفيديو كبير ويُحفظ في درايفك، لكنك تفتحين الموقع من داخل تطبيق (مثل الواتساب). افتحي الموقع في Chrome أو Safari ثم أعيدي الحفظ."};
+  let tok;try{tok=await (vidTokP||(async()=>{if(!gdIsReady())await gdPre();return gdToken();})());}catch(e){vidTokP=null;throw {vmsg:"الفيديو كبير ويُحفظ في درايفك. "+gdErrText(e).replace(/«اختيار من درايف»/g,"«حفظ»")};}
+  vidTokP=null;const nm=f.name.replace(/\.[^.]+$/,"");msg.className="msg";msg.textContent=`جارٍ رفع الفيديو «${nm}» إلى درايفك…`;
+  const type=f.type||"video/mp4";
+  const init=await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=id",{method:"POST",headers:{Authorization:"Bearer "+tok,"Content-Type":"application/json; charset=UTF-8","X-Upload-Content-Type":type,"X-Upload-Content-Length":String(f.size)},body:JSON.stringify({name:f.name,mimeType:type})}).catch(()=>null);
+  if(init&&init.status===401){gdTok=null;gdTokExp=0;try{localStorage.removeItem("namaa_gd");}catch(e){}throw {vmsg:"انتهى دخول قوقل. اضغطي «حفظ» مرة أخرى."};}
+  const loc=init&&init.ok&&init.headers.get("Location");if(!loc)throw {vmsg:"تعذّر بدء رفع الفيديو إلى درايف. تحققي من الاتصال وأعيدي المحاولة."};
+  const id=await new Promise((ok,no)=>{const x=new XMLHttpRequest();x.open("PUT",loc);x.setRequestHeader("Content-Type",type);
+    x.upload.onprogress=e=>{if(e.lengthComputable)msg.textContent=`جارٍ رفع الفيديو «${nm}» إلى درايفك… ${ar(Math.round(e.loaded*100/e.total))}٪`;};
+    x.onload=()=>{try{const j=JSON.parse(x.responseText);if(j.id)return ok(j.id);}catch(_){}no({vmsg:"تعذّر رفع الفيديو إلى درايف. أعيدي المحاولة."});};
+    x.onerror=()=>no({vmsg:"انقطع رفع الفيديو. تحققي من الاتصال وأعيدي المحاولة."});x.send(f);});
+  await gdShare(id);
+  return {kind:"link",type:"link",url:`https://drive.google.com/file/d/${id}/view`,name:"🎬 "+nm};}
 async function upRetry(fn){let er;for(let i=0;i<3;i++){try{return await fn();}catch(x){er=x;await new Promise(r=>setTimeout(r,900*(i+1)));}}throw er;}
 async function gdPick(msg,add){const ttl=$(msg.id==="ga-msg"?"#ga-title":"#a-name");
   if(!GDRIVE.clientId||!GDRIVE.apiKey){msg.className="msg err";msg.textContent="زر الدرايف لم يُفعَّل بعد. يمكنك الآن استخدام أيقونة الصورة أو PDF أو وورد أو إكسل.";return;}
@@ -1606,7 +1634,7 @@ $("#a-pick").addEventListener("change",async()=>{const k=pickKind;const fs=[...$
     const a={kind:k,file:f};if(f.size>maxOf(a)){$("#a-msg").className="msg err";$("#a-msg").textContent=tooBig(a);continue;}if(k==="barcode")a.url=await readBarcode(f);att.push(a);}
   renderAtt();});
 $("#f-add").addEventListener("submit",async e=>{
-  e.preventDefault();if(!curD||!curT)return;const d=DM[curD];
+  e.preventDefault();if(!curD||!curT)return;const d=DM[curD];vidTokEarly(att);if(!aVidAdd())return;
   if($("#a-url").value.trim())addUrl();
   const msg=$("#a-msg"),btn=$("#a-save");const ups=att.filter(a=>a.file);
   const bad=ups.find(a=>a.file.size>maxOf(a));if(bad){msg.className="msg err";msg.textContent=tooBig(bad);return;}
@@ -1617,10 +1645,11 @@ $("#f-add").addEventListener("submit",async e=>{
     for(const a of att){
       if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:a.gdName||"رابط"});continue;}
       const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;
+      if(bigVid(a)){out.push(await vidToDrive(f,msg));continue;}
       const isPdf=a.kind==="pdf";const isWord=a.kind==="word";const isXl=a.kind==="excel";
       const ext=safeExt(f,a.kind);
       const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):a.kind==="video"?(f.type||({mov:"video/quicktime",webm:"video/webm","3gp":"video/3gpp"})[ext]||"video/mp4"):(f.type||"image/jpeg");
-      let path;try{path=await upRetry(()=>uploadFile(f,ext,type));}catch(er){if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,er,vid:a.kind==="video"};}let thumb=null;
+      let path;try{path=await upRetry(()=>uploadFile(f,ext,type));}catch(er){if(a.kind==="video"){out.push(await vidToDrive(f,msg));continue;}if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,er,vid:a.kind==="video"};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
     msg.textContent="جارٍ الحفظ…";
@@ -1630,8 +1659,8 @@ $("#f-add").addEventListener("submit",async e=>{
     const it={domain:doc.domain,sec:doc.sec,title:doc.title,kind:doc.kind||null,term:doc.term,date:doc.date||"",cls:doc.cls,descr:doc.desc,checks:doc.checks||[],files:doc.files};
     const r=adminPin&&!tPins[curT]?null:await rpc("teacher_add",{tid:curT,p:tPins[curT],it});
     if(!r||!r.ok)throw r||{error:"pin"};
-    $("#f-add").reset();$("#a-target").style.display="none";att=[];renderAtt();closeAll();if(adminPin)await refreshAdmin();else await refreshTeacher(curT);renderAll();
-  }catch(err){console.error(err);msg.className="msg err";msg.textContent=err&&err.upl?(err.vid?`تعذّر رفع الفيديو «${err.upl}». جرّبي اختياره من الدرايف أو إضافة رابط يوتيوب بدلًا من رفعه.`:`تعذّر رفع الملف «${err.upl}». قد يكون نوعه غير مسموح في التخزين أو الاتصال ضعيف.`):"تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}
+    $("#f-add").reset();$("#a-target").style.display="none";att=[];renderAtt();$("#a-vbox").hidden=true;closeAll();if(adminPin)await refreshAdmin();else await refreshTeacher(curT);renderAll();
+  }catch(err){console.error(err);msg.className="msg err";msg.textContent=err&&err.vmsg?err.vmsg:err&&err.upl?(err.vid?`تعذّر رفع الفيديو «${err.upl}». جرّبي اختياره من الدرايف أو إضافة رابط يوتيوب بدلًا من رفعه.`:`تعذّر رفع الملف «${err.upl}». قد يكون نوعه غير مسموح في التخزين أو الاتصال ضعيف.`):"تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}
 });
 
 /* ================= viewer ================= */
@@ -1653,12 +1682,13 @@ function drawQR(u){const el=document.getElementById("v-qr");if(!el)return;if(!wi
 function embedOf(u){try{const x=new URL(u),h=x.hostname.replace(/^www\.|^m\./,"");let m;
   if(h==="youtu.be")return "https://www.youtube.com/embed/"+x.pathname.slice(1).split("/")[0];
   if(/(^|\.)youtube\.com$/.test(h)){if(x.searchParams.get("v"))return "https://www.youtube.com/embed/"+x.searchParams.get("v");if(m=/^\/(shorts|embed|live)\/([\w-]+)/.exec(x.pathname))return "https://www.youtube.com/embed/"+m[2];}
-  if(h==="drive.google.com"&&(m=/\/file\/d\/([\w-]+)/.exec(x.pathname)))return "https://drive.google.com/file/d/"+m[1]+"/preview";}catch(e){}return "";}
+  if(h==="drive.google.com"&&(m=/\/file\/d\/([\w-]+)/.exec(x.pathname)))return "https://drive.google.com/file/d/"+m[1]+"/preview";
+  if(h==="vimeo.com"&&(m=/^\/(\d+)/.exec(x.pathname)))return "https://player.vimeo.com/video/"+m[1];}catch(e){}return "";}
 async function loadFile(i){
   const f=curItem?.files?.[i];const box=$("#v-pages");const tok=++viewTok;const dl=$("#v-dl");
   if(!f){dl.hidden=true;box.innerHTML='<p class="msg">لا توجد ملفات مرفقة بهذا الشاهد.</p>';return;}
   const k=kindOf(f);
-  if(k==="link"){dl.hidden=true;const em=embedOf(f.url);box.innerHTML=(em?`<div class="vvid"><iframe src="${esc(em)}" title="${esc(f.name||"فيديو")}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:"")+linkBox(f.url,"فتح الرابط");drawQR(f.url);return;}
+  if(k==="link"){dl.hidden=true;const em=embedOf(f.url);const dv=/\.(mp4|webm|m4v|mov)(\?|#|$)/i.test(f.url);box.innerHTML=(dv?`<div class="vvid"><video src="${esc(f.url)}" controls playsinline preload="metadata"></video></div>`:"")+(em?`<div class="vvid"><iframe src="${esc(em)}" title="${esc(f.name||"فيديو")}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:"")+linkBox(f.url,"فتح الرابط");drawQR(f.url);return;}
   const url=fileUrl(f.path);dl.hidden=!url;dl.href=url;
   if(url&&k==="word"){box.innerHTML=`<p class="msg">📝 ملف وورد — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p><iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`;return;}
   if(url&&k==="excel"){box.innerHTML=`<p class="msg">📊 ملف إكسل — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p>`+(f.type==="text/csv"?"":`<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`);return;}
@@ -1834,33 +1864,34 @@ $("#g-files").addEventListener("click",async e=>{const b=e.target.closest("[data
   b.disabled=true;try{const r=await rpc("vice_file_delete",{p:adminPin,fid:b.dataset.gdel});if(r.ok){await removeFiles((r.files||[]).flatMap(f=>[f.path,f.thumb]));await loadVice();renderGrowth();toast2("تم الحذف");}}catch(err){b.textContent="تعذّر";}});
 /* add dialog */
 let gAtt=[],gKind=null;
-function renderGAtt(){$("#ga-list").innerHTML=gAtt.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-grm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
-$("#g-add").onclick=()=>{if(!curG)return;$("#f-gadd").reset();gAtt=[];renderGAtt();$("#ga-msg").textContent="";$("#ga-dom").textContent=GDM[curG].name;$("#ga-link").hidden=true;$("#dlg-gadd").hidden=false;setTimeout(()=>$("#ga-title").focus(),50);};
+function renderGAtt(){$("#ga-list").innerHTML=gAtt.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${bigVid(a)?" · كبير: سيُحفظ في درايفك تلقائيًا":""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-grm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
+$("#g-add").onclick=()=>{if(!curG)return;$("#f-gadd").reset();gAtt=[];renderGAtt();$("#ga-msg").textContent="";$("#ga-dom").textContent=GDM[curG].name;$("#ga-link").hidden=true;$("#ga-vbox").hidden=true;$("#dlg-gadd").hidden=false;setTimeout(()=>$("#ga-title").focus(),50);};
 $("#ga-list").addEventListener("click",e=>{const b=e.target.closest("[data-grm]");if(b){gAtt.splice(+b.dataset.grm,1);renderGAtt();}});
 $("#ga-types").addEventListener("click",e=>{const b=e.target.closest("[data-gat]");if(!b)return;const k=b.dataset.gat;
+  if(k==="video"){const V=$("#ga-vbox");V.hidden=!V.hidden;$("#ga-link").hidden=true;return;}
   if(k==="drive"){gdPick($("#ga-msg"),a=>{gAtt.push(a);renderGAtt();});return;}
   if(k==="link"){const L=$("#ga-link");L.hidden=!L.hidden;if(!L.hidden)$("#ga-url").focus();return;}
   gKind=k;const inp=$("#ga-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
 function gAddUrl(){let u=$("#ga-url").value.trim();if(!u)return true;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#ga-msg").className="msg err";$("#ga-msg").textContent="الرابط غير صحيح.";return false;}gAtt.push({kind:"link",url:u});$("#ga-url").value="";$("#ga-link").hidden=true;renderGAtt();return true;}
-$("#ga-url-add").onclick=gAddUrl;$("#ga-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gAddUrl();}});
+$("#ga-url-add").onclick=gAddUrl;const gVidAdd=vidPanel("ga",x=>{gAtt.push(x);renderGAtt();},k=>{gKind=k;});$("#ga-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gAddUrl();}});
 $("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
   const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:k==="video"?isVidF(f):isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(f.size>maxOf(a)){$("#ga-msg").className="msg err";$("#ga-msg").textContent=tooBig(a);continue;}if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
 async function uploadVice(blob,ext,type){const path=`vice/${uid()}${uid()}.${String(ext).replace(/[^a-z0-9]/gi,"")||"bin"}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)return uploadFile(blob,ext,type);return path;}
-$("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()||!curG)return;if(!gAddUrl())return;const msg=$("#ga-msg"),btn=$("#ga-save");
+$("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()||!curG)return;vidTokEarly(gAtt);if(!gAddUrl()||!gVidAdd())return;const msg=$("#ga-msg"),btn=$("#ga-save");
   if(!gAtt.length){msg.className="msg err";msg.textContent="أضيفي ملفًا أو رابطًا واحدًا على الأقل.";return;}
   const bad=gAtt.find(a=>a.file&&a.file.size>maxOf(a));if(bad){msg.className="msg err";msg.textContent=tooBig(bad);return;}
   btn.disabled=true;msg.className="msg";
   try{const out=[];const ups=gAtt.filter(a=>a.file);let ui=0;
     for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:a.gdName||"رابط"});continue;}
-      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=safeExt(f,a.kind);
+      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;if(bigVid(a)){out.push(await vidToDrive(f,msg));continue;}const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=safeExt(f,a.kind);
       const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):a.kind==="video"?(f.type||({mov:"video/quicktime",webm:"video/webm","3gp":"video/3gpp"})[ext]||"video/mp4"):(f.type||"image/jpeg");
-      let path;try{path=await upRetry(()=>uploadVice(f,ext,type));}catch(er){if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,vid:a.kind==="video"};}let thumb=null;
+      let path;try{path=await upRetry(()=>uploadVice(f,ext,type));}catch(er){if(a.kind==="video"){out.push(await vidToDrive(f,msg));continue;}if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,vid:a.kind==="video"};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,600);const bl=await new Promise(r=>cv.toBlob(r,"image/jpeg",.8));if(bl)thumb=await uploadVice(bl,"jpg","image/jpeg");}catch(_){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
     msg.textContent="جارٍ الحفظ…";
     const r=await rpc("vice_file_add",{p:adminPin,it:{domain:curG,title:$("#ga-title").value.trim(),descr:$("#ga-desc").value.trim(),files:out}});if(!r||!r.ok)throw r;
     $("#dlg-gadd").hidden=true;await loadVice();renderGrowth();toast2("تمت الإضافة ✓");
-  }catch(err){console.error(err);msg.className="msg err";msg.textContent=err&&err.upl?(err.vid?`تعذّر رفع الفيديو «${err.upl}». جرّبي اختياره من الدرايف أو إضافة رابط يوتيوب.`:`تعذّر رفع الملف «${err.upl}».`):"تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}});
+  }catch(err){console.error(err);msg.className="msg err";msg.textContent=err&&err.vmsg?err.vmsg:err&&err.upl?(err.vid?`تعذّر رفع الفيديو «${err.upl}». جرّبي اختياره من الدرايف أو إضافة رابط يوتيوب.`:`تعذّر رفع الملف «${err.upl}».`):"تعذّر الحفظ. تحققي من الاتصال ثم أعيدي المحاولة.";}finally{btn.disabled=false;}});
 
 /* ---- حضور الحصص ---- */
 function openVisits(){if(!isObs())return;curT=null;curD=null;showView("visits");renderVisits();toMain();}
