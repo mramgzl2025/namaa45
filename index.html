@@ -266,6 +266,8 @@ footer b{color:var(--hero-ink)}
 @media (max-width:420px){.atypes{gap:4px}.atypes button{font-size:10.5px!important;padding:6px 1px!important}.atypes button span{font-size:16px!important}}
 .atypes button{display:grid;justify-items:center;gap:2px;padding:7px 2px;border:1.5px solid color-mix(in srgb,var(--c) 35%,var(--line));border-radius:11px;background:color-mix(in srgb,var(--c) 8%,var(--surface));color:var(--ink);font:inherit;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap}
 .atypes button span{font-size:18px;line-height:1;color:var(--c)}
+.atypes button.gd{grid-column:1/-1;grid-auto-flow:column;justify-content:center;align-items:center;gap:8px;padding:9px 6px;font-size:13px!important}
+.atypes button.gd span{display:flex}
 .atypes button:hover,.atypes button[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--surface))}
 .alink{display:flex;gap:8px;margin-top:10px}.alink input{flex:1;min-width:0}.alink .btn{flex:none}
 .alist{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
@@ -947,6 +949,7 @@ body.has-sbar footer{padding-bottom:120px}
         <button type="button" data-at="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
         <button type="button" data-at="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-at="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
+        <button type="button" data-at="drive" class="gd" style="--c:#1A73E8"><span><svg viewBox="0 0 87.3 78" width="20" height="18" aria-hidden="true"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg></span>اختيار من درايف</button>
       </div>
       <input id="a-pick" type="file" hidden multiple>
       <div class="alink" id="a-link" hidden><input id="a-url" type="url" inputmode="url" dir="ltr" placeholder="https://"><button type="button" class="btn btn-primary" id="a-url-add">إضافة الرابط</button></div>
@@ -986,6 +989,7 @@ body.has-sbar footer{padding-bottom:120px}
         <button type="button" data-gat="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
         <button type="button" data-gat="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-gat="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
+        <button type="button" data-gat="drive" class="gd" style="--c:#1A73E8"><span><svg viewBox="0 0 87.3 78" width="20" height="18" aria-hidden="true"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg></span>اختيار من درايف</button>
       </div>
       <input id="ga-pick" type="file" hidden multiple>
       <div class="alink" id="ga-link" hidden><input id="ga-url" type="text" inputmode="url" dir="ltr" placeholder="https://"><button type="button" class="btn btn-primary" id="ga-url-add">إضافة الرابط</button></div>
@@ -1524,12 +1528,46 @@ const fmtSize=n=>n>1048576?(n/1048576).toFixed(1)+" م.ب":Math.max(1,Math.round
 function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?a.url:a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
 $("#a-list").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){att.splice(+b.dataset.rm,1);renderAtt();}});
 $("#a-types").addEventListener("click",e=>{const b=e.target.closest("[data-at]");if(!b)return;const k=b.dataset.at;
+  if(k==="drive"){gdPick($("#a-msg"),a=>{att.push(a);renderAtt();});return;}
   if(k==="link"){const L=$("#a-link");L.hidden=!L.hidden;if(!L.hidden)$("#a-url").focus();return;}
   pickKind=k;const inp=$("#a-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";
   if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
 function addUrl(){let u=$("#a-url").value.trim();if(!u)return;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#a-msg").className="msg err";$("#a-msg").textContent="الرابط غير صحيح.";return;}
   att.push({kind:"link",url:u});$("#a-url").value="";$("#a-link").hidden=true;$("#a-msg").textContent="";renderAtt();}
 $("#a-url-add").onclick=addUrl;$("#a-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addUrl();}});
+/* Google Drive picker — يملأ الإعداد مرة واحدة من Google Cloud */
+const GDRIVE={clientId:"993783176366-1v15gbroam95e5tsss68chiit7gpku54.apps.googleusercontent.com",apiKey:"AIzaSyAONCV-Krpz7ajhQZ_y76VtOTW_aIYTIq0",appId:"993783176366"};
+let gdTok=null,gdTokExp=0,gdTC=null;
+function gdLoad(src){return new Promise((ok,no)=>{if(document.querySelector(`script[src="${src}"]`)&&(src.includes("gsi")?window.google&&google.accounts:window.gapi))return ok();const t=document.createElement("script");t.src=src;t.async=true;t.onload=ok;t.onerror=no;document.head.appendChild(t);});}
+async function gdReady(){await gdLoad("https://accounts.google.com/gsi/client");await gdLoad("https://apis.google.com/js/api.js");if(!(window.google&&google.picker))await new Promise(r=>gapi.load("picker",r));}
+function gdToken(){return new Promise((ok,no)=>{if(gdTok&&Date.now()<gdTokExp)return ok(gdTok);
+  if(!gdTC)gdTC=google.accounts.oauth2.initTokenClient({client_id:GDRIVE.clientId,scope:"https://www.googleapis.com/auth/drive.file",callback:()=>{}});
+  gdTC.callback=r=>{if(r.error)return no(r);gdTok=r.access_token;gdTokExp=Date.now()+(r.expires_in-60)*1000;ok(gdTok);};
+  gdTC.error_callback=no;gdTC.requestAccessToken({prompt:gdTok?"":"select_account"});});}
+const GD_EXPORT={"application/vnd.google-apps.document":["application/vnd.openxmlformats-officedocument.wordprocessingml.document","docx"],"application/vnd.google-apps.spreadsheet":["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","xlsx"],"application/vnd.google-apps.presentation":["application/pdf","pdf"],"application/vnd.google-apps.drawing":["image/png","png"]};
+function gdKind(name,type){if(type==="application/pdf"||/\.pdf$/i.test(name))return "pdf";if(/\.docx?$/i.test(name)||/word|msword/.test(type))return "word";if(/\.(xlsx?|csv)$/i.test(name)||/sheet|excel|csv/.test(type))return "excel";if(type.startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(name))return "image";return "";}
+async function gdPick(msg,add){
+  if(!GDRIVE.clientId||!GDRIVE.apiKey){msg.className="msg err";msg.textContent="زر الدرايف لم يُفعَّل بعد. يمكنك الآن استخدام أيقونة الصورة أو PDF أو وورد أو إكسل.";return;}
+  msg.className="msg";msg.textContent="جارٍ فتح الدرايف…";
+  let tok;try{await gdReady();tok=await gdToken();}catch(e){msg.className="msg err";msg.textContent="لم يكتمل الدخول إلى حساب قوقل. حاولي مرة أخرى.";return;}
+  msg.textContent="";
+  const view=new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(false)
+    .setMimeTypes(["application/pdf","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv","image/png","image/jpeg","image/webp","image/gif","image/heic",...Object.keys(GD_EXPORT)].join(","));
+  const pk=new google.picker.PickerBuilder().addView(view).enableFeature(google.picker.Feature.MULTISELECT_ENABLED).setLocale("ar")
+    .setOAuthToken(tok).setDeveloperKey(GDRIVE.apiKey).setAppId(GDRIVE.appId).setTitle("اختاري الملفات من الدرايف")
+    .setCallback(async d=>{if(d.action!==google.picker.Action.PICKED)return;
+      const docs=d.docs||[];let n=0;
+      for(const doc of docs){msg.className="msg";msg.textContent=`جارٍ جلب «${doc.name}» من الدرايف… (${++n}/${docs.length})`;
+        try{const ex=GD_EXPORT[doc.mimeType];let name=doc.name,url;
+          if(ex){url=`https://www.googleapis.com/drive/v3/files/${doc.id}/export?mimeType=${encodeURIComponent(ex[0])}`;if(!new RegExp("\\."+ex[1]+"$","i").test(name))name+="."+ex[1];}
+          else url=`https://www.googleapis.com/drive/v3/files/${doc.id}?alt=media&supportsAllDrives=true`;
+          const r=await fetch(url,{headers:{Authorization:"Bearer "+tok}});if(!r.ok)throw new Error(r.status);
+          const b=await r.blob();const type=ex?ex[0]:(b.type||doc.mimeType||"");const k=gdKind(name,type);
+          if(!k){msg.className="msg err";msg.textContent=`الملف «${doc.name}» نوعه غير مدعوم.`;continue;}
+          add({kind:k,file:new File([b],name,{type})});
+        }catch(e){msg.className="msg err";msg.textContent=`تعذّر جلب «${doc.name}» من الدرايف.`;}}
+      if(msg.className!=="msg err")msg.textContent="";}).build();
+  pk.setVisible(true);}
 async function readBarcode(file){try{if(!("BarcodeDetector" in window))return "";const bd=new BarcodeDetector();const bmp=await createImageBitmap(file);const r=await bd.detect(bmp);return (r[0]&&r[0].rawValue)||"";}catch(e){return "";}}
 $("#a-pick").addEventListener("change",async()=>{const k=pickKind;const fs=[...$("#a-pick").files];
   for(const f of fs){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
@@ -1764,6 +1802,7 @@ function renderGAtt(){$("#ga-list").innerHTML=gAtt.map((a,i)=>`<li><span class="
 $("#g-add").onclick=()=>{if(!curG)return;$("#f-gadd").reset();gAtt=[];renderGAtt();$("#ga-msg").textContent="";$("#ga-dom").textContent=GDM[curG].name;$("#ga-link").hidden=true;$("#dlg-gadd").hidden=false;setTimeout(()=>$("#ga-title").focus(),50);};
 $("#ga-list").addEventListener("click",e=>{const b=e.target.closest("[data-grm]");if(b){gAtt.splice(+b.dataset.grm,1);renderGAtt();}});
 $("#ga-types").addEventListener("click",e=>{const b=e.target.closest("[data-gat]");if(!b)return;const k=b.dataset.gat;
+  if(k==="drive"){gdPick($("#ga-msg"),a=>{gAtt.push(a);renderGAtt();});return;}
   if(k==="link"){const L=$("#ga-link");L.hidden=!L.hidden;if(!L.hidden)$("#ga-url").focus();return;}
   gKind=k;const inp=$("#ga-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
 function gAddUrl(){let u=$("#ga-url").value.trim();if(!u)return true;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#ga-msg").className="msg err";$("#ga-msg").textContent="الرابط غير صحيح.";return false;}gAtt.push({kind:"link",url:u});$("#ga-url").value="";$("#ga-link").hidden=true;renderGAtt();return true;}
