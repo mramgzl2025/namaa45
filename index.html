@@ -1530,7 +1530,7 @@ let att=[],pickKind=null;
 const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},excel:{ic:"📊",l:"إكسل",acc:".xls,.xlsx,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
 const kindOf=f=>f.kind||(f.type==="link"?"link":f.type==="application/pdf"?"pdf":/word|msword/.test(f.type||"")?"word":/sheet|excel|csv/.test(f.type||"")?"excel":"image");
 const fmtSize=n=>n>1048576?(n/1048576).toFixed(1)+" م.ب":Math.max(1,Math.round(n/1024))+" ك.ب";
-function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?a.url:a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
+function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
 $("#a-list").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){att.splice(+b.dataset.rm,1);renderAtt();}});
 $("#a-types").addEventListener("click",e=>{const b=e.target.closest("[data-at]");if(!b)return;const k=b.dataset.at;
   if(k==="drive"){gdPick($("#a-msg"),a=>{att.push(a);renderAtt();});return;}
@@ -1554,13 +1554,16 @@ function gdErrText(e){const t=(e&&(e.type||e.error))||"";
   if(t==="access_denied")return "لم يكتمل السماح من حساب قوقل. أعيدي المحاولة واضغطي «متابعة» (Continue) في نافذة قوقل.";
   return "لم يكتمل الدخول إلى حساب قوقل. حاولي مرة أخرى.";}
 window.addEventListener("load",()=>setTimeout(()=>{if(!gdInApp())gdPre().catch(()=>{});},1500));
+try{const sv=JSON.parse(localStorage.getItem("namaa_gd")||"null");if(sv&&sv.exp>Date.now()){gdTok=sv.t;gdTokExp=sv.exp;}}catch(e){}
 function gdToken(){return new Promise((ok,no)=>{if(gdTok&&Date.now()<gdTokExp)return ok(gdTok);
   if(!gdTC)gdTC=google.accounts.oauth2.initTokenClient({client_id:GDRIVE.clientId,scope:"https://www.googleapis.com/auth/drive.file",callback:()=>{}});
-  gdTC.callback=r=>{if(r.error)return no(r);gdTok=r.access_token;gdTokExp=Date.now()+(r.expires_in-60)*1000;ok(gdTok);};
-  gdTC.error_callback=no;gdTC.requestAccessToken({prompt:gdTok?"":"select_account"});});}
+  gdTC.callback=r=>{if(r.error)return no(r);gdTok=r.access_token;gdTokExp=Date.now()+(r.expires_in-60)*1000;try{localStorage.setItem("namaa_gd",JSON.stringify({t:gdTok,exp:gdTokExp}));localStorage.setItem("namaa_gd_ok","1");}catch(e){}ok(gdTok);};
+  gdTC.error_callback=no;let seen=false;try{seen=!!localStorage.getItem("namaa_gd_ok");}catch(e){}gdTC.requestAccessToken({prompt:(gdTok||seen)?"":"select_account"});});}
 const GD_EXPORT={"application/vnd.google-apps.document":["application/vnd.openxmlformats-officedocument.wordprocessingml.document","docx"],"application/vnd.google-apps.spreadsheet":["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","xlsx"],"application/vnd.google-apps.presentation":["application/pdf","pdf"],"application/vnd.google-apps.drawing":["image/png","png"]};
 function gdKind(name,type){if(type==="application/pdf"||/\.pdf$/i.test(name))return "pdf";if(/\.docx?$/i.test(name)||/word|msword/.test(type))return "word";if(/\.(xlsx?|csv)$/i.test(name)||/sheet|excel|csv/.test(type))return "excel";if(type.startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(name))return "image";return "";}
-async function gdPick(msg,add){
+async function gdShare(id){try{if(!gdTok)return;await fetch(`https://www.googleapis.com/drive/v3/files/${id}/permissions?supportsAllDrives=true`,{method:"POST",headers:{Authorization:"Bearer "+gdTok,"Content-Type":"application/json"},body:JSON.stringify({role:"reader",type:"anyone"})});}catch(e){}}
+async function upRetry(fn){let er;for(let i=0;i<3;i++){try{return await fn();}catch(x){er=x;await new Promise(r=>setTimeout(r,900*(i+1)));}}throw er;}
+async function gdPick(msg,add){const ttl=$(msg.id==="ga-msg"?"#ga-title":"#a-name");
   if(!GDRIVE.clientId||!GDRIVE.apiKey){msg.className="msg err";msg.textContent="زر الدرايف لم يُفعَّل بعد. يمكنك الآن استخدام أيقونة الصورة أو PDF أو وورد أو إكسل.";return;}
   if(gdInApp()){msg.className="msg err";msg.textContent="أنتِ تفتحين الموقع من داخل تطبيق (مثل الواتساب)، وقوقل لا يسمح بالدخول من هنا. اضغطي النقاط الثلاث ⋮ أو زر المشاركة واختاري «فتح في Chrome» أو «فتح في Safari»، ثم أعيدي المحاولة.";return;}
   msg.className="msg";msg.textContent="جارٍ فتح الدرايف…";
@@ -1572,16 +1575,22 @@ async function gdPick(msg,add){
     .setOAuthToken(tok).setDeveloperKey(GDRIVE.apiKey).setAppId(GDRIVE.appId).setTitle("اختاري الملفات من الدرايف")
     .setCallback(async d=>{if(d.action!==google.picker.Action.PICKED)return;
       const docs=d.docs||[];let n=0;
+      const notes=[];
       for(const doc of docs){msg.className="msg";msg.textContent=`جارٍ جلب «${doc.name}» من الدرايف… (${++n}/${docs.length})`;
-        try{const ex=GD_EXPORT[doc.mimeType];let name=doc.name,url;
+        const dUrl=doc.url||`https://drive.google.com/file/d/${doc.id}/view`;const base=String(doc.name||"").replace(/\.[a-z0-9]{1,5}$/i,"");
+        if(ttl&&!ttl.value.trim())ttl.value=base.slice(0,140);
+        const asLink=async why=>{await gdShare(doc.id);add({kind:"link",url:dUrl,gdName:base||"ملف من الدرايف"});notes.push(`«${base}» أُضيف كرابط من الدرايف (${why}).`);};
+        try{if(Number(doc.sizeBytes)>20*1024*1024){await asLink("حجمه كبير");continue;}
+          const ex=GD_EXPORT[doc.mimeType];let name=doc.name,url;
           if(ex){url=`https://www.googleapis.com/drive/v3/files/${doc.id}/export?mimeType=${encodeURIComponent(ex[0])}`;if(!new RegExp("\\."+ex[1]+"$","i").test(name))name+="."+ex[1];}
           else url=`https://www.googleapis.com/drive/v3/files/${doc.id}?alt=media&supportsAllDrives=true`;
-          const r=await fetch(url,{headers:{Authorization:"Bearer "+tok}});if(!r.ok)throw new Error(r.status);
+          const r=await upRetry(async()=>{const x=await fetch(url,{headers:{Authorization:"Bearer "+tok}});if(!x.ok)throw new Error(x.status);return x;});
           const b=await r.blob();const type=ex?ex[0]:(b.type||doc.mimeType||"");const k=gdKind(name,type);if(k&&!/\.[a-z0-9]{1,5}$/i.test(name)){const e={pdf:"pdf",word:/msword/.test(type)?"doc":"docx",excel:/csv/.test(type)?"csv":/ms-excel/.test(type)?"xls":"xlsx",image:({"image/png":"png","image/webp":"webp","image/gif":"gif","image/heic":"heic"})[type]||"jpg"}[k];name+="."+e;}
-          if(!k){msg.className="msg err";msg.textContent=`الملف «${doc.name}» نوعه غير مدعوم.`;continue;}
-          add({kind:k,file:new File([b],name,{type})});
-        }catch(e){msg.className="msg err";msg.textContent=`تعذّر جلب «${doc.name}» من الدرايف.`;}}
-      if(msg.className!=="msg err")msg.textContent="";}).build();
+          if(!k||b.size>20*1024*1024){await asLink(!k?"نوعه لا يُرفع كملف":"حجمه كبير");continue;}
+          add({kind:k,file:new File([b],name,{type}),gd:{id:doc.id,url:dUrl,name:base}});
+        }catch(e){await asLink("تعذّر نسخه");}}
+      msg.className="msg";msg.textContent=notes.length?notes.join(" "):"";
+      }).build();
   pk.setVisible(true);}
 async function readBarcode(file){try{if(!("BarcodeDetector" in window))return "";const bd=new BarcodeDetector();const bmp=await createImageBitmap(file);const r=await bd.detect(bmp);return (r[0]&&r[0].rawValue)||"";}catch(e){return "";}}
 $("#a-pick").addEventListener("change",async()=>{const k=pickKind;const fs=[...$("#a-pick").files];
@@ -1599,12 +1608,12 @@ $("#f-add").addEventListener("submit",async e=>{
     const out=[];
     let ui=0;
     for(const a of att){
-      if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
+      if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:a.gdName||"رابط"});continue;}
       const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;
       const isPdf=a.kind==="pdf";const isWord=a.kind==="word";const isXl=a.kind==="excel";
       const ext=safeExt(f,a.kind);
       const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):(f.type||"image/jpeg");
-      let path;try{path=await uploadFile(f,ext,type);}catch(er){throw {upl:f.name,er};}let thumb=null;
+      let path;try{path=await upRetry(()=>uploadFile(f,ext,type));}catch(er){if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,er};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
     msg.textContent="جارٍ الحفظ…";
@@ -1813,7 +1822,7 @@ $("#g-files").addEventListener("click",async e=>{const b=e.target.closest("[data
   b.disabled=true;try{const r=await rpc("vice_file_delete",{p:adminPin,fid:b.dataset.gdel});if(r.ok){await removeFiles((r.files||[]).flatMap(f=>[f.path,f.thumb]));await loadVice();renderGrowth();toast2("تم الحذف");}}catch(err){b.textContent="تعذّر";}});
 /* add dialog */
 let gAtt=[],gKind=null;
-function renderGAtt(){$("#ga-list").innerHTML=gAtt.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?a.url:a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-grm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
+function renderGAtt(){$("#ga-list").innerHTML=gAtt.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-grm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
 $("#g-add").onclick=()=>{if(!curG)return;$("#f-gadd").reset();gAtt=[];renderGAtt();$("#ga-msg").textContent="";$("#ga-dom").textContent=GDM[curG].name;$("#ga-link").hidden=true;$("#dlg-gadd").hidden=false;setTimeout(()=>$("#ga-title").focus(),50);};
 $("#ga-list").addEventListener("click",e=>{const b=e.target.closest("[data-grm]");if(b){gAtt.splice(+b.dataset.grm,1);renderGAtt();}});
 $("#ga-types").addEventListener("click",e=>{const b=e.target.closest("[data-gat]");if(!b)return;const k=b.dataset.gat;
@@ -1830,10 +1839,10 @@ $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()
   const bad=gAtt.find(a=>a.file&&a.file.size>20*1024*1024);if(bad){msg.className="msg err";msg.textContent=`الملف «${bad.file.name}» أكبر من 20 ميجابايت.`;return;}
   btn.disabled=true;msg.className="msg";
   try{const out=[];const ups=gAtt.filter(a=>a.file);let ui=0;
-    for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
+    for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:a.gdName||"رابط"});continue;}
       const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=safeExt(f,a.kind);
       const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):(f.type||"image/jpeg");
-      let path;try{path=await uploadVice(f,ext,type);}catch(er){throw {upl:f.name};}let thumb=null;
+      let path;try{path=await upRetry(()=>uploadVice(f,ext,type));}catch(er){if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,600);const bl=await new Promise(r=>cv.toBlob(r,"image/jpeg",.8));if(bl)thumb=await uploadVice(bl,"jpg","image/jpeg");}catch(_){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
     msg.textContent="جارٍ الحفظ…";
