@@ -1181,7 +1181,12 @@ const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d;}catch(e){r
 const sb=(CFG.SUPABASE_URL&&CFG.SUPABASE_ANON_KEY&&window.supabase)?window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY):null;
 const rpc=async(fn,args)=>{const {data,error}=await sb.rpc(fn,args||{});if(error)throw error;return data;};
 const fileUrl=p=>sb?sb.storage.from("files").getPublicUrl(p).data.publicUrl:"";
-async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
+function safeExt(f,kind){const m=/\.([a-z0-9]{1,5})$/i.exec(f.name||"");if(m)return m[1].toLowerCase();const t=(f.type||"").toLowerCase();
+  if(kind==="pdf"||t==="application/pdf")return "pdf";
+  if(kind==="word")return t==="application/msword"?"doc":"docx";
+  if(kind==="excel")return t==="text/csv"?"csv":t==="application/vnd.ms-excel"?"xls":"xlsx";
+  const im={"image/png":"png","image/jpeg":"jpg","image/webp":"webp","image/gif":"gif","image/heic":"heic","image/heif":"heic"};return im[t]||"jpg";}
+async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${String(ext).replace(/[^a-z0-9]/gi,"")||"bin"}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
 const norm=r=>({...r,createdAt:Date.parse(r.created_at)});
 const PINERR={pin:"الرمز غير صحيح.",locked:"تم إيقاف المحاولات مؤقتًا بعد عدة أخطاء. حاولي لاحقًا، ومن نسيت رمزها تطلبه من وكيلة شؤون المعلمات.",notfound:"لم يُعثر على هذا الاسم.",weak:"الرمز يجب أن يكون ٤ أرقام.",taken:"هذا الرمز مستخدم. اختاري رمزًا آخر."};
 $("#demo-bar").hidden=true;
@@ -1540,6 +1545,15 @@ const GDRIVE={clientId:"993783176366-1v15gbroam95e5tsss68chiit7gpku54.apps.googl
 let gdTok=null,gdTokExp=0,gdTC=null;
 function gdLoad(src){return new Promise((ok,no)=>{if(document.querySelector(`script[src="${src}"]`)&&(src.includes("gsi")?window.google&&google.accounts:window.gapi))return ok();const t=document.createElement("script");t.src=src;t.async=true;t.onload=ok;t.onerror=no;document.head.appendChild(t);});}
 async function gdReady(){await gdLoad("https://accounts.google.com/gsi/client");await gdLoad("https://apis.google.com/js/api.js");if(!(window.google&&google.picker))await new Promise(r=>gapi.load("picker",r));}
+let gdReadyP=null;function gdPre(){if(!gdReadyP)gdReadyP=gdReady().catch(e=>{gdReadyP=null;throw e;});return gdReadyP;}
+function gdIsReady(){return !!(window.google&&google.accounts&&google.accounts.oauth2&&google.picker);}
+function gdInApp(){const u=navigator.userAgent||"";return /WhatsApp|Instagram|FBAN|FBAV|FB_IAB|Snapchat|Line\/|MicroMessenger|TikTok|musical_ly|Twitter/i.test(u)||(/Android/.test(u)&&/; wv\)/.test(u));}
+function gdErrText(e){const t=(e&&(e.type||e.error))||"";
+  if(t==="popup_failed_to_open")return "المتصفح منع نافذة تسجيل الدخول إلى قوقل. اسمحي بالنوافذ المنبثقة لهذا الموقع ثم اضغطي «اختيار من درايف» مرة أخرى.";
+  if(t==="popup_closed")return "أُغلقت نافذة قوقل قبل إكمال الدخول. اضغطي «اختيار من درايف» مرة أخرى واختاري حسابك ثم «متابعة».";
+  if(t==="access_denied")return "لم يكتمل السماح من حساب قوقل. أعيدي المحاولة واضغطي «متابعة» (Continue) في نافذة قوقل.";
+  return "لم يكتمل الدخول إلى حساب قوقل. حاولي مرة أخرى.";}
+window.addEventListener("load",()=>setTimeout(()=>{if(!gdInApp())gdPre().catch(()=>{});},1500));
 function gdToken(){return new Promise((ok,no)=>{if(gdTok&&Date.now()<gdTokExp)return ok(gdTok);
   if(!gdTC)gdTC=google.accounts.oauth2.initTokenClient({client_id:GDRIVE.clientId,scope:"https://www.googleapis.com/auth/drive.file",callback:()=>{}});
   gdTC.callback=r=>{if(r.error)return no(r);gdTok=r.access_token;gdTokExp=Date.now()+(r.expires_in-60)*1000;ok(gdTok);};
@@ -1548,8 +1562,9 @@ const GD_EXPORT={"application/vnd.google-apps.document":["application/vnd.openxm
 function gdKind(name,type){if(type==="application/pdf"||/\.pdf$/i.test(name))return "pdf";if(/\.docx?$/i.test(name)||/word|msword/.test(type))return "word";if(/\.(xlsx?|csv)$/i.test(name)||/sheet|excel|csv/.test(type))return "excel";if(type.startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(name))return "image";return "";}
 async function gdPick(msg,add){
   if(!GDRIVE.clientId||!GDRIVE.apiKey){msg.className="msg err";msg.textContent="زر الدرايف لم يُفعَّل بعد. يمكنك الآن استخدام أيقونة الصورة أو PDF أو وورد أو إكسل.";return;}
+  if(gdInApp()){msg.className="msg err";msg.textContent="أنتِ تفتحين الموقع من داخل تطبيق (مثل الواتساب)، وقوقل لا يسمح بالدخول من هنا. اضغطي النقاط الثلاث ⋮ أو زر المشاركة واختاري «فتح في Chrome» أو «فتح في Safari»، ثم أعيدي المحاولة.";return;}
   msg.className="msg";msg.textContent="جارٍ فتح الدرايف…";
-  let tok;try{await gdReady();tok=await gdToken();}catch(e){msg.className="msg err";msg.textContent="لم يكتمل الدخول إلى حساب قوقل. حاولي مرة أخرى.";return;}
+  let tok;try{if(!gdIsReady()){await gdPre();}tok=await gdToken();}catch(e){msg.className="msg err";msg.textContent=gdErrText(e);return;}
   msg.textContent="";
   const view=new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(false)
     .setMimeTypes(["application/pdf","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv","image/png","image/jpeg","image/webp","image/gif","image/heic",...Object.keys(GD_EXPORT)].join(","));
@@ -1562,7 +1577,7 @@ async function gdPick(msg,add){
           if(ex){url=`https://www.googleapis.com/drive/v3/files/${doc.id}/export?mimeType=${encodeURIComponent(ex[0])}`;if(!new RegExp("\\."+ex[1]+"$","i").test(name))name+="."+ex[1];}
           else url=`https://www.googleapis.com/drive/v3/files/${doc.id}?alt=media&supportsAllDrives=true`;
           const r=await fetch(url,{headers:{Authorization:"Bearer "+tok}});if(!r.ok)throw new Error(r.status);
-          const b=await r.blob();const type=ex?ex[0]:(b.type||doc.mimeType||"");const k=gdKind(name,type);
+          const b=await r.blob();const type=ex?ex[0]:(b.type||doc.mimeType||"");const k=gdKind(name,type);if(k&&!/\.[a-z0-9]{1,5}$/i.test(name)){const e={pdf:"pdf",word:/msword/.test(type)?"doc":"docx",excel:/csv/.test(type)?"csv":/ms-excel/.test(type)?"xls":"xlsx",image:({"image/png":"png","image/webp":"webp","image/gif":"gif","image/heic":"heic"})[type]||"jpg"}[k];name+="."+e;}
           if(!k){msg.className="msg err";msg.textContent=`الملف «${doc.name}» نوعه غير مدعوم.`;continue;}
           add({kind:k,file:new File([b],name,{type})});
         }catch(e){msg.className="msg err";msg.textContent=`تعذّر جلب «${doc.name}» من الدرايف.`;}}
@@ -1587,7 +1602,7 @@ $("#f-add").addEventListener("submit",async e=>{
       if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
       const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;
       const isPdf=a.kind==="pdf";const isWord=a.kind==="word";const isXl=a.kind==="excel";
-      const ext=(f.name.split(".").pop()||(isPdf?"pdf":"jpg")).toLowerCase();
+      const ext=safeExt(f,a.kind);
       const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):(f.type||"image/jpeg");
       let path;try{path=await uploadFile(f,ext,type);}catch(er){throw {upl:f.name,er};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
@@ -1809,14 +1824,14 @@ function gAddUrl(){let u=$("#ga-url").value.trim();if(!u)return true;if(!/^[a-z]
 $("#ga-url-add").onclick=gAddUrl;$("#ga-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gAddUrl();}});
 $("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
   const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
-async function uploadVice(blob,ext,type){const path=`vice/${uid()}${uid()}.${ext}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)return uploadFile(blob,ext,type);return path;}
+async function uploadVice(blob,ext,type){const path=`vice/${uid()}${uid()}.${String(ext).replace(/[^a-z0-9]/gi,"")||"bin"}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)return uploadFile(blob,ext,type);return path;}
 $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()||!curG)return;if(!gAddUrl())return;const msg=$("#ga-msg"),btn=$("#ga-save");
   if(!gAtt.length){msg.className="msg err";msg.textContent="أضيفي ملفًا أو رابطًا واحدًا على الأقل.";return;}
   const bad=gAtt.find(a=>a.file&&a.file.size>20*1024*1024);if(bad){msg.className="msg err";msg.textContent=`الملف «${bad.file.name}» أكبر من 20 ميجابايت.`;return;}
   btn.disabled=true;msg.className="msg";
   try{const out=[];const ups=gAtt.filter(a=>a.file);let ui=0;
     for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:"رابط"});continue;}
-      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=(f.name.split(".").pop()||(isPdf?"pdf":"jpg")).toLowerCase();
+      const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=safeExt(f,a.kind);
       const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):(f.type||"image/jpeg");
       let path;try{path=await uploadVice(f,ext,type);}catch(er){throw {upl:f.name};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,600);const bl=await new Promise(r=>cv.toBlob(r,"image/jpeg",.8));if(bl)thumb=await uploadVice(bl,"jpg","image/jpeg");}catch(_){}}
