@@ -262,7 +262,7 @@ footer b{color:var(--hero-ink)}
 .drop .dt b{color:var(--accent);font-size:15px}
 .drop .dt small{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
 .drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
-.atypes{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.atypes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .vbox{margin-top:10px;padding:12px;border:1.5px dashed color-mix(in srgb,#B4233C 45%,var(--line));border-radius:14px;background:color-mix(in srgb,#B4233C 5%,var(--surface));display:grid;gap:9px}.vbox .vb-t{margin:0;font-weight:800;font-size:14px}.vb-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.vb-btns .btn{justify-content:center;padding:10px 6px;font-size:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}.vb-btns .btn:hover{border-color:#B4233C}.vbox .alink{margin-top:0}
 .vvid{display:grid;gap:10px;justify-items:center}.vvid video,.vvid iframe{width:100%;max-height:70vh;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
 @media (max-width:420px){.atypes{gap:4px}.atypes button{font-size:10.5px!important;padding:6px 1px!important}.atypes button span{font-size:16px!important}}
@@ -945,14 +945,14 @@ body.has-sbar footer{padding-bottom:120px}
     <div class="field"><label for="a-desc">وصف مختصر (اختياري)</label><textarea id="a-desc" maxlength="700"></textarea></div>
     <div class="field"><span class="lbl">المرفقات — اختاري نوع ما تريدين رفعه</span>
       <div class="atypes" id="a-types">
-        <button type="button" data-at="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
-        <button type="button" data-at="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-at="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
-        <button type="button" data-at="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
         <button type="button" data-at="ppt" style="--c:#C4501F"><span>📽️</span>باوربوينت</button>
+        <button type="button" data-at="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
+        <button type="button" data-at="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-at="video" style="--c:#B4233C"><span>🎬</span>فيديو</button>
-        <button type="button" data-at="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
+        <button type="button" data-at="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
         <button type="button" data-at="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
+        <button type="button" data-at="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-at="drive" class="gd" style="--c:#1A73E8"><span><svg viewBox="0 0 87.3 78" width="20" height="18" aria-hidden="true"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg></span>اختيار من درايف</button>
       </div>
       <input id="a-pick" type="file" hidden multiple>
@@ -988,14 +988,14 @@ body.has-sbar footer{padding-bottom:120px}
     <div class="field"><label for="ga-desc">وصف مختصر (اختياري)</label><textarea id="ga-desc" maxlength="700"></textarea></div>
     <div class="field"><span class="lbl">المرفقات — اختاري نوع ما تريدين رفعه</span>
       <div class="atypes" id="ga-types">
-        <button type="button" data-gat="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
-        <button type="button" data-gat="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-gat="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
-        <button type="button" data-gat="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
         <button type="button" data-gat="ppt" style="--c:#C4501F"><span>📽️</span>باوربوينت</button>
+        <button type="button" data-gat="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
+        <button type="button" data-gat="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-gat="video" style="--c:#B4233C"><span>🎬</span>فيديو</button>
-        <button type="button" data-gat="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
+        <button type="button" data-gat="image" style="--c:#2E9D6A"><span>🖼️</span>صورة</button>
         <button type="button" data-gat="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
+        <button type="button" data-gat="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-gat="drive" class="gd" style="--c:#1A73E8"><span><svg viewBox="0 0 87.3 78" width="20" height="18" aria-hidden="true"><path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/><path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/><path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/><path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/><path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/><path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg></span>اختيار من درايف</button>
       </div>
       <input id="ga-pick" type="file" hidden multiple>
