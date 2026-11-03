@@ -949,6 +949,7 @@ body.has-sbar footer{padding-bottom:120px}
         <button type="button" data-at="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-at="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
         <button type="button" data-at="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
+        <button type="button" data-at="ppt" style="--c:#C4501F"><span>📽️</span>باوربوينت</button>
         <button type="button" data-at="video" style="--c:#B4233C"><span>🎬</span>فيديو</button>
         <button type="button" data-at="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-at="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
@@ -991,6 +992,7 @@ body.has-sbar footer{padding-bottom:120px}
         <button type="button" data-gat="pdf" style="--c:#C0457A"><span>📕</span>PDF</button>
         <button type="button" data-gat="word" style="--c:#1F6FD1"><span>📝</span>وورد</button>
         <button type="button" data-gat="excel" style="--c:#1D7A45"><span>📊</span>إكسل</button>
+        <button type="button" data-gat="ppt" style="--c:#C4501F"><span>📽️</span>باوربوينت</button>
         <button type="button" data-gat="video" style="--c:#B4233C"><span>🎬</span>فيديو</button>
         <button type="button" data-gat="link" style="--c:#E07A3F"><span>🔗</span>رابط</button>
         <button type="button" data-gat="barcode" style="--c:#3D4DB8"><span>▦</span>باركود</button>
@@ -1191,6 +1193,7 @@ function safeExt(f,kind){const m=/\.([a-z0-9]{1,5})$/i.exec(f.name||"");if(m)ret
   if(kind==="pdf"||t==="application/pdf")return "pdf";
   if(kind==="word")return t==="application/msword"?"doc":"docx";
   if(kind==="excel")return t==="text/csv"?"csv":t==="application/vnd.ms-excel"?"xls":"xlsx";
+  if(kind==="ppt")return t==="application/vnd.ms-powerpoint"?"ppt":"pptx";
   if(kind==="video")return t==="video/quicktime"?"mov":t==="video/webm"?"webm":t==="video/3gpp"?"3gp":"mp4";
   const im={"image/png":"png","image/jpeg":"jpg","image/webp":"webp","image/gif":"gif","image/heic":"heic","image/heif":"heic"};return im[t]||"jpg";}
 async function uploadFile(blob,ext,type){const path=`${new Date().getFullYear()}/${uid()}${uid()}.${String(ext).replace(/[^a-z0-9]/gi,"")||"bin"}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)throw error;return path;}
@@ -1534,10 +1537,10 @@ document.addEventListener("click",async e=>{
 document.addEventListener("click",e=>{if(e.target.closest("[data-unlock]")&&curT)askPin(curT);});
 /* attachments: image / pdf / word / link / barcode */
 let att=[],pickKind=null;
-const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},excel:{ic:"📊",l:"إكسل",acc:".xls,.xlsx,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"},video:{ic:"🎬",l:"فيديو",acc:"video/*,.mp4,.mov,.m4v,.webm,.3gp"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
+const AT={image:{ic:"🖼️",l:"صورة",acc:"image/*"},pdf:{ic:"📕",l:"PDF",acc:"application/pdf,.pdf"},word:{ic:"📝",l:"وورد",acc:".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"},excel:{ic:"📊",l:"إكسل",acc:".xls,.xlsx,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv"},ppt:{ic:"📽️",l:"باوربوينت",acc:".ppt,.pptx,.pps,.ppsx,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation"},video:{ic:"🎬",l:"فيديو",acc:"video/*,.mp4,.mov,.m4v,.webm,.3gp"},link:{ic:"🔗",l:"رابط"},barcode:{ic:"▦",l:"باركود",acc:"image/*"}};
 const VMAX=20*1024*1024,FMAX=20*1024*1024;const isVidF=f=>(f.type||"").startsWith("video/")||/\.(mp4|mov|m4v|webm|3gp)$/i.test(f.name||"");const maxOf=a=>a.kind==="video"?Infinity:FMAX;const bigVid=a=>a.kind==="video"&&a.file&&a.file.size>VMAX;
 const tooBig=a=>a.kind==="video"?`الفيديو «${a.file.name}» أكبر من 50 ميجابايت. ارفعيه على الدرايف ثم اختاريه بزر «اختيار من درايف»، أو أضيفي رابط يوتيوب.`:`الملف «${a.file.name}» أكبر من 20 ميجابايت.`;
-const kindOf=f=>f.kind||(f.type==="link"?"link":f.type==="application/pdf"?"pdf":/word|msword/.test(f.type||"")?"word":/sheet|excel|csv/.test(f.type||"")?"excel":/^video\//.test(f.type||"")?"video":"image");
+const kindOf=f=>f.kind||(f.type==="link"?"link":f.type==="application/pdf"?"pdf":/word|msword/.test(f.type||"")?"word":/sheet|excel|csv/.test(f.type||"")?"excel":/presentation|powerpoint/.test(f.type||"")?"ppt":/^video\//.test(f.type||"")?"video":"image");
 const fmtSize=n=>n>1048576?(n/1048576).toFixed(1)+" م.ب":Math.max(1,Math.round(n/1024))+" ك.ب";
 function renderAtt(){$("#a-list").innerHTML=att.map((a,i)=>`<li><span class="ai">${AT[a.kind].ic}</span><span class="an">${esc(a.kind==="link"?(a.gdName||a.url):a.file.name)}<small>${AT[a.kind].l}${a.file?" · "+fmtSize(a.file.size):""}${bigVid(a)?" · كبير: سيُحفظ في درايفك تلقائيًا":""}${a.url&&a.kind==="barcode"?" · قُرئ الرابط: "+esc(a.url):""}</small></span><button type="button" data-rm="${i}" aria-label="إزالة">✕</button></li>`).join("");}
 $("#a-list").addEventListener("click",e=>{const b=e.target.closest("[data-rm]");if(b){att.splice(+b.dataset.rm,1);renderAtt();}});
@@ -1569,8 +1572,8 @@ function gdToken(){return new Promise((ok,no)=>{if(gdTok&&Date.now()<gdTokExp)re
   if(!gdTC)gdTC=google.accounts.oauth2.initTokenClient({client_id:GDRIVE.clientId,scope:"https://www.googleapis.com/auth/drive.file",callback:()=>{}});
   gdTC.callback=r=>{if(r.error)return no(r);gdTok=r.access_token;gdTokExp=Date.now()+(r.expires_in-60)*1000;try{localStorage.setItem("namaa_gd",JSON.stringify({t:gdTok,exp:gdTokExp}));localStorage.setItem("namaa_gd_ok","1");}catch(e){}ok(gdTok);};
   gdTC.error_callback=no;let seen=false;try{seen=!!localStorage.getItem("namaa_gd_ok");}catch(e){}gdTC.requestAccessToken({prompt:(gdTok||seen)?"":"select_account"});});}
-const GD_EXPORT={"application/vnd.google-apps.document":["application/vnd.openxmlformats-officedocument.wordprocessingml.document","docx"],"application/vnd.google-apps.spreadsheet":["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","xlsx"],"application/vnd.google-apps.presentation":["application/pdf","pdf"],"application/vnd.google-apps.drawing":["image/png","png"]};
-function gdKind(name,type){if(type==="application/pdf"||/\.pdf$/i.test(name))return "pdf";if(/\.docx?$/i.test(name)||/word|msword/.test(type))return "word";if(/\.(xlsx?|csv)$/i.test(name)||/sheet|excel|csv/.test(type))return "excel";if(type.startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(name))return "image";return "";}
+const GD_EXPORT={"application/vnd.google-apps.document":["application/vnd.openxmlformats-officedocument.wordprocessingml.document","docx"],"application/vnd.google-apps.spreadsheet":["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","xlsx"],"application/vnd.google-apps.presentation":["application/vnd.openxmlformats-officedocument.presentationml.presentation","pptx"],"application/vnd.google-apps.drawing":["image/png","png"]};
+function gdKind(name,type){if(type==="application/pdf"||/\.pdf$/i.test(name))return "pdf";if(/\.docx?$/i.test(name)||/word|msword/.test(type))return "word";if(/\.(xlsx?|csv)$/i.test(name)||/sheet|excel|csv/.test(type))return "excel";if(/\.(pptx?|ppsx?)$/i.test(name)||/presentation|powerpoint/.test(type))return "ppt";if(type.startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(name))return "image";return "";}
 async function gdShare(id){try{if(!gdTok)return;await fetch(`https://www.googleapis.com/drive/v3/files/${id}/permissions?supportsAllDrives=true`,{method:"POST",headers:{Authorization:"Bearer "+gdTok,"Content-Type":"application/json"},body:JSON.stringify({role:"reader",type:"anyone"})});}catch(e){}}
 /* ===== فيديو موحّد: من الجهاز / درايف / أي رابط ===== */
 function vidPanel(P,push,setKind){const V=$("#"+P+"-vbox"),U=$("#"+P+"-vurl"),M=$("#"+P+"-msg");
@@ -1598,13 +1601,13 @@ async function vidToDrive(f,msg){
   return {kind:"link",type:"link",url:`https://drive.google.com/file/d/${id}/view`,name:"🎬 "+nm};}
 async function upRetry(fn){let er;for(let i=0;i<3;i++){try{return await fn();}catch(x){er=x;await new Promise(r=>setTimeout(r,900*(i+1)));}}throw er;}
 async function gdPick(msg,add){const ttl=$(msg.id==="ga-msg"?"#ga-title":"#a-name");
-  if(!GDRIVE.clientId||!GDRIVE.apiKey){msg.className="msg err";msg.textContent="زر الدرايف لم يُفعَّل بعد. يمكنك الآن استخدام أيقونة الصورة أو PDF أو وورد أو إكسل.";return;}
+  if(!GDRIVE.clientId||!GDRIVE.apiKey){msg.className="msg err";msg.textContent="زر الدرايف لم يُفعَّل بعد. يمكنك الآن استخدام أيقونة الصورة أو PDF أو وورد أو إكسل أو باوربوينت.";return;}
   if(gdInApp()){msg.className="msg err";msg.textContent="أنتِ تفتحين الموقع من داخل تطبيق (مثل الواتساب)، وقوقل لا يسمح بالدخول من هنا. اضغطي النقاط الثلاث ⋮ أو زر المشاركة واختاري «فتح في Chrome» أو «فتح في Safari»، ثم أعيدي المحاولة.";return;}
   msg.className="msg";msg.textContent="جارٍ فتح الدرايف…";
   let tok;try{if(!gdIsReady()){await gdPre();}tok=await gdToken();}catch(e){msg.className="msg err";msg.textContent=gdErrText(e);return;}
   msg.textContent="";
   const view=new google.picker.DocsView(google.picker.ViewId.DOCS).setIncludeFolders(true).setSelectFolderEnabled(false)
-    .setMimeTypes(["application/pdf","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv","image/png","image/jpeg","image/webp","image/gif","image/heic","video/mp4","video/quicktime","video/webm","video/3gpp","video/x-m4v","video/x-msvideo",...Object.keys(GD_EXPORT)].join(","));
+    .setMimeTypes(["application/pdf","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","text/csv","application/vnd.ms-powerpoint","application/vnd.openxmlformats-officedocument.presentationml.presentation","image/png","image/jpeg","image/webp","image/gif","image/heic","video/mp4","video/quicktime","video/webm","video/3gpp","video/x-m4v","video/x-msvideo",...Object.keys(GD_EXPORT)].join(","));
   const pk=new google.picker.PickerBuilder().addView(view).enableFeature(google.picker.Feature.MULTISELECT_ENABLED).setLocale("ar")
     .setOAuthToken(tok).setDeveloperKey(GDRIVE.apiKey).setAppId(GDRIVE.appId).setTitle("اختاري الملفات من الدرايف")
     .setCallback(async d=>{if(d.action!==google.picker.Action.PICKED)return;
@@ -1620,7 +1623,7 @@ async function gdPick(msg,add){const ttl=$(msg.id==="ga-msg"?"#ga-title":"#a-nam
           if(ex){url=`https://www.googleapis.com/drive/v3/files/${doc.id}/export?mimeType=${encodeURIComponent(ex[0])}`;if(!new RegExp("\\."+ex[1]+"$","i").test(name))name+="."+ex[1];}
           else url=`https://www.googleapis.com/drive/v3/files/${doc.id}?alt=media&supportsAllDrives=true`;
           const r=await upRetry(async()=>{const x=await fetch(url,{headers:{Authorization:"Bearer "+tok}});if(!x.ok)throw new Error(x.status);return x;});
-          const b=await r.blob();const type=ex?ex[0]:(b.type||doc.mimeType||"");const k=gdKind(name,type);if(k&&!/\.[a-z0-9]{1,5}$/i.test(name)){const e={pdf:"pdf",word:/msword/.test(type)?"doc":"docx",excel:/csv/.test(type)?"csv":/ms-excel/.test(type)?"xls":"xlsx",image:({"image/png":"png","image/webp":"webp","image/gif":"gif","image/heic":"heic"})[type]||"jpg"}[k];name+="."+e;}
+          const b=await r.blob();const type=ex?ex[0]:(b.type||doc.mimeType||"");const k=gdKind(name,type);if(k&&!/\.[a-z0-9]{1,5}$/i.test(name)){const e={pdf:"pdf",word:/msword/.test(type)?"doc":"docx",excel:/csv/.test(type)?"csv":/ms-excel/.test(type)?"xls":"xlsx",ppt:/ms-powerpoint/.test(type)?"ppt":"pptx",image:({"image/png":"png","image/webp":"webp","image/gif":"gif","image/heic":"heic"})[type]||"jpg"}[k];name+="."+e;}
           if(!k||b.size>20*1024*1024){await asLink(!k?"نوعه لا يُرفع كملف":"حجمه كبير");continue;}
           add({kind:k,file:new File([b],name,{type}),gd:{id:doc.id,url:dUrl,name:base}});
         }catch(e){await asLink("تعذّر نسخه");}}
@@ -1629,8 +1632,8 @@ async function gdPick(msg,add){const ttl=$(msg.id==="ga-msg"?"#ga-title":"#a-nam
   pk.setVisible(true);}
 async function readBarcode(file){try{if(!("BarcodeDetector" in window))return "";const bd=new BarcodeDetector();const bmp=await createImageBitmap(file);const r=await bd.detect(bmp);return (r[0]&&r[0].rawValue)||"";}catch(e){return "";}}
 $("#a-pick").addEventListener("change",async()=>{const k=pickKind;const fs=[...$("#a-pick").files];
-  for(const f of fs){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
-    const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:k==="video"?isVidF(f):isImg;if(!ok){$("#a-msg").className="msg err";$("#a-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}
+  for(const f of fs){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isPpt=/\.(pptx?|ppsx?)$/i.test(f.name)||/presentation|powerpoint/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
+    const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:k==="ppt"?isPpt:k==="video"?isVidF(f):isImg;if(!ok){$("#a-msg").className="msg err";$("#a-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}
     const a={kind:k,file:f};if(f.size>maxOf(a)){$("#a-msg").className="msg err";$("#a-msg").textContent=tooBig(a);continue;}if(k==="barcode")a.url=await readBarcode(f);att.push(a);}
   renderAtt();});
 $("#f-add").addEventListener("submit",async e=>{
@@ -1648,7 +1651,7 @@ $("#f-add").addEventListener("submit",async e=>{
       if(bigVid(a)){out.push(await vidToDrive(f,msg));continue;}
       const isPdf=a.kind==="pdf";const isWord=a.kind==="word";const isXl=a.kind==="excel";
       const ext=safeExt(f,a.kind);
-      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):a.kind==="video"?(f.type||({mov:"video/quicktime",webm:"video/webm","3gp":"video/3gpp"})[ext]||"video/mp4"):(f.type||"image/jpeg");
+      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):a.kind==="ppt"?(ext==="ppt"||ext==="pps"?"application/vnd.ms-powerpoint":"application/vnd.openxmlformats-officedocument.presentationml.presentation"):a.kind==="video"?(f.type||({mov:"video/quicktime",webm:"video/webm","3gp":"video/3gpp"})[ext]||"video/mp4"):(f.type||"image/jpeg");
       let path;try{path=await upRetry(()=>uploadFile(f,ext,type));}catch(er){if(a.kind==="video"){out.push(await vidToDrive(f,msg));continue;}if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,er,vid:a.kind==="video"};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,720);const blob=await new Promise(r=>cv.toBlob(r,"image/jpeg",.82));if(blob)thumb=await uploadFile(blob,"jpg","image/jpeg");}catch(err){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
@@ -1692,6 +1695,7 @@ async function loadFile(i){
   const url=fileUrl(f.path);dl.hidden=!url;dl.href=url;
   if(url&&k==="word"){box.innerHTML=`<p class="msg">📝 ملف وورد — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p><iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`;return;}
   if(url&&k==="excel"){box.innerHTML=`<p class="msg">📊 ملف إكسل — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p>`+(f.type==="text/csv"?"":`<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`);return;}
+  if(url&&k==="ppt"){box.innerHTML=`<p class="msg">📽️ عرض باوربوينت — إذا لم تظهر المعاينة استخدمي زر «فتح / تحميل الملف».</p><iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}" title="${esc(f.name)}"></iframe>`;return;}
   if(url&&k==="video"){box.innerHTML=`<div class="vvid"><video src="${esc(url)}" controls playsinline preload="metadata"></video><p class="hint">إذا لم يعمل الفيديو هنا استخدمي زر «فتح / تحميل الملف».</p></div>`;return;}
   if(url&&k==="barcode"){box.innerHTML=`<img src="${esc(url)}" alt="${esc(f.name)}" style="max-height:340px">${f.url?linkBox(f.url,"فتح رابط الباركود"):""}`;if(f.url)drawQR(f.url);return;}
   if(!url){box.innerHTML='<p class="msg">في وضع التجربة لا تبقى الملفات بعد إعادة تحميل الصفحة.</p>';return;}
@@ -1710,7 +1714,7 @@ $("#v-yes").onclick=async()=>{const x=curItem;if(!x)return;$("#v-yes").disabled=
 /* ================= export (Excel) ================= */
 let xlLoading=null;
 function loadXL(){if(window.ExcelJS)return Promise.resolve();return xlLoading||(xlLoading=new Promise((ok,no)=>{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js";sc.onload=ok;sc.onerror=()=>{xlLoading=null;no();};document.head.appendChild(sc);}));}
-const AR_KIND={image:"صورة",pdf:"PDF",word:"وورد",excel:"إكسل",video:"فيديو",link:"رابط",barcode:"باركود"};
+const AR_KIND={image:"صورة",pdf:"PDF",word:"وورد",excel:"إكسل",ppt:"باوربوينت",video:"فيديو",link:"رابط",barcode:"باركود"};
 $("#export").onclick=async()=>{
   const btn=$("#export"),m=$("#exp-msg");btn.disabled=true;m.className="msg";m.textContent="جارٍ تجهيز الملف…";
   try{await loadXL();}catch(e){m.className="msg err";m.textContent="تعذّر تحميل أداة الإكسل. تحققي من الاتصال.";btn.disabled=false;return;}
@@ -1874,8 +1878,8 @@ $("#ga-types").addEventListener("click",e=>{const b=e.target.closest("[data-gat]
   gKind=k;const inp=$("#ga-pick");inp.value="";inp.accept=AT[k].acc;inp.multiple=k!=="barcode";if(k==="barcode")inp.setAttribute("capture","environment");else inp.removeAttribute("capture");inp.click();});
 function gAddUrl(){let u=$("#ga-url").value.trim();if(!u)return true;if(!/^[a-z]+:\/\//i.test(u))u="https://"+u;try{new URL(u);}catch(e){$("#ga-msg").className="msg err";$("#ga-msg").textContent="الرابط غير صحيح.";return false;}gAtt.push({kind:"link",url:u});$("#ga-url").value="";$("#ga-link").hidden=true;renderGAtt();return true;}
 $("#ga-url-add").onclick=gAddUrl;const gVidAdd=vidPanel("ga",x=>{gAtt.push(x);renderGAtt();},k=>{gKind=k;});$("#ga-url").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gAddUrl();}});
-$("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
-  const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:k==="video"?isVidF(f):isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(f.size>maxOf(a)){$("#ga-msg").className="msg err";$("#ga-msg").textContent=tooBig(a);continue;}if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
+$("#ga-pick").addEventListener("change",async()=>{const k=gKind;for(const f of [...$("#ga-pick").files]){const isPdf=f.type==="application/pdf"||/\.pdf$/i.test(f.name),isWord=/\.docx?$/i.test(f.name)||/word|msword/.test(f.type),isXl=/\.(xlsx?|csv)$/i.test(f.name)||/sheet|excel|csv/.test(f.type||""),isPpt=/\.(pptx?|ppsx?)$/i.test(f.name)||/presentation|powerpoint/.test(f.type||""),isImg=(f.type||"").startsWith("image/")||/\.(png|jpe?g|webp|gif|heic)$/i.test(f.name);
+  const ok=k==="pdf"?isPdf:k==="word"?isWord:k==="excel"?isXl:k==="ppt"?isPpt:k==="video"?isVidF(f):isImg;if(!ok){$("#ga-msg").className="msg err";$("#ga-msg").textContent=`الملف «${f.name}» ليس من نوع ${AT[k].l}.`;continue;}const a={kind:k,file:f};if(f.size>maxOf(a)){$("#ga-msg").className="msg err";$("#ga-msg").textContent=tooBig(a);continue;}if(k==="barcode")a.url=await readBarcode(f);gAtt.push(a);}renderGAtt();});
 async function uploadVice(blob,ext,type){const path=`vice/${uid()}${uid()}.${String(ext).replace(/[^a-z0-9]/gi,"")||"bin"}`.replace(/-/g,"");const {error}=await sb.storage.from("files").upload(path,blob,{contentType:type,upsert:false});if(error)return uploadFile(blob,ext,type);return path;}
 $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()||!curG)return;vidTokEarly(gAtt);if(!gAddUrl()||!gVidAdd())return;const msg=$("#ga-msg"),btn=$("#ga-save");
   if(!gAtt.length){msg.className="msg err";msg.textContent="أضيفي ملفًا أو رابطًا واحدًا على الأقل.";return;}
@@ -1884,7 +1888,7 @@ $("#f-gadd").addEventListener("submit",async e=>{e.preventDefault();if(!isVice()
   try{const out=[];const ups=gAtt.filter(a=>a.file);let ui=0;
     for(const a of gAtt){if(a.kind==="link"){out.push({kind:"link",type:"link",url:a.url,name:a.gdName||"رابط"});continue;}
       const f=a.file;ui++;msg.textContent=`جارٍ رفع الملف ${ar(ui)} من ${ar(ups.length)}…`;if(bigVid(a)){out.push(await vidToDrive(f,msg));continue;}const isPdf=a.kind==="pdf",isWord=a.kind==="word",isXl=a.kind==="excel";const ext=safeExt(f,a.kind);
-      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):a.kind==="video"?(f.type||({mov:"video/quicktime",webm:"video/webm","3gp":"video/3gpp"})[ext]||"video/mp4"):(f.type||"image/jpeg");
+      const type=isPdf?"application/pdf":isWord?(ext==="doc"?"application/msword":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"):isXl?(ext==="csv"?"text/csv":ext==="xls"?"application/vnd.ms-excel":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):a.kind==="ppt"?(ext==="ppt"||ext==="pps"?"application/vnd.ms-powerpoint":"application/vnd.openxmlformats-officedocument.presentationml.presentation"):a.kind==="video"?(f.type||({mov:"video/quicktime",webm:"video/webm","3gp":"video/3gpp"})[ext]||"video/mp4"):(f.type||"image/jpeg");
       let path;try{path=await upRetry(()=>uploadVice(f,ext,type));}catch(er){if(a.kind==="video"){out.push(await vidToDrive(f,msg));continue;}if(a.gd){await gdShare(a.gd.id);out.push({kind:"link",type:"link",url:a.gd.url,name:a.gd.name||"ملف من الدرايف"});continue;}throw {upl:f.name,vid:a.kind==="video"};}let thumb=null;
       if(isPdf&&window.pdfjsLib){try{const pdf=await openPdf(new Uint8Array(await f.arrayBuffer()));const cv=await pageCanvas(pdf,1,600);const bl=await new Promise(r=>cv.toBlob(r,"image/jpeg",.8));if(bl)thumb=await uploadVice(bl,"jpg","image/jpeg");}catch(_){}}
       const o={kind:a.kind,path,name:f.name.replace(/\.[^.]+$/,""),type,thumb};if(a.url)o.url=a.url;out.push(o);}
