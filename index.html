@@ -794,7 +794,7 @@ body.has-sbar footer{padding-bottom:120px}
       </div>
       <div class="kpis" id="kpis"></div>
       <div class="panel" id="usage-panel">
-        <div class="p-head"><h3>المساحة المستخدمة</h3><p class="hint">الخطة المجانية: ١ جيجابايت لكل ملفات المعلمات.</p></div>
+        <div class="p-head"><h3>المساحة المستخدمة</h3><p class="hint">الخطة المدفوعة: ١٠٠ جيجابايت لكل ملفات المعلمات.</p></div>
         <div class="usage"><div class="ubar"><span id="u-fill"></span></div><div class="unums"><b id="u-used">—</b><span id="u-of"></span></div></div>
         <p class="msg" id="u-note"></p>
         <div class="utop" id="u-top"></div>
@@ -1331,7 +1331,7 @@ let usage=null;
 const fmtMB=b=>{const mb=b/1048576;return mb>=1024?ar((mb/1024).toFixed(2))+" جيجابايت":ar(mb<10?mb.toFixed(1):Math.round(mb))+" ميجابايت";};
 async function refreshUsage(){try{const u=await rpc("admin_usage",{p:adminPin});if(u.ok){let keep=new Set();try{const pp=await rpc("protected_paths",{p:adminPin});if(pp&&pp.ok)keep=new Set(pp.paths||[]);}catch(_){}u.orphans=(u.orphans||[]).filter(x=>x&&!String(x).startsWith("vice/")&&!keep.has(x));if(!u.orphans.length)u.orphan=0;usage=u;}}catch(e){}renderUsage();}
 function renderUsage(){if(!usage)return;const pct=Math.min(100,usage.total/usage.limit*100);const f=$("#u-fill");f.style.width=Math.max(pct,.5)+"%";f.className=pct>=90?"crit":pct>=70?"warn":"";
-  $("#u-used").textContent=fmtMB(usage.total);$("#u-of").textContent="من ١ جيجابايت · "+ar(Math.round(pct))+"٪ · "+ar(usage.count)+" ملف";
+  $("#u-used").textContent=fmtMB(usage.total);$("#u-of").textContent="من "+ar(Math.round(usage.limit/1073741824))+" جيجابايت · "+ar(Math.round(pct))+"٪ · "+ar(usage.count)+" ملف";
   const left=usage.limit-usage.total;$("#u-note").className="msg"+(pct>=90?" err":"");$("#u-note").textContent=pct>=90?"المساحة توشك على الامتلاء. اطلبي من المعلمات ضغط الملفات، أو فكّري في الخطة المدفوعة.":"المتبقي: "+fmtMB(left)+" تقريبًا. نصيحة: ضغط ملفات PDF قبل الرفع يوفّر كثيرًا.";
   const tn=Object.fromEntries(teachers.map(t=>[t.id,t.name]));const top=[...usage.per].sort((a,b)=>b.bytes-a.bytes).slice(0,8);
   $("#u-top").innerHTML=top.length?'<span style="border:0;background:none;padding-inline:0;color:var(--muted)">الأكثر استهلاكًا:</span>'+top.map(x=>`<span>${esc(tn[x.id]||"—")}<b>${fmtMB(x.bytes)}</b></span>`).join(""):"";
