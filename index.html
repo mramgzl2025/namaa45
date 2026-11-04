@@ -2143,12 +2143,45 @@ function domTableCanvas(tid,title){const tb=document.getElementById(tid);const h
   x.fillStyle="#8A8FA3";x.font="500 18px "+FNT;x.fillText("ملتقى نماء المهني — متابعة وكيلة شؤون المعلمات",W/2,H-35);
   return {c,breaks:[0,y0+thH,...rows.map((_,i)=>y0+thH+(i+1)*rh),H],repeatHead:[y0,thH],name:title.replace(/\s+/g,"-")+"-"+fileDate(),title};}
 
+/* ---------- خريطة الإنجاز (PDF) ---------- */
+function heatCanvas(){
+  const sel=document.getElementById("hm-month");const [yy,mm]=(sel&&sel.value?sel.value:new Date().getFullYear()+"-"+new Date().getMonth()).split("-").map(Number);const ms=new Date(yy,mm,1).getTime(),me=new Date(yy,mm+1,1).getTime();
+  const rows=teachers.map(t=>{const its=tItems(t.id);const c=covOf(its);const nw=new Set(its.filter(q=>(q.createdAt||0)>=ms&&(q.createdAt||0)<me).map(q=>q.domain));return {t,c,nw};}).sort((a,b)=>b.c.pct-a.c.pct||b.nw.size-a.nw.size);
+  const cs=20,cg=5,gp=14;const secs=SECTIONS.map(s=>{const ds=D.filter(d=>d.sec===s.id);return {s,ds,w:Math.max(ds.length*(cs+cg)-cg+gp*2,120)};});
+  const pad=40,nameW=230,pctW=95,nwW=90,rh=40,thH=70,head=230,foot=70;const W=pad*2+nameW+pctW+nwW+secs.reduce((a,b)=>a+b.w,0);const H=head+thH+rows.length*rh+foot;
+  const c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");x.direction="rtl";x.textAlign="center";x.textBaseline="middle";
+  x.fillStyle="#fff";x.fillRect(0,0,W,H);x.fillStyle="#1F2A5C";x.fillRect(0,0,W,140);x.fillStyle="#C98A22";x.fillRect(0,140,W,6);
+  x.fillStyle="#D9C9A0";x.font="700 24px "+FNT;x.fillText("الثانوية الخامسة والأربعون  ·  ملتقى نماء المهني",W/2,34);
+  x.fillStyle="#fff";x.font="800 46px "+FNT;x.fillText("خريطة الإنجاز",W/2,80);
+  x.fillStyle="#C9CCE6";x.font="500 23px "+FNT;x.fillText(todayAr()+"  ·  شهر المتابعة: "+MONTHS[mm]+" "+yy,W/2,118);
+  // دليل الألوان
+  const lg=[...SECTIONS.map(s=>[s.c,s.name,0]),["#E3E6EF","لم يُوثّق",0],["#fff","أُضيف في الشهر",1]];x.font="600 19px "+FNT;
+  const items=lg.map(([col,t,dot])=>({col,t,dot,w:x.measureText(t).width+40}));const lines=[[]];let acc=0;items.forEach(it=>{if(acc+it.w+18>W-pad*2&&lines[lines.length-1].length){lines.push([]);acc=0;}lines[lines.length-1].push(it);acc+=it.w+18;});
+  lines.forEach((ln,li)=>{const tw=ln.reduce((a,b)=>a+b.w+18,0)-18;let lx=W/2+tw/2;const yy2=166+li*30;
+  ln.forEach(it=>{const r=lx;x.fillStyle=it.col;x.beginPath();x.roundRect(r-22,yy2,20,20,5);x.fill();if(it.dot){x.setLineDash([3,3]);x.strokeStyle="#1C2333";x.lineWidth=2;x.stroke();x.setLineDash([]);}
+    x.fillStyle="#3A4058";x.textAlign="right";x.fillText(it.t,r-30,yy2+11);x.textAlign="center";lx-=it.w+18;});});
+  // الأعمدة من اليمين
+  let r=W-pad;const cName={l:r-nameW,r};r-=nameW;const cPct={l:r-pctW,r,cx:r-pctW/2};r-=pctW;const cNw={l:r-nwW,r,cx:r-nwW/2};r-=nwW;secs.forEach(o=>{o.r=r;o.l=r-o.w;o.cx=r-o.w/2;r=o.l;});
+  const y0=head;x.fillStyle="#E8ECF8";x.fillRect(pad,y0,W-pad*2,thH);x.fillStyle="#1F2A5C";x.font="700 19px "+FNT;
+  x.textAlign="right";x.fillText("المعلمة",cName.r-12,y0+thH/2);x.textAlign="center";x.fillText("الإنجاز",cPct.cx,y0+thH/2);x.fillText(MONTHS[mm],cNw.cx,y0+thH/2);
+  secs.forEach(o=>{x.fillStyle=o.s.c;x.beginPath();x.roundRect(o.l+4,y0+6,o.w-8,thH-12,10);x.fill();x.fillStyle="#fff";x.font="700 16px "+FNT;const L=wrap(x,o.s.name,o.w-16).slice(0,2);L.forEach((ln,k)=>x.fillText(ln,o.cx,y0+thH/2+(k-(L.length-1)/2)*20));});
+  rows.forEach((rw,i)=>{const y=y0+thH+i*rh,cy=y+rh/2;if(i%2){x.fillStyle="#F7F8FC";x.fillRect(pad,y,W-pad*2,rh);}
+    x.fillStyle="#1C2333";x.font="700 20px "+FNT;x.textAlign="right";x.fillText(fit(x,rw.t.name,nameW-20),cName.r-12,cy);x.textAlign="center";
+    const p=rw.c.pct;x.fillStyle=p===100?"#B88A1E":p>=50?"#1E8A57":p?"#1C2333":"#C0392B";x.font="800 20px "+FNT;x.fillText(ar(p)+"٪",cPct.cx,cy);
+    if(rw.nw.size){x.fillStyle="#1F2A5C";x.font="800 19px "+FNT;x.fillText("+"+ar(rw.nw.size),cNw.cx,cy);}else{x.fillStyle="#B5B9C7";x.font="500 19px "+FNT;x.fillText("—",cNw.cx,cy);}
+    secs.forEach(o=>{let cx0=o.r-gp-cs;o.ds.forEach(d=>{const on=rw.c.done.has(d.id);x.fillStyle=on?o.s.c:"#E3E6EF";x.beginPath();x.roundRect(cx0,cy-cs/2,cs,cs,5);x.fill();
+      if(rw.nw.has(d.id)){x.setLineDash([3,3]);x.strokeStyle="#1C2333";x.lineWidth=2;x.beginPath();x.roundRect(cx0-3,cy-cs/2-3,cs+6,cs+6,6);x.stroke();x.setLineDash([]);}cx0-=cs+cg;});});});
+  x.strokeStyle="#D9DDEA";x.lineWidth=1;const yEnd=y0+thH+rows.length*rh;for(let i=0;i<=rows.length;i++){const y=y0+thH+i*rh;x.beginPath();x.moveTo(pad,y);x.lineTo(W-pad,y);x.stroke();}
+  [cName.l,cPct.l,cNw.l,...secs.map(o=>o.l)].forEach(lx2=>{x.beginPath();x.moveTo(lx2,y0+thH);x.lineTo(lx2,yEnd);x.stroke();});
+  x.fillStyle="#8A8FA3";x.font="500 18px "+FNT;x.fillText("ملتقى نماء المهني — متابعة وكيلة شؤون المعلمات",W/2,H-35);
+  return {c,land:true,breaks:[0,y0+thH,...rows.map((_,i)=>y0+thH+(i+1)*rh),H],repeatHead:[y0,thH],name:"خريطة-الإنجاز-"+fileDate(),title:"خريطة الإنجاز"};}
+
 /* ---------- تحويل إلى صورة / PDF ---------- */
 const toBlob=c=>new Promise(r=>c.toBlob(r,"image/png"));
 function jpgBytes(cv){const u=cv.toDataURL("image/jpeg",.9);const b=atob(u.split(",")[1]);const a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
-function buildPDF(pages){/* pages: [{cv}] — يبني ملف PDF بسيط بصفحات A4 بدون مكتبات خارجية */
+function buildPDF(pages,land){/* pages: [{cv}] — يبني ملف PDF بسيط بصفحات A4 بدون مكتبات خارجية */
   const enc=s=>new TextEncoder().encode(s);const parts=[];let len=0;const offs=[];const push=x=>{const b=typeof x==="string"?enc(x):x;parts.push(b);len+=b.length;};
-  push("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n");const PW=595.28,PH=841.89,m=18;const n=pages.length;const kids=[];
+  push("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n");const PW=land?841.89:595.28,PH=land?595.28:841.89,m=18;const n=pages.length;const kids=[];
   const obj=(id,body)=>{offs[id]=len;push(id+" 0 obj\n");body();push("\nendobj\n");};
   // 1 catalog, 2 pages, then per page: page, content, image
   for(let i=0;i<n;i++)kids.push((3+i*3)+" 0 R");
@@ -2162,21 +2195,21 @@ function buildPDF(pages){/* pages: [{cv}] — يبني ملف PDF بسيط بص�
   const total=3+n*3;const xref=len;let x="xref\n0 "+total+"\n0000000000 65535 f \n";for(let i=1;i<total;i++)x+=String(offs[i]).padStart(10,"0")+" 00000 n \n";
   push(x+`trailer\n<< /Size ${total} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`);
   return new Blob(parts,{type:"application/pdf"});}
-async function toPDF(o){const c=o.c;const PW=595.28,PH=841.89,m=18,iw=PW-m*2,sc=iw/c.width,maxPx=Math.floor((PH-m*2)/sc);
-  if(c.height<=maxPx*1.3)return buildPDF([{cv:c}]);
+async function toPDF(o){const c=o.c;const L2=!!o.land;const PW=L2?841.89:595.28,PH=L2?595.28:841.89,m=18,iw=PW-m*2,sc=iw/c.width,maxPx=Math.floor((PH-m*2)/sc);
+  if(c.height<=maxPx*1.3)return buildPDF([{cv:c}],L2);
   let y=0,first=true;const B=[...(o.breaks||[0]),c.height];const pages=[];
   while(y<c.height-2){const hd=(!first&&o.repeatHead)?o.repeatHead[1]:0;const lim=y+maxPx-hd;let end=B.filter(b=>b>y&&b<=lim).pop();if(!end||end<=y)end=Math.min(c.height,lim);
     const pc=document.createElement("canvas");pc.width=c.width;pc.height=end-y+hd;const px=pc.getContext("2d");px.fillStyle="#fff";px.fillRect(0,0,pc.width,pc.height);
     if(hd)px.drawImage(c,0,o.repeatHead[0],c.width,hd,0,0,c.width,hd);px.drawImage(c,0,y,c.width,end-y,0,hd,c.width,end-y);
     pages.push({cv:pc});y=end;first=false;}
-  return buildPDF(pages);}
+  return buildPDF(pages,L2);}
 function download(blob,fn){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);}
 function shareSheet(file,title){const box=document.createElement("div");box.className="exp-ov";box.innerHTML=`<div class="exp-card"><b>الملف جاهز ✅</b><p>اضغطي «إرسال» واختاري واتساب ثم جروب المعلمات.</p><div class="exp-row"><button type="button" class="btn btn-gold" data-go>إرسال الآن</button><button type="button" class="btn btn-ghost" data-x>إغلاق</button></div></div>`;
   document.body.appendChild(box);box.querySelector("[data-x]").onclick=()=>box.remove();box.querySelector("[data-go]").onclick=async()=>{try{await navigator.share({files:[file],title});}catch(e){}box.remove();};}
 async function run(kind,fmt,send,btn){
   const old=btn.innerHTML;btn.disabled=true;btn.innerHTML="⏳ جارٍ التجهيز…";
   try{try{await document.fonts.load("700 30px Tajawal");await document.fonts.load("800 30px Tajawal");}catch(e){}
-    const o=kind==="ln"?lanternCanvas():kind==="ev"?evalCanvas():kind==="fw"?domTableCanvas("tb-follow","متابعة شواهد المعلمات"):domTableCanvas("tb-cov","نسبة التوثيق في الأقسام");
+    const o=kind==="hm"?heatCanvas():kind==="ln"?lanternCanvas():kind==="ev"?evalCanvas():kind==="fw"?domTableCanvas("tb-follow","متابعة شواهد المعلمات"):domTableCanvas("tb-cov","نسبة التوثيق في الأقسام");
     const blob=fmt==="pdf"?await toPDF(o):await toBlob(o.c);const fn=o.name+(fmt==="pdf"?".pdf":".png");
     if(send){const file=new File([blob],fn,{type:blob.type});
       if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:o.title});}catch(e){if(e&&e.name!=="AbortError")shareSheet(file,o.title);}}
@@ -2184,11 +2217,12 @@ async function run(kind,fmt,send,btn){
     else{download(blob,fn);toast2(fmt==="pdf"?"تم تحميل ملف PDF ✅":"تم تحميل الصورة ✅");}
   }catch(e){console.error(e);toast2("تعذّر التجهيز، حاولي مرة ثانية");}
   finally{btn.disabled=false;btn.innerHTML=old;}}
-function bar(kind,dark){const d=document.createElement("div");d.className="exp-bar"+(dark?" dark":"");
+function bar(kind,dark,pdfOnly){const d=document.createElement("div");d.className="exp-bar"+(dark?" dark":"");if(pdfOnly){d.innerHTML=`<button type="button" class="eb" data-f="pdf">📄 تحميل PDF</button>`;d.addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.f)run(kind,"pdf",false,b);});return d;}
   d.innerHTML=`<button type="button" class="eb" data-f="png">🖼️ تحميل صورة</button><button type="button" class="eb" data-f="pdf">📄 تحميل PDF</button><span class="eb-wa"><button type="button" class="eb wa" data-wa>واتساب ▾</button><span class="eb-menu" hidden><button type="button" class="eb" data-f="png" data-s="1">إرسال صورة</button><button type="button" class="eb" data-f="pdf" data-s="1">إرسال PDF</button></span></span>`;
   d.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.hasAttribute("data-wa")){const m=d.querySelector(".eb-menu");m.hidden=!m.hidden;return;}
     if(b.dataset.f){d.querySelector(".eb-menu").hidden=true;run(kind,b.dataset.f,!!b.dataset.s,b);}});return d;}
-function mount(){const lp=document.querySelector("#ln-panel .p-head");if(lp&&!lp.querySelector(".exp-bar"))lp.appendChild(bar("ln",true));
+function mount(){const hp=document.querySelector("#hm-panel .p-head");if(hp&&!hp.querySelector(".exp-bar"))hp.appendChild(bar("hm",false,true));
+  const lp=document.querySelector("#ln-panel .p-head");if(lp&&!lp.querySelector(".exp-bar"))lp.appendChild(bar("ln",true));
   const ev=document.getElementById("tb-eval");const ep=ev&&ev.closest(".panel")?.querySelector(".p-head");if(ep&&!ep.querySelector(".exp-bar"))ep.appendChild(bar("ev",false));
   [["tb-follow","fw"],["tb-cov","cv"]].forEach(([id,k])=>{const t=document.getElementById(id);if(!t)return;const pnl=t.closest(".panel");let hd=k==="fw"?null:pnl.querySelector(".p-head");if(k==="fw"){hd=document.createElement("div");hd.style.cssText="display:flex;justify-content:flex-start;margin:12px 0 8px";t.closest(".tscroll").before(hd);}if(hd&&!hd.querySelector(".exp-bar"))hd.appendChild(bar(k,false));});}
 const st=document.createElement("style");st.textContent=`.exp-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.exp-bar .eb{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:8px 13px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}.exp-bar .eb:hover{border-color:#C98A22}.exp-bar .eb.wa{background:#25D366;border-color:#25D366;color:#fff}.exp-bar .eb:disabled{opacity:.6;cursor:wait}.exp-bar.dark .eb{background:rgba(243,199,110,.12);border-color:rgba(243,199,110,.5);color:#FBE7A9}.exp-bar.dark .eb.wa{background:#25D366;border-color:#25D366;color:#fff}.eb-wa{position:relative;display:inline-flex}.eb-menu{position:absolute;top:calc(100% + 6px);left:0;z-index:30;display:grid;gap:6px;background:#fff;border:1px solid #E1E4EE;border-radius:12px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.18);min-width:150px}.eb-menu[hidden]{display:none}.eb-menu .eb{background:#fff!important;color:#1C2333!important;border-color:#E1E4EE!important;justify-content:center}.exp-ov{position:fixed;inset:0;background:rgba(10,13,38,.55);display:grid;place-items:center;z-index:9999;padding:20px}.exp-card{background:#fff;color:#1C2333;border-radius:18px;padding:22px;max-width:340px;width:100%;text-align:center;display:grid;gap:10px}.exp-card p{margin:0;font-size:14px;color:#555}.exp-row{display:flex;gap:8px;justify-content:center}`;
