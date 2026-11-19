@@ -129,6 +129,10 @@ section{padding-block:36px 4px}
 
 .cards{display:flex;flex-wrap:wrap;gap:18px}
 .cards>.dc{flex:1 1 250px;min-width:0}
+#sec-reflect .cards>.dc{flex:1 1 100%}
+#sec-reflect .dc .scene{height:240px}
+#sec-reflect .dc h3{font-size:24px}
+#sec-reflect .dc p{font-size:16px}
 .dc{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;text-align:right;cursor:pointer;padding:0;transition:transform .2s,box-shadow .2s,border-color .2s}
 .dc:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
 .scene{height:158px;max-width:100%;background:linear-gradient(160deg,color-mix(in srgb,var(--c) 16%,var(--surface)),color-mix(in srgb,var(--c) 6%,var(--surface)));position:relative;overflow:hidden}
@@ -1102,10 +1106,11 @@ const TERMS=["الفصل الأول ١٤٤٨","الفصل الثاني ١٤٤٨"
 const SECTIONS=[
  {id:"growth",n:"١",name:"النمو المهني",desc:"الرخصة والترقية والدورات والمجتمعات والزيارات",c:"#3D4DB8"},
  {id:"plan",n:"٢",name:"التخطيط والتوثيق",desc:"الخطط والتوزيع وسجلات المتابعة والمنصة",c:"#1F87B8"},
- {id:"strat",n:"٣",name:"استراتيجيات التدريس والتعلم",desc:"تنويع الاستراتيجيات ومراعاة الفروق والأنماط",c:"#E07A3F"},
- {id:"skills",n:"٤",name:"أنشطة تنمّي المهارات والقيم",desc:"التفكير والقراءة والعدد والقيم والانفعالات",c:"#8B5CF6"},
- {id:"students",n:"٥",name:"الطالبات",desc:"الإثراء والدعم والمشاريع وملفات الإنجاز",c:"#C0457A"},
- {id:"eval",n:"٦",name:"الاختبارات والتحليل",desc:"مسار التقويم من التشخيص إلى النهائي",c:"#2E9D6A"}
+ {id:"reflect",n:"٣",name:"التأمل الذاتي",desc:"وقفة صادقة مع الذات: ماذا نجح، وماذا أطوّر، وما خطوتي القادمة",c:"#0F8B8D"},
+ {id:"strat",n:"٤",name:"استراتيجيات التدريس والتعلم",desc:"تنويع الاستراتيجيات ومراعاة الفروق والأنماط",c:"#E07A3F"},
+ {id:"skills",n:"٥",name:"أنشطة تنمّي المهارات والقيم",desc:"التفكير والقراءة والعدد والقيم والانفعالات",c:"#8B5CF6"},
+ {id:"students",n:"٦",name:"الطالبات",desc:"الإثراء والدعم والمشاريع وملفات الإنجاز",c:"#C0457A"},
+ {id:"eval",n:"٧",name:"الاختبارات والتحليل",desc:"مسار التقويم من التشخيص إلى النهائي",c:"#2E9D6A"}
 ];
 const D=[
  // growth
@@ -1130,6 +1135,8 @@ const D=[
  {id:"khatm",sec:"plan",name:"ختم المنهج",c:"#2E9D6A",desc:"إنهاء المقرر في وقته وتوثيق ختمه.",scene:[["book",120,100,1.5],["okbadge",160,60,1.3],["calendar",236,92,1],["spark",270,40]],hints:["نموذج ختم المنهج المعتمد","توزيع المنهج مع ما يثبت الإنجاز","صور من حصة الختم"]},
  {id:"review",sec:"plan",name:"المراجعة",c:"#8B5CF6",desc:"خطة المراجعة وأوراقها قبل الاختبارات.",scene:[["sheets",120,94,1.4],["magnifier",210,90,1.1],["pencil",262,104,.9]],hints:["خطة المراجعة وجدولها","أوراق ومراجعات الطالبات","أسئلة المراجعة أو الملخصات"]},
  {id:"platform",sec:"plan",name:"منصة مدرستي والأنشطة الإلكترونية",c:"#1F87B8",desc:"أنشطة إلكترونية حضوريًا أو عن بعد.",scene:[["laptop",130,96,1.6],["phone",236,92,1.1],["spark",270,40]],hints:["لقطات من الأنشطة في منصة مدرستي","نماذج اختبارات إلكترونية","تقارير التفاعل"]},
+ // reflect
+ {id:"reflection",sec:"reflect",name:"التأمل الذاتي",c:"#0F8B8D",desc:"تأمّلي ممارساتكِ التدريسية: نقاط القوة، وما يحتاج إلى تطوير، وخطتكِ للتحسين.",scene:[["head",120,94,1.5],["bulb",215,72,1.2],["pencil",262,112,.9],["spark",70,44],["spark",280,40]],hints:["نموذج التأمل الذاتي بعد درس أو فترة","نقاط القوة في أدائي وما يحتاج إلى تطوير","أثر التأمل على ممارساتي وخطتي القادمة","مقطع أو صورة لحصة تأمّلتُ فيها مع وصف ما تعلّمته"]},
  // strat
  {id:"strategies",sec:"strat",name:"الاستراتيجيات التدريسية",c:"#E07A3F",desc:"تنويع الاستراتيجيات داخل الحصة.",scene:[["bulb",120,80,1.6],["gear",200,104,1.3,"#3D4DB8"],["gear",238,70,.9],["spark",70,40]],hints:["خطة تبيّن الاستراتيجية المستخدمة","صور التطبيق مع الطالبات","أدوات الاستراتيجية"]},
  {id:"coop",sec:"strat",name:"التعلم التعاوني",c:"#2E9D6A",desc:"العمل في مجموعات وتوزيع الأدوار.",scene:[["table",160,140,1.2],["person",108,108,.95,"#E07A3F"],["person",160,98,.95],["person",212,108,.95,"#3D4DB8"],["puzzle",160,40,.9,G]],hints:["بطاقات الأدوار","ورقة عمل جماعية","صور المجموعات"]},
