@@ -1966,8 +1966,8 @@ $("#vv-del").onclick=async()=>{const b=$("#vv-del");if(!curV)return;if(b.dataset
   b.disabled=true;try{await rpc("visit_delete",{p:adminPin,vid:curV});await loadVice();openVisit(curVT,null);toast2("حُذفت البطاقة");}catch(e){}finally{b.disabled=false;b.dataset.armed="";b.textContent="حذف البطاقة";}};
 
 /* ---- المعلمة: بطاقاتها والتوقيع ---- */
-async function loadTVisits(tid){if(!tPins[tid])return;try{const r=await rpc("teacher_visits",{tid,p:tPins[tid]});if(r&&r.ok){tVisits[tid]=r.items||[];renderTVisits();}}catch(e){}}
-function renderTVisits(){const box=$("#t-visits");if(!box)return;const L=curT&&tPins[curT]?tVisits[curT]:null;if(!L||!L.length){box.hidden=true;return;}box.hidden=false;
+async function loadTVisits(tid){/* بطاقات الملاحظة الصفية للإدارة فقط — لا تظهر للمعلمة */return;try{const r=await rpc("teacher_visits",{tid,p:tPins[tid]});if(r&&r.ok){tVisits[tid]=r.items||[];renderTVisits();}}catch(e){}}
+function renderTVisits(){const box=$("#t-visits");if(!box)return;box.hidden=true;box.innerHTML="";return;const L=curT&&tPins[curT]?tVisits[curT]:null;if(!L||!L.length){box.hidden=true;return;}box.hidden=false;
   box.innerHTML=`<div class="panel tvis"><div class="p-head"><h3>📋 بطاقات الملاحظة الصفية</h3><p class="hint">زيارات الإدارة لحصصكِ — اطّلعي عليها ووقّعي.</p></div><div class="tvis-list">${L.map(v=>`<div class="tvis-it"><div class="grow"><b>${esc(v.data&&v.data.lesson||"زيارة صفية")}</b><br><small class="hint">${esc(obsOf(v).who)} · ${esc(v.data&&v.data.date?fmtDate(v.data.date):shortT(Date.parse(v.created_at)))}</small></div>${v.teacher_sig?'<span class="pill-ok">✓ موقّعة</span>':'<span class="pill-wait">بانتظار توقيعكِ</span>'}<button type="button" class="btn btn-ghost" data-tvo="${esc(v.id)}">عرض${v.teacher_sig?"":" والتوقيع"}</button></div>`).join("")}</div></div>`;}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-tvo]");if(b)openTVisit(b.dataset.tvo);});
 let tvCur=null;
